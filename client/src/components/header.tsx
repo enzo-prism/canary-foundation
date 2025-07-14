@@ -38,7 +38,7 @@ export default function Header() {
                 onClick={() => scrollToSection("about")}
                 className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
               >
-                About Us
+                About Canary
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -58,14 +58,20 @@ export default function Header() {
                     Founder's Story
                   </button>
                   <button 
-                    onClick={() => scrollToSection("about")}
+                    onClick={() => scrollToSection("impact")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Canary Approach
+                    Impact & Success
                   </button>
                 </div>
               </div>
             </div>
+            <button 
+              onClick={() => scrollToSection("programs")}
+              className="text-dark hover:text-primary transition-colors duration-300"
+            >
+              Canary Approach
+            </button>
             <div className="relative group">
               <button 
                 onClick={() => scrollToSection("programs")}
@@ -103,22 +109,13 @@ export default function Header() {
               onClick={() => scrollToSection("news")}
               className="text-dark hover:text-primary transition-colors duration-300"
             >
-              News & Blog
+              Blog
             </button>
-            <button 
-              onClick={() => scrollToSection("events")}
-              className="text-dark hover:text-primary transition-colors duration-300"
-            >
-              Events
-            </button>
-            <button 
+            <Button 
               onClick={() => scrollToSection("contact")}
-              className="text-dark hover:text-primary transition-colors duration-300"
+              className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold"
             >
-              Contact
-            </button>
-            <Button className="bg-primary text-white hover:bg-primary-dark">
-              Donate Now
+              Take Action
             </Button>
           </div>
           
@@ -145,7 +142,13 @@ export default function Header() {
                 onClick={() => scrollToSection("about")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                About Us
+                About Canary
+              </button>
+              <button 
+                onClick={() => scrollToSection("programs")}
+                className="text-dark hover:text-primary transition-colors duration-300 text-left"
+              >
+                Canary Approach
               </button>
               <button 
                 onClick={() => scrollToSection("programs")}
@@ -157,22 +160,13 @@ export default function Header() {
                 onClick={() => scrollToSection("news")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                News & Blog
+                Blog
               </button>
-              <button 
-                onClick={() => scrollToSection("events")}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-              >
-                Events
-              </button>
-              <button 
+              <Button 
                 onClick={() => scrollToSection("contact")}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
+                className="bg-primary text-white hover:bg-primary-dark w-full font-semibold"
               >
-                Contact
-              </button>
-              <Button className="bg-primary text-white hover:bg-primary-dark w-full">
-                Donate Now
+                Take Action
               </Button>
             </div>
           </div>

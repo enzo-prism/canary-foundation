@@ -47,7 +47,15 @@ export default function Footer() {
                   onClick={() => scrollToSection("about")}
                   className="text-gray-300 hover:text-primary transition-colors duration-300"
                 >
-                  About Us
+                  About Canary
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="text-gray-300 hover:text-primary transition-colors duration-300"
+                >
+                  Canary Approach
                 </button>
               </li>
               <li>
@@ -63,15 +71,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("news")}
                   className="text-gray-300 hover:text-primary transition-colors duration-300"
                 >
-                  News & Blog
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection("events")}
-                  className="text-gray-300 hover:text-primary transition-colors duration-300"
-                >
-                  Events
+                  Blog
                 </button>
               </li>
               <li>

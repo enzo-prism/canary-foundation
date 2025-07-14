@@ -59,10 +59,11 @@ Preferred communication style: Simple, everyday language.
 - Yellow and white branding for cancer research focus
 - Research program showcases with detailed descriptions
 - Impact stories highlighting breakthrough discoveries
-- Comprehensive navigation matching original sitemap structure
+- Navigation structure: Home, About Canary, Canary Approach, Canary Science, Blog, Take Action
+- Take Action button prominently styled as primary call-to-action
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
-- Dropdown menus for About Us and Canary Science sections
+- Dropdown menu for About Canary with mission, founder story, and impact sections
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)
