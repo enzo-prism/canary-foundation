@@ -1151,7 +1151,7 @@ export default function Home() {
               
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <h4 className="font-semibold text-dark mb-4">Financial Transparency</h4>
-                <div className="space-y-3 text-sm text-gray-600">
+                <div className="space-y-3 text-sm text-gray-600 mb-6">
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4 text-primary" />
                     <span>501(c)(3) nonprofit organization</span>
@@ -1167,6 +1167,32 @@ export default function Home() {
                   <div className="flex items-center space-x-2">
                     <HandHeart className="w-4 h-4 text-primary" />
                     <span>Donation options: Financial gifts, stock, AmazonSmile</span>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h5 className="font-semibold text-dark mb-3">2020 Financial Performance</h5>
+                  <div className="grid grid-cols-2 gap-4 text-xs">
+                    <div className="bg-white rounded p-3">
+                      <div className="text-primary font-semibold text-lg">91%</div>
+                      <div className="text-gray-600">Program Expenses</div>
+                      <div className="text-gray-500 text-xs">$3,621,840</div>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <div className="text-primary font-semibold text-lg">3%</div>
+                      <div className="text-gray-600">Administrative</div>
+                      <div className="text-gray-500 text-xs">$103,196</div>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <div className="text-primary font-semibold text-lg">6%</div>
+                      <div className="text-gray-600">Fundraising</div>
+                      <div className="text-gray-500 text-xs">$238,864</div>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <div className="text-primary font-semibold text-lg">12.6¢</div>
+                      <div className="text-gray-600">Cost per $1 raised</div>
+                      <div className="text-gray-500 text-xs">$3,001,876 raised</div>
+                    </div>
                   </div>
                 </div>
               </div>
