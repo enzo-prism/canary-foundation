@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp } from "lucide-react";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -768,6 +768,82 @@ export default function Home() {
                     </p>
                     <p className="text-gray-600 text-sm">
                       Ensures effective financial and operational processes. Responsible for fund management and key operational functions.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+            
+            {/* Board of Directors Section */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-8 mb-16">
+              <h3 className="text-2xl font-semibold text-dark mb-4 text-center">Board of Directors</h3>
+              <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+                Our Board of Directors is integral to the success of our team. They represent a distinguished group of leaders who provide strategic decision-making and thoughtful guidance to ensure that our vision stays on track.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <TrendingUp className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Michael Ball</h4>
+                    <p className="text-primary font-medium mb-3">CEO, Contextual Genomics</p>
+                    <p className="text-gray-600 text-sm mb-3 font-medium">Canary Audit Committee</p>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Accomplished B2B software executive with 25+ years international experience. Former CEO of GenoLogics, leading LIMS provider for life sciences organizations.
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      <strong>Specialties:</strong> Healthcare, Genomics, B2B Software, SaaS, Life Sciences, Precision Medicine
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Award className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Kevin Kennedy</h4>
+                    <p className="text-primary font-medium mb-3">President, Senior Managing Director, Blue Ridge Partners</p>
+                    <p className="text-gray-600 text-sm mb-3 font-medium">Canary Audit Committee, Chair</p>
+                    <p className="text-gray-600 text-sm mb-3 italic">
+                      "I'm proud to serve as a board member for the Canary Foundation, where I've been able to see firsthand the innovation that the Foundation and Canary Center at Stanford have brought to the field of early cancer detection."
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      30+ years executive experience. Former CEO of Avaya, JDS Uniphase, SVP of Cisco Systems. Currently on boards of KLA-Tencor and Digital Realty.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Dale Jantzen</h4>
+                    <p className="text-primary font-medium mb-3">Board Member</p>
+                    <p className="text-gray-600 text-sm mb-3">
+                      20+ years product management and marketing experience in telecommunications. Former President of San Jose Grand Prix. BSEE from University of Saskatchewan.
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Former Marketing Director at Develcon Electronics, Alberta Microelectronics Center, and Sci-Tec Instruments. Extensive experience managing large technical teams and multi-million dollar projects.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Heart className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Hilary Valentine</h4>
+                    <p className="text-primary font-medium mb-3">Board Member</p>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Partner at Black & White Design. Board of Directors of Valentine Family Foundation. Co-Founder of Belize Kids improving lives for children in Belize.
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Chair of Room to Read Emeritus Board after serving 2003-2012. Former Co-Chair of Board of Directors 2005-2008. B.S. in Psychology from St. Lawrence University.
                     </p>
                   </CardContent>
                 </Card>
