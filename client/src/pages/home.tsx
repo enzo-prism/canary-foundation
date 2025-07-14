@@ -32,6 +32,26 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 export default function Home() {
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
+  
+  const timelineEvents = [
+    { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", category: "founding" },
+    { year: 2001, title: "Grace Listwin Dies", description: "Grace Listwin dies of late-stage ovarian cancer due to detection of her cancer at a late stage", category: "founding" },
+    { year: 2002, title: "First Biomarker Work", description: "Ovarian cancer biomarker work for Dr. Nicole Urban funded by Listwin Family Foundation at the Fred Hutch Cancer Research Center", category: "research" },
+    { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCRC focusing on cancer biomarkers", category: "research" },
+    { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin", category: "founding" },
+    { year: 2005, title: "First Scientific Symposium", description: "First annual Scientific Symposium and pancreatic cancer team formed", category: "milestone" },
+    { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients", category: "research" },
+    { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute", category: "milestone" },
+    { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to detect biomarkers—10,000 times more sensitive than existing tests", category: "breakthrough" },
+    { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer", category: "breakthrough" },
+    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble—trials begin for men with prostate cancer at Stanford", category: "milestone" },
+    { year: 2019, title: "ACED Alliance Launch", description: "Launch of ACED Alliance – The International Alliance for Cancer Early Detection", category: "milestone" },
+    { year: 2020, title: "In Loving Memory", description: "In Loving Memory Sanjiv Sam Gambhir, MD, PhD (November 23, 1962 – July 18, 2020)", category: "memorial" },
+    { year: 2021, title: "PASS Milestone", description: "Milestone enrollment of 2000 men in the Canary Prostate Active Surveillance Study (PASS)", category: "milestone" },
+    { year: 2023, title: "PATROL Launch", description: "Launch of PATROL: Prostate Cancer Screening for People at Genetic Risk for Aggressive Disease", category: "research" },
+    { year: 2024, title: "Future Goals", description: "Continuing research in multiomic analysis, point of care ultrasound, and microbubble technology", category: "future" }
+  ];
   
   const heroImages = [
     {
@@ -216,6 +236,96 @@ export default function Home() {
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-white mb-2">2004</div>
               <div className="text-white/90">Founded</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Timeline */}
+      <section id="timeline" className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Journey</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                From a personal tragedy to groundbreaking research—explore two decades of advancing early cancer detection.
+              </p>
+            </div>
+            
+            {/* Timeline Container */}
+            <div className="relative">
+              {/* Timeline Line */}
+              <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary to-primary opacity-30"></div>
+              
+              {/* Timeline Items */}
+              <div className="space-y-8 md:space-y-12">
+                {timelineEvents.map((event, index) => {
+                  const isLeft = index % 2 === 0;
+                  const isSelected = selectedTimelineItem === index;
+                  
+                  const getCategoryColor = (category: string) => {
+                    switch (category) {
+                      case "founding": return "bg-red-500";
+                      case "research": return "bg-blue-500";
+                      case "milestone": return "bg-primary";
+                      case "breakthrough": return "bg-green-500";
+                      case "memorial": return "bg-gray-500";
+                      case "future": return "bg-purple-500";
+                      default: return "bg-primary";
+                    }
+                  };
+                  
+                  return (
+                    <div
+                      key={index}
+                      className={`relative flex items-center ${
+                        isLeft ? 'md:justify-start' : 'md:justify-end'
+                      }`}
+                    >
+                      {/* Timeline Dot */}
+                      <div
+                        className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg transition-all duration-300 ${
+                          getCategoryColor(event.category)
+                        } ${isSelected ? 'scale-125' : 'hover:scale-110'}`}
+                      ></div>
+                      
+                      {/* Content Card */}
+                      <div
+                        className={`ml-12 md:ml-0 ${
+                          isLeft ? 'md:pr-8' : 'md:pl-8'
+                        } ${isLeft ? 'md:mr-1/2' : 'md:ml-1/2'} w-full md:w-5/12`}
+                      >
+                        <Card
+                          className={`bg-white hover:shadow-lg transition-all duration-300 cursor-pointer ${
+                            isSelected ? 'ring-2 ring-primary shadow-lg' : ''
+                          }`}
+                          onClick={() => setSelectedTimelineItem(isSelected ? null : index)}
+                        >
+                          <CardContent className="p-6">
+                            <div className="flex items-start justify-between mb-3">
+                              <div className={`text-2xl font-bold ${getCategoryColor(event.category).replace('bg-', 'text-')}`}>
+                                {event.year}
+                              </div>
+                              <div className={`px-2 py-1 rounded-full text-xs font-semibold text-white ${getCategoryColor(event.category)}`}>
+                                {event.category}
+                              </div>
+                            </div>
+                            <h3 className="text-lg font-semibold text-dark mb-2">{event.title}</h3>
+                            <p className={`text-gray-600 text-sm transition-all duration-300 ${
+                              isSelected ? 'line-clamp-none' : 'line-clamp-2'
+                            }`}>
+                              {event.description}
+                            </p>
+                            <button className="text-primary hover:text-primary-dark text-sm font-medium mt-2 transition-colors">
+                              {isSelected ? 'Show Less' : 'Read More'}
+                            </button>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

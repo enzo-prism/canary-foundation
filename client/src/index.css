@@ -74,6 +74,20 @@
     color: var(--dark);
   }
   
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-none {
+    display: block;
+    -webkit-line-clamp: none;
+    -webkit-box-orient: initial;
+    overflow: visible;
+  }
+  
   .text-light {
     color: var(--light);
   }
