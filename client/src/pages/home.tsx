@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target } from "lucide-react";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -35,22 +35,22 @@ export default function Home() {
   const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
   
   const timelineEvents = [
-    { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", category: "founding" },
-    { year: 2001, title: "Grace Listwin Dies", description: "Grace Listwin dies of late-stage ovarian cancer due to detection of her cancer at a late stage", category: "founding" },
-    { year: 2002, title: "First Biomarker Work", description: "Ovarian cancer biomarker work for Dr. Nicole Urban funded by Listwin Family Foundation at the Fred Hutch Cancer Research Center", category: "research" },
-    { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCRC focusing on cancer biomarkers", category: "research" },
-    { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin", category: "founding" },
-    { year: 2005, title: "First Scientific Symposium", description: "First annual Scientific Symposium and pancreatic cancer team formed", category: "milestone" },
-    { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients", category: "research" },
-    { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute", category: "milestone" },
-    { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to detect biomarkers—10,000 times more sensitive than existing tests", category: "breakthrough" },
-    { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer", category: "breakthrough" },
-    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble—trials begin for men with prostate cancer at Stanford", category: "milestone" },
-    { year: 2019, title: "ACED Alliance Launch", description: "Launch of ACED Alliance – The International Alliance for Cancer Early Detection", category: "milestone" },
-    { year: 2020, title: "In Loving Memory", description: "In Loving Memory Sanjiv Sam Gambhir, MD, PhD (November 23, 1962 – July 18, 2020)", category: "memorial" },
-    { year: 2021, title: "PASS Milestone", description: "Milestone enrollment of 2000 men in the Canary Prostate Active Surveillance Study (PASS)", category: "milestone" },
-    { year: 2023, title: "PATROL Launch", description: "Launch of PATROL: Prostate Cancer Screening for People at Genetic Risk for Aggressive Disease", category: "research" },
-    { year: 2024, title: "Future Goals", description: "Continuing research in multiomic analysis, point of care ultrasound, and microbubble technology", category: "future" }
+    { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", icon: Heart, category: "founding" },
+    { year: 2001, title: "Grace Listwin Dies", description: "Grace Listwin dies of late-stage ovarian cancer due to detection of her cancer at a late stage", icon: Heart, category: "founding" },
+    { year: 2002, title: "First Biomarker Work", description: "Ovarian cancer biomarker work for Dr. Nicole Urban funded by Listwin Family Foundation at the Fred Hutch Cancer Research Center", icon: Microscope, category: "research" },
+    { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCRC focusing on cancer biomarkers", icon: Building, category: "research" },
+    { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin", icon: Star, category: "founding" },
+    { year: 2005, title: "First Scientific Symposium", description: "First annual Scientific Symposium and pancreatic cancer team formed", icon: Users, category: "milestone" },
+    { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients", icon: Stethoscope, category: "research" },
+    { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute", icon: Building, category: "milestone" },
+    { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to detect biomarkers—10,000 times more sensitive than existing tests", icon: Lightbulb, category: "breakthrough" },
+    { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer", icon: Lightbulb, category: "breakthrough" },
+    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble—trials begin for men with prostate cancer at Stanford", icon: Award, category: "milestone" },
+    { year: 2019, title: "ACED Alliance Launch", description: "Launch of ACED Alliance – The International Alliance for Cancer Early Detection", icon: Handshake, category: "milestone" },
+    { year: 2020, title: "In Loving Memory", description: "In Loving Memory Sanjiv Sam Gambhir, MD, PhD (November 23, 1962 – July 18, 2020)", icon: Heart, category: "memorial" },
+    { year: 2021, title: "PASS Milestone", description: "Milestone enrollment of 2000 men in the Canary Prostate Active Surveillance Study (PASS)", icon: Target, category: "milestone" },
+    { year: 2023, title: "PATROL Launch", description: "Launch of PATROL: Prostate Cancer Screening for People at Genetic Risk for Aggressive Disease", icon: Shield, category: "research" },
+    { year: 2024, title: "Future Goals", description: "Continuing research in multiomic analysis, point of care ultrasound, and microbubble technology", icon: Target, category: "future" }
   ];
   
   const heroImages = [
@@ -255,25 +255,28 @@ export default function Home() {
             {/* Timeline Container */}
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary to-primary opacity-30"></div>
+              <div className="absolute left-10 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary to-primary opacity-30"></div>
               
               {/* Timeline Items */}
               <div className="space-y-8 md:space-y-12">
                 {timelineEvents.map((event, index) => {
                   const isLeft = index % 2 === 0;
                   const isSelected = selectedTimelineItem === index;
+                  const IconComponent = event.icon;
                   
-                  const getCategoryColor = (category: string) => {
+                  const getCategoryStyle = (category: string) => {
                     switch (category) {
-                      case "founding": return "bg-red-500";
-                      case "research": return "bg-blue-500";
-                      case "milestone": return "bg-primary";
-                      case "breakthrough": return "bg-green-500";
-                      case "memorial": return "bg-gray-500";
-                      case "future": return "bg-purple-500";
-                      default: return "bg-primary";
+                      case "founding": return { bg: "bg-gray-600", text: "text-gray-600" };
+                      case "research": return { bg: "bg-gray-500", text: "text-gray-500" };
+                      case "milestone": return { bg: "bg-primary", text: "text-primary" };
+                      case "breakthrough": return { bg: "bg-primary", text: "text-primary" };
+                      case "memorial": return { bg: "bg-gray-400", text: "text-gray-400" };
+                      case "future": return { bg: "bg-gray-700", text: "text-gray-700" };
+                      default: return { bg: "bg-primary", text: "text-primary" };
                     }
                   };
+                  
+                  const categoryStyle = getCategoryStyle(event.category);
                   
                   return (
                     <div
@@ -282,16 +285,18 @@ export default function Home() {
                         isLeft ? 'md:justify-start' : 'md:justify-end'
                       }`}
                     >
-                      {/* Timeline Dot */}
+                      {/* Timeline Dot with Icon */}
                       <div
-                        className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg transition-all duration-300 ${
-                          getCategoryColor(event.category)
-                        } ${isSelected ? 'scale-125' : 'hover:scale-110'}`}
-                      ></div>
+                        className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 w-12 h-12 rounded-full border-4 border-white shadow-lg transition-all duration-300 ${
+                          categoryStyle.bg
+                        } ${isSelected ? 'scale-110' : 'hover:scale-105'} flex items-center justify-center`}
+                      >
+                        <IconComponent className="w-5 h-5 text-white" />
+                      </div>
                       
                       {/* Content Card */}
                       <div
-                        className={`ml-12 md:ml-0 ${
+                        className={`ml-20 md:ml-0 ${
                           isLeft ? 'md:pr-8' : 'md:pl-8'
                         } ${isLeft ? 'md:mr-1/2' : 'md:ml-1/2'} w-full md:w-5/12`}
                       >
@@ -303,10 +308,10 @@ export default function Home() {
                         >
                           <CardContent className="p-6">
                             <div className="flex items-start justify-between mb-3">
-                              <div className={`text-2xl font-bold ${getCategoryColor(event.category).replace('bg-', 'text-')}`}>
+                              <div className={`text-2xl font-bold ${categoryStyle.text}`}>
                                 {event.year}
                               </div>
-                              <div className={`px-2 py-1 rounded-full text-xs font-semibold text-white ${getCategoryColor(event.category)}`}>
+                              <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${categoryStyle.bg}`}>
                                 {event.category}
                               </div>
                             </div>
