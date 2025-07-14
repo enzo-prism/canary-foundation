@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 
-// Blog post data with authentic Canary Foundation content from 2024
+// Blog post data with authentic Canary Foundation content from 2024 and 2023
 const blogPosts = [
   {
     id: 1,
@@ -34,10 +34,49 @@ const blogPosts = [
     readTime: "4 min read",
     featured: false,
     url: "https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/"
+  },
+  {
+    id: 3,
+    title: "Early Detection of Cancer Annual Conference- EDx23 – hosted by Cancer Research UK, Canary Center at Stanford, & OHSU Knight Cancer Institute",
+    excerpt: "The Early Detection of Cancer Conference brought nearly 500 researchers, physicians, patients, industry leaders and supporters to London in October to share the latest findings in early detection of cancer.",
+    content: "The Early Detection of Cancer Conference brought nearly 500 researchers, physicians, patients, industry leaders and supporters to London in October to share the latest findings in early detection of cancer. The conference was the largest since its inception and included lively debates, discussions, and presentations of recent advances in cancer early detection. This annual gathering represents the pinnacle of international collaboration in the field, bringing together the brightest minds to advance breakthrough research and accelerate the development of life-saving technologies.",
+    author: "Renata Barnes",
+    date: "2023-11-01",
+    category: "Conference",
+    tags: ["EDx23", "Conference", "London", "Cancer Research UK", "Stanford", "OHSU"],
+    readTime: "4 min read",
+    featured: false,
+    url: "https://www.canaryfoundation.org/2023/11/01/early-detection-of-cancer-annual-conference-edx23-hosted-by-cancer-research-uk-canary-center-at-stanford-ohsu-knight-cancer-institute-and-bringing-together-great-minds-to-collaborate-i/"
+  },
+  {
+    id: 4,
+    title: "Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2023 goes to: Professor Peter Sasieni",
+    excerpt: "Congratulations to Professor Peter Sasieni, Academic Director of the Kings Clinical Trials Unit at King's College London, who was presented with the 2023 Don Listwin award at the Early Detection of Cancer conference.",
+    content: "Congratulations to Professor Peter Sasieni, Academic Director of the Kings Clinical Trials Unit at King's College London, who was presented with the 2023 Don Listwin award at the Early Detection of Cancer conference dinner. The award recognizes outstanding contribution to cancer early detection. Peter's long career in cervical cancer prevention started with his first post-doctoral position at the Imperial Cancer Research Fund, looking at ways to optimize cervical cancer screening. He then looked at the potential for HPV testing to improve cervical cancer screening, followed by researching HPV vaccination as a means of cervical cancer prevention. Peter has also been working with Professor Rebecca Fitzgerald on the BEST trials which have assessed the use of the Cytosponge 'sponge on a string' device as a means of early detection and prevention of oesophageal cancer.",
+    author: "Renata Barnes",
+    date: "2023-11-01",
+    category: "Awards",
+    tags: ["Don Listwin Award", "Peter Sasieni", "Cervical Cancer", "HPV", "BEST Trials", "Cytosponge"],
+    readTime: "6 min read",
+    featured: false,
+    url: "https://www.canaryfoundation.org/2023/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2023-goes-to-professor-peter-sasieni/"
+  },
+  {
+    id: 5,
+    title: "Canary Ovary Team is approaching a milestone of completing its first study of fallopian tubes",
+    excerpt: "The Canary Ovary Team's initiative to tackle High Grade Serous Ovarian Cancer (HGSOC) is approaching a milestone of completing its first study of fallopian tubes from women with and without mutations in the BRCA genes.",
+    content: "The Canary Ovary Team's initiative to tackle High Grade Serous Ovarian Cancer (HGSOC) is approaching a milestone of completing its first study of fallopian tubes from women with and without mutations in the BRCA genes. HGSOC arises from the fallopian tubes, is the most common and deadly type of ovarian cancer, and women with BRCA mutations are at higher risk. The team has been carefully studying tubes to find whether there are BRCA-associated signals present at the molecular level, even in BRCA mutant tubes that appear 'normal' under the microscope. When complete, this study will be the largest of its kind and will serve as a definitive resource for follow-up studies and for the research community focused on detecting ovarian cancer early.",
+    author: "Renata Barnes",
+    date: "2023-11-01",
+    category: "Research",
+    tags: ["Ovarian Cancer", "BRCA", "Fallopian Tubes", "HGSOC", "Molecular Research"],
+    readTime: "4 min read",
+    featured: false,
+    url: "https://www.canaryfoundation.org/2023/11/01/canary-ovary-team-is-approaching-a-milestone-of-completing-its-first-study-of-fallopian-tubes/"
   }
 ];
 
-const categories = ["All", "Awards", "Conference"];
+const categories = ["All", "Awards", "Conference", "Research"];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
