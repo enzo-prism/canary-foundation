@@ -1173,12 +1173,14 @@ export default function Home() {
                 <div className="bg-gray-50 rounded-lg p-4">
                   <h5 className="font-semibold text-dark mb-3">2020 Financial Performance</h5>
                   <div className="grid lg:grid-cols-2 gap-6">
-                    <div className="flex justify-center">
-                      <img 
-                        src="/financial-chart-2020.webp" 
-                        alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
-                        className="max-w-full h-auto rounded-lg shadow-sm"
-                      />
+                    <div className="flex justify-center items-center">
+                      <div className="w-full max-w-md">
+                        <img 
+                          src="/financial-chart-2020.webp" 
+                          alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
+                          className="w-full h-auto object-contain rounded-lg shadow-sm"
+                        />
+                      </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4 text-xs">
                       <div className="bg-white rounded p-3">
