@@ -210,7 +210,16 @@ export default function Home() {
                 >
                   Support Research
                 </Button>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer">
+                <Button 
+                  variant="outline" 
+                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer"
+                  onClick={() => {
+                    const element = document.getElementById('programs');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
                   Our Programs
                 </Button>
               </div>
