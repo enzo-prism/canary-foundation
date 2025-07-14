@@ -279,11 +279,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Prostate cancer research" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-br from-yellow-300 via-yellow-100 to-white"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Prostate Cancer Program</h3>
@@ -296,11 +292,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Ovarian cancer research" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-tr from-gray-800 via-gray-600 to-yellow-300"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Ovarian Cancer Program</h3>
@@ -313,11 +305,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Pancreatic cancer research" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-bl from-white via-yellow-200 to-gray-900"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Pancreatic Cancer Program</h3>
@@ -330,11 +318,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Liquid biopsy research" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-r from-yellow-400 via-white to-black"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Liquid Biopsy Center</h3>
@@ -347,11 +331,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Molecular imaging research" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-tl from-gray-900 via-yellow-300 to-gray-100"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Molecular Imaging</h3>
@@ -364,11 +344,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Education and training programs" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-br from-white via-yellow-100 to-gray-800"></div>
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Education & Training</h3>
@@ -394,11 +370,7 @@ export default function Home() {
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <img 
-                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="PASS study breakthrough" 
-                className="rounded-2xl shadow-xl w-full h-auto"
-              />
+              <div className="rounded-2xl shadow-xl w-full h-80 bg-gradient-to-br from-yellow-300 via-white to-gray-900"></div>
             </div>
             <div>
               <div className="text-primary text-lg font-semibold mb-4">Research Breakthrough</div>
@@ -422,11 +394,7 @@ export default function Home() {
           
           <div className="grid md:grid-cols-2 gap-12 items-center mt-16">
             <div className="md:order-2">
-              <img 
-                src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="Liquid biopsy advancement" 
-                className="rounded-2xl shadow-xl w-full h-auto"
-              />
+              <div className="rounded-2xl shadow-xl w-full h-80 bg-gradient-to-tl from-gray-900 via-yellow-400 to-white"></div>
             </div>
             <div className="md:order-1">
               <div className="text-primary text-lg font-semibold mb-4">Innovation Achievement</div>
@@ -463,11 +431,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Don Listwin Award 2024" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-tr from-yellow-400 via-yellow-100 to-gray-800"></div>
               </div>
               <CardContent className="p-6">
                 <div className="text-primary text-sm font-semibold mb-2">AWARD • 2024</div>
@@ -481,11 +445,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="PATROL study launch" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-bl from-white via-yellow-300 to-black"></div>
               </div>
               <CardContent className="p-6">
                 <div className="text-primary text-sm font-semibold mb-2">RESEARCH • 2023</div>
@@ -499,11 +459,7 @@ export default function Home() {
             
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Remembering Dr. Gambhir" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="w-full h-48 bg-gradient-to-r from-gray-900 via-yellow-200 to-white"></div>
               </div>
               <CardContent className="p-6">
                 <div className="text-primary text-sm font-semibold mb-2">REMEMBRANCE • 2020</div>
