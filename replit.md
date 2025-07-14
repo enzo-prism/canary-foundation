@@ -1,0 +1,123 @@
+# Canary Foundation Website
+
+## Overview
+
+This is a full-stack web application for the Canary Foundation, a non-profit organization focused on sustainable development and community empowerment. The application features a modern, responsive design built with React and TypeScript on the frontend, Express.js on the backend, and uses PostgreSQL with Drizzle ORM for data management.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite for development and production builds
+- **UI Library**: Radix UI components with shadcn/ui design system
+- **Styling**: Tailwind CSS with custom CSS variables for theming
+- **State Management**: TanStack Query (React Query) for server state management
+- **Routing**: Wouter for client-side routing
+- **Forms**: React Hook Form with Zod validation
+
+### Backend Architecture
+- **Framework**: Express.js with TypeScript
+- **Database**: PostgreSQL with Drizzle ORM
+- **Database Client**: Neon Database serverless driver
+- **Validation**: Zod schemas for request/response validation
+- **Development**: tsx for TypeScript execution in development
+
+### Project Structure
+- `client/` - Frontend React application
+- `server/` - Backend Express.js application
+- `shared/` - Shared TypeScript types and schemas
+- `migrations/` - Database migration files
+
+## Key Components
+
+### Database Schema
+- **Users Table**: Basic user management with username/password
+- **Contact Messages Table**: Stores contact form submissions with name, email, subject, message, and timestamp
+
+### API Endpoints
+- `POST /api/contact` - Submit contact form messages
+- `GET /api/contact` - Retrieve contact messages (admin functionality)
+
+### Frontend Features
+- Single-page application with smooth scrolling navigation
+- Responsive design with mobile-first approach
+- Contact form with client-side validation
+- Toast notifications for user feedback
+- Modern UI components from Radix UI/shadcn
+
+### Storage Layer
+- In-memory storage implementation for development (`MemStorage`)
+- Database-ready architecture with Drizzle ORM configuration
+- Prepared for PostgreSQL production deployment
+
+## Data Flow
+
+1. **Contact Form Submission**:
+   - User fills out contact form on frontend
+   - Form data validated with Zod schema
+   - API request sent to `/api/contact` endpoint
+   - Server validates data and stores in database
+   - Success/error response returned to client
+   - Toast notification shown to user
+
+2. **Server-Side Validation**:
+   - All API endpoints use Zod schemas for validation
+   - Shared schemas between frontend and backend ensure consistency
+   - Error handling with proper HTTP status codes
+
+## External Dependencies
+
+### Frontend Dependencies
+- **UI Components**: Extensive Radix UI component library
+- **Styling**: Tailwind CSS with PostCSS
+- **Icons**: Lucide React icons
+- **Date Handling**: date-fns library
+- **Form Management**: React Hook Form with Zod resolvers
+
+### Backend Dependencies
+- **Database**: Neon Database serverless PostgreSQL
+- **ORM**: Drizzle ORM with PostgreSQL dialect
+- **Session Management**: connect-pg-simple for PostgreSQL sessions
+- **Development Tools**: tsx for TypeScript execution
+
+### Development Tools
+- **Build**: Vite with React plugin
+- **TypeScript**: Strict configuration with path aliases
+- **Database Migrations**: Drizzle Kit for schema management
+- **Replit Integration**: Custom plugins for development environment
+
+## Deployment Strategy
+
+### Development Environment
+- Vite dev server for frontend with HMR
+- Express server with automatic TypeScript compilation
+- In-memory storage for rapid development
+- Replit-specific plugins for cloud development
+
+### Production Build
+- Frontend built with Vite to static assets
+- Backend compiled with esbuild to ES modules
+- Database migrations applied with Drizzle Kit
+- Environment variables for database connection
+
+### Database Configuration
+- PostgreSQL database with Drizzle ORM
+- Connection via DATABASE_URL environment variable
+- Migration files stored in `/migrations` directory
+- Schema definitions in `shared/schema.ts`
+
+### Key Architectural Decisions
+
+1. **Shared Schema Approach**: Uses a shared TypeScript schema file to ensure type safety between frontend and backend, reducing duplication and maintaining consistency.
+
+2. **Memory Storage Pattern**: Implements an in-memory storage layer for development that can be easily swapped for database persistence in production.
+
+3. **Monorepo Structure**: Organizes code into logical directories (client, server, shared) while maintaining a single repository for easier development and deployment.
+
+4. **Component-First UI**: Leverages Radix UI primitives with shadcn/ui styling for accessible, customizable components.
+
+5. **Type-Safe API**: Uses Zod for runtime validation and TypeScript for compile-time safety throughout the application stack.
