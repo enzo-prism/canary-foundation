@@ -1,5 +1,5 @@
-import { Bird } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -14,10 +14,12 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <Bird className="text-white text-xl" />
-              </div>
+            <div className="flex items-center space-x-3 mb-6">
+              <img 
+                src={canaryLogo} 
+                alt="Canary Foundation Logo" 
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-xl font-bold">Canary Foundation</span>
             </div>
             <p className="text-gray-300 mb-6">

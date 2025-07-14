@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Bird } from "lucide-react";
+import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,10 +18,12 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <Bird className="text-white text-xl" />
-            </div>
+          <div className="flex items-center space-x-3">
+            <img 
+              src={canaryLogo} 
+              alt="Canary Foundation Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <span className="text-xl font-bold text-dark">Canary Foundation</span>
           </div>
           
