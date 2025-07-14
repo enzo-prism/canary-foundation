@@ -661,37 +661,117 @@ export default function Home() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
+                <CardContent className="p-6">
                   <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <Star className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-dark mb-2">Don Listwin</h3>
-                  <p className="text-primary font-medium mb-2">Founder</p>
-                  <p className="text-gray-600 text-sm">Founded Canary following personal loss, serves on National Cancer Institute Board of Scientific Advisors</p>
+                  <h3 className="text-xl font-semibold text-dark mb-2 text-center">Don Listwin</h3>
+                  <p className="text-primary font-medium mb-3 text-center">Founder, CEO, Co-Chairman</p>
+                  <p className="text-gray-600 text-sm mb-3 italic">
+                    "After 30 years in the technology industry, I launched Canary Foundation in 2004. I was motivated by a personal experience with cancer."
+                  </p>
+                  <p className="text-gray-600 text-sm">
+                    Former CEO of Sana Security, Openwave, and #2 executive at Cisco Systems. Serves on NCI Board of Scientific Advisors and multiple company boards.
+                  </p>
                 </CardContent>
               </Card>
               
               <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
+                <CardContent className="p-6">
                   <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <Users className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-dark mb-2">Joseph M. DeSimone, PhD</h3>
-                  <p className="text-primary font-medium mb-2">Current Director</p>
-                  <p className="text-gray-600 text-sm">Departments of Radiology, Chemical Engineering, Materials Science, Chemistry, and Business</p>
+                  <h3 className="text-xl font-semibold text-dark mb-2 text-center">Joseph M. DeSimone, PhD</h3>
+                  <p className="text-primary font-medium mb-3 text-center">Current Director</p>
+                  <p className="text-gray-600 text-sm">
+                    Departments of Radiology, Chemical Engineering, Materials Science, Chemistry, and Business. 
+                    Leading innovative research and strategic direction at Stanford.
+                  </p>
                 </CardContent>
               </Card>
               
               <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
+                <CardContent className="p-6">
                   <div className="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Heart className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-dark mb-2">Sanjiv Sam Gambhir</h3>
-                  <p className="text-gray-600 font-medium mb-2">Co-Founder (1962-2020)</p>
-                  <p className="text-gray-600 text-sm">Pioneer in early detection strategies, co-led Canary Center at Stanford</p>
+                  <h3 className="text-xl font-semibold text-dark mb-2 text-center">Sanjiv Sam Gambhir</h3>
+                  <p className="text-gray-600 font-medium mb-3 text-center">Co-Founder (1962-2020)</p>
+                  <p className="text-gray-600 text-sm">
+                    Pioneer in early detection strategies, co-led Canary Center at Stanford. His legacy continues to inspire our mission.
+                  </p>
                 </CardContent>
               </Card>
+            </div>
+            
+            {/* Core Staff Section */}
+            <div className="bg-white rounded-lg p-8 mb-16">
+              <h3 className="text-2xl font-semibold text-dark mb-8 text-center">Core Staff</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Microscope className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Heidi Auman</h4>
+                    <p className="text-primary font-medium mb-3">Scientific Program Manager</p>
+                    <p className="text-gray-600 text-sm mb-3 italic">
+                      "I want to help the Canary Foundation succeed at the challenge of aligning different disciplines toward the common goal of early cancer detection."
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Former Postdoctoral Research Fellow at NYU School of Medicine. Manages strategic plans, group connectivity, and progress tracking.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <HandHeart className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Therese Quinlan</h4>
+                    <p className="text-primary font-medium mb-3">Chief Development Officer</p>
+                    <p className="text-gray-600 text-sm mb-3 italic">
+                      "I joined Canary Foundation to match my deep interest and training in high-impact philanthropy with an organization positioned to create a leap in science and technology."
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Manages major gift programs and transformational giving efforts. Mills College graduate with extensive philanthropic experience.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Users2 className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Renata Barnes</h4>
+                    <p className="text-primary font-medium mb-3">Donor and Development Services Manager</p>
+                    <p className="text-gray-600 text-sm mb-3 italic">
+                      "I joined the Canary Foundation because I believe that the idea of early detection is the logical approach to solving the problem of cancer that touches all of us."
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      University of Utah graduate specializing in database systems, event management, and donor relations.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                      <Shield className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-dark mb-2">Candy Gularte</h4>
+                    <p className="text-primary font-medium mb-3">Finance and Administrative Manager</p>
+                    <p className="text-gray-600 text-sm mb-3 italic">
+                      "The Mission of Canary is close to my heart after having lost my Dad to lung cancer at an early age."
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      Ensures effective financial and operational processes. Responsible for fund management and key operational functions.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
             
             <div className="bg-white rounded-lg p-8">
