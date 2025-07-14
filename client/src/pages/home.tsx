@@ -204,7 +204,10 @@ export default function Home() {
                 The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 animate-bounceIn animate-stagger-2">
-                <Button className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer">
+                <Button 
+                  className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer"
+                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                >
                   Support Research
                 </Button>
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer">

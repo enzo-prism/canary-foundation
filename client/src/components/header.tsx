@@ -194,7 +194,7 @@ export default function Header() {
               Blog
             </Link>
             <Button 
-              onClick={() => scrollToSection("contact")}
+              onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
               className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold"
             >
               Take Action
@@ -333,7 +333,10 @@ export default function Header() {
                 Blog
               </Link>
               <Button 
-                onClick={() => scrollToSection("contact")}
+                onClick={() => {
+                  window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                  setIsMenuOpen(false);
+                }}
                 className="bg-primary text-white hover:bg-primary-dark w-full font-semibold"
               >
                 Take Action
