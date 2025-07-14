@@ -37,7 +37,7 @@ export default function Home() {
     {
       src: canaryChallengeLogo,
       alt: "Canary Challenge logo featuring stylized cyclist figures with yellow canary bird",
-      title: "Canary Challenge"
+      title: "Annual Fundraiser"
     },
     {
       src: canaryFinishLine,
