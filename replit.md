@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a full-stack web application for the Canary Foundation, a non-profit organization focused on sustainable development and community empowerment. The application features a modern, responsive design built with React and TypeScript on the frontend, Express.js on the backend, and uses PostgreSQL with Drizzle ORM for data management.
+This is a full-stack web application for the Canary Foundation, a non-profit organization focused on early cancer detection research and precision medicine. Founded in 2004, the foundation develops breakthrough technologies and biomarkers for detecting cancer at its earliest stages. The application features a modern, responsive design built with React and TypeScript on the frontend, Express.js on the backend, and uses PostgreSQL with Drizzle ORM for data management.
 
 ## User Preferences
 
@@ -42,12 +42,23 @@ Preferred communication style: Simple, everyday language.
 - `POST /api/contact` - Submit contact form messages
 - `GET /api/contact` - Retrieve contact messages (admin functionality)
 
+### Research Programs Featured
+- **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
+- **Ovarian Cancer Program**: BRCA pre-cancer atlas, fallopian tube precursor studies
+- **Pancreatic Cancer Program**: Advanced ultrasound imaging, POCUS technology
+- **Liquid Biopsy Center**: Urine analysis, interstitial fluid research, microneedle patches
+- **Molecular Imaging**: Photoacoustic imaging, microbubble contrast agents
+- **Education & Training**: NCI R25 CREST program, Phillips Postdoc Fellowship
+
 ### Frontend Features
 - Single-page application with smooth scrolling navigation
 - Responsive design with mobile-first approach
 - Contact form with client-side validation
 - Toast notifications for user feedback
 - Modern UI components from Radix UI/shadcn
+- Yellow and white branding for cancer research focus
+- Research program showcases with detailed descriptions
+- Impact stories highlighting breakthrough discoveries
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)

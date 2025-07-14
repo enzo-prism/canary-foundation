@@ -21,7 +21,7 @@ export default function Footer() {
               <span className="text-xl font-bold">Canary Foundation</span>
             </div>
             <p className="text-gray-300 mb-6">
-              Empowering communities worldwide through sustainable development programs and collaborative partnerships.
+              Advancing early cancer detection through innovative research, biomarker development, and precision medicine approaches since 2004.
             </p>
             <div className="flex space-x-4">
               <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
@@ -55,7 +55,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("programs")}
                   className="text-gray-300 hover:text-primary transition-colors duration-300"
                 >
-                  Our Programs
+                  Research Programs
                 </button>
               </li>
               <li>
@@ -78,12 +78,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-6">Programs</h3>
+            <h3 className="text-lg font-semibold mb-6">Research Areas</h3>
             <ul className="space-y-3">
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Education & Literacy</button></li>
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Healthcare Access</button></li>
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Economic Empowerment</button></li>
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Emergency Response</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Prostate Cancer</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Ovarian Cancer</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Pancreatic Cancer</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Liquid Biopsy</button></li>
             </ul>
           </div>
           

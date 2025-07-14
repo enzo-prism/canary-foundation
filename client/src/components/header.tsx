@@ -43,7 +43,7 @@ export default function Header() {
               onClick={() => scrollToSection("programs")}
               className="text-dark hover:text-primary transition-colors duration-300"
             >
-              Programs
+              Research
             </button>
             <button 
               onClick={() => scrollToSection("impact")}
@@ -91,7 +91,7 @@ export default function Header() {
                 onClick={() => scrollToSection("programs")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                Programs
+                Research
               </button>
               <button 
                 onClick={() => scrollToSection("impact")}

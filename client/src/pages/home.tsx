@@ -70,24 +70,24 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight">
-                Empowering Communities for <span className="text-primary">Lasting Change</span>
+                Advancing <span className="text-primary">Early Cancer Detection</span> Through Innovation
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                The Canary Foundation works tirelessly to create sustainable solutions that transform lives and build stronger communities worldwide.
+                The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="bg-primary text-white hover:bg-primary-dark font-semibold">
-                  Support Our Mission
+                  Support Research
                 </Button>
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
-                  Learn More
+                  Our Programs
                 </Button>
               </div>
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="Community volunteers working together" 
+                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                alt="Medical research and cancer detection technology" 
                 className="rounded-2xl shadow-xl w-full h-auto"
               />
             </div>
@@ -100,20 +100,20 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">250+</div>
-              <div className="text-white/90">Communities Served</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">21+</div>
+              <div className="text-white/90">Years of Research</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">50,000+</div>
-              <div className="text-white/90">Lives Impacted</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">1,100+</div>
+              <div className="text-white/90">PASS Study Participants</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">180</div>
-              <div className="text-white/90">Active Projects</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">149</div>
+              <div className="text-white/90">Proteins Identified</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">15</div>
-              <div className="text-white/90">Years of Service</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">2004</div>
+              <div className="text-white/90">Founded</div>
             </div>
           </div>
         </div>
@@ -125,8 +125,8 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Mission</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              We believe that every community has the potential to thrive. Our mission is to provide sustainable resources, 
-              education, and support that empowers communities to create lasting positive change from within.
+              Founded in 2004, the Canary Foundation is dedicated to advancing early cancer detection through innovative 
+              biomarkers, imaging technologies, and precision medicine approaches. We believe that early detection saves lives.
             </p>
           </div>
           
@@ -134,30 +134,30 @@ export default function Home() {
             <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                  <Stethoscope className="text-white text-2xl" />
+                </div>
+                <h3 className="text-xl font-semibold text-dark mb-4">Early Detection Focus</h3>
+                <p className="text-gray-600">We develop breakthrough technologies and biomarkers for detecting cancer at its earliest, most treatable stages.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                  <Users className="text-white text-2xl" />
+                </div>
+                <h3 className="text-xl font-semibold text-dark mb-4">Collaborative Research</h3>
+                <p className="text-gray-600">We foster partnerships with leading institutions and researchers to accelerate discoveries in cancer detection and treatment.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
                   <Heart className="text-white text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Compassionate Care</h3>
-                <p className="text-gray-600">We approach every initiative with empathy and understanding, ensuring our support addresses real community needs.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
-                  <Handshake className="text-white text-2xl" />
-                </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Collaborative Partnership</h3>
-                <p className="text-gray-600">We work alongside communities, not for them, fostering partnerships that respect local knowledge and culture.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
-                  <Sprout className="text-white text-2xl" />
-                </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Sustainable Growth</h3>
-                <p className="text-gray-600">Our programs are designed to create long-term impact, building capacity for communities to thrive independently.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Patient-Centered Impact</h3>
+                <p className="text-gray-600">Our research is driven by the goal of improving outcomes and quality of life for patients and their families.</p>
               </CardContent>
             </Card>
           </div>
@@ -168,9 +168,9 @@ export default function Home() {
       <section id="programs" className="py-16 md:py-20 bg-light">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Programs</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Research Programs</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              We focus on key areas that create the most significant impact for communities worldwide.
+              Our comprehensive research programs target the most challenging cancers through innovative detection methods and precision medicine approaches.
             </p>
           </div>
           
@@ -178,14 +178,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Educational program" 
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Prostate cancer research" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Education & Literacy</h3>
-                <p className="text-gray-600 mb-4">Providing access to quality education and literacy programs that unlock potential and create opportunities.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Prostate Cancer Program</h3>
+                <p className="text-gray-600 mb-4">PASS study with 1,100+ participants, PATROL genetic risk cohort, and advanced imaging technologies for early detection.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -195,14 +195,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1584432743501-7d5c27a39189?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Healthcare program" 
+                  src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Ovarian cancer research" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Healthcare Access</h3>
-                <p className="text-gray-600 mb-4">Ensuring essential healthcare services reach underserved communities through mobile clinics and training programs.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Ovarian Cancer Program</h3>
+                <p className="text-gray-600 mb-4">BRCA pre-cancer atlas, fallopian tube precursor studies, and biomarker development for high-grade serous carcinoma.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -212,14 +212,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Sustainable development program" 
+                  src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Pancreatic cancer research" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Sustainable Development</h3>
-                <p className="text-gray-600 mb-4">Promoting environmentally friendly practices and renewable energy solutions for sustainable community growth.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Pancreatic Cancer Program</h3>
+                <p className="text-gray-600 mb-4">Advanced ultrasound imaging, POCUS technology, and biomarker research for early pancreatic cancer detection.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -229,14 +229,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Economic empowerment program" 
+                  src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Liquid biopsy research" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Economic Empowerment</h3>
-                <p className="text-gray-600 mb-4">Supporting entrepreneurship and job creation through microfinance and business training programs.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Liquid Biopsy Center</h3>
+                <p className="text-gray-600 mb-4">Breakthrough research in urine, interstitial fluid, and exosome analysis with microneedle patch technology.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -246,14 +246,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Water and sanitation program" 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Molecular imaging research" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Water & Sanitation</h3>
-                <p className="text-gray-600 mb-4">Providing clean water access and sanitation infrastructure to improve health and quality of life.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Molecular Imaging</h3>
+                <p className="text-gray-600 mb-4">Cutting-edge imaging technologies including photoacoustic imaging and microbubble contrast agents.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -263,14 +263,14 @@ export default function Home() {
             <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
               <div className="overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
-                  alt="Emergency response program" 
+                  src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Education and training programs" 
                   className="w-full h-48 object-cover"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Emergency Response</h3>
-                <p className="text-gray-600 mb-4">Rapid response and recovery support for communities affected by natural disasters and crises.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Education & Training</h3>
+                <p className="text-gray-600 mb-4">NCI R25 CREST program, Phillips Postdoc Fellowship, and cancer research education initiatives.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -284,35 +284,63 @@ export default function Home() {
       <section id="impact" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Stories of Impact</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Research Impact</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Real stories from the communities we serve showcase the transformative power of collective action.
+              Our breakthrough discoveries are transforming cancer detection and improving patient outcomes worldwide.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="Maria's success story" 
+                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                alt="PASS study breakthrough" 
                 className="rounded-2xl shadow-xl w-full h-auto"
               />
             </div>
             <div>
-              <div className="text-primary text-lg font-semibold mb-4">Success Story</div>
-              <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">Maria's Agricultural Revolution</h3>
+              <div className="text-primary text-lg font-semibold mb-4">Research Breakthrough</div>
+              <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">PASS Study Shapes National Guidelines</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                "Before the Canary Foundation's sustainable farming program, my family struggled to grow enough food. 
-                Now, with new techniques and solar-powered irrigation, we not only feed our family but sell surplus 
-                at the local market. My children can now attend school instead of working in the fields."
+                "The PASS study's findings with over 1,100 participants have directly influenced national screening guidelines 
+                and risk assessment protocols. Our research is helping doctors make better decisions about prostate cancer 
+                screening, ultimately saving lives through earlier detection."
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
-                  <Quote className="text-white" />
+                  <GraduationCap className="text-white" />
                 </div>
                 <div>
-                  <div className="font-semibold text-dark">Maria Santos</div>
-                  <div className="text-gray-600 text-sm">Guatemala</div>
+                  <div className="font-semibold text-dark">Dr. Daniel Lin</div>
+                  <div className="text-gray-600 text-sm">PASS Study Lead</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center mt-16">
+            <div className="md:order-2">
+              <img 
+                src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                alt="Liquid biopsy advancement" 
+                className="rounded-2xl shadow-xl w-full h-auto"
+              />
+            </div>
+            <div className="md:order-1">
+              <div className="text-primary text-lg font-semibold mb-4">Innovation Achievement</div>
+              <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">Liquid Biopsy Breakthrough</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                "Our liquid biopsy center has identified 149 proteins in normal urine samples and developed revolutionary 
+                microneedle patch technology for interstitial fluid analysis. This non-invasive approach could 
+                revolutionize how we detect cancer in its earliest stages."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
+                  <Droplets className="text-white" />
+                </div>
+                <div>
+                  <div className="font-semibold text-dark">Research Team</div>
+                  <div className="text-gray-600 text-sm">Liquid Biopsy Center</div>
                 </div>
               </div>
             </div>
@@ -324,9 +352,9 @@ export default function Home() {
       <section className="py-16 md:py-20 bg-light">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Get Involved</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Support Our Research</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Join our mission to create positive change. There are many ways to support our work and make a difference.
+              Join our mission to advance early cancer detection. There are many ways to support our research and make a difference.
             </p>
           </div>
           
@@ -336,8 +364,8 @@ export default function Home() {
                 <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
                   <HandHeart className="text-white text-3xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Donate</h3>
-                <p className="text-gray-600 mb-6">Your financial support helps us expand our programs and reach more communities in need.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Fund Research</h3>
+                <p className="text-gray-600 mb-6">Your support accelerates breakthrough discoveries in cancer detection and treatment.</p>
                 <Button className="bg-primary text-white hover:bg-primary-dark">
                   Donate Now
                 </Button>
@@ -347,12 +375,12 @@ export default function Home() {
             <Card className="bg-white text-center hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-8">
                 <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users2 className="text-white text-3xl" />
+                  <GraduationCap className="text-white text-3xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Volunteer</h3>
-                <p className="text-gray-600 mb-6">Join our team of dedicated volunteers and contribute your skills to meaningful projects.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Join Our Team</h3>
+                <p className="text-gray-600 mb-6">Explore fellowship opportunities and contribute to cutting-edge cancer research.</p>
                 <Button className="bg-primary text-white hover:bg-primary-dark">
-                  Volunteer
+                  Apply Now
                 </Button>
               </CardContent>
             </Card>
@@ -360,12 +388,12 @@ export default function Home() {
             <Card className="bg-white text-center hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-8">
                 <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Share2 className="text-white text-3xl" />
+                  <Users className="text-white text-3xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Spread the Word</h3>
-                <p className="text-gray-600 mb-6">Help us raise awareness by sharing our mission with your network and community.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Partner With Us</h3>
+                <p className="text-gray-600 mb-6">Collaborate with us to advance cancer detection technologies and improve patient outcomes.</p>
                 <Button className="bg-primary text-white hover:bg-primary-dark">
-                  Share
+                  Partner
                 </Button>
               </CardContent>
             </Card>
