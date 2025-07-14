@@ -34,6 +34,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
   const [expandableItems, setExpandableItems] = useState<Set<number>>(new Set());
+  const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
   
   const timelineEvents = [
     { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", icon: Heart, category: "founding" },
@@ -75,6 +76,39 @@ export default function Home() {
     });
     setExpandableItems(newExpandableItems);
   }, []);
+
+  // Scroll-triggered animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '50px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleElements(prev => new Set([...prev, entry.target.id]));
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with animate-on-scroll class
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Apply visibility classes when elements become visible
+  useEffect(() => {
+    const visibleElementsArray = Array.from(visibleElements);
+    visibleElementsArray.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.classList.add('animate-visible');
+      }
+    });
+  }, [visibleElements]);
   
   const heroImages = [
     {
@@ -162,27 +196,27 @@ export default function Home() {
       <section id="home" className="bg-white py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight">
-                Advancing <span className="text-primary">Early Cancer Detection</span> Through Innovation
+            <div className="animate-on-scroll" id="hero-content">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight animate-fadeIn">
+                Advancing <span className="text-primary animate-text-glow">Early Cancer Detection</span> Through Innovation
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed animate-slideUp animate-stagger-1">
                 The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-primary text-white hover:bg-primary-dark font-semibold">
+              <div className="flex flex-col sm:flex-row gap-4 animate-bounceIn animate-stagger-2">
+                <Button className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer">
                   Support Research
                 </Button>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer">
                   Our Programs
                 </Button>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative animate-on-scroll animate-scaleIn animate-stagger-3" id="hero-slider">
               {/* Image Slider */}
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl animate-pulse-glow">
                 <div 
-                  className="flex transition-transform duration-500 ease-out"
+                  className="flex transition-transform duration-500 ease-out gpu-optimized"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {heroImages.map((image, index) => (
@@ -190,14 +224,14 @@ export default function Home() {
                       <img 
                         src={image.src}
                         alt={image.alt}
-                        className={`w-full h-64 sm:h-80 md:h-96 transition-transform duration-300 group-hover:scale-105 ${
+                        className={`w-full h-64 sm:h-80 md:h-96 transition-transform duration-300 group-hover:scale-105 gpu-optimized ${
                           index === 0 ? 'object-cover' : 
                           index === 4 ? 'object-cover object-top' : 'object-cover'
                         }`}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                       <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-white">
-                        <div className="text-sm sm:text-base font-medium bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+                        <div className="text-sm sm:text-base font-medium bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm animate-float">
                           {image.title}
                         </div>
                       </div>
@@ -208,17 +242,17 @@ export default function Home() {
                 {/* Navigation buttons */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 animate-pulse-glow gpu-optimized-hover"
                   aria-label="Previous image"
                 >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 animate-icon-spin" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 animate-pulse-glow gpu-optimized-hover"
                   aria-label="Next image"
                 >
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 animate-icon-spin" />
                 </button>
               </div>
               
@@ -652,18 +686,18 @@ export default function Home() {
       <section id="leadership" className="py-16 md:py-20 bg-light">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Leadership Team</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
+            <div className="text-center mb-16 animate-on-scroll" id="leadership-header">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6 animate-slideUp">Leadership Team</h2>
+              <p className="text-lg text-gray-600 leading-relaxed animate-fadeIn animate-stagger-1">
                 Our multidisciplinary team brings together world-class researchers, clinicians, and innovators dedicated to advancing early cancer detection.
               </p>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-1" id="leadership-card-1">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Star className="w-10 h-10 text-white" />
+                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                    <Star className="w-10 h-10 text-white animate-icon-spin" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Don Listwin</h3>
                   <p className="text-primary font-medium mb-3 text-center">Founder, CEO, Co-Chairman</p>
@@ -676,10 +710,10 @@ export default function Home() {
                 </CardContent>
               </Card>
               
-              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-2" id="leadership-card-2">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-10 h-10 text-white" />
+                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                    <Users className="w-10 h-10 text-white animate-icon-spin" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Joseph M. DeSimone, PhD</h3>
                   <p className="text-primary font-medium mb-3 text-center">Current Director</p>
@@ -690,9 +724,9 @@ export default function Home() {
                 </CardContent>
               </Card>
               
-              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-3" id="leadership-card-3">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
                     <Heart className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Sanjiv Sam Gambhir</h3>
@@ -705,13 +739,13 @@ export default function Home() {
             </div>
             
             {/* Core Staff Section */}
-            <div className="bg-white rounded-lg p-8 mb-16">
-              <h3 className="text-2xl font-semibold text-dark mb-8 text-center">Core Staff</h3>
+            <div className="bg-white rounded-lg p-8 mb-16 animate-on-scroll" id="core-staff">
+              <h3 className="text-2xl font-semibold text-dark mb-8 text-center animate-slideUp">Core Staff</h3>
               <div className="grid md:grid-cols-2 gap-8">
-                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+                <Card className="bg-gray-50 animate-card-hover animate-on-scroll animate-stagger-1" id="staff-card-1">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Microscope className="w-8 h-8 text-white" />
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 animate-float">
+                      <Microscope className="w-8 h-8 text-white animate-icon-spin" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Heidi Auman</h4>
                     <p className="text-primary font-medium mb-3">Scientific Program Manager</p>
