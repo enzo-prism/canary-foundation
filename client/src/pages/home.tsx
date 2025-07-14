@@ -14,7 +14,7 @@ import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote } from "lucide-react";
-import canaryChallengeLogo from "@assets/canary challenge logo_1752514803889.webp";
+import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
 import canaryBooth from "@assets/Canary Challenge Booth_1752514185862.webp";
@@ -148,7 +148,7 @@ export default function Home() {
                         src={image.src}
                         alt={image.alt}
                         className={`w-full h-64 sm:h-80 md:h-96 transition-transform duration-300 group-hover:scale-105 ${
-                          index === 0 ? 'object-contain bg-gray-100' : 
+                          index === 0 ? 'object-cover' : 
                           index === 4 ? 'object-cover object-top' : 'object-cover'
                         }`}
                       />
