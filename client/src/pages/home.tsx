@@ -1170,9 +1170,9 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <h5 className="font-semibold text-dark mb-3">2020 Financial Performance</h5>
-                  <div className="grid lg:grid-cols-2 gap-6">
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h5 className="font-semibold text-dark mb-6 text-xl">2020 Financial Performance</h5>
+                  <div className="grid lg:grid-cols-2 gap-8">
                     <div className="flex justify-center items-center">
                       <div className="w-full max-w-md">
                         <img 
@@ -1182,26 +1182,26 @@ export default function Home() {
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 text-xs">
-                      <div className="bg-white rounded p-3">
-                        <div className="text-primary font-semibold text-lg">91%</div>
-                        <div className="text-gray-600">Program Expenses</div>
-                        <div className="text-gray-500 text-xs">$3,621,840</div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-white rounded-lg p-4 text-center">
+                        <div className="text-primary font-bold text-2xl mb-2">91%</div>
+                        <div className="text-gray-800 font-semibold text-base mb-1">Program Expenses</div>
+                        <div className="text-gray-600 text-sm">$3,621,840</div>
                       </div>
-                      <div className="bg-white rounded p-3">
-                        <div className="text-primary font-semibold text-lg">3%</div>
-                        <div className="text-gray-600">Administrative</div>
-                        <div className="text-gray-500 text-xs">$103,196</div>
+                      <div className="bg-white rounded-lg p-4 text-center">
+                        <div className="text-primary font-bold text-2xl mb-2">3%</div>
+                        <div className="text-gray-800 font-semibold text-base mb-1">Administrative</div>
+                        <div className="text-gray-600 text-sm">$103,196</div>
                       </div>
-                      <div className="bg-white rounded p-3">
-                        <div className="text-primary font-semibold text-lg">6%</div>
-                        <div className="text-gray-600">Fundraising</div>
-                        <div className="text-gray-500 text-xs">$238,864</div>
+                      <div className="bg-white rounded-lg p-4 text-center">
+                        <div className="text-primary font-bold text-2xl mb-2">6%</div>
+                        <div className="text-gray-800 font-semibold text-base mb-1">Fundraising</div>
+                        <div className="text-gray-600 text-sm">$238,864</div>
                       </div>
-                      <div className="bg-white rounded p-3">
-                        <div className="text-primary font-semibold text-lg">12.6¢</div>
-                        <div className="text-gray-600">Cost per $1 raised</div>
-                        <div className="text-gray-500 text-xs">$3,001,876 raised</div>
+                      <div className="bg-white rounded-lg p-4 text-center">
+                        <div className="text-primary font-bold text-2xl mb-2">12.6¢</div>
+                        <div className="text-gray-800 font-semibold text-base mb-1">Cost per $1 raised</div>
+                        <div className="text-gray-600 text-sm">$3,001,876 raised</div>
                       </div>
                     </div>
                   </div>
