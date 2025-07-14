@@ -14,6 +14,10 @@ import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote } from "lucide-react";
+import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
+import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
+import canaryBooth from "@assets/Canary Challenge Booth_1752514185862.webp";
+import canaryBiker from "@assets/Canary Challenge Biker_1752514185863.webp";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -30,24 +34,24 @@ export default function Home() {
   
   const heroImages = [
     {
-      src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      alt: "Medical research and cancer detection technology",
-      title: "Advancing Early Detection"
+      src: canaryFinishLine,
+      alt: "Canary Challenge finish line with volunteers celebrating community involvement",
+      title: "Canary Challenge Finish Line"
     },
     {
-      src: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      alt: "Cancer research laboratory",
-      title: "Precision Medicine Research"
+      src: canaryVolunteers,
+      alt: "Canary Challenge volunteers in bright yellow shirts supporting the event",
+      title: "Community Volunteers"
     },
     {
-      src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      alt: "Healthcare professionals collaborating",
-      title: "Collaborative Innovation"
+      src: canaryBooth,
+      alt: "Canary Foundation booth with volunteers helping participants during the challenge",
+      title: "Check-In & Support"
     },
     {
-      src: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      alt: "Molecular imaging technology",
-      title: "Breakthrough Technologies"
+      src: canaryBiker,
+      alt: "Canary Challenge cyclist in yellow jersey participating in the fundraising ride",
+      title: "Challenge Participant"
     }
   ];
   
