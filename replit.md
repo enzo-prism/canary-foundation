@@ -28,6 +28,10 @@ Preferred communication style: Simple, everyday language.
 
 ### Project Structure
 - `client/` - Frontend React application
+  - `src/pages/home.tsx` - Main homepage with all sections
+  - `src/pages/blog.tsx` - Blog page with 2024 authentic content
+  - `src/pages/not-found.tsx` - 404 error page
+  - `src/components/` - Reusable UI components
 - `server/` - Backend Express.js application
 - `shared/` - Shared TypeScript types and schemas
 - `migrations/` - Database migration files
@@ -41,6 +45,7 @@ Preferred communication style: Simple, everyday language.
 ### API Endpoints
 - `POST /api/contact` - Submit contact form messages
 - `GET /api/contact` - Retrieve contact messages (admin functionality)
+- `/blog` - Blog page with authentic 2024 Canary Foundation content
 
 ### Research Programs Featured
 - **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
@@ -54,7 +59,7 @@ Preferred communication style: Simple, everyday language.
 - **Lung Cancer Program**: Never-smoker biomarkers, MD Anderson partnerships, community outreach
 
 ### Frontend Features
-- Single-page application with smooth scrolling navigation
+- Multi-page application with smooth scrolling navigation and routing
 - Responsive design with mobile-first approach
 - Contact form with client-side validation
 - Toast notifications for user feedback
@@ -67,12 +72,15 @@ Preferred communication style: Simple, everyday language.
 - Canary Approach dropdown: Overview, Canary Collaborations and Partnership, Canary Symposium
 - Canary Science dropdown: Overview, Science, Programs, Centers, Publications, Funding by Invitation
 - About Canary dropdown: Our Mission, Founder's Story, Impact & Success
+- Dedicated blog page with authentic 2024 content from Canary Foundation
+- Blog features: search functionality, category filtering, featured posts, external links
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
 - Comprehensive timeline with 18+ authentic milestones (2000-2024)
 - Leadership section featuring key personnel and Scientific Advisory Board
 - Community outreach section highlighting health disparities initiatives
 - Financial transparency information with nonprofit status and funding history
+- GPU-accelerated animations with scroll-triggered effects
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)

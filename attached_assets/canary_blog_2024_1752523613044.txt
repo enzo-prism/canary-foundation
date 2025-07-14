@@ -1,0 +1,63 @@
+CANARY FOUNDATION BLOG ARCHIVE - 2024
+================================================================================
+Generated on: 2025-07-14 12:56:41
+Year: 2024
+Total posts this year: 2
+First post: November 1, 2024 - Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2024 goes to: Professor Antonis Antoniou
+Last post: November 1, 2024 - Early Detection of Cancer Annual Conference- EDx24 – hosted by Canary Center at Stanford, Cancer Research UK, &amp; OHSU Knight Cancer Institute, and bringing together great minds to collaborate in cancer early detection research!
+
+Authors this year (1):
+  - Renata Barnes: 2 posts
+
+================================================================================
+TABLE OF CONTENTS - 2024
+================================================================================
+
+  1. November 1, 2024 - Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2024 goes to: Professor Antonis Antoniou
+  2. November 1, 2024 - Early Detection of Cancer Annual Conference- EDx24 – hosted by Canary Center at Stanford, Cancer Research UK, &amp; OHSU Knight Cancer Institute, and bringing together great minds to collaborate in cancer early detection research!
+
+
+================================================================================
+BLOG POST #1
+================================================================================
+Title: Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2024 goes to: Professor Antonis Antoniou
+Date: November 1, 2024
+Author: Renata Barnes
+Published: 2024-11-01T19:58:47+00:00
+URL: https://www.canaryfoundation.org/2024/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2024-goes-to-professor-antonis-antoniou/
+--------------------------------------------------------------------------------
+
+Prof Antonis Antoniou, Professor of Cancer Risk Prediction in the Department of Public Health and Primary Care, has been named as the 2024 of winner of the Don Listwin award for outstanding contribution to early cancer detection.
+
+Announced last night (23rd October) at the [Early Detection of Cancer Conference](https://www.earlydetectionresearch.com/) in San Francisco, the award recognises a sustained contribution to, or singular achievement in, the cancer early detection field. The award is named in honour of Don Listwin, founder and chairman of the Canary Foundation, dedicated to research into early cancer detection.
+
+Antonis and team have been recognised for their work on developing risk prediction models for cancer, in particular for breast and ovarian cancers. These models can help doctors to predict who might be most at risk of certain cancers so that preventive and screening measures can be better targeted. The team’s [CanRisk tool](https://www.canrisk.org/) is used in primary care to calculate an individual’s future risks of developing breast and ovarian cancers using cancer family history, genetic and other risk factors. Since 2020 over 3 million assessments have been performed using CanRisk.
+
+Antonis said: I am deeply honoured that our work has been selected for the 2024 Don Listwin Award. This award reflects the remarkable dedication and contributions of our team, collaborators, healthcare professionals, patient and public partners, and everyone involved in the multidisciplinary work that underpins CanRisk. Over the years, this work has included developing novel statistical methods for modelling cancer susceptibility, understanding cancer risks for genetically susceptible individuals through large-scale collaborative studies, developing and validating multifactorial risk models, and transforming this research into user-friendly tools for clinicians. This has truly been a team effort.
+
+(credit @ [Catherine Atkins](https://www.earlycancer.cam.ac.uk/users/catherine-atkins) from https://www.earlycancer.cam.ac.uk/news/prof-antonis-antoniou-announced-2024-don-listwin-award-winner#:~:text=We%20are%20thrilled%20to%20report,contribution%20to%20early%20cancer%20detection.)
+
+
+================================================================================
+BLOG POST #2
+================================================================================
+Title: Early Detection of Cancer Annual Conference- EDx24 – hosted by Canary Center at Stanford, Cancer Research UK, &amp; OHSU Knight Cancer Institute, and bringing together great minds to collaborate in cancer early detection research!
+Date: November 1, 2024
+Author: Renata Barnes
+Published: 2024-11-01T21:05:27+00:00
+URL: https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/
+--------------------------------------------------------------------------------
+
+The Early Detection of Cancer Conference brought top scientists and innovators in cancer research and bioengineering, physicians, patients, industry leaders and supporters to San Francisco in October to share the latest findings in early detection of cancer.
+
+The conference evolved from the formed international collaboration to accelerate research in the early detection of cancer including:
+
+The goal of this unique trans-Atlantic agreement is to find lethal cancers as they are forming so they can be treated more effectively. Survival increases significantly when the disease is treated at an early stage.
+
+The collaboration also seeks to accelerate progress by breaking down barriers for scientists, including:
+
+2024 session topics include:
+
+Click here for the full agenda of speakers and topics:
+
+[https://www.earlydetectionresearch.com/agenda/](https://www.earlydetectionresearch.com/agenda/)

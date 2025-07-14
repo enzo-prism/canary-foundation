@@ -7,83 +7,37 @@ import { Input } from '@/components/ui/input';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 
-// Blog post data with authentic Canary Foundation content
+// Blog post data with authentic Canary Foundation content from 2024
 const blogPosts = [
   {
     id: 1,
-    title: "Canary Foundation Receives $2.5M NIH Grant for Early Cancer Detection Research",
-    excerpt: "The National Institutes of Health has awarded the Canary Foundation a significant grant to advance breakthrough technologies in early cancer detection, focusing on liquid biopsy innovations.",
-    content: "The Canary Foundation is proud to announce receipt of a $2.5 million grant from the National Institutes of Health (NIH) to advance our groundbreaking research in early cancer detection. This funding will support our innovative liquid biopsy program, which aims to detect cancer signatures in blood samples before traditional screening methods can identify tumors.",
-    author: "Dr. Joseph M. DeSimone",
-    date: "2024-01-15",
-    category: "Research Funding",
-    tags: ["NIH", "Liquid Biopsy", "Early Detection", "Research Grant"],
-    readTime: "4 min read",
-    featured: true
+    title: "Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2024 goes to: Professor Antonis Antoniou",
+    excerpt: "Prof Antonis Antoniou, Professor of Cancer Risk Prediction in the Department of Public Health and Primary Care, has been named as the 2024 winner of the Don Listwin award for outstanding contribution to early cancer detection.",
+    content: "Prof Antonis Antoniou, Professor of Cancer Risk Prediction in the Department of Public Health and Primary Care, has been named as the 2024 winner of the Don Listwin award for outstanding contribution to early cancer detection. Announced at the Early Detection of Cancer Conference in San Francisco, the award recognises a sustained contribution to, or singular achievement in, the cancer early detection field. The award is named in honour of Don Listwin, founder and chairman of the Canary Foundation, dedicated to research into early cancer detection. Antonis and team have been recognised for their work on developing risk prediction models for cancer, in particular for breast and ovarian cancers. These models can help doctors to predict who might be most at risk of certain cancers so that preventive and screening measures can be better targeted. The team's CanRisk tool is used in primary care to calculate an individual's future risks of developing breast and ovarian cancers using cancer family history.",
+    author: "Renata Barnes",
+    date: "2024-11-01",
+    category: "Awards",
+    tags: ["Don Listwin Award", "Risk Prediction", "Breast Cancer", "Ovarian Cancer", "CanRisk"],
+    readTime: "5 min read",
+    featured: true,
+    url: "https://www.canaryfoundation.org/2024/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2024-goes-to-professor-antonis-antoniou/"
   },
   {
     id: 2,
-    title: "Breakthrough in Pancreatic Cancer Detection Using Advanced Ultrasound Technology",
-    excerpt: "Stanford researchers at the Canary Center have developed a revolutionary ultrasound imaging technique that can detect pancreatic cancer at its earliest stages.",
-    content: "Stanford University researchers working with the Canary Foundation have achieved a significant breakthrough in pancreatic cancer detection. Using advanced ultrasound technology combined with AI-powered image analysis, the team has successfully identified pancreatic tumors in their earliest stages with 95% accuracy.",
-    author: "Dr. Sarah Chen",
-    date: "2024-01-10",
-    category: "Technology",
-    tags: ["Pancreatic Cancer", "Ultrasound", "AI", "Stanford"],
-    readTime: "6 min read",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Annual Canary Symposium 2024: Advancing Precision Medicine",
-    excerpt: "Join leading researchers, clinicians, and innovators for our annual symposium focusing on precision medicine and personalized cancer treatment approaches.",
-    content: "The Canary Foundation is excited to announce our Annual Symposium 2024, themed 'Advancing Precision Medicine in Cancer Care.' This premier event will bring together world-renowned researchers, clinicians, and industry leaders to discuss the latest developments in personalized cancer treatment and early detection strategies.",
-    author: "Don Listwin",
-    date: "2024-01-05",
-    category: "Events",
-    tags: ["Symposium", "Precision Medicine", "Conference", "2024"],
-    readTime: "3 min read",
-    featured: false
-  },
-  {
-    id: 4,
-    title: "New Biomarker Discovery Could Revolutionize Ovarian Cancer Screening",
-    excerpt: "Researchers have identified a novel biomarker that shows promise for early detection of ovarian cancer, potentially saving thousands of lives annually.",
-    content: "A collaborative research team supported by the Canary Foundation has discovered a promising new biomarker for ovarian cancer detection. This breakthrough could lead to more effective screening programs and earlier intervention, significantly improving outcomes for women at risk.",
-    author: "Dr. Maria Rodriguez",
-    date: "2023-12-28",
-    category: "Research",
-    tags: ["Ovarian Cancer", "Biomarkers", "Screening", "Women's Health"],
-    readTime: "5 min read",
-    featured: false
-  },
-  {
-    id: 5,
-    title: "Canary Foundation Partners with Leading Tech Companies for AI-Driven Cancer Detection",
-    excerpt: "Strategic partnerships with technology leaders will accelerate the development of AI-powered tools for cancer detection and diagnosis.",
-    content: "The Canary Foundation has announced strategic partnerships with several leading technology companies to develop AI-driven cancer detection tools. These collaborations will leverage machine learning algorithms and big data analytics to improve the accuracy and speed of cancer diagnosis.",
-    author: "Heidi Auman",
-    date: "2023-12-20",
-    category: "Partnerships",
-    tags: ["AI", "Technology", "Partnerships", "Machine Learning"],
+    title: "Early Detection of Cancer Annual Conference- EDx24 – hosted by Canary Center at Stanford, Cancer Research UK, & OHSU Knight Cancer Institute",
+    excerpt: "The Early Detection of Cancer Conference brought top scientists and innovators in cancer research and bioengineering, physicians, patients, industry leaders and supporters to San Francisco in October to share the latest findings in early detection of cancer.",
+    content: "The Early Detection of Cancer Conference brought top scientists and innovators in cancer research and bioengineering, physicians, patients, industry leaders and supporters to San Francisco in October to share the latest findings in early detection of cancer. The conference evolved from the formed international collaboration to accelerate research in the early detection of cancer. The goal of this unique trans-Atlantic agreement is to find lethal cancers as they are forming so they can be treated more effectively. Survival increases significantly when the disease is treated at an early stage. The collaboration also seeks to accelerate progress by breaking down barriers for scientists, fostering international cooperation and knowledge sharing in the critical field of cancer early detection.",
+    author: "Renata Barnes",
+    date: "2024-11-01",
+    category: "Conference",
+    tags: ["EDx24", "Conference", "Stanford", "Cancer Research UK", "OHSU", "Collaboration"],
     readTime: "4 min read",
-    featured: false
-  },
-  {
-    id: 6,
-    title: "Patient Success Story: Early Detection Saves Life",
-    excerpt: "Meet Sarah Thompson, whose life was saved through early cancer detection technologies developed by the Canary Foundation research network.",
-    content: "Sarah Thompson's story exemplifies the life-saving potential of early cancer detection. Thanks to breakthrough screening technologies developed through Canary Foundation research, Sarah's cancer was detected at stage 1, leading to successful treatment and full recovery.",
-    author: "Therese Quinlan",
-    date: "2023-12-15",
-    category: "Patient Stories",
-    tags: ["Patient Success", "Early Detection", "Survival", "Hope"],
-    readTime: "7 min read",
-    featured: false
+    featured: false,
+    url: "https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/"
   }
 ];
 
-const categories = ["All", "Research Funding", "Technology", "Events", "Research", "Partnerships", "Patient Stories"];
+const categories = ["All", "Awards", "Conference"];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -208,7 +162,10 @@ export default function Blog() {
                     ))}
                   </div>
                   
-                  <Button className="bg-primary text-white hover:bg-primary-dark animate-shimmer">
+                  <Button 
+                    className="bg-primary text-white hover:bg-primary-dark animate-shimmer"
+                    onClick={() => window.open(featuredPost.url, '_blank')}
+                  >
                     Read Full Article
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -291,7 +248,12 @@ export default function Blog() {
                           <Calendar className="w-4 h-4" />
                           <span>{new Date(post.date).toLocaleDateString()}</span>
                         </div>
-                        <Button variant="ghost" size="sm" className="text-primary hover:text-primary-dark animate-shimmer">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-primary hover:text-primary-dark animate-shimmer"
+                          onClick={() => window.open(post.url, '_blank')}
+                        >
                           Read More
                           <ArrowRight className="w-4 h-4 ml-1" />
                         </Button>
