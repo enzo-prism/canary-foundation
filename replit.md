@@ -61,9 +61,11 @@ Preferred communication style: Simple, everyday language.
 - Impact stories highlighting breakthrough discoveries
 - Navigation structure: Home, About Canary, Canary Approach, Canary Science, Blog, Take Action
 - Take Action button prominently styled as primary call-to-action
+- Canary Approach dropdown: Overview, Canary Collaborations and Partnership, Canary Symposium
+- Canary Science dropdown: Overview, Science, Programs, Centers, Publications, Funding by Invitation
+- About Canary dropdown: Our Mission, Founder's Story, Impact & Success
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
-- Dropdown menu for About Canary with mission, founder story, and impact sections
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)

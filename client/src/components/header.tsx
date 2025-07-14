@@ -66,18 +66,12 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <button 
-              onClick={() => scrollToSection("programs")}
-              className="text-dark hover:text-primary transition-colors duration-300"
-            >
-              Canary Approach
-            </button>
             <div className="relative group">
               <button 
                 onClick={() => scrollToSection("programs")}
                 className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
               >
-                Canary Science
+                Canary Approach
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -88,19 +82,70 @@ export default function Header() {
                     onClick={() => scrollToSection("programs")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Research Programs
+                    Overview
                   </button>
                   <button 
                     onClick={() => scrollToSection("programs")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Clinical Studies
+                    Canary Collaborations and Partnership
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("events")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Canary Symposium
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <button 
+                onClick={() => scrollToSection("programs")}
+                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
+              >
+                Canary Science
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="py-1">
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Overview
                   </button>
                   <button 
                     onClick={() => scrollToSection("programs")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Imaging Technologies
+                    Science
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Programs
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Centers
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Publications
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Funding by Invitation
                   </button>
                 </div>
               </div>
@@ -144,18 +189,66 @@ export default function Header() {
               >
                 About Canary
               </button>
-              <button 
-                onClick={() => scrollToSection("programs")}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-              >
-                Canary Approach
-              </button>
-              <button 
-                onClick={() => scrollToSection("programs")}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-              >
-                Canary Science
-              </button>
+              <div className="border-l-2 border-gray-200 pl-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">Canary Approach</div>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Overview
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Collaborations & Partnership
+                </button>
+                <button 
+                  onClick={() => scrollToSection("events")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                >
+                  Canary Symposium
+                </button>
+              </div>
+              <div className="border-l-2 border-gray-200 pl-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">Canary Science</div>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Overview
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Science
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Programs
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Centers
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Publications
+                </button>
+                <button 
+                  onClick={() => scrollToSection("programs")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                >
+                  Funding by Invitation
+                </button>
+              </div>
               <button 
                 onClick={() => scrollToSection("news")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
