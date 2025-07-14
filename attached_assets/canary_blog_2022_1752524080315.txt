@@ -1,0 +1,99 @@
+CANARY FOUNDATION BLOG ARCHIVE - 2022
+================================================================================
+Generated on: 2025-07-14 12:56:41
+Year: 2022
+Total posts this year: 2
+First post: November 16, 2022 - Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2022 goes to: Sudhir Srivastava, Ph.D., MPH, MS
+Last post: November 17, 2022 - Early Detection of Cancer Annual Conference- EDx22 – hosted by OHSU Knight Cancer Institute, The Canary Center at Stanford, and Cancer Research UK brought together great minds to collaborate in cancer early detection research! %
+
+Authors this year (1):
+  - Renata Barnes: 2 posts
+
+================================================================================
+TABLE OF CONTENTS - 2022
+================================================================================
+
+  1. November 16, 2022 - Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2022 goes to: Sudhir Srivastava, Ph.D., MPH, MS
+  2. November 17, 2022 - Early Detection of Cancer Annual Conference- EDx22 – hosted by OHSU Knight Cancer Institute, The Canary Center at Stanford, and Cancer Research UK brought together great minds to collaborate in cancer early detection research! %
+
+
+================================================================================
+BLOG POST #1
+================================================================================
+Title: Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2022 goes to: Sudhir Srivastava, Ph.D., MPH, MS
+Date: November 16, 2022
+Author: Renata Barnes
+Published: 2022-11-16T22:13:31+00:00
+URL: https://www.canaryfoundation.org/2022/11/16/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2022-goes-to-sudhir-srivastava-ph-d-mph-ms/
+--------------------------------------------------------------------------------
+
+The Don Listwin Award for Outstanding Contribution to Cancer Early Detection recognizes a sustained contribution to, or singular achievement in, the cancer early detection field.
+
+The 2022 Award goes to: Sudhir Srivastava, Ph.D., MPH, MS: Senior Scientific Officer and Chief of the Cancer Biomarkers Research Branch in the Division of Cancer Prevention, National Cancer Institute (NCI), National Institutes of Health (NIH).
+
+He is well-known for having established a number of transformative programs on translational research on cancer screening, early detection, risk assessment and enabling technologies including artificial intelligence with a network of leading experts in medicine, science, computational biology that has advanced scientific discoveries and revolutionized diagnostics in cancer early detection.
+
+In 2000, Dr. Srivastava developed and implemented a novel approach to collaborative clinical research on cancer biomarkers through the establishment of the Early Detection Research Network, a flagship program at the NCI that has begun translating biomarkers into clinical tests (> 8 FDA approved and > 19 CLIA certified) for early detection. This network has been a pioneer in applying innovative technologies in the validation of cancer biomarkers as well as in the development of a national informatics infrastructure to support the research.
+
+He also developed a number of strategic programs that promotes the convergence of interdisciplinary approaches from physics, biology, chemistry, and engineering emphasizing seamless integration of these disciplines into innovations, team science and translation from the bench to the bedside. These include EDRN, the Alliance of Glycobiologists, the Liver Cancer Consortium, the Liquid Biology Consortium, the Pancreatic Cancer Early Detection Consortium, the Cancer Imaging and Biomarkers Program, and the PreCancer Atlas. His conceptualization and implementation of the EDRN informatics infrastructure, in collaboration with NASA’s Jet Propulsion Laboratory, has become a model for similar collaboration established at the NIH. He is respected as an early adapter of emerging technologies, in particular, artificial intelligence initiatives he launched in 1994, before the science became omnipresence in the life sciences and a vital approach in today’s world of enhancing human capabilities. He has successfully developed partnerships on shared interests with the National Institute of Standards and Technology, DOD’s Center for Prostate Disease Research, DOE’s Pacific Northwest National Laboratory, and the Jet Propulsion Laboratory. In addition, he has developed collaborations with international and non-profit foundations, such as Japan’s Agency for Medical Development and Research, Cancer Research-UK, the China Cancer Institute/Chinese Academy of Medical Sciences, and U.S. organization such as Pancreatic Cancer Action Network, Lustgarten Foundation, and Kenner’s Family Research Foundation.
+
+In recognition of his leadership in cancer diagnostics, Dr. Srivastava was featured in Wired magazine in August 2003, and more recently, has been awarded a Distinguished Public Service Award (2016) by the American Pancreatology Association, a Distinguished Clinical and Translational Proteomics Award (2017) by HUPO International, and the Distinguished NCI Cancer Prevention Fellowship Program (CPFP) Alumni Award (2016).
+
+* Excerpt taken from https://www.earlydetectionresearch.com/award/
+
+
+================================================================================
+BLOG POST #2
+================================================================================
+Title: Early Detection of Cancer Annual Conference- EDx22 – hosted by OHSU Knight Cancer Institute, The Canary Center at Stanford, and Cancer Research UK brought together great minds to collaborate in cancer early detection research! %
+Date: November 17, 2022
+Author: Renata Barnes
+Published: 2022-11-17T22:55:46+00:00
+URL: https://www.canaryfoundation.org/2022/11/17/early-detection-of-cancer-annual-conference-edx22-hosted-by-ohsu-knight-cancer-institute-the-canary-center-at-stanford-and-cancer-research-uk-brought-together-great-minds-to-collaborate-i/
+--------------------------------------------------------------------------------
+
+This year’s sold-out conference had engaging discussions, talks from submitted abstracts, and opportunities to collaborate with experts from across the globe. There was also the opportunity to debate provocative early detection challenges.
+
+This year’s interesting Agenda and Speakers:
+
+Keynote: Population and tumor heterogeneity in cancer genome science Speaker: John Carpten, USC
+
+From models to mechanisms to humans Topic chairs: Simon Leedham & Victor Velculescu Speakers: Jos Jonkers, Ryan Schenck, Sabine Tejpar, Victor Velculescu
+
+Yeuk Pin Gladys Poon – The clonal evolution preceding leukemia development revealed using single-cell DNA sequencing
+
+Shiqin Liu – Shed Trop2 Extracellular Domain is a Potential Liquid Biomarker for High-risk Prostate Cancer and a Regulator of Prostate Cancer Progression
+
+Panel: How should we evaluate Multi Cancer Early Detection Tests? Moderator: Michelle Le Beau Speakers: Allan Hackshaw, Minetta Liu, Anne Mackie, Josh Ofman
+
+Emerging technologies for early detection and precision diagnosis Topic chairs: Rob West & Thuy Ngo Speakers: Brian Cunningham, Thuy Ngo, Mirabela Rusu, Rob West
+
+Jie Wang – Acoustic Fabrication of Living Cardiomyocyte-based Hybrid Biorobots
+
+Travis Moore – Robust CNV detection using single-cell ATAC-seq
+
+Great Debate 1: There is no such thing as over-diagnosis. Every diagnosis will help us better understand the biology of the cancer, eventually advancing early cancer detection and management. Speakers: Nora Pashayan & Eithne Costello
+
+Day 2, Opening remarks – Tanya Stoyanova, Canary Center at Stanford University
+
+Keynote Panel: A funding agency perspective on early detection Speakers: Karen Knudsen, Phil Castle, Catherine Elliott
+
+Microbiological risk factors for early detection Topic chairs: Xin Lu & Zhenzhen Zhang Speakers: Emma Allen-Vercoe, Curtis Huttenhower, Gabe Kwong and Zhenzhen Zhang
+
+Danielle Brasino – A New, Organ-on-Chip Platform to Study the Relationship Between Gut Microbiota and Distal Tumors
+
+Michael Fadel – Diagnostic performance of a non-invasive breath test for colorectal cancer: COlorectal BReath Analysis 1 (COBRA1) study
+
+Panel: What can we learn from trials that return unexpected results on mortality benefit from early detection biomarkers/tests? Moderator: Peter Johnson Speakers: Christine Berg, Usha Menon
+
+Great Debate 2: Single-organ cancer screening is failing public health – Multi-cancer early detection tests are the only way forward Speakers: Paul Limburg & Bob Steele
+
+Day 3, Opening remarks – George Hanna, Imperial College London
+
+Joshua Bull – Mathematical Tools for Spatial Analysis of Multiplex Medical Images
+
+Elinor Nemlander – Predicting lung cancer in never smokers, former smokers and current smokers using machine learning – results from a computer-based detailed symptom questionnaire given to patients investigated at a specialist lung clinic
+
+What is needed for an earlier cancer detection test to have clinical impact? Topic chairs: Tom Beer & Rebecca Fitzgerald Speakers: Hormuzd Katki, Larry Kessler, Chris Peters, Sharmila Anandasabapathy
+
+Conference closing remarks – George Hanna

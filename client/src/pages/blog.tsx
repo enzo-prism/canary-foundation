@@ -73,6 +73,32 @@ const blogPosts = [
     readTime: "4 min read",
     featured: false,
     url: "https://www.canaryfoundation.org/2023/11/01/canary-ovary-team-is-approaching-a-milestone-of-completing-its-first-study-of-fallopian-tubes/"
+  },
+  {
+    id: 6,
+    title: "Early Detection of Cancer Annual Conference- EDx22 – hosted by OHSU Knight Cancer Institute, The Canary Center at Stanford, and Cancer Research UK",
+    excerpt: "This year's sold-out conference had engaging discussions, talks from submitted abstracts, and opportunities to collaborate with experts from across the globe, with provocative early detection challenges.",
+    content: "This year's sold-out conference had engaging discussions, talks from submitted abstracts, and opportunities to collaborate with experts from across the globe. There was also the opportunity to debate provocative early detection challenges. The conference featured keynote presentations on population and tumor heterogeneity in cancer genome science, emerging technologies for early detection and precision diagnosis, and panels on multi-cancer early detection tests and funding agency perspectives. Notable sessions included discussions on microbiological risk factors, mathematical tools for spatial analysis, and the clinical impact requirements for early detection tests.",
+    author: "Renata Barnes",
+    date: "2022-11-17",
+    category: "Conference",
+    tags: ["EDx22", "Conference", "OHSU", "Stanford", "Cancer Research UK", "Collaboration"],
+    readTime: "5 min read",
+    featured: false,
+    url: "https://www.canaryfoundation.org/2022/11/17/early-detection-of-cancer-annual-conference-edx22-hosted-by-ohsu-knight-cancer-institute-the-canary-center-at-stanford-and-cancer-research-uk-brought-together-great-minds-to-collaborate-i/"
+  },
+  {
+    id: 7,
+    title: "Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2022 goes to: Sudhir Srivastava, Ph.D., MPH, MS",
+    excerpt: "The 2022 Award goes to Sudhir Srivastava, Senior Scientific Officer and Chief of the Cancer Biomarkers Research Branch in the Division of Cancer Prevention, National Cancer Institute (NCI), National Institutes of Health (NIH).",
+    content: "The Don Listwin Award for Outstanding Contribution to Cancer Early Detection recognizes a sustained contribution to, or singular achievement in, the cancer early detection field. The 2022 Award goes to Sudhir Srivastava, Ph.D., MPH, MS: Senior Scientific Officer and Chief of the Cancer Biomarkers Research Branch in the Division of Cancer Prevention, National Cancer Institute (NCI), National Institutes of Health (NIH). He is well-known for having established a number of transformative programs on translational research on cancer screening, early detection, risk assessment and enabling technologies including artificial intelligence with a network of leading experts. In 2000, Dr. Srivastava developed and implemented the Early Detection Research Network, a flagship program at the NCI that has begun translating biomarkers into clinical tests (> 8 FDA approved and > 19 CLIA certified) for early detection.",
+    author: "Renata Barnes",
+    date: "2022-11-16",
+    category: "Awards",
+    tags: ["Don Listwin Award", "Sudhir Srivastava", "NCI", "NIH", "Biomarkers", "EDRN"],
+    readTime: "6 min read",
+    featured: false,
+    url: "https://www.canaryfoundation.org/2022/11/16/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2022-goes-to-sudhir-srivastava-ph-d-mph-ms/"
   }
 ];
 

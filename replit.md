@@ -72,9 +72,10 @@ Preferred communication style: Simple, everyday language.
 - Canary Approach dropdown: Overview, Canary Collaborations and Partnership, Canary Symposium
 - Canary Science dropdown: Overview, Science, Programs, Centers, Publications, Funding by Invitation
 - About Canary dropdown: Our Mission, Founder's Story, Impact & Success
-- Dedicated blog page with authentic 2023-2024 content from Canary Foundation
+- Dedicated blog page with authentic 2022-2024 content from Canary Foundation
 - Blog features: search functionality, category filtering, featured posts, external links
-- 5 authentic blog posts covering Don Listwin Awards, EDx conferences, and research milestones
+- 7 authentic blog posts covering Don Listwin Awards, EDx conferences, and research milestones
+- Three years of continuous EDx conference coverage (2022: sold-out, 2023: London with 500 attendees, 2024: San Francisco)
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
 - Comprehensive timeline with 18+ authentic milestones (2000-2024)
