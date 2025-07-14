@@ -348,8 +348,162 @@ export default function Home() {
         </div>
       </section>
 
+      {/* News & Blog Section */}
+      <section id="news" className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Latest News & Updates</h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Stay informed about our latest research breakthroughs, awards, and developments in early cancer detection.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Don Listwin Award 2024" 
+                  className="w-full h-48 object-cover"
+                />
+              </div>
+              <CardContent className="p-6">
+                <div className="text-primary text-sm font-semibold mb-2">AWARD • 2024</div>
+                <h3 className="text-xl font-semibold text-dark mb-3">Don Listwin Award Recognition</h3>
+                <p className="text-gray-600 mb-4">The Canary Foundation receives prestigious recognition for advancing early cancer detection research.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Read More →
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="PATROL study launch" 
+                  className="w-full h-48 object-cover"
+                />
+              </div>
+              <CardContent className="p-6">
+                <div className="text-primary text-sm font-semibold mb-2">RESEARCH • 2023</div>
+                <h3 className="text-xl font-semibold text-dark mb-3">PATROL Study Launch</h3>
+                <p className="text-gray-600 mb-4">New prospective cohort study focuses on genetic risk factors and biobanking for prostate cancer.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Read More →
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300" 
+                  alt="Remembering Dr. Gambhir" 
+                  className="w-full h-48 object-cover"
+                />
+              </div>
+              <CardContent className="p-6">
+                <div className="text-primary text-sm font-semibold mb-2">REMEMBRANCE • 2020</div>
+                <h3 className="text-xl font-semibold text-dark mb-3">Remembering Sanjiv Sam Gambhir</h3>
+                <p className="text-gray-600 mb-4">Honoring the legacy of a pioneering leader in molecular imaging and cancer detection.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Read More →
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section id="events" className="py-16 md:py-20 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Upcoming Events</h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Join us at conferences, symposiums, and educational events focused on advancing cancer detection research.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="text-white text-2xl" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-dark mb-2">Annual Early Detection Conference</h3>
+                    <p className="text-gray-600 mb-4">
+                      Co-hosted with OHSU and CRUK, featuring the latest advances in cancer detection technologies and research.
+                    </p>
+                    <div className="text-primary font-semibold">Coming Soon</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <Users className="text-white text-2xl" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-dark mb-2">Scientific Symposium</h3>
+                    <p className="text-gray-600 mb-4">
+                      Annual gathering of researchers and clinicians to share latest findings in biomarker development and imaging.
+                    </p>
+                    <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                      Visit Symposium Site →
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <Handshake className="text-white text-2xl" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-dark mb-2">EDx24 Conference</h3>
+                    <p className="text-gray-600 mb-4">
+                      Focused on addressing disparities in cancer detection and advancing equity in healthcare access.
+                    </p>
+                    <div className="text-primary font-semibold">Past Event</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="text-white text-2xl" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-dark mb-2">Research Training Programs</h3>
+                    <p className="text-gray-600 mb-4">
+                      NCI R25 CREST summer training program and fellowship opportunities for emerging researchers.
+                    </p>
+                    <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                      Apply Now →
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Get Involved */}
-      <section className="py-16 md:py-20 bg-light">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Support Our Research</h2>
@@ -407,7 +561,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Contact Us</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Ready to make a difference? Get in touch with our team to learn more about our programs and how you can help.
+              Have questions about our research or want to learn more about supporting early cancer detection? We'd love to hear from you.
             </p>
           </div>
           
@@ -421,7 +575,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold text-dark">Address</div>
-                    <div className="text-gray-600">123 Foundation Street<br />Hope City, HC 12345</div>
+                    <div className="text-gray-600">Redwood City, CA<br />United States</div>
                   </div>
                 </div>
                 

@@ -55,15 +55,23 @@ export default function Footer() {
                   onClick={() => scrollToSection("programs")}
                   className="text-gray-300 hover:text-primary transition-colors duration-300"
                 >
-                  Research Programs
+                  Canary Science
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => scrollToSection("impact")}
+                  onClick={() => scrollToSection("news")}
                   className="text-gray-300 hover:text-primary transition-colors duration-300"
                 >
-                  Impact Stories
+                  News & Blog
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection("events")}
+                  className="text-gray-300 hover:text-primary transition-colors duration-300"
+                >
+                  Events
                 </button>
               </li>
               <li>
@@ -90,10 +98,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Get Involved</h3>
             <ul className="space-y-3">
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Donate</button></li>
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Volunteer</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Fund Research</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Fellowship Programs</button></li>
               <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Partner With Us</button></li>
-              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Newsletter</button></li>
+              <li><button className="text-gray-300 hover:text-primary transition-colors duration-300">Research Collaboration</button></li>
             </ul>
           </div>
         </div>

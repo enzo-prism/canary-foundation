@@ -1,0 +1,58 @@
+Analysis of the Current Sitemap
+The sitemap at https://www.canaryfoundation.org/sitemap_index.xml is a standard XML sitemap index file, typically used for SEO purposes in WordPress-based sites like this one. It serves as a master index pointing to subordinate sitemap files (e.g., page-sitemap.xml for static pages, post-sitemap.xml for dynamic content like blog posts, category-sitemap.xml for taxonomies, and possibly author-sitemap.xml). These child sitemaps list individual URLs with metadata such as last modification dates (<lastmod>) and priorities (<priority>), helping search engines crawl the site efficiently. The structure reflects a hierarchical organization: static pages form the core navigation and content backbone, while posts represent time-sensitive updates (e.g., news, accomplishments) that link back to evergreen program pages. Categories group content thematically, facilitating discovery (e.g., linking multiple posts or pages under "research" or "events"). Overall, the sitemap emphasizes a research-focused site with about 50-100 indexable URLs, prioritizing high-value pages like programs and about sections (higher <priority> values, often 0.8-1.0) over archival posts (lower priorities, around 0.5). Connections are navigational: Root pages link downward to subpages, and content pages cross-link for user flow (e.g., from a program page to related clinical studies or news posts).</priority></priority></lastmod>
+
+Outline of All Key Pages
+Based on the sitemap's implied structure (static pages as foundational, posts as supplemental, categories as connectors), I've outlined the key pages hierarchically. This groups them into logical sections, drawing from the site's navigation and linked content. Explanations of connections highlight how pages interlink via menus, internal hyperlinks, and site architecture (e.g., breadcrumbs, sidebars, or footer navigation), creating a user journey from general awareness (home/about) to specific research (programs/science) to engagement (donate/events).
+
+Home/Root
+URL: https://www.canaryfoundation.org/
+Description: The entry point, featuring the mission ("early cancer detection saves lives"), recent news (e.g., Don Listwin Award 2024, EDx24 conference), and a timeline of accomplishments (2003-2023, including PATROL launch and center expansions).
+Connections: Serves as the hub; links outward to all top-level sections (e.g., "Learn More" to About, "Donate Now" to Donate). It cross-references programs via highlights (e.g., tumor research) and events (e.g., symposium). Posts and news often link back here for context.
+About Us
+URL: https://www.canaryfoundation.org/about-canary/
+Subpages:
+Founder's Story: https://www.canaryfoundation.org/about-canary/founders-story/
+Canary Approach: https://www.canaryfoundation.org/canary-approach/
+Description: Covers the foundation's history (founded 2004, $75M+ raised), mission expansion to precision treatment, and collaborative model (e.g., with Stanford, CRUK).
+Connections: Linked from home navigation; provides foundational context, linking to programs (e.g., how collaborations enable tumor research) and donate (e.g., impact stories encourage giving). Subpages like Founder's Story connect personally, often referenced in news posts.
+Programs (Canary Science)
+URL: https://www.canaryfoundation.org/canary-science/programs/ (inferred parent)
+Subpages (Tumors/Research Areas):
+Prostate Cancer: https://www.canaryfoundation.org/canary-science/programs/tumors/prostate/
+Ovarian Cancer: https://www.canaryfoundation.org/canary-science/programs/tumors/ovarian/
+Pancreatic Cancer: https://www.canaryfoundation.org/canary-science/programs/tumors/pancreatic/
+Lung Cancer: https://www.canaryfoundation.org/canary-science/programs/tumors/lung/
+Breast Cancer: https://www.canaryfoundation.org/canary-science/programs/tumors/breast/
+Subpages (Clinical Progress):
+Clinical Studies: https://www.canaryfoundation.org/canary-science/programs/clinical-progress/clinical-studies/ (with anchors like #ImagingForOvarianCancer, #BreastCancerImaging, #PASS)
+Subpages (Science/Technologies):
+Imaging: https://www.canaryfoundation.org/canary-science/science/imaging/ (with anchors like #microbubble for microbubble-based molecular imaging)
+Description: Details research focus on early detection via biomarkers, imaging, and studies (e.g., PASS for prostate active surveillance, POCUS for pancreas).
+Connections: Dropdown from main nav under "Canary Science"; tumor subpages link to each other for cross-cancer insights and to clinical studies (e.g., ovarian imaging trials reference ovarian tumor page). They connect upward to about (for collaboration context) and downward to news/posts (e.g., updates on PATROL cohort).
+News & Blog
+URL: https://www.canaryfoundation.org/news-blog/ (inferred from posts)
+Key Posts (Dynamic Content):
+Remembering Sanjiv Sam Gambhir: https://www.canaryfoundation.org/2020/08/04/remembering-sanjiv-sam-gambhir/
+Accomplishments Timeline Entries: Various dated posts (e.g., 2023 PATROL launch, 2024 award announcements)
+Description: Blog-style updates on research milestones, awards, and remembrances; categorized by themes like "research" or "events."
+Connections: Linked from home and footer; posts reference programs (e.g., a post on ultrasound imaging links to pancreatic program) and events (e.g., conference recaps). Categories connect multiple posts to static pages (e.g., "prostate" category links to prostate program).
+Events
+URL: https://www.canaryfoundation.org/events/ (inferred)
+Subpages/External:
+Scientific Symposium: http://www.canarysymposium.org
+Annual Early Detection Conference: Linked via news (co-hosted with OHSU, CRUK)
+Canary Center at Stanford: http://canarycenter.stanford.edu/ (events and collaborations)
+Description: Covers conferences, symposia, and outreach (e.g., EDx24 for disparities).
+Connections: Nav item from home; events pages link to programs (e.g., symposium sessions on ovarian biomarkers) and news (recaps/posts). External sites like Canary Center connect back via partnerships mentioned in about.
+Take Action/Donate
+URL: https://www.canaryfoundation.org/take-action-2/ or https://www.canaryfoundation.org/donate/
+Description: Ways to contribute (financial gifts, stock, AmazonSmile); ties to impact metrics.
+Connections: Prominent button from home and all pages; links from programs/about to encourage support for specific research (e.g., "Donate to prostate team").
+Contact & Footer Pages
+URL: https://www.canaryfoundation.org/contact/ (inferred)
+Subpages:
+Privacy Policy/Terms: Likely in footer (standard links)
+Tax Info: Mentioned site-wide (501(c)(3), Tax ID #65-1230251)
+Description: Contact form, address (Redwood City, CA), and legal info.
+Connections: Footer on all pages; links from donate (for inquiries) and about (team contacts). Ensures site-wide accessibility.
+This outline captures ~40-50 key pages/posts from the sitemap's scope, with static pages (from page-sitemap.xml) as the core hierarchy and posts/categories (from post/category-sitemap.xml) adding dynamism. Connections form a web: Home/about as top-level entry, funneling to programs/science for depth, with news/events providing updates and cross-links. Donate/contact weave throughout for engagement, creating a cohesive flow from awareness to action.

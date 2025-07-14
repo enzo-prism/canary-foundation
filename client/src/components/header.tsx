@@ -33,23 +33,83 @@ export default function Header() {
             >
               Home
             </button>
+            <div className="relative group">
+              <button 
+                onClick={() => scrollToSection("about")}
+                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
+              >
+                About Us
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="py-1">
+                  <button 
+                    onClick={() => scrollToSection("about")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Our Mission
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("about")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Founder's Story
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("about")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Canary Approach
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <button 
+                onClick={() => scrollToSection("programs")}
+                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
+              >
+                Canary Science
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="py-1">
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Research Programs
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Clinical Studies
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("programs")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Imaging Technologies
+                  </button>
+                </div>
+              </div>
+            </div>
             <button 
-              onClick={() => scrollToSection("about")}
+              onClick={() => scrollToSection("news")}
               className="text-dark hover:text-primary transition-colors duration-300"
             >
-              About
+              News & Blog
             </button>
             <button 
-              onClick={() => scrollToSection("programs")}
+              onClick={() => scrollToSection("events")}
               className="text-dark hover:text-primary transition-colors duration-300"
             >
-              Research
-            </button>
-            <button 
-              onClick={() => scrollToSection("impact")}
-              className="text-dark hover:text-primary transition-colors duration-300"
-            >
-              Impact
+              Events
             </button>
             <button 
               onClick={() => scrollToSection("contact")}
@@ -85,19 +145,25 @@ export default function Header() {
                 onClick={() => scrollToSection("about")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                About
+                About Us
               </button>
               <button 
                 onClick={() => scrollToSection("programs")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                Research
+                Canary Science
               </button>
               <button 
-                onClick={() => scrollToSection("impact")}
+                onClick={() => scrollToSection("news")}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
-                Impact
+                News & Blog
+              </button>
+              <button 
+                onClick={() => scrollToSection("events")}
+                className="text-dark hover:text-primary transition-colors duration-300 text-left"
+              >
+                Events
               </button>
               <button 
                 onClick={() => scrollToSection("contact")}
