@@ -141,7 +141,9 @@ export default function Home() {
                       <img 
                         src={image.src}
                         alt={image.alt}
-                        className="w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
+                        className={`w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105 ${
+                          index === 3 ? 'object-top' : ''
+                        }`}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                       <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-white">
