@@ -33,6 +33,7 @@ export default function Home() {
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
+  const [expandableItems, setExpandableItems] = useState<Set<number>>(new Set());
   
   const timelineEvents = [
     { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", icon: Heart, category: "founding" },
@@ -52,6 +53,18 @@ export default function Home() {
     { year: 2023, title: "PATROL Launch", description: "Launch of PATROL: Prostate Cancer Screening for People at Genetic Risk for Aggressive Disease", icon: Shield, category: "research" },
     { year: 2024, title: "Future Goals", description: "Continuing research in multiomic analysis, point of care ultrasound, and microbubble technology", icon: Target, category: "future" }
   ];
+  
+  // Check which items need expansion based on content length
+  useEffect(() => {
+    const newExpandableItems = new Set<number>();
+    timelineEvents.forEach((event, index) => {
+      // Estimate if text would overflow 2 lines (approximately 100-120 characters for typical text)
+      if (event.description.length > 100) {
+        newExpandableItems.add(index);
+      }
+    });
+    setExpandableItems(newExpandableItems);
+  }, []);
   
   const heroImages = [
     {
@@ -321,9 +334,11 @@ export default function Home() {
                             }`}>
                               {event.description}
                             </p>
-                            <button className="text-primary hover:text-primary-dark text-sm font-medium mt-2 transition-colors">
-                              {isSelected ? 'Show Less' : 'Read More'}
-                            </button>
+                            {expandableItems.has(index) && (
+                              <button className="text-primary hover:text-primary-dark text-sm font-medium mt-2 transition-colors">
+                                {isSelected ? 'Show Less' : 'Read More'}
+                              </button>
+                            )}
                           </CardContent>
                         </Card>
                       </div>
