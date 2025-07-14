@@ -1,0 +1,47 @@
+Overview
+
+
+
+Canary is focused on the early detection of solid tumors.  Our anchor institution is the Canary Center at Stanford University.  We have affiliate relationships around the world including Cambridge University and OSHU in Portland.  
+
+We support two teams that are comprised of disease specific experts from North America.  For women’s health our focus is on ovarian cancer early detection.  The men’s program is focused on prostate cancer.  
+
+Canary has supported advanced imaging for two decades.  We are currently supporting building a new cancer imaging center at UCSD that will focus on using low-cost ultrasound to confirm cancer detected by biomarkers such as CA-125 (ovarian) and CA-19 (pancreas).
+
+Canary Center at Stanford
+
+The Canary Center at Stanford is focused on the detection of cancer and other diseases at their earliest stages when treatment is most effective. Research to discover and implement minimally invasive diagnostic and imaging strategies is complemented by support for innovations in precision treatment.
+
+Faculty and Affiliates at Canary Center are engaged in a variety of research programs and collaborations throughout the Stanford campus and beyond. Examples on campus include projects testing new categories of biomarkers such as exosomes and glycoproteins, applying mathematical models to predict patient outcomes, and developing advanced imaging agents for early cancer detection. The Center also supports infrastructure for developing innovative therapies in collaboration with Stanford Engineers via a design thinking process that accelerates translation to the clinic.
+
+The Center continues to collaborate with other Early Detection programs around the world, sharing samples, technologies and healthcare expertise as well as developing the next generation of multidisciplinary scientists (including an internship program) and fostering interaction through international meetings (such as the annual Early Detection of Cancer conference).
+
+
+
+
+Prostate team
+
+Finding potentially lethal prostate cancer early, while reducing unnecessary treatments and side effects for low-risk disease, are central goals of the Canary Prostate team. The team’s primary efforts are split between two multicenter clinical studies, Canary PATROL (opened in 2023) and Canary PASS (opened in 2008).
+
+PATROL is accruing a prospective cohort of individuals at genetic risk for prostate cancer. Men who have a BRCA2 mutation or associated variant are at higher risk of prostate cancer, are diagnosed at earlier ages and at higher stages, and have generally worse outcomes. PATROL participants are followed with clinical visits and biobanking, guiding early detection of the disease and ultimately contributing to an understanding of the natural history of prostate cancer. 
+
+PASS follows men diagnosed with early stage, low risk prostate cancer who choose active surveillance, collecting data and samples along the way and alerting participants to any signs of possible cancer progression for prompt treatment. Canary PASS is helping to shape national guidelines, demonstrating that active surveillance is an effective strategy for men with early-stage prostate cancer. The team is actively engaged in numerous scientific collaborations, providing samples, data and analyses from this well-annotated cohort aimed at better tools for decision making among men on active surveillance.
+
+Ovarian team
+
+High-grade serous carcinoma (HGSC) is the most lethal ovarian cancer. Evidence spearheaded by members of our team indicates that most HGSC arise from a precursor lesion in the fallopian tube (FT), termed serous tubal intraepithelial carcinoma (STIC). Our new insight for origins of HGSC has been a paradigm shift in the field. Prior ovarian cancer biomarker discovery efforts, using blood and tissue samples collected at clinical diagnosis, do not reflect early-stage HGSC. Our team is directly analyzing FT to identify genes and proteins as promising candidate early detection and prevention biomarkers.
+
+STICs are prevalent in BRCA mutation-related ovarian cancers, which are almost exclusively HGSC. Our team has established an initial BRCA pre-cancer Atlas spanning DNA methylation, RNA, protein, and spatial transcriptomic data sets on FT samples. Two foundational collaborative projects will serve as a resource for understanding the development of early HGSC.
+
+Surgical removal of the fallopian tubes and ovaries has been shown to prevent ovarian cancer and is considered standard of care for patients at high genetic risk.  Consistent with the idea that serous ovarian cancer begins in the FT, emerging data show a reduction in HGSOC when removing only the FTs, avoiding the consequences of early menopause in younger women.  Surgery is performed laparoscopically on an outpatient basis. Despite the known benefits, surgical prevention is currently restricted to women who are at high genetic risk or undergoing benign gynecologic surgery for other reasons.
+
+Key components of the ovarian team work going forward are 1) validation of candidate biomarkers coming from the Atlas, 2) building out a specimen network representing population diversity and clinical covariates, including a STIC registry with a goal of hundreds of STICs and 3) addressing the multiple barriers, including educational, administrative, and regulatory, to offering potentially life-saving surgical removal of fallopian tubes to women who undergo abdominal surgery for non-gynecologic indications.
+
+
+Ultrasound Imaging; highlight on Pancreas
+
+Ultrasound is a non-invasive, inexpensive, and highly accessible imaging modality with potential for cancer screening and early detection. Point of care ultrasound (POCUS) technology is transforming clinical practice by enabling high-quality, real-time bedside assessment of an array of diseases beyond radiology. Toward establishing POCUS as a tool for pancreatic cancer screening, the Canary team recently published our first proof of concept study demonstrating that POCUS can visualize the pancreas reliably at the bedside.
+
+Follow-up studies are underway for contrast enhanced POCUS using microbubbles—small gas-filled spheres that circulate in the bloodstream. An advantage of microbubbles when exposed to ultrasound is the strong harmonic signal emitted; this signal can be isolated from conventional tissue signals through contrast-mode imaging. Our team developed the first version of contrast-mode imaging on a POCUS probe as an industry-academic collaboration and are now working together to test contrast POCUS imaging in patients (including those at high risk of pancreatic cancer).
+
+Longer-term, the Canary team is leveraging expertise in molecular imaging—showing biological processes associated with cancer—to develop the first POCUS-based molecular imaging solution. Microbubbles can be made to target receptors expressed on the surface of blood vessels, enabling ultrasound as a bedside molecular imaging modality.

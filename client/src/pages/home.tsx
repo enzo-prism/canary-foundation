@@ -354,11 +354,15 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Mission</h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              Canary is focused on the early detection of solid tumors. Our anchor institution is the Canary Center at Stanford University, 
+              with affiliate relationships around the world including Cambridge University and OHSU in Portland.
+            </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Founded in 2004, the Canary Foundation is dedicated to advancing early cancer detection through innovative 
-              biomarkers, imaging technologies, and precision medicine approaches. We believe that early detection saves lives.
+              We support two specialized teams comprised of disease-specific experts from North America: women's health focused on ovarian cancer early detection, 
+              and men's program focused on prostate cancer.
             </p>
           </div>
           
@@ -378,18 +382,18 @@ export default function Home() {
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
                   <Users className="text-white text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Collaborative Research</h3>
-                <p className="text-gray-600">We foster partnerships with leading institutions and researchers to accelerate discoveries in cancer detection and treatment.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Global Collaborations</h3>
+                <p className="text-gray-600">We foster partnerships with leading institutions worldwide to accelerate discoveries in cancer detection and treatment.</p>
               </CardContent>
             </Card>
             
             <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
-                  <Heart className="text-white text-2xl" />
+                  <Shield className="text-white text-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-dark mb-4">Patient-Centered Impact</h3>
-                <p className="text-gray-600">Our research is driven by the goal of improving outcomes and quality of life for patients and their families.</p>
+                <h3 className="text-xl font-semibold text-dark mb-4">Advanced Imaging</h3>
+                <p className="text-gray-600">Supporting advanced imaging for two decades, including building a new cancer imaging center at UCSD focused on low-cost ultrasound.</p>
               </CardContent>
             </Card>
           </div>
@@ -413,7 +417,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Prostate Cancer Program</h3>
-                <p className="text-gray-600 mb-4">PASS study with 1,100+ participants, PATROL genetic risk cohort, and advanced imaging technologies for early detection.</p>
+                <p className="text-gray-600 mb-4">Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -426,7 +430,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Ovarian Cancer Program</h3>
-                <p className="text-gray-600 mb-4">BRCA pre-cancer atlas, fallopian tube precursor studies, and biomarker development for high-grade serous carcinoma.</p>
+                <p className="text-gray-600 mb-4">Focused on high-grade serous carcinoma origins in fallopian tubes. BRCA pre-cancer atlas with multi-omics data and STIC registry for early detection breakthroughs.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -438,8 +442,8 @@ export default function Home() {
                 <div className="w-full h-48 bg-gradient-to-bl from-white via-yellow-200 to-gray-900"></div>
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-dark mb-3">Pancreatic Cancer Program</h3>
-                <p className="text-gray-600 mb-4">Advanced ultrasound imaging, POCUS technology, and biomarker research for early pancreatic cancer detection.</p>
+                <h3 className="text-xl font-semibold text-dark mb-3">Ultrasound Imaging Program</h3>
+                <p className="text-gray-600 mb-4">Point-of-care ultrasound (POCUS) technology for pancreatic cancer screening. Developing contrast-enhanced imaging with microbubbles and molecular imaging solutions.</p>
                 <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
                   Learn More →
                 </Button>
@@ -484,6 +488,109 @@ export default function Home() {
                 </Button>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Canary Center at Stanford Section */}
+      <section id="canary-center" className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Canary Center at Stanford</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                The Canary Center at Stanford is focused on the detection of cancer and other diseases at their earliest stages when treatment is most effective.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h3 className="text-2xl font-semibold text-dark mb-6">Our Approach</h3>
+                <p className="text-gray-600 mb-4">
+                  Research to discover and implement minimally invasive diagnostic and imaging strategies is complemented by support for innovations in precision treatment.
+                </p>
+                <p className="text-gray-600 mb-4">
+                  Faculty and Affiliates are engaged in a variety of research programs and collaborations throughout the Stanford campus and beyond, testing new categories of biomarkers such as exosomes and glycoproteins.
+                </p>
+                <p className="text-gray-600">
+                  The Center supports infrastructure for developing innovative therapies and applies mathematical models to predict patient outcomes.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Microscope className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-dark mb-2">Advanced Biomarkers</h4>
+                    <p className="text-sm text-gray-600">Exosomes and glycoproteins research</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Target className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-dark mb-2">Precision Medicine</h4>
+                    <p className="text-sm text-gray-600">Mathematical models for outcomes</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Lightbulb className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-dark mb-2">Imaging Innovation</h4>
+                    <p className="text-sm text-gray-600">Advanced imaging agents</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-light hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <GraduationCap className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-dark mb-2">Education</h4>
+                    <p className="text-sm text-gray-600">Next-generation scientists</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+            
+            <div className="bg-light rounded-lg p-8">
+              <h3 className="text-2xl font-semibold text-dark mb-6 text-center">Global Collaboration</h3>
+              <p className="text-gray-600 text-center mb-6">
+                The Center collaborates with other Early Detection programs around the world, sharing samples, technologies, and healthcare expertise.
+              </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Share2 className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-2">Sample Sharing</h4>
+                  <p className="text-sm text-gray-600">Collaborative research networks</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-2">Internship Program</h4>
+                  <p className="text-sm text-gray-600">Developing multidisciplinary scientists</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Handshake className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-2">Annual Conference</h4>
+                  <p className="text-sm text-gray-600">Early Detection of Cancer meeting</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
