@@ -51,7 +51,7 @@ export default function Header() {
                     onClick={() => scrollToSection("about")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Our Mission
+                    Overview
                   </button>
                   <button 
                     onClick={() => scrollToSection("about")}
@@ -60,10 +60,34 @@ export default function Header() {
                     Founder's Story
                   </button>
                   <button 
-                    onClick={() => scrollToSection("impact")}
+                    onClick={() => scrollToSection("leadership")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Impact & Success
+                    Staff
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("leadership")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Board of Directors
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("leadership")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Leadership Council
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("leadership")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Scientific Leadership
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("contact")}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Financials
                   </button>
                 </div>
               </div>
@@ -185,12 +209,51 @@ export default function Header() {
               >
                 Home
               </button>
-              <button 
-                onClick={() => scrollToSection("about")}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-              >
-                About Canary
-              </button>
+              <div className="border-l-2 border-gray-200 pl-4">
+                <div className="text-sm font-semibold text-gray-500 mb-2">About Canary</div>
+                <button 
+                  onClick={() => scrollToSection("about")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Overview
+                </button>
+                <button 
+                  onClick={() => scrollToSection("about")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Founder's Story
+                </button>
+                <button 
+                  onClick={() => scrollToSection("leadership")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Staff
+                </button>
+                <button 
+                  onClick={() => scrollToSection("leadership")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Board of Directors
+                </button>
+                <button 
+                  onClick={() => scrollToSection("leadership")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Leadership Council
+                </button>
+                <button 
+                  onClick={() => scrollToSection("leadership")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                >
+                  Scientific Leadership
+                </button>
+                <button 
+                  onClick={() => scrollToSection("contact")}
+                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                >
+                  Financials
+                </button>
+              </div>
               <div className="border-l-2 border-gray-200 pl-4">
                 <div className="text-sm font-semibold text-gray-500 mb-2">Canary Approach</div>
                 <button 
