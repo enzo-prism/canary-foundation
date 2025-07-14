@@ -1170,39 +1170,59 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h5 className="font-semibold text-dark mb-6 text-xl">2020 Financial Performance</h5>
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="flex justify-center items-center">
-                      <div className="w-full max-w-md">
-                        <img 
-                          src="/financial-chart-2020.webp" 
-                          alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
-                          className="w-full h-auto object-contain rounded-lg shadow-sm"
-                        />
+                <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                  <div className="bg-gradient-to-r from-primary to-yellow-400 p-6 text-white">
+                    <h5 className="font-bold text-2xl mb-2">2020 Financial Performance</h5>
+                    <p className="text-yellow-50 opacity-90">Transparent stewardship of your donations</p>
+                  </div>
+                  
+                  <div className="p-6">
+                    {/* Chart Section */}
+                    <div className="mb-8">
+                      <div className="flex justify-center">
+                        <div className="w-full max-w-lg">
+                          <img 
+                            src="/financial-chart-2020.webp" 
+                            alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
+                            className="w-full h-auto object-contain rounded-lg shadow-md"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-white rounded-lg p-4 text-center">
-                        <div className="text-primary font-bold text-2xl mb-2">91%</div>
-                        <div className="text-gray-800 font-semibold text-base mb-1">Program Expenses</div>
-                        <div className="text-gray-600 text-sm">$3,621,840</div>
+                    
+                    {/* Key Metrics */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 text-center border border-blue-200">
+                        <div className="text-primary font-black text-3xl sm:text-4xl mb-2">91%</div>
+                        <div className="text-gray-800 font-semibold text-lg mb-1">Scientific Programs</div>
+                        <div className="text-gray-600 font-medium">$3,621,840</div>
                       </div>
-                      <div className="bg-white rounded-lg p-4 text-center">
-                        <div className="text-primary font-bold text-2xl mb-2">3%</div>
-                        <div className="text-gray-800 font-semibold text-base mb-1">Administrative</div>
-                        <div className="text-gray-600 text-sm">$103,196</div>
+                      
+                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-5 text-center border border-orange-200">
+                        <div className="text-orange-600 font-black text-3xl sm:text-4xl mb-2">6%</div>
+                        <div className="text-gray-800 font-semibold text-lg mb-1">Fundraising</div>
+                        <div className="text-gray-600 font-medium">$238,864</div>
                       </div>
-                      <div className="bg-white rounded-lg p-4 text-center">
-                        <div className="text-primary font-bold text-2xl mb-2">6%</div>
-                        <div className="text-gray-800 font-semibold text-base mb-1">Fundraising</div>
-                        <div className="text-gray-600 text-sm">$238,864</div>
+                      
+                      <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-5 text-center border border-gray-200">
+                        <div className="text-gray-600 font-black text-3xl sm:text-4xl mb-2">3%</div>
+                        <div className="text-gray-800 font-semibold text-lg mb-1">Administrative</div>
+                        <div className="text-gray-600 font-medium">$103,196</div>
                       </div>
-                      <div className="bg-white rounded-lg p-4 text-center">
-                        <div className="text-primary font-bold text-2xl mb-2">12.6¢</div>
-                        <div className="text-gray-800 font-semibold text-base mb-1">Cost per $1 raised</div>
-                        <div className="text-gray-600 text-sm">$3,001,876 raised</div>
+                      
+                      <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 text-center border border-green-200">
+                        <div className="text-green-600 font-black text-3xl sm:text-4xl mb-2">12.6¢</div>
+                        <div className="text-gray-800 font-semibold text-lg mb-1">Cost per $1 raised</div>
+                        <div className="text-gray-600 font-medium">$3,001,876 total</div>
                       </div>
+                    </div>
+                    
+                    {/* Summary */}
+                    <div className="bg-primary bg-opacity-5 rounded-lg p-6 text-center">
+                      <div className="text-2xl font-bold text-dark mb-2">Total 2020 Expenses: $3,963,900</div>
+                      <p className="text-gray-600 text-lg">
+                        91% of every dollar donated goes directly to cancer research programs
+                      </p>
                     </div>
                   </div>
                 </div>
