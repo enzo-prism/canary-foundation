@@ -1,0 +1,87 @@
+### Mission and Vision
+- Focus on early detection of solid tumors, emphasizing minimally invasive diagnostic and imaging strategies to identify cancer at curable stages.
+- Expanded vision to include precision treatment, extending beyond cancer to other diseases like neurology, cardiology, and autoimmune conditions.
+- Goal of saving lives through basic and translational research, interdisciplinary education, and outreach for underserved communities.
+- Paradigm shifts, such as recognizing most high-grade serous ovarian cancers originate from precursors in the fallopian tubes (STIC lesions).
+- Commitment to developing low-cost, accessible tools like point-of-care ultrasound (POCUS) for confirmation of biomarkers (e.g., CA-125 for ovarian, CA-19 for pancreas).
+
+### History and Founding
+- Founded in 2004 by Don Listwin following his mother Grace Listwin's death from late-stage ovarian cancer in 2001, after a misdiagnosis in 2000.
+- Initial funding through the Listwin Family Foundation in 2002 for ovarian biomarker work at Fred Hutch Cancer Research Center (FHCRC).
+- Establishment of the Center of Excellence for early cancer detection at FHCRC in 2003 by Dr. Lee Hartwell.
+- Canary Center at Stanford founded in 2009 in partnership with Stanford School of Medicine and Stanford Cancer Institute, co-led by Sanjiv Sam Gambhir (1962-2020).
+- Over $75 million raised historically, supporting global affiliates like Cambridge University and Oregon Health & Science University (OHSU).
+- Evolution from biomarker focus to advanced imaging and precision therapies, with facility expansions like the move to Stanford’s Technology and Innovation Park in 2013 (doubling lab space).
+
+### Leadership and Team
+- Founder: Don Listwin, motivated by personal loss, named to National Cancer Institute Board of Scientific Advisors in 2009.
+- Co-Founder Remembrance: Sanjiv Sam Gambhir, MD, PhD (deceased 2020), pioneer in early detection strategies.
+- Current Director: Joseph M. DeSimone, PhD (Departments of Radiology, Chemical Engineering, Materials Science and Engineering, Chemistry, Graduate School of Business).
+- Scientific Advisory Board: Zhenan Bao (Chemical Engineering), James Brooks (Medicine, Oncology), Sylvia Plevritis (Biomedical Data Science), Stephen Quake (Stanford Radiology).
+- Key Researchers: Parag Mallick (immune system exploitation for detection), Sharon Pitteri (ovarian markers, NEMO project), Utkan Demirci (biomedical microfluidics, recruited 2014), Tom Soh (portable diagnostics, recruited 2015).
+- Operations: Heidi Auman (program coordinator, involved in content sharing for updates).
+- Multidisciplinary teams: Disease-specific experts from North America, engineers, statisticians, and clinicians focused on women's (ovarian) and men's (prostate) health.
+
+### Programs and Research Areas
+- **Prostate Team**: Canary PATROL (launched 2023: Prospective cohort for genetic risk, e.g., BRCA2 mutations, with biobanking and natural history studies); Canary PASS (launched 2008: Active surveillance for low-risk cases, over 2,000 enrolled, influencing national guidelines and reducing overtreatment).
+- **Ovarian Team**: High-grade serous carcinoma (HGSC) research, including BRCA pre-cancer Atlas (DNA methylation, RNA, protein, spatial transcriptomics on fallopian tube samples); Validation of candidate biomarkers; Preventive strategies like surgical removal of fallopian tubes (laparoscopic, outpatient, reducing HGSC risk without early menopause).
+- **Pancreas and Ultrasound Imaging**: Proof-of-concept studies for POCUS (reliable pancreas visualization at bedside); Contrast-enhanced POCUS using microbubbles (harmonic signals for isolation); Molecular imaging with targeted microbubbles; New cancer imaging center at UCSD focusing on low-cost ultrasound for biomarker confirmation.
+- **Other Cancer Areas**: Lung (biomarkers for high-risk never-smokers, national screening trials with MD Anderson); Breast (microbubble clinical trials, imaging); Pancreatic (gene mutations discovered 2006, microbubble imaging below 1mm in 2011).
+- **Cross-Cutting Technologies**: Biomarkers (e.g., exosomes, glycoproteins, HE4 for ovarian validated 2008); Imaging (photoacoustic devices, magneto-nano sensors 10,000x more sensitive in 2009); Machine learning (Canary Quantum Cloud developed 2015).
+
+### Initiatives and Centers
+- Canary Center at Stanford: Dedicated to minimally invasive diagnostics, imaging, and precision treatments; Infrastructure for innovative therapies via design thinking with Stanford engineers.
+- Cyclotron and Radiochemistry Facility (CRF): Generates clinically approved radiotracers (>36 under FDA); Supports preclinical research, education in radiation safety and cGMP.
+- Liquid Biopsy Center: Focus on urine, interstitial fluid, exosomes, mucosal fluids; Highlights include interstitial fluid diagnostics via 3D-printed microneedle patches (IRB-approved April 2024, safety study with N=10 showing 149 proteins in NCI biomarker database).
+- Center for Interventional Radiology Innovation at Stanford (IRIS): Projects like endovascular neuromodulation, stem cell implantation for diabetes, pediatric biodegradable stents.
+- Center for Diagnostic and Therapeutic Ultrasound: Seed funding for 2-3 projects to prepare for NIH P41 Biomedical Technology Research Center application.
+- Specimen Networks: Building diverse cohorts, including STIC registry (goal: hundreds of samples) for population diversity and clinical covariates.
+
+### Education and Training
+- NCI R25 Cancer Research Education Summer Training (CREST): Co-PIs Sharon Pitteri and Utkan Demirci, on second renewal; 10-week summer program for hands-on cancer research.
+- Philips Postdoctoral Fellowship in Precision Health: Supports advanced training in early detection and precision medicine.
+- Internships and Fellowships: Multidisciplinary programs for next-generation scientists, including Cancer Engineering fellowships for graduate students and postdocs.
+- Training Infrastructure: Formal education in radiation safety, radiolabeling chemistry, cGMP practices, and quality control at CRF.
+
+### Events and Conferences
+- Annual Early Detection of Cancer Conference: Co-hosted by Canary Center, Knight Cancer Center at OHSU, and Cancer Research UK; In-person return in 2022 after virtual years; Focus on thought leadership and sharing samples/technologies.
+- Annual Scientific Symposium: First held in 2005, fostering interactions among global early detection programs.
+- Canary Early Detection Seminar Series: Ongoing discussions on innovations.
+
+### Outreach and Addressing Disparities
+- Community Engagement: Partnerships with Stanford Cancer Institute's Office of Cancer Health Equity; Collaborations like Baywell Health in Oakland (50 years serving Black community) for lung cancer screening.
+- Expanding Access: Conversations with Federally Qualified Health Centers (FQHCs); Broaden screening criteria (e.g., 20 years smoking vs. 20 pack-years; include never-smokers with family history, especially Asian populations).
+- Innovative Solutions: Teal Health at-home self-collect cervical cancer screening (primary HPV testing, overcomes discomfort/access barriers; Founded by Avnesh Thakor, with Joseph M. DeSimone on BOD).
+- Barriers Addressed: Educational, administrative, and regulatory hurdles to preventive surgeries (e.g., fallopian tube removal during non-gynecologic procedures).
+
+### Accomplishments and Milestones
+- Timeline from 2000 (misdiagnosis) to 2023 (PATROL launch, POCUS pilot showing pancreas visibility, gene expression profiling with Veracyte/Decipher).
+- Key Achievements: FDA approvals for microbubble ultrasound (2014 for prostate, 2019 for breast/pancreatic); NCI award for PASS (2014); Spirit of Hope Award from Stanford Cancer Institute (2012).
+- Milestones: 2,000 men enrolled in PASS (2021); First jointly funded conference (2019); Launch of ACED Alliance (2019); Discovery of lung cancer biomarker attracting licensing (2017).
+- Awards: Don Listwin Award (e.g., 2024 to Professor Antonis Antoniou for cancer risk prediction).
+
+### Publications and Recent News
+- Recent Publications: PNAS 2021 (various); JACS Au 2022; Nature 2024; Clinical Chemistry 2014 (interstitial fluid); Proof-of-concept for POCUS in pancreas (recently published).
+- Freely Postable Papers: Focus on prostate (PATROL/PASS), ovarian (HGSC/STIC), pancreas (ultrasound); Sourced for website per email thread.
+- News: Updates on collaborations (e.g., Gray Foundation multiomic analysis 2022); International partnerships (e.g., University of Calgary pilots completed 2019).
+- Funding Sources: Bill & Melinda Gates Foundation; NCI grants.
+
+### Collaborations and Partnerships
+- Global Alliances: ACED (2019: CRUK, Canary Center, Cambridge, OHSU, UCL, Manchester); Canadian British Columbia Cancer Agency (2006); University of Calgary/Cambridge (2018 projects).
+- Industry/Academic: Genomic Health (2013 for prostate test); MD Anderson (2014 lung trials); El Camino Hospital (2014 pancreatic trials); Veracyte/Decipher (2023 gene profiling).
+- Foundations: BRCA Foundation (2018 ovarian initiative); Gray Foundation (2022 fallopian tube analysis).
+- Sample/Technology Sharing: With worldwide early detection programs; Annual conferences for expertise exchange.
+
+### Future Goals
+- Biomarker Panels: Canary marker in four-marker panel for lung cancer mortality reduction.
+- Imaging Advances: First patients imaged with contrast POCUS; Manufacturing pipeline for early detection microbubbles.
+- Prostate Consensus: Best practices for active surveillance.
+- Ovarian Research: Complete multiomic dataset for BRCA vs. non-BRCA fallopian tubes; Geospatial characterization of precursors.
+- Engineering Focus: Seed grants for cancer engineering collaborations (biomed scientists, MDs, engineers); Fellowships for grads/postdocs.
+- Expansions: New UCSD imaging center; Diverse specimen networks; NIH P41 application for ultrasound research center.
+
+### Funding and Donations
+- Financial Transparency: Latest financials shared in July 2025 email thread (newest version provided by Don Listwin).
+- Donation Options: Financial gifts, stock, AmazonSmile; Tied to impact like supporting registries or trials.
+- Tax Information: 501(c)(3) nonprofit, Tax ID #65-1230251.
+- Grant Projects: Support for innovative, early-stage efforts in compassion, justice, and sustainability (inspired by related Canary entities, but align with cancer focus).

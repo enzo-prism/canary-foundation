@@ -49,6 +49,9 @@ Preferred communication style: Simple, everyday language.
 - **Liquid Biopsy Center**: Urine analysis, interstitial fluid research, microneedle patches
 - **Molecular Imaging**: Photoacoustic imaging, microbubble contrast agents
 - **Education & Training**: NCI R25 CREST program, Phillips Postdoc Fellowship
+- **Cyclotron & Radiochemistry Facility**: 36+ FDA-approved radiotracers, radiation safety education
+- **Interventional Radiology (IRIS)**: Endovascular neuromodulation, stem cell implantation
+- **Lung Cancer Program**: Never-smoker biomarkers, MD Anderson partnerships, community outreach
 
 ### Frontend Features
 - Single-page application with smooth scrolling navigation
@@ -66,6 +69,10 @@ Preferred communication style: Simple, everyday language.
 - About Canary dropdown: Our Mission, Founder's Story, Impact & Success
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
+- Comprehensive timeline with 18+ authentic milestones (2000-2024)
+- Leadership section featuring key personnel and Scientific Advisory Board
+- Community outreach section highlighting health disparities initiatives
+- Financial transparency information with nonprofit status and funding history
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)

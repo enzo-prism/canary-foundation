@@ -40,13 +40,23 @@ export default function Home() {
     { year: 2001, title: "Grace Listwin Dies", description: "Grace Listwin dies of late-stage ovarian cancer due to detection of her cancer at a late stage", icon: Heart, category: "founding" },
     { year: 2002, title: "First Biomarker Work", description: "Ovarian cancer biomarker work for Dr. Nicole Urban funded by Listwin Family Foundation at the Fred Hutch Cancer Research Center", icon: Microscope, category: "research" },
     { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCRC focusing on cancer biomarkers", icon: Building, category: "research" },
-    { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin", icon: Star, category: "founding" },
+    { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin following his mother's death from late-stage ovarian cancer", icon: Star, category: "founding" },
     { year: 2005, title: "First Scientific Symposium", description: "First annual Scientific Symposium and pancreatic cancer team formed", icon: Users, category: "milestone" },
-    { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients", icon: Stethoscope, category: "research" },
-    { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute", icon: Building, category: "milestone" },
+    { year: 2006, title: "Pancreatic Gene Mutations", description: "Discovery of pancreatic cancer gene mutations, advancing understanding of genetic factors", icon: Microscope, category: "breakthrough" },
+    { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients for low-risk prostate cancer monitoring", icon: Stethoscope, category: "research" },
+    { year: 2008, title: "HE4 Ovarian Biomarker", description: "HE4 biomarker for ovarian cancer validated, improving early detection capabilities", icon: Target, category: "breakthrough" },
+    { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute, co-led by Sanjiv Sam Gambhir", icon: Building, category: "milestone" },
     { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to detect biomarkers—10,000 times more sensitive than existing tests", icon: Lightbulb, category: "breakthrough" },
-    { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer", icon: Lightbulb, category: "breakthrough" },
-    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble—trials begin for men with prostate cancer at Stanford", icon: Award, category: "milestone" },
+    { year: 2009, title: "Don Listwin NCI Board", description: "Don Listwin named to National Cancer Institute Board of Scientific Advisors", icon: Award, category: "milestone" },
+    { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer, advancing understanding of tumor biology", icon: Lightbulb, category: "breakthrough" },
+    { year: 2011, title: "Microbubble Imaging", description: "Microbubble imaging technology developed for pancreatic cancer detection below 1mm", icon: Microscope, category: "breakthrough" },
+    { year: 2012, title: "Spirit of Hope Award", description: "Stanford Cancer Institute awards Spirit of Hope Award recognizing outstanding contributions", icon: Award, category: "milestone" },
+    { year: 2013, title: "Stanford Technology Park", description: "Canary Center moves to Stanford Technology and Innovation Park, doubling laboratory space", icon: Building, category: "milestone" },
+    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble for prostate cancer trials at Stanford", icon: Award, category: "milestone" },
+    { year: 2014, title: "NCI Award for PASS", description: "National Cancer Institute recognizes PASS study with significant funding award", icon: Award, category: "milestone" },
+    { year: 2015, title: "Canary Quantum Cloud", description: "Launch of Canary Quantum Cloud for machine learning applications in cancer detection", icon: Lightbulb, category: "breakthrough" },
+    { year: 2017, title: "Lung Cancer Biomarker", description: "Discovery of lung cancer biomarker attracts licensing interest from industry partners", icon: Target, category: "breakthrough" },
+    { year: 2018, title: "BRCA Foundation Partnership", description: "Collaboration with BRCA Foundation launches ovarian cancer prevention initiative", icon: Handshake, category: "milestone" },
     { year: 2019, title: "ACED Alliance Launch", description: "Launch of ACED Alliance – The International Alliance for Cancer Early Detection", icon: Handshake, category: "milestone" },
     { year: 2020, title: "In Loving Memory", description: "In Loving Memory Sanjiv Sam Gambhir, MD, PhD (November 23, 1962 – July 18, 2020)", icon: Heart, category: "memorial" },
     { year: 2021, title: "PASS Milestone", description: "Milestone enrollment of 2000 men in the Canary Prostate Active Surveillance Study (PASS)", icon: Target, category: "milestone" },
@@ -356,13 +366,17 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Mission</h2>
-            <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Canary is focused on the early detection of solid tumors. Our anchor institution is the Canary Center at Stanford University, 
-              with affiliate relationships around the world including Cambridge University and OHSU in Portland.
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Canary is focused on the early detection of solid tumors, emphasizing minimally invasive diagnostic and imaging strategies to identify cancer at curable stages. 
+              Our expanded vision includes precision treatment, extending beyond cancer to neurology, cardiology, and autoimmune conditions.
             </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Our anchor institution is the Canary Center at Stanford University, with affiliate relationships around the world including Cambridge University and OHSU in Portland. 
               We support two specialized teams comprised of disease-specific experts from North America: women's health focused on ovarian cancer early detection, 
               and men's program focused on prostate cancer.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Our commitment extends to developing low-cost, accessible tools and addressing health disparities in underserved communities through outreach and partnerships.
             </p>
           </div>
           
@@ -488,6 +502,45 @@ export default function Home() {
                 </Button>
               </CardContent>
             </Card>
+            
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <div className="w-full h-48 bg-gradient-to-tl from-yellow-400 via-gray-100 to-gray-800"></div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold text-dark mb-3">Cyclotron & Radiochemistry</h3>
+                <p className="text-gray-600 mb-4">Generates clinically approved radiotracers (36+ under FDA) supporting preclinical research and radiation safety education.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Learn More →
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <div className="w-full h-48 bg-gradient-to-br from-gray-700 via-yellow-200 to-white"></div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold text-dark mb-3">Interventional Radiology</h3>
+                <p className="text-gray-600 mb-4">IRIS center projects including endovascular neuromodulation, stem cell implantation, and pediatric biodegradable stents.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Learn More →
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white hover:shadow-xl transition-shadow duration-300">
+              <div className="overflow-hidden">
+                <div className="w-full h-48 bg-gradient-to-tr from-white via-yellow-300 to-gray-600"></div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold text-dark mb-3">Lung Cancer Program</h3>
+                <p className="text-gray-600 mb-4">Biomarkers for high-risk never-smokers, national screening trials with MD Anderson, and community outreach programs.</p>
+                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  Learn More →
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -588,6 +641,92 @@ export default function Home() {
                   </div>
                   <h4 className="font-semibold text-dark mb-2">Annual Conference</h4>
                   <p className="text-sm text-gray-600">Early Detection of Cancer meeting</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section id="leadership" className="py-16 md:py-20 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Leadership Team</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Our multidisciplinary team brings together world-class researchers, clinicians, and innovators dedicated to advancing early cancer detection.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Star className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-2">Don Listwin</h3>
+                  <p className="text-primary font-medium mb-2">Founder</p>
+                  <p className="text-gray-600 text-sm">Founded Canary following personal loss, serves on National Cancer Institute Board of Scientific Advisors</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-2">Joseph M. DeSimone, PhD</h3>
+                  <p className="text-primary font-medium mb-2">Current Director</p>
+                  <p className="text-gray-600 text-sm">Departments of Radiology, Chemical Engineering, Materials Science, Chemistry, and Business</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Heart className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-2">Sanjiv Sam Gambhir</h3>
+                  <p className="text-gray-600 font-medium mb-2">Co-Founder (1962-2020)</p>
+                  <p className="text-gray-600 text-sm">Pioneer in early detection strategies, co-led Canary Center at Stanford</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="bg-white rounded-lg p-8">
+              <h3 className="text-2xl font-semibold text-dark mb-6 text-center">Scientific Advisory Board</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Microscope className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-1">Zhenan Bao</h4>
+                  <p className="text-sm text-gray-600">Chemical Engineering</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Stethoscope className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-1">James Brooks</h4>
+                  <p className="text-sm text-gray-600">Medicine, Oncology</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-1">Sylvia Plevritis</h4>
+                  <p className="text-sm text-gray-600">Biomedical Data Science</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Shield className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-dark mb-1">Stephen Quake</h4>
+                  <p className="text-sm text-gray-600">Stanford Radiology</p>
                 </div>
               </div>
             </div>
@@ -850,6 +989,111 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Community Outreach Section */}
+      <section id="outreach" className="py-16 md:py-20 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Community Outreach</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We are committed to addressing health disparities and expanding access to early cancer detection in underserved communities.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                    <Users2 className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-3">Community Partnerships</h3>
+                  <p className="text-gray-600 mb-4">
+                    Collaborations with Stanford Cancer Institute's Office of Cancer Health Equity and community organizations like Baywell Health in Oakland, 
+                    serving the Black community for 50 years with lung cancer screening programs.
+                  </p>
+                  <div className="text-primary font-medium">Active Partnerships</div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+                    <MapPin className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-3">Federally Qualified Health Centers</h3>
+                  <p className="text-gray-600 mb-4">
+                    Expanding access through conversations with FQHCs to broaden screening criteria, including 20 years of smoking vs. 20 pack-years, 
+                    and including never-smokers with family history, especially in Asian populations.
+                  </p>
+                  <div className="text-primary font-medium">Expanding Access</div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="bg-white rounded-lg p-8">
+              <h3 className="text-2xl font-semibold text-dark mb-6 text-center">Innovative Access Solutions</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <div className="flex items-start space-x-4 mb-6">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-dark mb-2">Teal Health Partnership</h4>
+                      <p className="text-gray-600 text-sm">
+                        At-home self-collect cervical cancer screening with primary HPV testing, overcoming discomfort and access barriers. 
+                        Founded by Avnesh Thakor, with Joseph M. DeSimone on Board of Directors.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <Stethoscope className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-dark mb-2">Point-of-Care Ultrasound</h4>
+                      <p className="text-gray-600 text-sm">
+                        Developing low-cost, accessible POCUS tools for biomarker confirmation (CA-125 for ovarian, CA-19 for pancreatic cancers) 
+                        to improve detection in resource-limited settings.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex items-start space-x-4 mb-6">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-dark mb-2">Educational Barriers</h4>
+                      <p className="text-gray-600 text-sm">
+                        Addressing administrative and regulatory hurdles to preventive surgeries, such as fallopian tube removal during 
+                        non-gynecologic procedures to reduce ovarian cancer risk.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <HandHeart className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-dark mb-2">Compassionate Care</h4>
+                      <p className="text-gray-600 text-sm">
+                        Grant projects supporting innovative, early-stage efforts in compassion, justice, and sustainability 
+                        aligned with our cancer-focused mission.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -901,6 +1145,28 @@ export default function Home() {
                   <div>
                     <div className="font-semibold text-dark">Office Hours</div>
                     <div className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <h4 className="font-semibold text-dark mb-4">Financial Transparency</h4>
+                <div className="space-y-3 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span>501(c)(3) nonprofit organization</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span>Tax ID: 65-1230251</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span>Over $75 million raised historically</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <HandHeart className="w-4 h-4 text-primary" />
+                    <span>Donation options: Financial gifts, stock, AmazonSmile</span>
                   </div>
                 </div>
               </div>
