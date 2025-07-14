@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -14,23 +16,32 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  const navigateToHome = () => {
+    if (location !== "/") {
+      window.location.href = "/";
+    } else {
+      scrollToSection("home");
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <img 
               src={canaryLogo} 
               alt="Canary Foundation Logo" 
               className="w-10 h-10 object-contain"
             />
             <span className="text-xl font-bold text-dark">Canary Foundation</span>
-          </div>
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button 
-              onClick={() => scrollToSection("home")}
+              onClick={navigateToHome}
               className="text-dark hover:text-primary transition-colors duration-300"
             >
               Home
@@ -176,12 +187,12 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <button 
-              onClick={() => scrollToSection("news")}
+            <Link 
+              href="/blog"
               className="text-dark hover:text-primary transition-colors duration-300"
             >
               Blog
-            </button>
+            </Link>
             <Button 
               onClick={() => scrollToSection("contact")}
               className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold"
@@ -204,7 +215,7 @@ export default function Header() {
           <div className="md:hidden mt-4">
             <div className="flex flex-col space-y-4">
               <button 
-                onClick={() => scrollToSection("home")}
+                onClick={navigateToHome}
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
               >
                 Home
@@ -314,12 +325,13 @@ export default function Header() {
                   Funding by Invitation
                 </button>
               </div>
-              <button 
-                onClick={() => scrollToSection("news")}
+              <Link 
+                href="/blog"
                 className="text-dark hover:text-primary transition-colors duration-300 text-left"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Blog
-              </button>
+              </Link>
               <Button 
                 onClick={() => scrollToSection("contact")}
                 className="bg-primary text-white hover:bg-primary-dark w-full font-semibold"
