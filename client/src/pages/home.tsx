@@ -14,6 +14,7 @@ import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight } from "lucide-react";
+import BiomarkerGrid from "@/components/BiomarkerGrid";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -194,8 +195,9 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section id="home" className="bg-white py-12 md:py-20">
-        <div className="container mx-auto px-4">
+      <section id="home" className="relative bg-white py-12 md:py-20 overflow-hidden">
+        <BiomarkerGrid />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll" id="hero-content">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight animate-fadeIn">

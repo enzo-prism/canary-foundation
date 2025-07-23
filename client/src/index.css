@@ -74,6 +74,19 @@
     color: var(--dark);
   }
   
+  /* Biomarker Grid Animation Utilities */
+  .biomarker-pulse {
+    animation: biomarker-pulse 2s ease-in-out infinite;
+  }
+  
+  .biomarker-drift {
+    animation: biomarker-drift 16s ease-in-out infinite;
+  }
+  
+  .hero-text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -363,5 +376,57 @@
   .gpu-optimized-hover {
     transform: translateZ(0);
     will-change: transform, box-shadow;
+  }
+  
+  .gpu-optimized-hover:hover {
+    transform: translateZ(0) scale(1.05);
+  }
+  
+  /* Biomarker Grid Animations */
+  @keyframes biomarker-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes biomarker-drift {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(10px, -5px) rotate(1deg);
+    }
+    50% {
+      transform: translate(-5px, 10px) rotate(-1deg);
+    }
+    75% {
+      transform: translate(-10px, -5px) rotate(0.5deg);
+    }
+  }
+  
+  @keyframes signal-flow {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  .signal-flow {
+    animation: signal-flow 1.3s ease-in-out infinite;
   }
 }

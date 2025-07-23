@@ -1,0 +1,91 @@
+“Living Biomarker Grid” — Detailed Art-Direction Spec
+
+(Use this as a hand-off doc for motion designer / front-end dev.)
+
+⸻
+
+1 Overall Concept
+
+A translucent, slow-moving network of micro-nodes and hair-line connectors sits beneath the hero copy, evoking slides under a microscope. Intermittent yellow pulses race along random edges to suggest real-time signal detection. Everything is low-contrast, low-alpha, so the headline remains the undisputed focal point.
+
+⸻
+
+2 Canvas & Layering
+
+Layer	Z-index	Purpose	Motion
+L0 – White Base	0	Pure #FFFFFF page background.	Static
+L1 – Faint Static Grid	1	8 × 8 px dotted lattice (5 % gray #F2F2F2) covering full viewport. Anchors the eye, reduces emptiness on 4K screens.	None
+L2 – Dynamic Node Network	2	~600 nodes (2–3 px radius) + connectors (1 px stroke). Opacity 0.12.	Gentle drift + subtle parallax (0.4× scroll speed).
+L3 – Signal Pulses	3	4–6 concurrent pulses: 100 % yellow (#FAC72E → #F5B300) dashes that run 200–400 px along random connectors; 1.3 s duration.	Trigger every 2.5 s with slight randomness.
+L4 – Copy & CTAs	4	Hero text, buttons, stat card.	Fixed
+
+Note: Wrap L1-L3 inside one <canvas> (Three.js or Pixi) so GPU handles compositing; L4 stays in normal DOM for SEO + accessibility.
+
+⸻
+
+3 Visual Details
+	•	Nodes: Perfect circles, 2 px radius default; every 12th node at 3 px to add visual rhythm.
+Color: rgba(33, 33, 33, 0.15) (#212121 @ 15 % opacity).
+	•	Connectors: Straight lines; 1 px weight; same color as nodes. Avoid diagonal > 30° from horizontal to keep a “lab-grid” vibe.
+	•	Drift Animation: Each node group (12–20 nodes) travels within a 20 px radius “orbit” driven by simplex noise; cycle ≈ 16 s. Lines auto-stretch between node positions.
+	•	Parallax: Translate canvas on scroll = currentScrollY × 0.4. Prevents motion sickness yet adds depth.
+	•	Pulses:
+	•	Stroke-dasharray equals connector length; animate dash-offset from 0 → –length.
+	•	Color tween: start #FAC72E @ 100 % → finish #FFCE40 @ 0 % opacity.
+	•	Glow: apply filter: drop-shadow(0 0 4px rgba(250,199,46,0.6));.
+
+⸻
+
+4 Color Palette & Contrast
+
+Token	Hex	Usage
+brand-yellow	#FAC72E	Pulses, primary CTAs
+brand-yellow-dark	#E8AF00	Hover states / pulse midpoint
+graphite	#212121 @ 15 %-25 % opacity	Nodes & lines
+neutral-grid	#F2F2F2	Dotted background
+Maintain ≥ 4.5:1 contrast for all copy by ensuring pulses never overlap the left 45 % of the hero (use a transparent gradient mask).		
+
+
+⸻
+
+5 Responsiveness & Fallbacks
+
+Breakpoint	Adjustment
+≥ 1280 px	Render full grid (600 nodes).
+768–1279 px	Halve node count, slower drift, pulses limited to 3 concurrent.
+< 768 px	Replace canvas with a 140 KB WebP: single frame of grid + faint yellow pulse; re-enable full animation only if window.devicePixelRatio > 2 & prefers-reduced-motion: no-preference.
+
+
+⸻
+
+6 Performance Guardrails
+	1.	Cap render loop at 30 FPS.
+	2.	Offload vertex updates to a Web Worker; main thread only handles uniform time & scroll offset.
+	3.	Pause requestAnimationFrame if document.visibilityState === 'hidden'.
+	4.	Keep total compressed JS + texture payload ≤ 120 KB.
+
+⸻
+
+7 Accessibility
+	•	Respect prefers-reduced-motion: reduce → render L1 static dot grid only.
+	•	<canvas aria-hidden="true">; provide alternative description in hero <h1> for screen-readers.
+	•	Ensure pulses never flash faster than 3 Hz (WCAG seizure safe).
+
+⸻
+
+8 Micro-Interactions (Optional Polish)
+	•	Hover on CTA: Ripple a single pulse outward from the button into the grid (trigger programmatically along nearest connectors).
+	•	Hover on Stat Card: Brief brightness bump (+15 % luminance) across the entire canvas for 200 ms, like “spotlight on discovery.”
+
+⸻
+
+TL;DR Build Checklist
+	•	Establish dot grid texture (static)
+	•	Generate noise-driven node positions (seeded per load)
+	•	Connect nodes ≤ 160 px apart with lines
+	•	Implement drift & parallax
+	•	Spawn randomized yellow pulses
+	•	Mask left 45 % to guarantee text legibility
+	•	Performance + accessibility toggles
+
+Hand this spec to your motion/front-end collaborator and you’ll get a classy, science-infused hero that stays performant and on-brand. Ping me when you’re ready for the code scaffold or a CodePen starter!
