@@ -19,6 +19,7 @@ import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
 import canaryBooth from "@assets/Canary Challenge Booth_1752514185862.webp";
 import canaryBiker from "@assets/Canary Challenge Biker_1752514185863.webp";
+import canaryAnimatedVideo from "@assets/canary foundation animated video_1753284730466.mp4";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -407,6 +408,39 @@ export default function Home() {
                   <span>Scroll to explore timeline</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Logo Video Section */}
+      <section className="py-12 md:py-16 bg-gradient-to-b from-light to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white p-8 md:p-12">
+              <div className="aspect-video w-full max-w-2xl mx-auto">
+                <video
+                  src={canaryAnimatedVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-contain rounded-lg"
+                  style={{
+                    maxHeight: '400px',
+                    objectFit: 'contain'
+                  }}
+                >
+                  <source src={canaryAnimatedVideo} type="video/mp4" />
+                  Your browser does not support the video element.
+                </video>
+              </div>
+              
+              <div className="mt-6">
+                <p className="text-gray-600 text-sm md:text-base">
+                  Advancing early cancer detection through innovative research and collaboration
+                </p>
               </div>
             </div>
           </div>
