@@ -82,7 +82,7 @@ Preferred communication style: Simple, everyday language.
 - Leadership section featuring key personnel and Scientific Advisory Board
 - Community outreach section highlighting health disparities initiatives
 - Dedicated Financials section separate from Contact with enhanced transparency
-- "Our Community in Action" photo gallery showcasing foundation supporters
+- "Our Community Legacy" photo gallery showcasing historic foundation supporters and past fundraising events
 - Animated Canary Foundation logo video positioned between timeline and mission
 - Hero section simplified with innovation highlight instead of image slider
 - GPU-accelerated animations with scroll-triggered effects throughout the site

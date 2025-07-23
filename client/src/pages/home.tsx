@@ -114,28 +114,28 @@ export default function Home() {
   const heroImages = [
     {
       src: canaryChallengeLogo,
-      alt: "Canary Challenge logo featuring stylized cyclist figures with yellow canary bird",
-      title: "Annual Fundraiser"
+      alt: "Historic Canary Challenge logo from past cycling fundraiser events featuring stylized cyclist figures with yellow canary bird",
+      title: "Past Fundraising Events"
     },
     {
       src: canaryFinishLine,
-      alt: "Canary Challenge finish line with volunteers celebrating community involvement",
-      title: "Canary Challenge Finish Line"
+      alt: "Historic photo from Canary Challenge finish line showing volunteers celebrating community involvement in past fundraising events",
+      title: "Historic Challenge Events"
     },
     {
       src: canaryVolunteers,
-      alt: "Canary Challenge volunteers in bright yellow shirts supporting the event",
-      title: "Community Volunteers"
+      alt: "Historic photo of Canary Challenge volunteers in signature yellow shirts from past community fundraising events",
+      title: "Dedicated Volunteers"
     },
     {
       src: canaryBooth,
-      alt: "Canary Foundation booth with volunteers helping participants during the challenge",
-      title: "Check-In & Support"
+      alt: "Historic photo of Canary Foundation booth with volunteers supporting participants during past challenge events",
+      title: "Community Support"
     },
     {
       src: canaryBiker,
-      alt: "Canary Challenge cyclist in yellow jersey participating in the fundraising ride",
-      title: "Challenge Participant"
+      alt: "Historic photo of Canary Challenge cyclist in yellow jersey from past fundraising cycling events",
+      title: "Community Participants"
     }
   ];
   
@@ -935,9 +935,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Community in Action</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Community Legacy</h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                See how our dedicated supporters and volunteers make breakthrough cancer research possible through community engagement and philanthropy.
+                Celebrating the dedicated supporters and volunteers who have made breakthrough cancer research possible through years of community engagement and philanthropy.
               </p>
             </div>
             
@@ -963,11 +963,11 @@ export default function Home() {
                         <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4">
                           <h3 className="text-xl md:text-2xl font-bold mb-2">{image.title}</h3>
                           <p className="text-white/90 text-sm md:text-base">
-                            {index === 0 && "Join our annual cycling fundraiser that brings together the community to support early cancer detection research."}
-                            {index === 1 && "Celebrating achievements with our dedicated volunteers who make every event successful."}
-                            {index === 2 && "Our passionate volunteers in signature yellow shirts represent hope and determination in the fight against cancer."}
-                            {index === 3 && "Event coordination and participant support showcase the organizational excellence of our team."}
-                            {index === 4 && "Individual supporters like this cyclist embody the personal commitment to advancing cancer research."}
+                            {index === 0 && "Historic fundraising events like the Canary Challenge brought together our community to support early cancer detection research through cycling and community engagement."}
+                            {index === 1 && "Celebrating the achievements of our dedicated volunteers who made past community events successful and impactful."}
+                            {index === 2 && "Our passionate volunteers in signature yellow shirts have long represented hope and determination in the fight against cancer."}
+                            {index === 3 && "Past event coordination and participant support showcased the organizational excellence and community spirit of our team."}
+                            {index === 4 && "Individual supporters who participated in past fundraising events embody the personal commitment to advancing cancer research."}
                           </p>
                         </div>
                       </div>
@@ -1024,7 +1024,7 @@ export default function Home() {
             {/* Call to Action */}
             <div className="text-center mt-12">
               <p className="text-gray-600 mb-6">
-                Join our community of supporters making a difference in cancer research
+                Continue the legacy of community support that makes a difference in cancer research
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
