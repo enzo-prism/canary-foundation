@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight } from "lucide-react";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -313,7 +313,7 @@ export default function Home() {
       {/* Interactive Timeline */}
       <section id="timeline" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Journey</h2>
               <p className="text-lg text-gray-600 leading-relaxed">
@@ -321,86 +321,92 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Timeline Container */}
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-10 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary to-primary opacity-30"></div>
-              
-              {/* Timeline Items */}
-              <div className="space-y-8 md:space-y-12">
-                {timelineEvents.map((event, index) => {
-                  const isLeft = index % 2 === 0;
-                  const isSelected = selectedTimelineItem === index;
-                  const IconComponent = event.icon;
-                  
-                  const getCategoryStyle = (category: string) => {
-                    switch (category) {
-                      case "founding": return { bg: "bg-gray-600", text: "text-gray-600" };
-                      case "research": return { bg: "bg-gray-500", text: "text-gray-500" };
-                      case "milestone": return { bg: "bg-primary", text: "text-primary" };
-                      case "breakthrough": return { bg: "bg-primary", text: "text-primary" };
-                      case "memorial": return { bg: "bg-gray-400", text: "text-gray-400" };
-                      case "future": return { bg: "bg-gray-700", text: "text-gray-700" };
-                      default: return { bg: "bg-primary", text: "text-primary" };
-                    }
-                  };
-                  
-                  const categoryStyle = getCategoryStyle(event.category);
-                  
-                  return (
-                    <div
-                      key={index}
-                      className={`relative flex items-center ${
-                        isLeft ? 'md:justify-start' : 'md:justify-end'
-                      }`}
-                    >
-                      {/* Timeline Dot with Icon */}
+            {/* Horizontal Timeline Container */}
+            <div className="relative overflow-x-auto pb-8">
+              {/* Horizontal Timeline Line */}
+              <div className="relative min-w-max">
+                <div className="absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-gray-200 via-primary to-gray-200 opacity-30"></div>
+                
+                {/* Timeline Items Grid */}
+                <div className="flex space-x-8 min-w-max px-4">
+                  {timelineEvents.map((event, index) => {
+                    const isSelected = selectedTimelineItem === index;
+                    const IconComponent = event.icon;
+                    
+                    const getCategoryStyle = (category: string) => {
+                      switch (category) {
+                        case "founding": return { bg: "bg-gray-600", text: "text-gray-600", border: "border-gray-600" };
+                        case "research": return { bg: "bg-gray-500", text: "text-gray-500", border: "border-gray-500" };
+                        case "milestone": return { bg: "bg-primary", text: "text-primary", border: "border-primary" };
+                        case "breakthrough": return { bg: "bg-primary", text: "text-primary", border: "border-primary" };
+                        case "memorial": return { bg: "bg-gray-400", text: "text-gray-400", border: "border-gray-400" };
+                        case "future": return { bg: "bg-gray-700", text: "text-gray-700", border: "border-gray-700" };
+                        default: return { bg: "bg-primary", text: "text-primary", border: "border-primary" };
+                      }
+                    };
+                    
+                    const categoryStyle = getCategoryStyle(event.category);
+                    
+                    return (
                       <div
-                        className={`absolute left-4 md:left-1/2 md:-translate-x-1/2 w-12 h-12 rounded-full border-4 border-white shadow-lg transition-all duration-300 ${
-                          categoryStyle.bg
-                        } ${isSelected ? 'scale-110' : 'hover:scale-105'} flex items-center justify-center`}
+                        key={index}
+                        className="flex-shrink-0 relative"
+                        style={{ width: '280px' }}
                       >
-                        <IconComponent className="w-5 h-5 text-white" />
-                      </div>
-                      
-                      {/* Content Card */}
-                      <div
-                        className={`ml-20 md:ml-0 ${
-                          isLeft ? 'md:pr-8' : 'md:pl-8'
-                        } ${isLeft ? 'md:mr-1/2' : 'md:ml-1/2'} w-full md:w-5/12`}
-                      >
+                        {/* Timeline Dot with Icon */}
+                        <div
+                          className={`relative mx-auto w-12 h-12 rounded-full border-4 border-white shadow-lg transition-all duration-300 ${
+                            categoryStyle.bg
+                          } ${isSelected ? 'scale-110' : 'hover:scale-105'} flex items-center justify-center cursor-pointer z-10`}
+                          onClick={() => setSelectedTimelineItem(isSelected ? null : index)}
+                        >
+                          <IconComponent className="w-5 h-5 text-white" />
+                        </div>
+                        
+                        {/* Year Label */}
+                        <div className={`text-center mt-4 mb-3 text-xl font-bold ${categoryStyle.text}`}>
+                          {event.year}
+                        </div>
+                        
+                        {/* Content Card */}
                         <Card
-                          className={`bg-white hover:shadow-lg transition-all duration-300 cursor-pointer ${
-                            isSelected ? 'ring-2 ring-primary shadow-lg' : ''
+                          className={`bg-white hover:shadow-lg transition-all duration-300 cursor-pointer h-48 ${
+                            isSelected ? `ring-2 ${categoryStyle.border} shadow-lg` : ''
                           }`}
                           onClick={() => setSelectedTimelineItem(isSelected ? null : index)}
                         >
-                          <CardContent className="p-6">
-                            <div className="flex items-start justify-between mb-3">
-                              <div className={`text-2xl font-bold ${categoryStyle.text}`}>
-                                {event.year}
-                              </div>
-                              <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${categoryStyle.bg}`}>
+                          <CardContent className="p-4 h-full flex flex-col">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className={`px-2 py-1 rounded-full text-xs font-semibold text-white ${categoryStyle.bg}`}>
                                 {event.category}
                               </div>
                             </div>
-                            <h3 className="text-lg font-semibold text-dark mb-2">{event.title}</h3>
-                            <p className={`text-gray-600 text-sm transition-all duration-300 ${
-                              isSelected ? 'line-clamp-none' : 'line-clamp-2'
+                            <h3 className="text-sm font-semibold text-dark mb-2 line-clamp-2">{event.title}</h3>
+                            <p className={`text-gray-600 text-xs flex-1 transition-all duration-300 ${
+                              isSelected ? 'line-clamp-none overflow-auto' : 'line-clamp-4'
                             }`}>
                               {event.description}
                             </p>
                             {expandableItems.has(index) && (
-                              <button className="text-primary hover:text-primary-dark text-sm font-medium mt-2 transition-colors">
+                              <button className="text-primary hover:text-primary-dark text-xs font-medium mt-2 transition-colors self-start">
                                 {isSelected ? 'Show Less' : 'Read More'}
                               </button>
                             )}
                           </CardContent>
                         </Card>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+              </div>
+              
+              {/* Mobile scroll hint */}
+              <div className="flex justify-center mt-6 md:hidden">
+                <div className="flex items-center text-gray-500 text-sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <span>Scroll to explore timeline</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </div>
               </div>
             </div>
           </div>
