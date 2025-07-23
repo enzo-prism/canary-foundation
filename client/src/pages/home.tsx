@@ -907,7 +907,8 @@ export default function Home() {
             
             {/* Interactive Photo Gallery */}
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl shadow-xl">
+              {/* Image Container */}
+              <div className="overflow-hidden rounded-2xl shadow-xl bg-white">
                 <div 
                   className="flex transition-transform duration-500 ease-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -917,24 +918,11 @@ export default function Home() {
                       <img 
                         src={image.src}
                         alt={image.alt}
-                        className={`w-full h-64 sm:h-80 md:h-96 lg:h-[32rem] transition-transform duration-300 group-hover:scale-105 ${
+                        className={`w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] object-cover transition-transform duration-300 group-hover:scale-105 ${
                           index === 0 ? 'object-cover' : 
                           index === 4 ? 'object-cover object-top' : 'object-cover'
                         }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4">
-                          <h3 className="text-xl md:text-2xl font-bold mb-2">{image.title}</h3>
-                          <p className="text-white/90 text-sm md:text-base">
-                            {index === 0 && "Historic fundraising events like the Canary Challenge brought together our community to support early cancer detection research through cycling and community engagement."}
-                            {index === 1 && "Celebrating the achievements of our dedicated volunteers who made past community events successful and impactful."}
-                            {index === 2 && "Our passionate volunteers in signature yellow shirts have long represented hope and determination in the fight against cancer."}
-                            {index === 3 && "Past event coordination and participant support showcased the organizational excellence and community spirit of our team."}
-                            {index === 4 && "Individual supporters who participated in past fundraising events embody the personal commitment to advancing cancer research."}
-                          </p>
-                        </div>
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -954,6 +942,22 @@ export default function Home() {
                 >
                   <ChevronRight className="w-5 h-5 text-gray-700" />
                 </button>
+                
+                {/* Caption Container Below Image */}
+                <div className="bg-white p-6 border-t border-gray-100">
+                  <div className="text-center">
+                    <h3 className="text-xl md:text-2xl font-bold text-dark mb-3">
+                      {heroImages[currentSlide]?.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-4xl mx-auto">
+                      {currentSlide === 0 && "Historic fundraising events like the Canary Challenge brought together our community to support early cancer detection research through cycling and community engagement."}
+                      {currentSlide === 1 && "Celebrating the achievements of our dedicated volunteers who made past community events successful and impactful."}
+                      {currentSlide === 2 && "Our passionate volunteers in signature yellow shirts have long represented hope and determination in the fight against cancer."}
+                      {currentSlide === 3 && "Past event coordination and participant support showcased the organizational excellence and community spirit of our team."}
+                      {currentSlide === 4 && "Individual supporters who participated in past fundraising events embody the personal commitment to advancing cancer research."}
+                    </p>
+                  </div>
+                </div>
               </div>
               
               {/* Enhanced dots indicator */}
