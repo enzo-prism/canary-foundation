@@ -39,7 +39,6 @@ const BiomarkerGrid: React.FC = () => {
       ref={containerRef}
       className="absolute inset-0 overflow-hidden"
       style={{ 
-        clipPath: 'polygon(0 0, 60% 0, 60% 100%, 0 100%)', // Mask left 60% for text legibility
         transform: `translateY(${scrollY * 0.3}px)`,
       }}
       aria-hidden="true"
@@ -160,8 +159,7 @@ const BiomarkerGrid: React.FC = () => {
       
       {/* Overlay gradient for text legibility */}
       <div 
-        className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-transparent"
-        style={{ width: '50%' }}
+        className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/40"
       />
     </div>
   );

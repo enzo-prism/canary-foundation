@@ -198,24 +198,24 @@ export default function Home() {
       <section id="home" className="relative bg-white py-12 md:py-20 overflow-hidden">
         <BiomarkerGrid />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="animate-on-scroll" id="hero-content">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight animate-fadeIn">
+              <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-dark mb-8 leading-tight animate-fadeIn">
                 Advancing <span className="text-primary animate-text-glow">Early Cancer Detection</span> Through Innovation
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed animate-slideUp animate-stagger-1">
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed animate-slideUp animate-stagger-1 max-w-3xl mx-auto">
                 The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-bounceIn animate-stagger-2">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center animate-bounceIn animate-stagger-2">
                 <Button 
-                  className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer"
+                  className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer px-8 py-4 text-lg"
                   onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
                 >
                   Support Research
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer"
+                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold animate-shimmer px-8 py-4 text-lg"
                   onClick={() => {
                     const element = document.getElementById('programs');
                     if (element) {
@@ -225,17 +225,6 @@ export default function Home() {
                 >
                   Our Programs
                 </Button>
-              </div>
-            </div>
-            <div className="relative animate-on-scroll animate-scaleIn animate-stagger-3" id="hero-visual">
-              <div className="bg-gradient-to-br from-primary to-yellow-400 rounded-2xl shadow-xl p-8 md:p-12 text-white text-center">
-                <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Star className="w-12 h-12 text-white" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">20+ Years of Innovation</h2>
-                <p className="text-white/90 text-lg">
-                  Leading breakthrough discoveries in early cancer detection since 2004
-                </p>
               </div>
             </div>
           </div>
