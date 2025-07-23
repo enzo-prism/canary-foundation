@@ -95,7 +95,7 @@ export default function Header() {
                     Scientific Leadership
                   </button>
                   <button 
-                    onClick={() => scrollToSection("contact")}
+                    onClick={() => scrollToSection("financials")}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
                     Financials
@@ -259,7 +259,7 @@ export default function Header() {
                   Scientific Leadership
                 </button>
                 <button 
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => scrollToSection("financials")}
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left"
                 >
                   Financials
