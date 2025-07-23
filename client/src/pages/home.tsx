@@ -908,37 +908,38 @@ export default function Home() {
             {/* Interactive Photo Gallery */}
             <div className="relative">
               {/* Image Container */}
-              <div className="overflow-hidden rounded-2xl shadow-xl bg-white">
+              <div className="rounded-2xl shadow-xl bg-white overflow-hidden">
                 <div 
                   className="flex transition-transform duration-500 ease-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {heroImages.map((image, index) => (
                     <div key={index} className="w-full flex-shrink-0 relative group">
-                      <img 
-                        src={image.src}
-                        alt={image.alt}
-                        className={`w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] object-cover transition-transform duration-300 group-hover:scale-105 ${
-                          index === 0 ? 'object-cover' : 
-                          index === 4 ? 'object-cover object-top' : 'object-cover'
-                        }`}
-                      />
+                      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                        <img 
+                          src={image.src}
+                          alt={image.alt}
+                          className="absolute inset-0 w-full h-full object-contain bg-gray-50 transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
                 
-                {/* Navigation buttons */}
+                {/* Navigation buttons - positioned relative to image area */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 z-10"
                   aria-label="Previous photo"
+                  style={{ top: 'calc(28.125% - 24px)' }}
                 >
                   <ChevronLeft className="w-5 h-5 text-gray-700" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 z-10"
                   aria-label="Next photo"
+                  style={{ top: 'calc(28.125% - 24px)' }}
                 >
                   <ChevronRight className="w-5 h-5 text-gray-700" />
                 </button>
