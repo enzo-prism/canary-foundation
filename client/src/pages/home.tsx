@@ -419,22 +419,23 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white p-8 md:p-12">
-              <div className="aspect-video w-full max-w-2xl mx-auto">
-                <video
-                  src={canaryAnimatedVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-contain rounded-lg"
-                  style={{
-                    maxHeight: '400px',
-                    objectFit: 'contain'
-                  }}
-                >
-                  <source src={canaryAnimatedVideo} type="video/mp4" />
-                  Your browser does not support the video element.
-                </video>
+              <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto relative">
+                <div className="absolute inset-0 rounded-full overflow-hidden shadow-lg border-4 border-primary/10">
+                  <video
+                    src={canaryAnimatedVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                    style={{
+                      objectFit: 'cover'
+                    }}
+                  >
+                    <source src={canaryAnimatedVideo} type="video/mp4" />
+                    Your browser does not support the video element.
+                  </video>
+                </div>
               </div>
               
               <div className="mt-6">
