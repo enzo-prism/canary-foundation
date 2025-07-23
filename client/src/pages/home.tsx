@@ -462,10 +462,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Prostate Cancer Program</h3>
-                <p className="text-gray-600 mb-4">Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).</p>
               </CardContent>
             </Card>
             
@@ -475,10 +472,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Ovarian Cancer Program</h3>
-                <p className="text-gray-600 mb-4">Focused on high-grade serous carcinoma origins in fallopian tubes. BRCA pre-cancer atlas with multi-omics data and STIC registry for early detection breakthroughs.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Focused on high-grade serous carcinoma origins in fallopian tubes. BRCA pre-cancer atlas with multi-omics data and STIC registry for early detection breakthroughs.</p>
               </CardContent>
             </Card>
             
@@ -488,10 +482,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Ultrasound Imaging Program</h3>
-                <p className="text-gray-600 mb-4">Point-of-care ultrasound (POCUS) technology for pancreatic cancer screening. Developing contrast-enhanced imaging with microbubbles and molecular imaging solutions.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Point-of-care ultrasound (POCUS) technology for pancreatic cancer screening. Developing contrast-enhanced imaging with microbubbles and molecular imaging solutions.</p>
               </CardContent>
             </Card>
             
@@ -501,10 +492,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Liquid Biopsy Center</h3>
-                <p className="text-gray-600 mb-4">Breakthrough research in urine, interstitial fluid, and exosome analysis with microneedle patch technology.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Breakthrough research in urine, interstitial fluid, and exosome analysis with microneedle patch technology.</p>
               </CardContent>
             </Card>
             
@@ -514,10 +502,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Molecular Imaging</h3>
-                <p className="text-gray-600 mb-4">Cutting-edge imaging technologies including photoacoustic imaging and microbubble contrast agents.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Cutting-edge imaging technologies including photoacoustic imaging and microbubble contrast agents.</p>
               </CardContent>
             </Card>
             
@@ -527,10 +512,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Education & Training</h3>
-                <p className="text-gray-600 mb-4">NCI R25 CREST program, Phillips Postdoc Fellowship, and cancer research education initiatives.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">NCI R25 CREST program, Phillips Postdoc Fellowship, and cancer research education initiatives.</p>
               </CardContent>
             </Card>
             
@@ -540,10 +522,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Cyclotron & Radiochemistry</h3>
-                <p className="text-gray-600 mb-4">Generates clinically approved radiotracers (36+ under FDA) supporting preclinical research and radiation safety education.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Generates clinically approved radiotracers (36+ under FDA) supporting preclinical research and radiation safety education.</p>
               </CardContent>
             </Card>
             
@@ -553,10 +532,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Interventional Radiology</h3>
-                <p className="text-gray-600 mb-4">IRIS center projects including endovascular neuromodulation, stem cell implantation, and pediatric biodegradable stents.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">IRIS center projects including endovascular neuromodulation, stem cell implantation, and pediatric biodegradable stents.</p>
               </CardContent>
             </Card>
             
@@ -566,10 +542,7 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Lung Cancer Program</h3>
-                <p className="text-gray-600 mb-4">Biomarkers for high-risk never-smokers, national screening trials with MD Anderson, and community outreach programs.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Learn More →
-                </Button>
+                <p className="text-gray-600">Biomarkers for high-risk never-smokers, national screening trials with MD Anderson, and community outreach programs.</p>
               </CardContent>
             </Card>
           </div>
@@ -1197,8 +1170,12 @@ export default function Home() {
                     <p className="text-gray-600 mb-4">
                       Annual gathering of researchers and clinicians to share latest findings in biomarker development and imaging.
                     </p>
-                    <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                      Visit Symposium Site →
+                    <Button 
+                      variant="link" 
+                      className="text-primary hover:text-primary-dark font-semibold p-0"
+                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                    >
+                      Support Research →
                     </Button>
                   </div>
                 </div>
@@ -1233,8 +1210,12 @@ export default function Home() {
                     <p className="text-gray-600 mb-4">
                       NCI R25 CREST summer training program and fellowship opportunities for emerging researchers.
                     </p>
-                    <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                      Apply Now →
+                    <Button 
+                      variant="link" 
+                      className="text-primary hover:text-primary-dark font-semibold p-0"
+                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                    >
+                      Support Research →
                     </Button>
                   </div>
                 </div>
@@ -1262,7 +1243,10 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Fund Research</h3>
                 <p className="text-gray-600 mb-6">Your support accelerates breakthrough discoveries in cancer detection and treatment.</p>
-                <Button className="bg-primary text-white hover:bg-primary-dark">
+                <Button 
+                  className="bg-primary text-white hover:bg-primary-dark"
+                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                >
                   Donate Now
                 </Button>
               </CardContent>
@@ -1275,8 +1259,11 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Join Our Team</h3>
                 <p className="text-gray-600 mb-6">Explore fellowship opportunities and contribute to cutting-edge cancer research.</p>
-                <Button className="bg-primary text-white hover:bg-primary-dark">
-                  Apply Now
+                <Button 
+                  className="bg-primary text-white hover:bg-primary-dark"
+                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                >
+                  Support Research
                 </Button>
               </CardContent>
             </Card>
@@ -1288,8 +1275,11 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Partner With Us</h3>
                 <p className="text-gray-600 mb-6">Collaborate with us to advance cancer detection technologies and improve patient outcomes.</p>
-                <Button className="bg-primary text-white hover:bg-primary-dark">
-                  Partner
+                <Button 
+                  className="bg-primary text-white hover:bg-primary-dark"
+                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                >
+                  Support Research
                 </Button>
               </CardContent>
             </Card>

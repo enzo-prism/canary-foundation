@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
 export default function Footer() {
@@ -22,23 +22,9 @@ export default function Footer() {
               />
               <span className="text-xl font-bold">Canary Foundation</span>
             </div>
-            <p className="text-gray-300 mb-6">
+            <p className="text-gray-300">
               Advancing early cancer detection through innovative research, biomarker development, and precision medicine approaches since 2004.
             </p>
-            <div className="flex space-x-4">
-              <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
-                <Facebook className="w-5 h-5" />
-              </button>
-              <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
-                <Twitter className="w-5 h-5" />
-              </button>
-              <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
-                <Instagram className="w-5 h-5" />
-              </button>
-              <button className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors duration-300">
-                <Linkedin className="w-5 h-5" />
-              </button>
-            </div>
           </div>
           
           <div>
