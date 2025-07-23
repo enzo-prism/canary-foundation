@@ -132,8 +132,8 @@ const BiomarkerGrid: React.FC = () => {
               strokeDasharray="20 60"
               className="signal-flow"
               style={{ 
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${1.5 + i * 0.2}s`,
+                animationDelay: `${i * 1.5}s`,
+                animationDuration: `${4.5 + i * 0.6}s`,
               }}
             />
           ))}
