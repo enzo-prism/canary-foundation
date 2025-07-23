@@ -225,62 +225,15 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className="relative animate-on-scroll animate-scaleIn animate-stagger-3" id="hero-slider">
-              {/* Image Slider */}
-              <div className="relative overflow-hidden rounded-2xl shadow-xl animate-pulse-glow">
-                <div 
-                  className="flex transition-transform duration-500 ease-out gpu-optimized"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {heroImages.map((image, index) => (
-                    <div key={index} className="w-full flex-shrink-0 relative group">
-                      <img 
-                        src={image.src}
-                        alt={image.alt}
-                        className={`w-full h-64 sm:h-80 md:h-96 transition-transform duration-300 group-hover:scale-105 gpu-optimized ${
-                          index === 0 ? 'object-cover' : 
-                          index === 4 ? 'object-cover object-top' : 'object-cover'
-                        }`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-white">
-                        <div className="text-sm sm:text-base font-medium bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm animate-float">
-                          {image.title}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+            <div className="relative animate-on-scroll animate-scaleIn animate-stagger-3" id="hero-visual">
+              <div className="bg-gradient-to-br from-primary to-yellow-400 rounded-2xl shadow-xl p-8 md:p-12 text-white text-center">
+                <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Star className="w-12 h-12 text-white" />
                 </div>
-                
-                {/* Navigation buttons */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 animate-pulse-glow gpu-optimized-hover"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 animate-icon-spin" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 animate-pulse-glow gpu-optimized-hover"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 animate-icon-spin" />
-                </button>
-              </div>
-              
-              {/* Dots indicator */}
-              <div className="flex justify-center mt-4 space-x-2">
-                {heroImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentSlide ? 'bg-primary w-6' : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">20+ Years of Innovation</h2>
+                <p className="text-white/90 text-lg">
+                  Leading breakthrough discoveries in early cancer detection since 2004
+                </p>
               </div>
             </div>
           </div>
@@ -971,6 +924,127 @@ export default function Home() {
                   <h4 className="font-semibold text-dark mb-1">Stephen Quake</h4>
                   <p className="text-sm text-gray-600">Stanford Radiology</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Photos of Canary Foundation Supporters */}
+      <section className="py-16 md:py-20 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Community in Action</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                See how our dedicated supporters and volunteers make breakthrough cancer research possible through community engagement and philanthropy.
+              </p>
+            </div>
+            
+            {/* Interactive Photo Gallery */}
+            <div className="relative">
+              <div className="overflow-hidden rounded-2xl shadow-xl">
+                <div 
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {heroImages.map((image, index) => (
+                    <div key={index} className="w-full flex-shrink-0 relative group">
+                      <img 
+                        src={image.src}
+                        alt={image.alt}
+                        className={`w-full h-64 sm:h-80 md:h-96 lg:h-[32rem] transition-transform duration-300 group-hover:scale-105 ${
+                          index === 0 ? 'object-cover' : 
+                          index === 4 ? 'object-cover object-top' : 'object-cover'
+                        }`}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <div className="absolute bottom-6 left-6 right-6 text-white">
+                        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4">
+                          <h3 className="text-xl md:text-2xl font-bold mb-2">{image.title}</h3>
+                          <p className="text-white/90 text-sm md:text-base">
+                            {index === 0 && "Join our annual cycling fundraiser that brings together the community to support early cancer detection research."}
+                            {index === 1 && "Celebrating achievements with our dedicated volunteers who make every event successful."}
+                            {index === 2 && "Our passionate volunteers in signature yellow shirts represent hope and determination in the fight against cancer."}
+                            {index === 3 && "Event coordination and participant support showcase the organizational excellence of our team."}
+                            {index === 4 && "Individual supporters like this cyclist embody the personal commitment to advancing cancer research."}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Navigation buttons */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-700" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-700" />
+                </button>
+              </div>
+              
+              {/* Enhanced dots indicator */}
+              <div className="flex justify-center mt-6 space-x-3">
+                {heroImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`group transition-all duration-300 ${
+                      index === currentSlide ? 'scale-110' : 'hover:scale-105'
+                    }`}
+                    aria-label={`View ${image.title}`}
+                  >
+                    <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? 'bg-primary scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                    }`} />
+                    <div className="text-xs text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      {image.title}
+                    </div>
+                  </button>
+                ))}
+              </div>
+              
+              {/* Photo count indicator */}
+              <div className="text-center mt-4">
+                <span className="text-sm text-gray-500">
+                  {currentSlide + 1} of {heroImages.length}
+                </span>
+              </div>
+            </div>
+            
+            {/* Call to Action */}
+            <div className="text-center mt-12">
+              <p className="text-gray-600 mb-6">
+                Join our community of supporters making a difference in cancer research
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  className="bg-primary text-white hover:bg-primary-dark font-semibold"
+                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                >
+                  Support Our Mission
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                  onClick={() => {
+                    const element = document.getElementById('contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Get Involved
+                </Button>
               </div>
             </div>
           </div>

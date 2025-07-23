@@ -78,11 +78,14 @@ Preferred communication style: Simple, everyday language.
 - Three years of continuous EDx conference coverage (2022: sold-out, 2023: London with 500 attendees, 2024: San Francisco)
 - News & Blog section with recent awards and research updates
 - Events section covering conferences, symposiums, and training programs
-- Comprehensive timeline with 18+ authentic milestones (2000-2024)
+- Comprehensive horizontal timeline with 24+ authentic milestones (2000-2024)
 - Leadership section featuring key personnel and Scientific Advisory Board
 - Community outreach section highlighting health disparities initiatives
-- Financial transparency information with nonprofit status and funding history
-- GPU-accelerated animations with scroll-triggered effects
+- Dedicated Financials section separate from Contact with enhanced transparency
+- "Our Community in Action" photo gallery showcasing foundation supporters
+- Animated Canary Foundation logo video positioned between timeline and mission
+- Hero section simplified with innovation highlight instead of image slider
+- GPU-accelerated animations with scroll-triggered effects throughout the site
 
 ### Storage Layer
 - In-memory storage implementation for development (`MemStorage`)
