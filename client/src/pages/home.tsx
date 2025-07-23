@@ -1302,6 +1302,177 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Financials Section */}
+      <section id="financials" className="py-16 md:py-20 bg-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Financial Transparency</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We are committed to transparency and responsible stewardship of every donation. 
+                See how your contributions directly support breakthrough cancer research.
+              </p>
+            </div>
+            
+            <div className="grid lg:grid-cols-3 gap-8 mb-12">
+              {/* Nonprofit Information */}
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                    <Shield className="text-white text-2xl" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-4">Nonprofit Status</h3>
+                  <div className="space-y-3 text-gray-600">
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-4 h-4 text-primary" />
+                      <span>501(c)(3) nonprofit organization</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-4 h-4 text-primary" />
+                      <span>Tax ID: 65-1230251</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-4 h-4 text-primary" />
+                      <span>Over $75 million raised historically</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              {/* Donation Options */}
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                    <HandHeart className="text-white text-2xl" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-4">Ways to Give</h3>
+                  <div className="space-y-3 text-gray-600">
+                    <div className="flex items-center space-x-2">
+                      <HandHeart className="w-4 h-4 text-primary" />
+                      <span>Financial gifts</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <HandHeart className="w-4 h-4 text-primary" />
+                      <span>Stock donations</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <HandHeart className="w-4 h-4 text-primary" />
+                      <span>AmazonSmile contributions</span>
+                    </div>
+                  </div>
+                  <Button 
+                    className="bg-primary text-white hover:bg-primary-dark mt-6 w-full"
+                    onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  >
+                    Donate Now
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              {/* Impact Overview */}
+              <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                    <TrendingUp className="text-white text-2xl" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-dark mb-4">Research Impact</h3>
+                  <div className="space-y-3 text-gray-600">
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                      <span>91% goes to scientific programs</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                      <span>Only 12.6¢ cost per $1 raised</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                      <span>Direct impact on cancer detection</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Detailed Financial Performance */}
+            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-primary to-yellow-400 p-8 text-white">
+                <h3 className="font-bold text-3xl mb-3">2020 Financial Performance</h3>
+                <p className="text-yellow-50 opacity-90 text-lg">
+                  Transparent stewardship of your donations with detailed expense breakdown
+                </p>
+              </div>
+              
+              <div className="p-8">
+                {/* Chart Section */}
+                <div className="mb-12">
+                  <div className="flex justify-center">
+                    <div className="w-full max-w-2xl">
+                      <img 
+                        src="/financial-chart-2020.webp" 
+                        alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
+                        className="w-full h-auto object-contain rounded-lg shadow-md"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Key Metrics */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-6 text-center border border-yellow-200">
+                    <div className="text-primary font-black text-4xl lg:text-5xl mb-3">91%</div>
+                    <div className="text-gray-800 font-semibold text-lg mb-2">Scientific Programs</div>
+                    <div className="text-gray-600 font-medium">$3,621,840</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 text-center border border-gray-200">
+                    <div className="text-gray-600 font-black text-4xl lg:text-5xl mb-3">6%</div>
+                    <div className="text-gray-800 font-semibold text-lg mb-2">Fundraising</div>
+                    <div className="text-gray-600 font-medium">$238,864</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 text-center border border-gray-200">
+                    <div className="text-gray-600 font-black text-4xl lg:text-5xl mb-3">3%</div>
+                    <div className="text-gray-800 font-semibold text-lg mb-2">Administrative</div>
+                    <div className="text-gray-600 font-medium">$103,196</div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-6 text-center border border-yellow-200">
+                    <div className="text-primary font-black text-4xl lg:text-5xl mb-3">12.6¢</div>
+                    <div className="text-gray-800 font-semibold text-lg mb-2">Cost per $1 raised</div>
+                    <div className="text-gray-600 font-medium">$3,001,876 total</div>
+                  </div>
+                </div>
+                
+                {/* Summary */}
+                <div className="bg-primary bg-opacity-5 rounded-lg p-8 text-center">
+                  <div className="text-3xl font-bold text-dark mb-4">Total 2020 Expenses: $3,963,900</div>
+                  <p className="text-gray-600 text-xl mb-6">
+                    91% of every dollar donated goes directly to cancer research programs
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-6 mt-8">
+                    <div className="bg-white rounded-lg p-6 border border-gray-200">
+                      <h4 className="font-semibold text-dark mb-3">Research Excellence</h4>
+                      <p className="text-gray-600 text-sm">
+                        Your donations fund cutting-edge research programs including PASS, PATROL, 
+                        liquid biopsy development, and breakthrough imaging technologies.
+                      </p>
+                    </div>
+                    <div className="bg-white rounded-lg p-6 border border-gray-200">
+                      <h4 className="font-semibold text-dark mb-3">Operational Efficiency</h4>
+                      <p className="text-gray-600 text-sm">
+                        Our low administrative costs ensure maximum impact from every contribution, 
+                        with minimal overhead and efficient resource allocation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -1357,84 +1528,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h4 className="font-semibold text-dark mb-4">Financial Transparency</h4>
-                <div className="space-y-3 text-sm text-gray-600 mb-6">
-                  <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-primary" />
-                    <span>501(c)(3) nonprofit organization</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-primary" />
-                    <span>Tax ID: 65-1230251</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4 text-primary" />
-                    <span>Over $75 million raised historically</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <HandHeart className="w-4 h-4 text-primary" />
-                    <span>Donation options: Financial gifts, stock, AmazonSmile</span>
-                  </div>
-                </div>
-                
-                <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-                  <div className="bg-gradient-to-r from-primary to-yellow-400 p-6 text-white">
-                    <h5 className="font-bold text-2xl mb-2">2020 Financial Performance</h5>
-                    <p className="text-yellow-50 opacity-90">Transparent stewardship of your donations</p>
-                  </div>
-                  
-                  <div className="p-6">
-                    {/* Chart Section */}
-                    <div className="mb-8">
-                      <div className="flex justify-center">
-                        <div className="w-full max-w-lg">
-                          <img 
-                            src="/financial-chart-2020.webp" 
-                            alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
-                            className="w-full h-auto object-contain rounded-lg shadow-md"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Key Metrics */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 text-center border border-blue-200">
-                        <div className="text-primary font-black text-3xl sm:text-4xl mb-2">91%</div>
-                        <div className="text-gray-800 font-semibold text-lg mb-1">Scientific Programs</div>
-                        <div className="text-gray-600 font-medium">$3,621,840</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-5 text-center border border-orange-200">
-                        <div className="text-orange-600 font-black text-3xl sm:text-4xl mb-2">6%</div>
-                        <div className="text-gray-800 font-semibold text-lg mb-1">Fundraising</div>
-                        <div className="text-gray-600 font-medium">$238,864</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-5 text-center border border-gray-200">
-                        <div className="text-gray-600 font-black text-3xl sm:text-4xl mb-2">3%</div>
-                        <div className="text-gray-800 font-semibold text-lg mb-1">Administrative</div>
-                        <div className="text-gray-600 font-medium">$103,196</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 text-center border border-green-200">
-                        <div className="text-green-600 font-black text-3xl sm:text-4xl mb-2">12.6¢</div>
-                        <div className="text-gray-800 font-semibold text-lg mb-1">Cost per $1 raised</div>
-                        <div className="text-gray-600 font-medium">$3,001,876 total</div>
-                      </div>
-                    </div>
-                    
-                    {/* Summary */}
-                    <div className="bg-primary bg-opacity-5 rounded-lg p-6 text-center">
-                      <div className="text-2xl font-bold text-dark mb-2">Total 2020 Expenses: $3,963,900</div>
-                      <p className="text-gray-600 text-lg">
-                        91% of every dollar donated goes directly to cancer research programs
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
             
             <div>
