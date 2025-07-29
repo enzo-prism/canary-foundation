@@ -107,6 +107,10 @@ const categories = ["All", "Awards", "Conference", "Research"];
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
   const [visibleElements, setVisibleElements] = useState(new Set());
 

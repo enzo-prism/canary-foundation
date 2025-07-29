@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,6 +7,10 @@ import { Link } from "wouter";
 import { ExternalLink, Camera, Target } from "lucide-react";
 
 export default function Science() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="min-h-screen bg-white">
       <Header />
