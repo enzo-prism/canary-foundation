@@ -13,6 +13,7 @@ import LeadershipCouncil from "@/pages/leadership-council";
 import ScientificLeadership from "@/pages/scientific-leadership";
 import Financials from "@/pages/financials";
 import CanaryApproach from "@/pages/canary-approach";
+import ApproachOverview from "@/pages/approach-overview";
 import Collaborations from "@/pages/collaborations";
 import Symposium from "@/pages/symposium";
 import CanaryScience from "@/pages/canary-science";
@@ -34,7 +35,7 @@ function Router() {
       <Route path="/about/financials" component={Financials} />
       
       {/* Canary Approach pages */}
-      <Route path="/approach/overview" component={CanaryApproach} />
+      <Route path="/approach/overview" component={ApproachOverview} />
       <Route path="/approach/collaborations" component={Collaborations} />
       <Route path="/approach/symposium" component={Symposium} />
       
