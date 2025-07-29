@@ -1,6 +1,9 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { ExternalLink, Camera } from "lucide-react";
 
 export default function Science() {
   return (
@@ -78,13 +81,27 @@ export default function Science() {
               <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Changing the Game in Cancer</h2>
               
               <div className="grid md:grid-cols-3 gap-8">
-                <Card className="bg-white shadow-lg">
+                <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Imaging Technology</h3>
-                    <p className="text-gray-600 mb-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <Camera className="w-5 h-5 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold text-dark">Imaging Technology</h3>
+                    </div>
+                    <p className="text-gray-600 mb-6">
                       Revolutionary imaging techniques that peer into cells and tissues in ways never before possible, revealing cancer's earliest signatures.
                     </p>
-                    <div className="text-sm text-primary font-semibold">Advanced Visualization</div>
+                    <div className="text-sm text-primary font-semibold mb-4">Advanced Visualization</div>
+                    <Link href="/science/science/imaging">
+                      <Button 
+                        variant="outline" 
+                        className="border-primary text-primary hover:bg-primary hover:text-white font-semibold w-full"
+                      >
+                        Explore Imaging Research
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
 

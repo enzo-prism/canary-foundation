@@ -22,6 +22,7 @@ import Programs from "@/pages/programs";
 import Centers from "@/pages/centers";
 import Publications from "@/pages/publications";
 import FundingByInvitation from "@/pages/funding-by-invitation";
+import Imaging from "@/pages/imaging";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -51,6 +52,7 @@ function Router() {
       <Route path="/science/centers" component={Centers} />
       <Route path="/science/publications" component={Publications} />
       <Route path="/science/funding-by-invitation" component={FundingByInvitation} />
+      <Route path="/science/science/imaging" component={Imaging} />
       
       <Route component={NotFound} />
     </Switch>
