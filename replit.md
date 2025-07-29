@@ -58,6 +58,7 @@ Preferred communication style: Simple, everyday language.
 - Created Programs page (/science/programs) featuring authentic content about 5 cancer types with Dr. Sanjiv Gambhir leadership spotlight and multidisciplinary team approach
 - Created Centers page (/science/centers) with authentic foundation story including Don Listwin's $10M investment, Dr. Nicole Urban's biomarker work, and Nobel Laureate Dr. Lee Hartwell partnership
 - Created Publications page (/science/publications) featuring 100+ authentic Canary-funded research papers across 7 cancer types with complete bibliographic details
+- Created Funding by Invitation page (/science/funding-by-invitation) detailing invitation-only research award process and Board of Directors oversight
 
 ### Research Programs Featured
 - **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort

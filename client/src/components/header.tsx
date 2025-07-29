@@ -124,7 +124,7 @@ export default function Header() {
                   <Link href="/science/publications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Publications
                   </Link>
-                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <Link href="/science/funding-by-invitation" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Funding by Invitation
                   </Link>
                 </div>
@@ -277,7 +277,7 @@ export default function Header() {
                   Publications
                 </Link>
                 <Link 
-                  href="/science/overview"
+                  href="/science/funding-by-invitation"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left"
                   onClick={() => setIsMenuOpen(false)}
                 >
