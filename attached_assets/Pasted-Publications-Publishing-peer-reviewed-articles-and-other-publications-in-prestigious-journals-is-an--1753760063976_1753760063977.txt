@@ -1,0 +1,192 @@
+Publications
+Publishing peer-reviewed articles and other publications in prestigious journals is an important part of the scientific process. It not only helps other researchers keep up to date with developments in their field, but it also helps better direct their own research. Since we know researchers and scientists love facts, here’s one on the history of journals: Scientific journals date back to 1665 when the French Journal des sçavans and the English Philosophical Transactions of the Royal Society first began systematically publishing research results. Of course, Canary-related publications are much more recent. Sit back, and enjoy the read.
+
+Canary Funded Papers
+Biomarkers
+Ronald,  J.A., et al. Detecting cancers through tumor-activatable minicircles that lead to a detectable blood biomarker. Proc Natl Acad Sci U S A (2015)
+
+More
+Gregory, M.T., et al. Targeted single molecule mutation detection with massively parallel sequencing. Nucleic Acids Research (2015)
+
+Yoo, S., et al. MODMatcher: multi-omics data matcher for integrative genomic analysis. PLoS Computational Biology (2014)
+
+Brooks, J.D. Translational genomics: The challenge of developing cancer biomarkers. Genome Res. (2012)
+
+Hanash, S.M. Why have protein biomarkers not reached the clinic? Genome Med. (2011)
+
+Borugian, M.J., et al. The Canadian Partnership for Tomorrow Project: building a pan-Canadian research platform for disease prevention. CMAJ (2010)
+
+May, D., et al. A software platform for rapidly creating computational tools for mass spectrometry-based proteomics. J Proteome. Res. (2009)
+
+Lutz, A.M., et al. Cancer screening: A mathematical model relating secreted blood biomarker levels to tumor sizes. PLoS Medicine (2008)
+
+Scholler, N., et al. Use of cancer-specific yeast-secreted in vivo biotinylated recombinant antibodies for serum biomarker discovery. J. Transl. Med. (2008)
+
+Martin, D.B., et al. MRMer: An interactive open-source and cross-platform system for data extraction and visualization of multiple reaction monitoring experiments. Mol. Cell. Proteomics (2008)
+
+Less
+Brain Cancer
+Gambhir, S., et al. PET imaging of tumor glycolysis downstream of hexokinase through noninvasive measurement of pyruvate kinase M2. Science Translational Medicine (2015)
+
+Breast Cancer
+Pitteri, S.J., et al. Tumor microenvironment-derived proteins dominate the plasma proteome response during breast cancer induction and progression. Cancer Res. (2011)
+
+Imaging
+Deshpande, N., et. al. Tumor angiogenic marker expression levels during tumor growth: longitudinal assessment with molecularly targeted microbubbles and US imaging. Radiology (2011)
+
+More
+Thakor, A.S., et al. The fate and toxicity of Raman-active silica-gold nanoparticles in mice. Sci Transl Med. (2011)
+
+Mittra, E.S., et al. Pilot pharmacokinetic and dosimetric studies of 18F-FPPRGD2: A PET radiopharmaceutical agent for imaging a(v)ß(3) integrin levels. Radiology (2011)
+
+Nielson, C.H., et al. PET imaging of tumor neovascularization in a transgenic mouse model with a novel 64Cu-DOTA-knottin peptide. Cancer Res. (2010)
+
+Willmann JK, et al. Targeted Contrast-Enhanced Ultrasound Imaging of Tumor Angiogenesis with Contrast Microbubbles Conjugated to Integrin-Binding Knottin Peptides. Journal of Nuclear Medicine (2010)
+
+Willmann, J.K., et al. Targeted microbubbles for imaging tumor angiogenesis: assessment of whole-body biodistribution with dynamic micro-PET in mice. Radiology (2008)
+
+Willmann, J.K., et al. Dual-targeted contrast agent for US assessment of tumor angiogenesis in vivo.Radiology (2008)
+
+Willmann, J.K., et al. US imaging of tumor angiogenesis with microbubbles targeted to vascular endothelial growth factor receptor type 2 in mice. Radiology (2008)
+
+Lutz, A.M., et al. 2-deoxy-2-[F-18]fluoro-D-glucose accumulation in ovarian carcinoma cell lines. Mol. Imaging Biol. (2007)
+
+Less
+Lung Cancer
+Wikoff, W.R., et al. Diacetylspermine Is a Novel Prediagnostic Serum Biomarker for Non-Small-Cell Lung Cancer and Has Additive Performance With Pro-Surfactant Protein B. Journal of Clinical Oncology (2015)
+
+More
+Yoo, S., et al. Integrative analysis of DNA methylation and gene expression data identifies EPAS1 as a key regulator of COPD. PLoS Genetics (2015)
+
+Carlsson, A. et al. Circulating tumor microemboli diagnostics for patients with non-small-cell lung cancer. J Thorac Oncol. (2014)
+
+Sin, D.D., et al. Pro–Surfactant Protein B As a Biomarker for Lung Cancer Prediction. Journal of Clinical Oncology (2013)
+
+Wu, C., et al. Network-based differential gene expression analysis suggests cell cycle related genes regulated by E2F1 underlie the molecular difference between smoker and non-smoker lung adenocarcinoma. BMC Bioinformatics (2013)
+
+Taguchi, A., et al. Circulating Pro-Surfactant Protein B as a Risk Biomarker for Lung Cancer. Cancer Epidemiol Biomarkers Prev. (2013)
+
+Lin, R.S. and Plevritis, S.K. Comparing the Benefits of Screening for Breast Cancer and Lung Cancer Using a Novel Natural History Model. Cancer Causes Control. (2012)
+
+Selamat, S.A., et al. Genome-scale analysis of DNA methylation in lung adenocarcinoma and integration with mRNA expression. Genome Res. (2012)
+
+Thu, K.L., et al. Lung adenocarcinoma of never smokers and smokers harbor differential regions of genetic alteration and exhibit different levels of genomic instability. PLoS One. (2012)
+
+Taguchi, A., et al. Lung cancer signatures in plasma based on proteome profiling of mouse tumor models. Cancer Cell. (2011)
+
+Zhang, Y.A., et al. Frequent detection of infectious xenotropic murine leukemia virus (XMLV) in human cultures established from mouse xenografts. Cancer Biol Ther. (2011)
+
+Dasgupta, S., et al. Mitochondrial DNA mutations in respiratory complex-I in never-smoker lung cancer patients contribute to lung cancer progression and associated with EGFR gene mutation. J Cell Physiol. (2011)
+
+Nielson, C.H., et al. PET imaging of tumor neovascularization in a transgenic mouse model with a novel 64Cu-DOTA-knottin peptide. Cancer Res. (2010)
+
+Gazdar, A.F., et al. Lung cancer cell lines: Useless artifacts or invaluable tools for medical science?Lung Cancer. (2010)
+
+Chari, R., et al. Integrating the multiple dimensions of genomic and epigenomic landscapes of cancer. Cancer Metastasis Rev. (2010)
+
+Qui, J., et al. Occurrence of autoantibodies to Annexin I, 14-3-3 Theta and LAMR1 in prediagnostic lung lancer sera. J. Clin. Oncology. (2008)
+
+Bach, P.B. Is our natural-history model of lung cancer wrong? Lancet Oncol. (2008)
+
+Less
+Ovarian Cancer
+Urban, N. et al. Identifying post-menopausal women at elevated risk for epithelial ovarian cancer. Gynecologic Oncology (2015)
+
+More
+Karlan, B.Y., et al. Use of CA125 and HE4 serum markers to predict ovarian cancer in elevated-risk women.Cancer Epidemiol Biomarkers Prev. (2014)
+
+Lutz, A.M., et al. Ultrasound Molecular Imaging in a Human CD276 Expression-Modulated Murine Ovarian Cancer Model. Clin Cancer Res. (2014)
+
+Urban, N., et al. Interpretation of single and serial measures of HE4 and CA125 in asymptomatic women at high risk for ovarian cancer. Cancer Epidemiol Biomarkers Prev. (2012)
+
+Salzman, J., et al. Circular RNAs are the predominant transcript isoform from hundreds of human genes in diverse cell types. PLoS One (2012)
+
+Hori, S.S. and Gambhir, S.S. Mathematical model identifies blood biomarker–based early cancer detection strategies and limitations. Sci Transl Med. (2011)
+
+Salzman, J., et al. ESRRA-C11orf20 is a recurrent gene fusion in serous ovarian carcinoma. PLoS Biol. (2011)
+
+Urban N., et al. Potential role of HE4 in multimodal screening for epithelial ovarian cancer. J Natl Cancer Inst. (2011)
+
+Lutz, A.M., et al. Early diagnosis of ovarian carcinoma: is a solution in sight? Radiology (2011)
+
+Houshdaran, S., et al. DNA methylation profiles of ovarian epithelial carcinoma tumors and cell lines.PloS One (2010)
+
+Shaw, P.A., et al. Candidate serous cancer precursors in fallopian tube epithelium of BRCA1/2 mutation carriers. Mod Pathol. (2009)
+
+Brown, P.O., et al. The Preclinical Natural History of Serous Ovarian Cancer: Defining the Target for Early Detection. PloS Med. (2009)
+
+Köbel, M., et al. Ovarian carcinoma subtypes are different diseases: implications for biomarker studies. PLoS Medicine (2008)
+
+Lutz, A.M., et al. Cancer screening: A mathematical model relating secreted blood biomarker levels to tumor sizes. PLoS Medicine (2008)
+
+Martin, D.B., et al. MRMer: An interactive open-source and cross-platform system for data extraction and visualization of multiple reaction monitoring experiments. Mol. Cell. Proteomics (2008)
+
+Palmer, C., et al. Systematic Evaluation of Candidate Blood Markers for Detecting Ovarian Cancer.PLoS One (2008)
+
+Faca, V.M., et al.Proteomic analysis of ovarian cancer cells reveals dynamic processes of protein secretion and shedding of extra-cellular domains. PLoS One (2008)
+
+Estep, A., et al. Mutation analysis of BRAF, MEK1 and MEK2 in 15 ovarian cancer cell lines: Implications for therapy. PLoS One (2007)
+
+Scholler, N., et al. Development of a CA125-mesothelin cell adhesion assay as a screening tool for biologics discovery. Cancer Lett. (2007)
+
+Thorpe, J.T., et al. Effects of blood collection conditions on ovarian cancer serum markers. PLoS One (2007)
+
+Bergan, L., et al. Development and in vitro validation of anti-mesothelin biobodies that prevent CA125/Mesothelin-dependent cell attachment. Cancer Lett. (2007)
+
+Scholler, N., et al. Method for generation of in vivo biotinylated recombinant antibodies by yeast mating. J. Immunol. Methods. (2006)
+
+Scholler, N., et al. Bead-based ELISA for validation of ovarian cancer early detection markers. Clin. Cancer Res. (2006)
+
+Less
+Pancreatic Cancer
+Pysz, M.A., et al. Vascular Endothelial Growth Factor Receptor Type 2-targeted Contrast-enhanced US of Pancreatic Cancer Neovasculature in a Genetically Engineered Mouse Model: Potential for Earlier Detection. Radiology (2015)
+
+More
+Foygel, K., et al. Detection of pancreatic ductal adenocarcinoma in mice by ultrasound imaging of thymocyte differentiation antigen 1. Gastroenterology (2013)
+
+Pan, S., et al. Multiplex targeted proteomic assay for biomarker detection in plasma: a pancreatic cancer biomarker case study. J Proteome Res. (2012)
+
+Brentnall, TA., et al. Pancreatic cancer surveillance: learning as we go. Am J Gastroenterol. (2011)
+
+Pan, S., et al. Protein alterations associated with pancreatic cancer and chronic pancreatitis found in human plasma using globalquantitative proteomics profiling.J Proteome Res. (2011)
+
+Chen R, et al. Pilot Study of Blood Biomarker Candidates for Detection of Pancreatic Cancer. Pancreas (2010)
+
+Faca, V., et al. A mouse to human search for plasma proteome changes associated with pancreatic tumor development. PloS Med. (2008)
+
+Chen R., et al. Comparison of pancreas juice proteins from cancer versus pancreatitis using quantitative proteomic analysis. Pancreas (2007)
+
+Chen R., et al. Quantitative proteomics analysis reveals that proteins differentially expressed in chronic pancreatitis are also frequently involved in pancreatic cancer Mol. Cell. Proteomics (2007)
+
+Pogue-Geile, K.L., et al. Palladin mutation causes familial pancreatic cancer and suggests a new cancer mechanism. PloS Med. (2006)
+
+Chen R., et al. Quantitative proteomic profiling of pancreatic cancer juice. Proteomics (2006)
+
+Less
+Prostate Cancer
+Brooks, J.D., et al. Loss of expression of AZGP1 is associated with worse clinical outcomes in a multi-institutional radical prostatectomy cohort. Prostate (2016)
+
+More
+Lotan, T.L., et al. Analytic validation of a clinical-grade PTEN immunohistochemistry assay in prostate cancer by comparison with PTEN FISH. Modern Pathology (2016 )
+
+Tretiakova, M.S., et al. Prognostic value of Ki67 in localized prostate carcinoma: a multi-institutional study of >1000 prostatectomies. Prostate Cancer Prostatic Dis. (2016)
+
+Newcomb, L.F., et al. Outcomes of Active Surveillance for Clinically Localized Prostate Cancer in the Prospective, Multi-Institutional Canary PASS Cohort. Journal of Urology (2015)
+
+Brooks, J.D., et al. Evaluation of ERG and SPINK1 by Immunohistochemical Staining and Clinicopathological Outcomes in a Multi-Institutional Radical Prostatectomy Cohort of 1067 Patients. PLoS One (2015)
+
+Troyer, D.A., et al. A multicenter study shows PTEN deletion is strongly associated with seminal vesicle involvement and extracapsular extension in localized prostate cancer. Prostate (2015)
+
+Ankerst D.P., et al. Precision Medicine in Active Surveillance for Prostate Cancer: Development of the Canary-Early Detection Research Network Active Surveillance Biopsy Risk Calculator. European Urology (2015)
+
+Jokerst, J.V., et al. A Magnetic Bead-Based Sensor for the Quantification of Multiple Prostate Cancer Biomarkers. PLoS One (2015)
+
+Lin, D.W., et al. Urinary TMPRSS2:ERG and PCA3 in an active surveillance cohort: results from a baseline analysis in the Canary Prostate Active Surveillance Study. Clin Cancer Res. (2013)
+
+Hawley, S., et al. A model for the design and construction of a resource for the validation of prognostic prostate cancer biomarkers: the Canary Prostate Cancer Tissue Microarray. Adv Anat Pathol. (2013)
+
+McKenney, J.K, et al. The potential impact of reproducibility of Gleason grading in men with early stage prostate cancer managed by active surveillance: a multi-institutional study. J.Urol (2010)
+
+Newcomb, L.F., et al. Canary Prostate Active Surveillance Study: Design of a multi-institutional active surveillance cohort and biorepository. Urology (2009)
+
+Less
