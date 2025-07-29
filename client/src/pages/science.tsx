@@ -3,7 +3,7 @@ import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ExternalLink, Camera } from "lucide-react";
+import { ExternalLink, Camera, Target } from "lucide-react";
 
 export default function Science() {
   return (
@@ -105,13 +105,27 @@ export default function Science() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white shadow-lg">
+                <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Biomarker Discovery</h3>
-                    <p className="text-gray-600 mb-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <Target className="w-5 h-5 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold text-dark">Biomarker Discovery</h3>
+                    </div>
+                    <p className="text-gray-600 mb-6">
                       Unraveling the biological and molecular complexities of cancer through cutting-edge biomarker research and development.
                     </p>
-                    <div className="text-sm text-primary font-semibold">Molecular Insights</div>
+                    <div className="text-sm text-primary font-semibold mb-4">Molecular Insights</div>
+                    <Link href="/science/science/biomarkers">
+                      <Button 
+                        variant="outline" 
+                        className="border-primary text-primary hover:bg-primary hover:text-white font-semibold w-full"
+                      >
+                        Explore Biomarker Research
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
 

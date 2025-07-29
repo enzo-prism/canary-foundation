@@ -55,6 +55,8 @@ Preferred communication style: Simple, everyday language.
 - Updated Canary Symposium page with authentic evolution story to Early Detection of Cancer Conference
 - Updated Canary Science Overview page with authentic content about being world's only non-profit focused solely on early cancer detection
 - Created dedicated Science page (/science/science) with authentic content featuring "It's All About the Science" theme and Jelena Levi scientist spotlight
+- Added Imaging subpage (/science/science/imaging) featuring Dr. Sanjiv Gambhir's molecular imaging expertise, FDA-approved microbubble technology, and photoacoustic imaging research
+- Added Biomarkers subpage (/science/science/biomarkers) featuring Richard Kimura's biomarker research, blood-based detection methods, and multi-cancer screening trials
 - Created Programs page (/science/programs) featuring authentic content about 5 cancer types with Dr. Sanjiv Gambhir leadership spotlight and multidisciplinary team approach
 - Created Centers page (/science/centers) with authentic foundation story including Don Listwin's $10M investment, Dr. Nicole Urban's biomarker work, and Nobel Laureate Dr. Lee Hartwell partnership
 - Created Publications page (/science/publications) featuring 100+ authentic Canary-funded research papers across 7 cancer types with complete bibliographic details
