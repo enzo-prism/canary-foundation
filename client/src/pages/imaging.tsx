@@ -121,33 +121,39 @@ export default function Imaging() {
       
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-20 bg-white">
+        <section className="py-12 md:py-16 lg:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">
-                Molecular Imaging for Early Cancer Detection
-              </h1>
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                Leading breakthrough imaging technologies that allow us to see biological processes happening in the context of disease, 
-                based on specific molecular events taking place at early stages of tumor development.
-              </p>
+            <div className="max-w-4xl mx-auto">
+              {/* Mobile-first title */}
+              <div className="text-center mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-4 leading-tight">
+                  Molecular Imaging for Early Cancer Detection
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-2">
+                  Leading breakthrough imaging technologies that allow us to see biological processes happening in the context of disease, 
+                  based on specific molecular events taking place at early stages of tumor development.
+                </p>
+              </div>
               
-              {/* Dr. Gambhir Spotlight */}
-              <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 mb-8">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                      <Eye className="w-8 h-8 text-white" />
+              {/* Dr. Gambhir Spotlight - Mobile-optimized */}
+              <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+                <CardContent className="p-4 sm:p-6 md:p-8">
+                  {/* Mobile: Stacked layout, Desktop: Centered */}
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-full flex items-center justify-center">
+                      <Eye className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl sm:text-2xl font-bold text-dark mb-2">Dr. Sanjiv 'Sam' Gambhir</h2>
+                      <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-3 font-medium">
+                        World-renowned expert in molecular imaging, leading the science initiatives for Canary Foundation
+                      </p>
+                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                        Imaging plays a critical role in early cancer detection. Beyond just taking a snapshot, molecular imaging allows us to see biological processes happening in the context of disease, 
+                        based on specific molecular events (such as gene expression) taking place, even at early stages of tumor development. This aids in understanding the cancer's characteristics and can guide next steps such as treatment decisions.
+                      </p>
                     </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-dark mb-4">Dr. Sanjiv 'Sam' Gambhir</h2>
-                  <p className="text-lg text-gray-700 mb-4">
-                    World-renowned expert in molecular imaging, leading the science initiatives for Canary Foundation
-                  </p>
-                  <p className="text-gray-600">
-                    Imaging plays a critical role in early cancer detection. Beyond just taking a snapshot, molecular imaging allows us to see biological processes happening in the context of disease, 
-                    based on specific molecular events (such as gene expression) taking place, even at early stages of tumor development. This aids in understanding the cancer's characteristics and can guide next steps such as treatment decisions.
-                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -155,48 +161,58 @@ export default function Imaging() {
         </section>
 
         {/* Imaging Technologies Section */}
-        <section className="py-16 md:py-20 bg-light">
+        <section className="py-12 md:py-16 lg:py-20 bg-light">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Breakthrough Imaging Technologies</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+              {/* Mobile-first header */}
+              <div className="text-center mb-8 md:mb-12 lg:mb-16">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark mb-4 md:mb-6">Breakthrough Imaging Technologies</h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed px-2">
                   Our imaging projects are led by world-renowned experts developing revolutionary approaches to early cancer detection.
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
+              {/* Mobile-first card layout */}
+              <div className="space-y-6 md:space-y-8">
                 {imagingTechniques.map((technique) => (
                   <Card key={technique.id} className="bg-white hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-8">
-                      <div className="flex items-start gap-6">
-                        <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <CardContent className="p-4 sm:p-6 md:p-8">
+                      {/* Mobile: Stacked layout, Desktop: Side-by-side */}
+                      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
                           {technique.icon}
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-4">
-                            <h3 className="text-2xl font-semibold text-dark">{technique.title}</h3>
-                            <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                        <div className="flex-1 text-center sm:text-left">
+                          {/* Mobile-optimized title and badge */}
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-dark">{technique.title}</h3>
+                            <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 w-fit mx-auto sm:mx-0">
                               {technique.status}
                             </Badge>
                           </div>
-                          <p className="text-gray-600 mb-4">{technique.summary}</p>
+                          <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{technique.summary}</p>
                           
                           {expandedSections[technique.id] && (
-                            <div className="bg-gray-50 rounded-lg p-6 mb-4">
-                              <p className="text-gray-700 leading-relaxed">{technique.expandedContent}</p>
+                            <div className="bg-gray-50 rounded-lg p-4 sm:p-6 mb-4">
+                              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{technique.expandedContent}</p>
                             </div>
                           )}
                           
                           <Button
                             variant="ghost"
                             onClick={() => toggleSection(technique.id)}
-                            className="text-primary hover:text-primary-dark hover:bg-primary/10 p-0"
+                            className="text-primary hover:text-primary-dark hover:bg-primary/10 p-2 mx-auto sm:mx-0 flex items-center"
                           >
                             {expandedSections[technique.id] ? (
-                              <>Less <ChevronUp className="w-4 h-4 ml-1" /></>
+                              <>
+                                <span className="text-sm sm:text-base">Less</span>
+                                <ChevronUp className="w-4 h-4 ml-1" />
+                              </>
                             ) : (
-                              <>More <ChevronDown className="w-4 h-4 ml-1" /></>
+                              <>
+                                <span className="text-sm sm:text-base">More</span>
+                                <ChevronDown className="w-4 h-4 ml-1" />
+                              </>
                             )}
                           </Button>
                         </div>
@@ -210,49 +226,59 @@ export default function Imaging() {
         </section>
 
         {/* Cancer-Specific Studies Section */}
-        <section className="py-16 md:py-20 bg-white">
+        <section className="py-12 md:py-16 lg:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Cancer-Specific Imaging Studies</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+              {/* Mobile-first header */}
+              <div className="text-center mb-8 md:mb-12 lg:mb-16">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark mb-4 md:mb-6">Cancer-Specific Imaging Studies</h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed px-2">
                   Tailored imaging approaches for different cancer types, each with unique detection challenges and requirements.
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-1 gap-8">
+              {/* Mobile-first cards with improved spacing */}
+              <div className="space-y-6 md:space-y-8">
                 {cancerStudies.map((study, index) => (
                   <Card key={index} className="bg-light hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-8">
-                      <div className="flex items-start gap-6">
-                        <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <CardContent className="p-4 sm:p-6 md:p-8">
+                      {/* Mobile: Stacked, Desktop: Side-by-side */}
+                      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
                           {study.icon}
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-4">
-                            <h3 className="text-xl font-semibold text-dark">{study.title}</h3>
-                            <div className="flex items-center gap-1 text-sm text-gray-500">
+                        <div className="flex-1 text-center sm:text-left">
+                          {/* Mobile-optimized title and location */}
+                          <div className="mb-3 sm:mb-4">
+                            <h3 className="text-lg sm:text-xl font-semibold text-dark mb-2">{study.title}</h3>
+                            <div className="flex items-center justify-center sm:justify-start gap-1 text-xs sm:text-sm text-gray-500">
                               <MapPin className="w-3 h-3" />
                               <span>{study.location}</span>
                             </div>
                           </div>
-                          <p className="text-gray-600 mb-4">{study.description}</p>
+                          <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{study.description}</p>
                           
                           {expandedSections[`study-${index}`] && (
-                            <div className="bg-white rounded-lg p-6 mb-4 border border-gray-200">
-                              <p className="text-gray-700 leading-relaxed">{study.expandedContent}</p>
+                            <div className="bg-white rounded-lg p-4 sm:p-6 mb-4 border border-gray-200">
+                              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{study.expandedContent}</p>
                             </div>
                           )}
                           
                           <Button
                             variant="ghost"
                             onClick={() => toggleSection(`study-${index}`)}
-                            className="text-primary hover:text-primary-dark hover:bg-primary/10 p-0"
+                            className="text-primary hover:text-primary-dark hover:bg-primary/10 p-2 mx-auto sm:mx-0 flex items-center"
                           >
                             {expandedSections[`study-${index}`] ? (
-                              <>Less <ChevronUp className="w-4 h-4 ml-1" /></>
+                              <>
+                                <span className="text-sm sm:text-base">Less</span>
+                                <ChevronUp className="w-4 h-4 ml-1" />
+                              </>
                             ) : (
-                              <>More <ChevronDown className="w-4 h-4 ml-1" /></>
+                              <>
+                                <span className="text-sm sm:text-base">More</span>
+                                <ChevronDown className="w-4 h-4 ml-1" />
+                              </>
                             )}
                           </Button>
                         </div>
@@ -266,26 +292,28 @@ export default function Imaging() {
         </section>
 
         {/* Research Locations Section */}
-        <section className="py-16 md:py-20 bg-light">
+        <section className="py-12 md:py-16 lg:py-20 bg-light">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Where Canary Science is Happening</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+              {/* Mobile-first header */}
+              <div className="text-center mb-8 md:mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark mb-4 md:mb-6">Where Canary Science is Happening</h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed px-2">
                   Our imaging research is conducted at leading academic medical centers across the United States.
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-1 gap-6">
+              {/* Mobile-first location cards */}
+              <div className="space-y-4 md:space-y-6">
                 {researchLocations.map((location, index) => (
                   <Card key={index} className="bg-white hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                          <MapPin className="w-6 h-6 text-white" />
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                          <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
-                        <div>
-                          <h3 className="text-lg font-semibold text-dark">{location}</h3>
+                        <div className="flex-1">
+                          <h3 className="text-sm sm:text-base md:text-lg font-semibold text-dark leading-tight">{location}</h3>
                         </div>
                       </div>
                     </CardContent>
@@ -297,49 +325,57 @@ export default function Imaging() {
         </section>
 
         {/* Publications Section */}
-        <section className="py-16 md:py-20 bg-white">
+        <section className="py-12 md:py-16 lg:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Canary Funded Publications</h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              {/* Mobile-first header */}
+              <div className="text-center mb-8 md:mb-12 lg:mb-16">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark mb-4 md:mb-6">Canary Funded Publications</h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 px-2">
                   Peer-reviewed research publications showcasing breakthrough discoveries in molecular imaging for cancer detection.
                 </p>
               </div>
               
               <Card className="bg-light">
-                <CardContent className="p-8">
-                  <div className="space-y-6">
+                <CardContent className="p-4 sm:p-6 md:p-8">
+                  {/* Mobile-first publication list */}
+                  <div className="space-y-4 sm:space-y-6">
                     {publications.map((publication, index) => (
-                      <div key={index} className="flex items-start gap-4 p-4 bg-white rounded-lg hover:shadow-md transition-shadow duration-300">
-                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                          <BookOpen className="w-4 h-4 text-white" />
+                      <div key={index} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-lg hover:shadow-md transition-shadow duration-300">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                          <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <p className="text-gray-700 leading-relaxed">{publication}</p>
+                          <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">{publication}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                   
                   {expandedSections['publications'] && (
-                    <div className="mt-6 pt-6 border-t border-gray-300">
-                      <p className="text-gray-600 text-center">
+                    <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-300">
+                      <p className="text-xs sm:text-sm md:text-base text-gray-600 text-center px-2">
                         These publications represent groundbreaking research in molecular imaging, funded by Canary Foundation to advance early cancer detection technologies.
                       </p>
                     </div>
                   )}
                   
-                  <div className="text-center mt-6">
+                  <div className="text-center mt-4 sm:mt-6">
                     <Button
                       variant="ghost"
                       onClick={() => toggleSection('publications')}
-                      className="text-primary hover:text-primary-dark hover:bg-primary/10"
+                      className="text-primary hover:text-primary-dark hover:bg-primary/10 p-2"
                     >
                       {expandedSections['publications'] ? (
-                        <>Less <ChevronUp className="w-4 h-4 ml-1" /></>
+                        <>
+                          <span className="text-sm sm:text-base">Less</span>
+                          <ChevronUp className="w-4 h-4 ml-1" />
+                        </>
                       ) : (
-                        <>More <ChevronDown className="w-4 h-4 ml-1" /></>
+                        <>
+                          <span className="text-sm sm:text-base">More</span>
+                          <ChevronDown className="w-4 h-4 ml-1" />
+                        </>
                       )}
                     </Button>
                   </div>
