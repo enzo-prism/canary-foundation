@@ -47,6 +47,12 @@ Preferred communication style: Simple, everyday language.
 - `GET /api/contact` - Retrieve contact messages (admin functionality)
 - `/blog` - Blog page with authentic 2024 Canary Foundation content
 
+### Individual Navigation Pages
+- **About Canary**: 7 dedicated pages (Overview, Founder's Story, Staff, Board of Directors, Leadership Council, Scientific Leadership, Financials)
+- **Canary Approach**: 3 dedicated pages (Overview, Collaborations & Partnership, Canary Symposium)
+- **Canary Science**: 1 comprehensive page (Overview covering Programs, Centers, Publications, Funding)
+- All pages feature authentic content from Canary Foundation materials and real research data
+
 ### Research Programs Featured
 - **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
 - **Ovarian Cancer Program**: BRCA pre-cancer atlas, fallopian tube precursor studies
