@@ -1,0 +1,46 @@
+Founder’s Story
+The World Needs Early Cancer Detection: The Earlier, the Better
+Don Listwin is one of those people who makes things happen, he shakes things up, and drives change. And he’s really good at it. He built a successful technology career at Cisco (the #2 executive) and then went on to found several other leading tech companies. But his biggest challenge of all came after he lost his mother to misdiagnosed ovarian cancer. He wondered if her outcome could have been different.
+
+More
+What if they had found her tumor much earlier? And what if we could move all late-stage cancer patients to early stage? He was determined to find out.
+
+In 2004, he left a high-profile technology career to found the Canary Foundation, and has never turned back. He has committed his life to advancing early cancer detection. Someday soon, he believes early cancer detection tests will be commonplace, and the first line of defense for cancer. To which we say, it’s about time.
+
+Less
+Don the Change Maker
+Don’s mother Grace was twice misdiagnosed with a bladder infection, and by the time they discovered late-stage ovarian cancer, it was too late. Determined to launch a radical assault on cancer, he began what a Wall Street Journal article on the foundation called “an industrial-style attack on the thorny problem of early cancer detection.” And the more he investigated, the more he didn’t like what he found.
+
+Learn about the development of the Canary Center at Stanford
+More
+There was a big gap in funding. Of the $10 billion spent annually on cancer research in the United States, the vast majority fund new cancer treatments and patient care. Thinking of his mother and the millions who had died from aggressive cancers simply because the cancer was discovered too late, he found this news disheartening to say the least. In his view, for far too long, cancer research had continued to focus on drug therapies that were expensive, introduced too late in the game, and were simply not effective enough to improve cancer patient outcomes. Early cancer detection that looks to identify and isolate cancer at its most curable stage had been severely underfunded, and unexplored. But that was about to change.
+
+Don approached the disease as a technology and market development problem waiting to be solved. As an engineer and entrepreneur, he thought just about any problem could be fixed with the right amount of leadership, intellect and time. He saw cancer, and the way we studied the disease, as a series of network failures. And he believed that a systematic approach that involved researchers from many disciplines and institutions sharing information and working together would give us the edge on the disease. He had an ‘ah-ha’ pattern-match moment when he recognized that the approach to fighting cancer was not that different than the breakthroughs in his tech career from building the essence of the mobile internet to the access business at Cisco and more. “Instead of fiber optics, it’s genomics, and instead of switching, it’s a focus on imaging,” said Don in explaining the logic behind how new technology and a shift in funding could upend the entire cancer field.
+
+“We didn’t build the Internet with one person, with one institution. All these people from all these places came together to make it happen,” Don said. “We had collaboration across multiple disciplines. Just look at the Human Genome Project. It’s a great example of team science.”
+
+Less
+Don the Optimist Meets the Scientist and Nobel Laureate
+In early 2001, Don fired off emails to cancer centers across the country to find out what they were doing in the early detection area. He met Dr. Lee Hartwell, 2001 Nobel Laureate, and director of the Fred Hutchinson Cancer Center (known as the “Hutch”) in Seattle. They discovered they shared a passion for early cancer detection. After funding a $10-million gift to Hutch to start a center of excellence, and help fund the core of a biomarker discovery and analysis program, Don and Dr. Hartwell began forming the first Canary Research Team—carefully comprised of outstanding scientific researchers from across the globe, each contributing specialized expertise across disciplines. This was the genesis of the Canary Foundation.
+
+The Canary in the Coal Mine
+Canary was named after the birds coalminers once carried as early detectors of dangerous gases. It’s a fitting name for the world’s first non-profit dedicated solely to early cancer detection. Don and Dr. Hartwell began recruiting scientists for the research teams starting with ovarian cancer. Over the next several years, teams were added for pancreatic, lung, and prostate cancer.
+
+More
+During that time, Don had built a strong relationship with Dr. Sanjiv Sam Gambhir, a world-renowned expert in molecular imaging and now chair of the Radiology Department at the Stanford University School of Medicine, and an early member of the Canary team. While Canary teams were collaborating and innovating virtually, Don and Sam wondered what would happen if world-class scientists had a physical building at a major university, where they could draw on other disciplines and assets from material science to computer science.
+
+After approaching the Dean of the School of Medicine at Stanford University who supported the idea, they talked with President John Hennessey who told them that he wanted the university to work on things that would uniquely differentiate them and have global impact. In 2009, the Canary Center at Stanford was formed.
+
+Now led by Dr. Sam Gambhir, the Canary Center at Stanford is a key part of the Canary Foundation, and is focused on a two-stage diagnostic strategy consisting of blood-based diagnostic tests to identify individuals who are likely to have cancer, combined with molecular imaging to pinpoint and verify a specific cancer type. The Canary Center at Stanford is the first in the world to integrate research in both in vivo and in vitro diagnostics to deliver these tests by housing state of the art core facilities and collaborative research programs in molecular imaging, proteomics, chemistry and bioinformatics.
+
+The Canary Center at Stanford is the model for future early cancer detection centers that will be developed, and along with Hutch, remains a key part of the work of the Canary Foundation.
+
+Today, more than 10 years since its founding, the Canary Foundation is recognized around the world for its groundbreaking work in blood and imaging biomarker discovery, and companies are increasingly looking to collaborate with Canary on bringing new molecular diagnostics to market.
+
+Canary has continued to collaborate with academia and industry including the National Cancer Institute, M.D. Anderson, El Camino Hospital, the BC Cancer Agency, and Genomic Health.
+
+Says Don, “Participating in building the internet was one thing but being a leader who creates a whole new industry and saves lives, that’s quite another. Wouldn’t succeeding at this be a great thing?”
+
+Don hopes to have a going-out-of-business party in 15 or more years when he sees global, self-sustaining centers building the next generation of technology and products, taking over the work that the Canary Foundation began.
+
+Even better, maybe by then, and if Don gets his way, cancer’s time would have come, and gone.
