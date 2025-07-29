@@ -20,6 +20,7 @@ import CanaryScience from "@/pages/canary-science";
 import Science from "@/pages/science";
 import Programs from "@/pages/programs";
 import Centers from "@/pages/centers";
+import Publications from "@/pages/publications";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/science/science" component={Science} />
       <Route path="/science/programs" component={Programs} />
       <Route path="/science/centers" component={Centers} />
+      <Route path="/science/publications" component={Publications} />
       
       <Route component={NotFound} />
     </Switch>
