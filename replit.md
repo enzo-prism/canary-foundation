@@ -53,6 +53,7 @@ Preferred communication style: Simple, everyday language.
 - **Canary Science**: 1 comprehensive page (Overview covering Programs, Centers, Publications, Funding)
 - All pages feature authentic content from Canary Foundation materials and real research data
 - Updated Canary Symposium page with authentic evolution story to Early Detection of Cancer Conference
+- Updated Canary Science Overview page with authentic content about being world's only non-profit focused solely on early cancer detection
 
 ### Research Programs Featured
 - **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
