@@ -54,6 +54,7 @@ Preferred communication style: Simple, everyday language.
 - All pages feature authentic content from Canary Foundation materials and real research data
 - Updated Canary Symposium page with authentic evolution story to Early Detection of Cancer Conference
 - Updated Canary Science Overview page with authentic content about being world's only non-profit focused solely on early cancer detection
+- Created dedicated Science page (/science/science) with authentic content featuring "It's All About the Science" theme and Jelena Levi scientist spotlight
 
 ### Research Programs Featured
 - **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
