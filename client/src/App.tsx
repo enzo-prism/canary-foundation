@@ -18,6 +18,7 @@ import Collaborations from "@/pages/collaborations";
 import Symposium from "@/pages/symposium";
 import CanaryScience from "@/pages/canary-science";
 import Science from "@/pages/science";
+import Programs from "@/pages/programs";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -43,6 +44,7 @@ function Router() {
       {/* Canary Science pages */}
       <Route path="/science/overview" component={CanaryScience} />
       <Route path="/science/science" component={Science} />
+      <Route path="/science/programs" component={Programs} />
       
       <Route component={NotFound} />
     </Switch>
