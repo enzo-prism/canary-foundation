@@ -14,7 +14,7 @@ export default function Financials() {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">
-                Financial Transparency
+                Financials
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
                 We are committed to complete transparency in how we manage and utilize 
@@ -24,46 +24,56 @@ export default function Financials() {
           </div>
         </section>
 
-        {/* Financial Overview */}
+        {/* 2020 Financial Performance Metrics */}
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">2023 Financial Summary</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Canary Foundation 2020 Financial Performance Metrics</h2>
               
-              <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-8 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">$12.5M</div>
-                    <h3 className="text-xl font-semibold text-dark mb-2">Total Revenue</h3>
-                    <p className="text-gray-600">From donations, grants, and partnerships</p>
+                    <div className="text-4xl font-bold text-primary mb-2">91%</div>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Program Expenses</h3>
+                    <p className="text-gray-600">$3,621,840 of total $3,963,900 costs</p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-8 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">$11.8M</div>
-                    <h3 className="text-xl font-semibold text-dark mb-2">Research Investment</h3>
-                    <p className="text-gray-600">Directly funding breakthrough research</p>
+                    <div className="text-4xl font-bold text-primary mb-2">3%</div>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Administrative Expenses</h3>
+                    <p className="text-gray-600">$103,196 general/administration costs</p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-8 text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">94%</div>
-                    <h3 className="text-xl font-semibold text-dark mb-2">Research Allocation</h3>
-                    <p className="text-gray-600">Of total funds invested in research programs</p>
+                    <div className="text-4xl font-bold text-primary mb-2">6%</div>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Fundraising Expenses</h3>
+                    <p className="text-gray-600">$238,864 fundraising costs</p>
                   </CardContent>
                 </Card>
+
+                <Card className="bg-primary/5 border-primary/20">
+                  <CardContent className="p-8 text-center">
+                    <div className="text-4xl font-bold text-primary mb-2">12.6¢</div>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Fundraising Efficiency</h3>
+                    <p className="text-gray-600">Cost per $1.00 raised from $3,001,876 total</p>
+                  </CardContent>
+                </Card>
+
+
               </div>
             </div>
           </div>
         </section>
 
-        {/* Expense Breakdown */}
+        {/* Detailed Financial Breakdown */}
         <section className="py-16 md:py-20 bg-light">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">How Your Donations Are Used</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">2020 Financial Breakdown</h2>
               
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -72,50 +82,55 @@ export default function Financials() {
                     <div className="flex items-center justify-between p-4 bg-white rounded-lg">
                       <div className="flex items-center">
                         <div className="w-4 h-4 bg-primary rounded mr-3"></div>
-                        <span className="text-gray-700">Research Programs</span>
+                        <span className="text-gray-700">Program Expenses</span>
                       </div>
-                      <span className="font-semibold text-primary">94%</span>
+                      <span className="font-semibold text-primary">91%</span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-white rounded-lg">
                       <div className="flex items-center">
                         <div className="w-4 h-4 bg-primary/60 rounded mr-3"></div>
-                        <span className="text-gray-700">Administrative Costs</span>
+                        <span className="text-gray-700">Fundraising Expenses</span>
                       </div>
-                      <span className="font-semibold text-gray-600">4%</span>
+                      <span className="font-semibold text-gray-600">6%</span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-white rounded-lg">
                       <div className="flex items-center">
                         <div className="w-4 h-4 bg-primary/30 rounded mr-3"></div>
-                        <span className="text-gray-700">Fundraising</span>
+                        <span className="text-gray-700">Administrative Expenses</span>
                       </div>
-                      <span className="font-semibold text-gray-600">2%</span>
+                      <span className="font-semibold text-gray-600">3%</span>
                     </div>
+                  </div>
+                  
+                  <div className="mt-8 p-6 bg-white rounded-lg border border-gray-200">
+                    <h4 className="text-lg font-semibold text-dark mb-4">Total 2020 Costs</h4>
+                    <div className="text-3xl font-bold text-primary mb-2">$3,963,900</div>
+                    <p className="text-gray-600">Complete operational expenses</p>
                   </div>
                 </div>
                 <div>
                   <Card className="bg-white">
                     <CardContent className="p-8">
-                      <h4 className="text-xl font-bold text-dark mb-4">Research Impact</h4>
+                      <h4 className="text-xl font-bold text-dark mb-4">Fundraising Efficiency</h4>
+                      <div className="text-center mb-6">
+                        <div className="text-4xl font-bold text-primary mb-2">12.6¢</div>
+                        <p className="text-gray-600">Cost per $1.00 raised</p>
+                      </div>
                       <p className="text-gray-600 leading-relaxed mb-6">
-                        Every dollar donated goes directly toward advancing early cancer detection research. 
-                        Our minimal overhead ensures maximum impact for breakthrough discoveries.
+                        Outstanding fundraising efficiency with minimal overhead ensures maximum impact for breakthrough cancer detection research.
                       </p>
                       <div className="space-y-3">
                         <div className="flex items-center text-sm text-gray-600">
                           <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
-                          Direct research grants to leading institutions
+                          Total funds raised: $3,001,876
                         </div>
                         <div className="flex items-center text-sm text-gray-600">
                           <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
-                          Equipment and technology development
+                          Fundraising costs: $238,864
                         </div>
                         <div className="flex items-center text-sm text-gray-600">
                           <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
-                          Clinical trial support and patient studies
-                        </div>
-                        <div className="flex items-center text-sm text-gray-600">
-                          <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
-                          Training and education programs
+                          Efficient fundraising model for sustainable growth
                         </div>
                       </div>
                     </CardContent>
@@ -126,91 +141,49 @@ export default function Financials() {
           </div>
         </section>
 
-        {/* Annual Reports */}
+        {/* Transparency and Accountability */}
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Annual Reports</h2>
-              
-              <div className="grid md:grid-cols-3 gap-8">
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8 text-center">
-                    <div className="text-3xl font-bold text-primary mb-4">2023</div>
-                    <h3 className="text-xl font-semibold text-dark mb-4">Annual Report</h3>
-                    <p className="text-gray-600 mb-6">
-                      Comprehensive overview of research achievements, financial stewardship, and impact metrics.
-                    </p>
-                    <Button 
-                      className="bg-primary text-white hover:bg-primary-dark"
-                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
-                    >
-                      View Report
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8 text-center">
-                    <div className="text-3xl font-bold text-primary mb-4">2022</div>
-                    <h3 className="text-xl font-semibold text-dark mb-4">Annual Report</h3>
-                    <p className="text-gray-600 mb-6">
-                      Detailed financial statements, research program updates, and partnership highlights.
-                    </p>
-                    <Button 
-                      className="bg-primary text-white hover:bg-primary-dark"
-                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
-                    >
-                      View Report
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8 text-center">
-                    <div className="text-3xl font-bold text-primary mb-4">2021</div>
-                    <h3 className="text-xl font-semibold text-dark mb-4">Annual Report</h3>
-                    <p className="text-gray-600 mb-6">
-                      Foundation milestones, research breakthroughs, and transparent financial reporting.
-                    </p>
-                    <Button 
-                      className="bg-primary text-white hover:bg-primary-dark"
-                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
-                    >
-                      View Report
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Accountability Standards */}
-        <section className="py-16 md:py-20 bg-light">
-          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Commitment to Accountability</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Financial Transparency</h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                We maintain the highest standards of financial transparency and accountability, 
-                ensuring every donation is used effectively to advance our mission.
+                The Canary Foundation maintains the highest standards of financial transparency and accountability, 
+                ensuring every donation is used effectively to advance early cancer detection research.
               </p>
               
               <div className="grid md:grid-cols-2 gap-8">
                 <Card className="bg-white">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-dark mb-4">Independent Audits</h3>
-                    <p className="text-gray-600 text-sm">
-                      Annual independent financial audits ensure compliance with nonprofit standards 
-                      and transparent use of donor funds.
-                    </p>
+                    <h3 className="text-xl font-bold text-dark mb-4">2020 Performance Summary</h3>
+                    <div className="space-y-3 text-gray-600">
+                      <div className="flex justify-between">
+                        <span>Program Expense Percentage:</span>
+                        <span className="font-semibold text-primary">91%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Administrative Expense Percentage:</span>
+                        <span className="font-semibold">3%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Fundraising Expense Percentage:</span>
+                        <span className="font-semibold">6%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Fundraising Efficiency:</span>
+                        <span className="font-semibold text-primary">12.6¢ per $1</span>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
+
                 <Card className="bg-white">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-dark mb-4">Board Oversight</h3>
+                    <h3 className="text-xl font-bold text-dark mb-4">Nonprofit Commitment</h3>
+                    <p className="text-gray-600 text-sm mb-4">
+                      As a 501(c)(3) nonprofit organization, we are committed to the highest standards of financial stewardship. Annual independent audits ensure compliance with nonprofit standards and transparent use of donor funds.
+                    </p>
                     <p className="text-gray-600 text-sm">
-                      Our Board of Directors provides rigorous oversight of financial management 
-                      and strategic allocation of resources.
+                      Our Board of Directors provides rigorous oversight of financial management and strategic allocation of resources to maximize research impact.
                     </p>
                   </CardContent>
                 </Card>
