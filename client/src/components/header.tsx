@@ -58,48 +58,27 @@ export default function Header() {
               </button>
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
-                  <button 
-                    onClick={() => scrollToSection("about")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  <Link href="/about/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Overview
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("about")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/founders-story" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Founder's Story
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("leadership")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/staff" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Staff
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("leadership")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/board-directors" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Board of Directors
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("leadership")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/leadership-council" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Leadership Council
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("leadership")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/scientific-leadership" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Scientific Leadership
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("financials")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/about/financials" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Financials
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -115,24 +94,15 @@ export default function Header() {
               </button>
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  <Link href="/approach/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Overview
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/approach/collaborations" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Canary Collaborations and Partnership
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("events")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/approach/symposium" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Canary Symposium
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -148,42 +118,24 @@ export default function Header() {
               </button>
               <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Overview
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Science
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Programs
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Centers
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Publications
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("programs")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
+                  </Link>
+                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Funding by Invitation
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
