@@ -16,8 +16,7 @@ export default function BoardDirectors() {
                 Board of Directors
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Our Board of Directors is integral to the success of our team. They represent a diverse 
-                group of accomplished leaders, scientists, and innovators who guide our strategic vision.
+                Our Board of Directors is integral to the success of our team. They represent a distinguished group of leaders who provide strategic decision-making and thoughtful guidance to ensure that our vision stays on track. They provide business, technology and management expertise as well as non-profit acumen.
               </p>
             </div>
           </div>
@@ -27,147 +26,106 @@ export default function BoardDirectors() {
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">DL</span>
+              <div className="grid gap-16">
+                
+                {/* Michael Ball */}
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <span className="text-3xl font-bold text-primary">MB</span>
                     </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Don Listwin</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Executive Chairman</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Founder of Canary Foundation with extensive experience in technology leadership 
-                      and strategic business development. Passionate advocate for early cancer detection research.
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Michael Ball</h3>
+                    <p className="text-lg font-semibold text-primary mb-6">CEO, Contextual Genomics</p>
+                    <p className="text-base text-gray-500 mb-4">Canary Audit Committee</p>
+                  </div>
+                </div>
 
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">SG</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Sarah Garcia</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Chief Medical Officer</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Leading oncologist with 20+ years experience in cancer research and clinical practice. 
-                      Expert in biomarker development and precision medicine approaches.
+                {/* Kevin Kennedy */}
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="order-2 md:order-1">
+                    <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Kevin Kennedy</h3>
+                    <p className="text-lg font-semibold text-primary mb-6">President, Senior Managing Director, Blue Ridge Partners</p>
+                    <p className="text-base text-gray-500 mb-6">Canary Audit Committee, Chair</p>
+                    <blockquote className="text-lg text-gray-600 italic border-l-4 border-primary pl-6 mb-6">
+                      "I'm proud to serve as a board member for the Canary Foundation, where I've been able to see firsthand the innovation that the Foundation and Canary Center at Stanford have brought to the field of early cancer detection. Giving back to the communities where we live and do business has always been a priority for my wife and me. We've been involved with the Canary Foundation from the start and are thrilled to grow that relationship."
+                      <footer className="text-base text-gray-500 mt-4 not-italic">— Kevin Kennedy</footer>
+                    </blockquote>
+                    <p className="text-gray-600 leading-relaxed">
+                      Over 30 years' experience as an executive leading prominent public and private technology and telecommunications companies. Before joining Blue Ridge Partners, he was the CEO of Avaya, Inc., CEO of JDS Uniphase Corporation, SVP of Cisco Systems, and CEO of Openwave Systems. Currently he is on the boards of KLA-Tencor Corporation (KLAC-Nasdaq) and Digital Realty (DLR-NYSE). He is currently a Senior Managing Director with Blue Ridge Partners, a boutique consultancy focused on top-line growth.
                     </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <span className="text-3xl font-bold text-primary">KK</span>
+                    </div>
+                  </div>
+                </div>
 
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">MJ</span>
+                {/* Don Listwin */}
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <span className="text-3xl font-bold text-primary">DL</span>
                     </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Michael Johnson</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Chief Technology Officer</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Technology innovator with expertise in medical device development and digital health platforms. 
-                      Leading the foundation's technology strategy and innovation initiatives.
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Don Listwin</h3>
+                    <p className="text-lg font-semibold text-primary mb-6">Founder and Chairman, Canary Foundation</p>
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                      Don Listwin is a 30-year veteran of the technology industry. Currently Don is acting President and CEO of ISchemaView and head of Listwin Ventures; investing in the future. Don has served as CEO of Sana Security, Openwave, and had been the #2 executive at Cisco Systems. Today, in addition to his work at the foundation, he serves on the board of directors of several private and public companies including POET Technologies and Robin Systems.
                     </p>
-                  </CardContent>
-                </Card>
+                    <p className="text-gray-600 leading-relaxed">
+                      Don is also deeply involved with other cancer-related organizations. He is on the External Advisory Board for the Center for Cancer Nanotechnology Excellence (CCNE) at Stanford and is a member of the Stanford Advisory Board for the Canary Center for Cancer Early Detection at Stanford. He also serves as a member of The Melanoma Cancer Center at The Moffitt Cancer Center. He was appointed and served on the National Cancer Institute's Board of Scientific Advisors.
+                    </p>
+                  </div>
+                </div>
 
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">LC</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Lisa Chen</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Research Director</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Renowned researcher in molecular biology and cancer genomics. Leading multiple 
-                      breakthrough studies in early detection biomarkers and liquid biopsy technologies.
+                {/* Dale Jantzen */}
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="order-2 md:order-1">
+                    <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Dale Jantzen</h3>
+                    <p className="text-lg font-semibold text-primary mb-6">Board Member</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Dale has over 20 years of product management and marketing experience in the telecommunications industry. He most recently served as the President of the San Jose Grand Prix for three years. Dale earned his BSEE at the University of Saskatchewan in 1982. For the next eight years, he served as Marketing Director for Develcon Electronics. Dale then moved on to hold similar positions at Alberta Microelectronics Center and then at Sci-Tec Instruments Ltd.
                     </p>
-                  </CardContent>
-                </Card>
+                    <p className="text-gray-600 leading-relaxed mt-4">
+                      Throughout his career, Dale has managed large teams of technical product management and marketing professionals, while overseeing multi-million dollar project accounts. Dale possesses a wealth of technical skills and depth of leadership experience.
+                    </p>
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <span className="text-3xl font-bold text-primary">DJ</span>
+                    </div>
+                  </div>
+                </div>
 
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">RP</span>
+                {/* Hilary Valentine */}
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <span className="text-3xl font-bold text-primary">HV</span>
                     </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Robert Park</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Chief Financial Officer</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Financial strategist with extensive experience in nonprofit management and 
-                      healthcare finance. Ensuring fiscal responsibility and sustainable growth.
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Hilary Valentine</h3>
+                    <p className="text-lg font-semibold text-primary mb-6">Board Member</p>
+                    <p className="text-gray-600 leading-relaxed">
+                      Hilary Valentine is a partner at Black & White Design and serves on the Board of Directors of the Valentine Family Foundation. She is co-Founder of Belize Kids with the mission of improving lives for children in Belize. She also serves on the Emeritus Board of Breast Cancer Connections. Hilary is the Chair of the Room to Read Emeritus Board after serving on the Room to Read board of directors from 2003 to 2012. She was Co-Chair of the Board of Directors from 2005 to 2008.
                     </p>
-                  </CardContent>
-                </Card>
+                    <p className="text-gray-600 leading-relaxed mt-4">
+                      Hilary graduated with a B.S. in Psychology from St. Lawrence University.
+                    </p>
+                  </div>
+                </div>
 
-                <Card className="bg-white shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">AW</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Amanda White</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Clinical Affairs Director</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Clinical research expert with deep experience in regulatory affairs and 
-                      clinical trial design for cancer detection technologies.
-                    </p>
-                  </CardContent>
-                </Card>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Board Responsibilities */}
-        <section className="py-16 md:py-20 bg-light">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Board Responsibilities</h2>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <Card className="bg-white">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-dark mb-4">Strategic Oversight</h3>
-                    <ul className="space-y-3 text-gray-600">
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Setting long-term strategic direction and priorities
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Overseeing major research initiatives and partnerships
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Ensuring alignment with mission and values
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-dark mb-4">Governance & Accountability</h3>
-                    <ul className="space-y-3 text-gray-600">
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Financial oversight and risk management
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Performance monitoring and evaluation
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                        Ensuring transparency and ethical standards
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
-
       <Footer />
     </div>
   );
