@@ -1,0 +1,95 @@
+Imaging
+Dr. Sanjiv ‘Sam’ Gambhir
+Dr. Sanjiv ‘Sam’ Gambhir, world-renowned expert in molecular imaging, is leading the science initiatives for Canary Foundation
+
+Imaging plays a critical role in early cancer detection. Beyond just taking a snapshot, molecular imaging allows us to see biological processes happening in the context of disease, based on specific molecular events (such as gene expression) taking place, even at early stages of tumor development. This aids in understanding the cancer’s characteristics and can guide next steps such as treatment decisions. Our imaging projects are led by a world-renowned expert in molecular imaging—Dr. Sanjiv Sam Gambhir. He is Chair of the Radiology department and Virginia and D.K. Ludwig Professor of Cancer Research at the Stanford School of Medicine. Along with teams of scientists—each with their own labs—Sam is guiding the future of early cancer detection imaging.
+
+Enhanced Ultrasound Imaging
+For many years, Canary Foundation has been supporting the development of enhanced ultrasound techniques for early cancer detection. Ultrasound is a widely available imaging technology that lacks ionizing radiation, is relatively cost-effective and allows a dynamic evaluation of the region of interest in real time. Cancer of the prostate, ovary, breast and pancreas are excellent candidates for imaging with enhanced ultrasound techniques, which include imaging with targeted microbubbles and photoacoustic imaging.
+
+Microbubble Technology
+Breakthroughs in imaging technology promise to revolutionize early detection of many cancers. Canary’s Microbubble Project, using enhanced ultrasound technology, is one such breakthrough. Initially funded by individual philanthropy, the targeted microbubble technology has now been FDA approved for use in patients.
+
+More
+Microbubbles are small gas-filled spheres that are injected into the bloodstream, and when they are coated with antibodies directed to specific biomarkers, they are known as targeted microbubbles. Canary has been testing targeted microbubbles that adhere to biomarkers in tumor vasculature (developing blood vessels associated with tumor growth but not normal tissues). When ultrasound is applied, they reflect a distinct and enhanced signal from the tumor compared to the background tissues.
+
+Less
+
+Photoacoustic Imaging
+We are adapting traditional ultrasound imaging with an emerging non-ionizing photoacoustic imaging (PAI) technique that essentially lets us “hear” light.
+
+More
+PAI employs rapid short light pulses to illuminate tissue. The light is absorbed by various molecules found naturally in the body (e.g. hemoglobin) and converted to minute changes in temperature, which in turn, cause the absorbing molecules to locally expand. The transient local tissue expansion generates a pressure wave that can be detected using an ultrasound imaging system.
+
+Photoacoustic strategies allow deeper tissue penetration than optics alone while preserving the spatial and temporal resolution advantages of ultrasound. Therefore, tissues within a human body can be more clearly visualized at a depth that is clinically relevant. Because hemoglobin is one of the primary molecules present naturally that produce a photoacoustic signal, PAI is especially suitable for detecting blood vessels associated with tumors, as well as monitoring changes in blood vessel growth that can accompany tumor formation and growth.
+
+Less
+Canary’s Studies in Imaging for Prostate Cancer
+New imaging approaches may provide a more sensitive and more accurate approach for the detection of prostate cancers. We are testing two new techniques, enhanced ultrasound using targeted microbubbles and photoacoustic imaging (PAI), for their utility in prostate cancer screening.
+
+More
+In current clinical practice, the entire prostate is viewed with an ultrasound image for biopsy procedures. Biopsies are taken from several regions within the organ in hopes of capturing cells from a tumor. Depending on the tumor size and prostate volume, tumor cells are often not captured during biopsy, and the presence of a tumor can be missed.
+
+Additionally, accurate methods for the detection of early aggressive prostate cancer versus benign tumors could help eliminate unnecessary biopsies and could lead to an overall increase in patient survival.
+
+A human study is underway at Stanford confirming the safety, feasibility, and dosage requirements for targeted microbubbles. Men diagnosed with prostate cancer are imaged with targeted microbubbles prior to surgery. Images are compared to surgical findings and gene expression data to determine how well the imaging reflects the actual presence of tumor.
+
+A human study has been initiated at Stanford testing the combination of PAI and transrectal ultrasound on patients to evaluate this new technology’s ability to visualize prostate cancer. This study will also inform future instrument development and optimization requirements.
+
+Less
+Canary’s Studies in Imaging for Ovarian Cancer
+At Stanford, we have engineered a new photoacoustic imaging (PAI) device that is being tested for visualization of prostate cancer. We are adapting this device for use in ovarian cancer imaging. After development and pre-clinical testing of the device, we will move into the clinical setting to test in patients. Our goal is to reliably visualize cancer even from several centimeters deep inside ovarian tissue.
+
+More
+Initial clinical studies will provide the preliminary data necessary to improve the PAI instrument and develop larger clinical trials to assess the impact of combining transvaginal ultrasound and photoacoustic imaging for ovarian cancer screening.
+
+Another molecular imaging modality that holds promise for imaging ovarian cancer is enhanced ultrasound using targeted microbubble technology. Clinical studies are underway in collaboration with the Bracco company in Europe to test microbubble imaging in women with ovarian cancer. Recent FDA approval for using targeted microbubbles in humans, and the clinical studies in progress in men with prostate cancer at Stanford, have opened the door to advance this study for ovarian cancer.
+
+The Canary ovarian cancer team continues to discover and develop additional, more cancer-specific imaging biomarkers to pinpoint ovarian cancer in future molecular imaging studies.
+
+Less
+Molecular Imaging for Pancreatic Cancer
+The pancreatic cancer team is pursuing development of sensitive, specific, and low-impact imaging for early detection of pancreatic cancer.
+
+More
+Current imaging techniques such as CT, ultrasound, and MRI are not reliable for early detection of pancreatic cancer or discrimination of cancer versus diseases such as chronic pancreatitis. Development of new imaging agents to discriminate pancreatic cancer compared to benign diseases, as well as small early-stage pancreatic tumors, is critically needed.
+
+The Canary team has demonstrated the ability to detect small pancreatic cancers, less than 1 millimeter in size, using ultrasound with targeted microbubble technology in mouse models of pancreatic cancer. The team has also discovered a new candidate biomarker for pancreatic cancer imaging, Thymocyte Differentiation Antigen 1 (Thy1). Thy1 is expressed in vascular endothelial cells early in pancreatic cancer development. Ultrasound imaging with Thy1-targeted microbubbles in mouse models of pancreatic cancer shows promise, as the imaging agent visualizes pancreatic cancer and not benign disease. Thy1 is also being developed for other imaging modalities, including photoacoustic imaging.
+
+
+
+Dr. Timothy Donahue is deeply committed to distinguishing surgical candidates who have aggressive pancreatic cancer, from those who do not need surgery and can be safely monitored.
+Less
+Collaborative 5-Year Study to Combine Imaging and Biomarkers for Lung Cancer
+To build upon our previous research and to improve upon the success of the NIH-funded National Lung Screening Trial (NLST), partner stakeholders and collaborating institutions, including Canary Foundation and MD Anderson Cancer Center in Houston, Texas, are launching a collaborative five-year study.
+
+More
+In addition to saving lives through low-dose computed tomography (CT), the goal of this study is to test the contribution of biomarkers to CT screening. Biomarkers have the potential to aid the interpretation of CT scans to reduce the false- positive rate. Biomarkers may also identify individuals at risk for lung cancer who could benefit from screening. The results of this study may become the standard of care for lung cancer screening in the future.
+
+Less
+Breast Cancer Imaging
+New imaging approaches may provide a more sensitive and more accurate approach for the detection of breast cancers. We are testing several imaging alternatives, including a new positron emission tomography (PET) imaging agent, enhanced ultrasound using targeted microbubbles, and photoacoustic imaging, for their ability to identify breast cancer early and to better distinguish cancer and benign conditions.
+
+Where Canary Science is Happening
+Stanford University, Stanford, California
+MD Anderson Cancer Center, Houston, Texas
+University of Washington, Seattle, Washington
+Canary Funded Publications
+Deshpande, N., et. al. Tumor angiogenic marker expression levels during tumor growth: longitudinal assessment with molecularly targeted microbubbles and US imaging. Radiology (2011)
+
+More
+Thakor, A.S., et al. The fate and toxicity of Raman-active silica-gold nanoparticles in mice. Sci Transl Med. (2011)
+
+Mittra, E.S., et al. Pilot pharmacokinetic and dosimetric studies of 18F-FPPRGD2: A PET radiopharmaceutical agent for imaging a(v)ß(3) integrin levels. Radiology (2011)
+
+Nielson, C.H., et al. PET imaging of tumor neovascularization in a transgenic mouse model with a novel 64Cu-DOTA-knottin peptide. Cancer Res. (2010)
+
+Willmann JK, et al. Targeted Contrast-Enhanced Ultrasound Imaging of Tumor Angiogenesis with Contrast Microbubbles Conjugated to Integrin-Binding Knottin Peptides. Journal of Nuclear Medicine (2010)
+
+Willmann, J.K., et al. Targeted microbubbles for imaging tumor angiogenesis: assessment of whole-body biodistribution with dynamic micro-PET in mice. Radiology (2008)
+
+Willmann, J.K., et al. Dual-targeted contrast agent for US assessment of tumor angiogenesis in vivo. Radiology (2008)
+
+Lutz, A.M., et al. 2-deoxy-2-[F-18]fluoro-D-glucose accumulation in ovarian carcinoma cell lines. Mol. Imaging Biol. (2007)
+
+Less

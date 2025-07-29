@@ -13,7 +13,8 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { Link } from "wouter";
 import BiomarkerGrid from "@/components/BiomarkerGrid";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
@@ -406,9 +407,22 @@ export default function Home() {
               We support two specialized teams comprised of disease-specific experts from North America: women's health focused on ovarian cancer early detection, 
               and men's program focused on prostate cancer.
             </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
               Our commitment extends to developing low-cost, accessible tools and addressing health disparities in underserved communities through outreach and partnerships.
             </p>
+            
+            {/* Learn More About Mission */}
+            <div className="text-center">
+              <Link href="/about/overview">
+                <Button 
+                  variant="outline" 
+                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                >
+                  Learn More About Our Mission
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -418,7 +432,16 @@ export default function Home() {
                   <Stethoscope className="text-white text-2xl" />
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Early Detection Focus</h3>
-                <p className="text-gray-600">We develop breakthrough technologies and biomarkers for detecting cancer at its earliest, most treatable stages.</p>
+                <p className="text-gray-600 mb-4">We develop breakthrough technologies and biomarkers for detecting cancer at its earliest, most treatable stages.</p>
+                <Link href="/science/science">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
+                  >
+                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -428,7 +451,16 @@ export default function Home() {
                   <Users className="text-white text-2xl" />
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Global Collaborations</h3>
-                <p className="text-gray-600">We foster partnerships with leading institutions worldwide to accelerate discoveries in cancer detection and treatment.</p>
+                <p className="text-gray-600 mb-4">We foster partnerships with leading institutions worldwide to accelerate discoveries in cancer detection and treatment.</p>
+                <Link href="/approach/collaborations">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
+                  >
+                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -438,7 +470,16 @@ export default function Home() {
                   <Shield className="text-white text-2xl" />
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Advanced Imaging</h3>
-                <p className="text-gray-600">Supporting advanced imaging for two decades, including building a new cancer imaging center at UCSD focused on low-cost ultrasound.</p>
+                <p className="text-gray-600 mb-4">Supporting advanced imaging for two decades, including building a new cancer imaging center at UCSD focused on low-cost ultrasound.</p>
+                <Link href="/science/centers">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
+                  >
+                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -450,9 +491,22 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Research Programs</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
               Our comprehensive research programs target the most challenging cancers through innovative detection methods and precision medicine approaches.
             </p>
+            
+            {/* Learn More About Programs */}
+            <div className="text-center">
+              <Link href="/science/programs">
+                <Button 
+                  variant="outline" 
+                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                >
+                  Explore All Programs
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -462,7 +516,16 @@ export default function Home() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-dark mb-3">Prostate Cancer Program</h3>
-                <p className="text-gray-600">Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).</p>
+                <p className="text-gray-600 mb-4">Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).</p>
+                <Link href="/science/programs">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
+                  >
+                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -569,9 +632,20 @@ export default function Home() {
                 <p className="text-gray-600 mb-4">
                   Faculty and Affiliates are engaged in a variety of research programs and collaborations throughout the Stanford campus and beyond, testing new categories of biomarkers such as exosomes and glycoproteins.
                 </p>
-                <p className="text-gray-600">
+                <p className="text-gray-600 mb-6">
                   The Center supports infrastructure for developing innovative therapies and applies mathematical models to predict patient outcomes.
                 </p>
+                
+                {/* Learn More About Centers */}
+                <Link href="/science/centers">
+                  <Button 
+                    variant="outline" 
+                    className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                  >
+                    Learn About Our Centers
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
@@ -644,7 +718,16 @@ export default function Home() {
                     <Handshake className="w-8 h-8 text-white" />
                   </div>
                   <h4 className="font-semibold text-dark mb-2">Annual Conference</h4>
-                  <p className="text-sm text-gray-600">Early Detection of Cancer meeting</p>
+                  <p className="text-sm text-gray-600 mb-3">Early Detection of Cancer meeting</p>
+                  <Link href="/approach/symposium">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0 text-xs"
+                    >
+                      Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -658,9 +741,33 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-on-scroll" id="leadership-header">
               <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6 animate-slideUp">Leadership Team</h2>
-              <p className="text-lg text-gray-600 leading-relaxed animate-fadeIn animate-stagger-1">
+              <p className="text-lg text-gray-600 leading-relaxed animate-fadeIn animate-stagger-1 mb-8">
                 Our multidisciplinary team brings together world-class researchers, clinicians, and innovators dedicated to advancing early cancer detection.
               </p>
+              
+              {/* Learn More About Leadership */}
+              <div className="text-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/about/staff">
+                    <Button 
+                      variant="outline" 
+                      className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                    >
+                      Meet Our Staff
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                  <Link href="/about/founder-story">
+                    <Button 
+                      variant="outline" 
+                      className="border-gray-400 text-gray-600 hover:bg-gray-600 hover:text-white font-semibold"
+                    >
+                      Founder's Story
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -784,6 +891,19 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
                 Our Board of Directors is integral to the success of our team. They represent a distinguished group of leaders who provide strategic decision-making and thoughtful guidance to ensure that our vision stays on track.
               </p>
+              
+              {/* Learn More About Board */}
+              <div className="text-center mb-8">
+                <Link href="/about/board-of-directors">
+                  <Button 
+                    variant="outline" 
+                    className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
+                  >
+                    Meet Full Board of Directors
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
               
               <div className="grid md:grid-cols-2 gap-8">
                 <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
