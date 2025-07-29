@@ -1,12 +1,75 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenSections, setMobileOpenSections] = useState<{ [key: string]: boolean }>({});
   const [location] = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Navigation structure with all pages
+  const navigationStructure = {
+    'About Canary': {
+      path: null,
+      items: [
+        { name: 'Our Mission', path: '/about/overview' },
+        { name: "Founder's Story", path: '/about/founders-story' },
+        { name: 'Staff', path: '/about/staff' },
+        { name: 'Board of Directors', path: '/about/board-directors' },
+        { name: 'Leadership Council', path: '/about/leadership-council' },
+        { name: 'Scientific Leadership', path: '/about/scientific-leadership' },
+        { name: 'Financials', path: '/about/financials' }
+      ]
+    },
+    'Canary Approach': {
+      path: null,
+      items: [
+        { name: 'Overview', path: '/approach/overview' },
+        { name: 'Collaborations & Partnership', path: '/approach/collaborations' },
+        { name: 'Canary Symposium', path: '/approach/symposium' }
+      ]
+    },
+    'Canary Science': {
+      path: null,
+      items: [
+        { name: 'Overview', path: '/science/overview' },
+        { 
+          name: 'Science', 
+          path: '/science/science',
+          subItems: [
+            { name: 'Imaging', path: '/science/science/imaging' },
+            { name: 'Biomarkers', path: '/science/science/biomarkers' }
+          ]
+        },
+        { name: 'Programs', path: '/science/programs' },
+        { name: 'Centers', path: '/science/centers' },
+        { name: 'Publications', path: '/science/publications' },
+        { name: 'Funding by Invitation', path: '/science/funding-by-invitation' }
+      ]
+    }
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
+  }, [location]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -25,9 +88,16 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  const toggleMobileSection = (sectionName: string) => {
+    setMobileOpenSections(prev => ({
+      ...prev,
+      [sectionName]: !prev[sectionName]
+    }));
+  };
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-4" ref={dropdownRef}>
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-3">
             <img 
@@ -39,106 +109,79 @@ export default function Header() {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             <button 
               onClick={navigateToHome}
-              className="text-dark hover:text-primary transition-colors duration-300"
+              className="text-dark hover:text-primary transition-colors duration-300 font-medium"
             >
               Home
             </button>
-            <div className="relative group">
-              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
-                About Canary
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="py-1">
-                  <Link href="/about/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Overview
-                  </Link>
-                  <Link href="/about/founders-story" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Founder's Story
-                  </Link>
-                  <Link href="/about/staff" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Staff
-                  </Link>
-                  <Link href="/about/board-directors" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Board of Directors
-                  </Link>
-                  <Link href="/about/leadership-council" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Leadership Council
-                  </Link>
-                  <Link href="/about/scientific-leadership" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Scientific Leadership
-                  </Link>
-                  <Link href="/about/financials" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Financials
-                  </Link>
+            
+            {/* Dynamic Desktop Dropdowns */}
+            {Object.entries(navigationStructure).map(([sectionName, section]) => (
+              <div key={sectionName} className="relative">
+                <button 
+                  className="text-dark hover:text-primary transition-colors duration-300 flex items-center font-medium"
+                  onMouseEnter={() => setOpenDropdown(sectionName)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  {sectionName}
+                  <ChevronDown className="w-4 h-4 ml-1 transition-transform duration-200" />
+                </button>
+                
+                {/* Dropdown Menu */}
+                <div 
+                  className={`absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 transition-all duration-300 ${
+                    openDropdown === sectionName 
+                      ? 'opacity-100 visible transform translate-y-0' 
+                      : 'opacity-0 invisible transform -translate-y-2'
+                  }`}
+                  onMouseEnter={() => setOpenDropdown(sectionName)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <div className="py-2">
+                    {section.items.map((item, index) => (
+                      <div key={index}>
+                        <Link 
+                          href={item.path} 
+                          className="group flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          <span className="font-medium">{item.name}</span>
+                          {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
+                        </Link>
+                        
+                        {/* Sub-items for Science section */}
+                        {item.subItems && (
+                          <div className="ml-4 border-l-2 border-gray-100">
+                            {item.subItems.map((subItem, subIndex) => (
+                              <Link 
+                                key={subIndex}
+                                href={subItem.path} 
+                                className="block px-4 py-2 text-xs text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="relative group">
-              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
-                Canary Approach
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="py-1">
-                  <Link href="/approach/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Overview
-                  </Link>
-                  <Link href="/approach/collaborations" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Canary Collaborations and Partnership
-                  </Link>
-                  <Link href="/approach/symposium" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Canary Symposium
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="relative group">
-              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
-                Canary Science
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-              <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="py-1">
-                  <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Overview
-                  </Link>
-                  <Link href="/science/science" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Science
-                  </Link>
-                  <Link href="/science/programs" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Programs
-                  </Link>
-                  <Link href="/science/centers" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Centers
-                  </Link>
-                  <Link href="/science/publications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Publications
-                  </Link>
-                  <Link href="/science/funding-by-invitation" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Funding by Invitation
-                  </Link>
-                </div>
-              </div>
-            </div>
+            ))}
+            
             <Link 
               href="/blog"
-              className="text-dark hover:text-primary transition-colors duration-300"
+              className="text-dark hover:text-primary transition-colors duration-300 font-medium"
             >
               Blog
             </Link>
             <Button 
               onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
-              className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold"
+              className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300"
             >
               Take Action
             </Button>
@@ -146,160 +189,92 @@ export default function Header() {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-dark"
+            className="lg:hidden text-dark p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="text-xl" /> : <Menu className="text-xl" />}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
         
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4">
-            <div className="flex flex-col space-y-4">
-              <button 
-                onClick={navigateToHome}
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-              >
-                Home
-              </button>
-              <div className="border-l-2 border-gray-200 pl-4">
-                <div className="text-sm font-semibold text-gray-500 mb-2">About Canary</div>
+          <div className="lg:hidden mt-6 border-t border-gray-100 pt-6">
+            <div className="max-h-96 overflow-y-auto">
+              <div className="space-y-4">
+                <button 
+                  onClick={navigateToHome}
+                  className="text-dark hover:text-primary transition-colors duration-300 text-left font-medium block w-full"
+                >
+                  Home
+                </button>
+                
+                {/* Dynamic Mobile Navigation */}
+                {Object.entries(navigationStructure).map(([sectionName, section]) => (
+                  <div key={sectionName} className="border-l-2 border-primary/20 pl-4">
+                    <button
+                      onClick={() => toggleMobileSection(sectionName)}
+                      className="flex items-center justify-between w-full text-left py-2"
+                    >
+                      <span className="text-sm font-semibold text-gray-600">{sectionName}</span>
+                      <ChevronDown 
+                        className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                          mobileOpenSections[sectionName] ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                    
+                    {mobileOpenSections[sectionName] && (
+                      <div className="mt-2 space-y-2">
+                        {section.items.map((item, index) => (
+                          <div key={index}>
+                            <Link 
+                              href={item.path}
+                              className="block text-dark hover:text-primary transition-colors duration-300 text-sm py-2 font-medium"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {item.name}
+                            </Link>
+                            
+                            {/* Sub-items for mobile */}
+                            {item.subItems && (
+                              <div className="ml-4 space-y-1">
+                                {item.subItems.map((subItem, subIndex) => (
+                                  <Link 
+                                    key={subIndex}
+                                    href={subItem.path}
+                                    className="block text-gray-600 hover:text-primary transition-colors duration-300 text-xs py-1"
+                                    onClick={() => setIsMenuOpen(false)}
+                                  >
+                                    • {subItem.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                
                 <Link 
-                  href="/about/overview"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  href="/blog"
+                  className="text-dark hover:text-primary transition-colors duration-300 text-left font-medium block py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Overview
+                  Blog
                 </Link>
-                <Link 
-                  href="/about/founders-story"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
+                
+                <Button 
+                  onClick={() => {
+                    window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                    setIsMenuOpen(false);
+                  }}
+                  className="bg-primary text-white hover:bg-primary-dark w-full font-semibold py-3 rounded-lg shadow-md"
                 >
-                  Founder's Story
-                </Link>
-                <Link 
-                  href="/about/staff"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Staff
-                </Link>
-                <Link 
-                  href="/about/board-directors"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Board of Directors
-                </Link>
-                <Link 
-                  href="/about/leadership-council"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Leadership Council
-                </Link>
-                <Link 
-                  href="/about/scientific-leadership"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Scientific Leadership
-                </Link>
-                <Link 
-                  href="/about/financials"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Financials
-                </Link>
+                  Take Action
+                </Button>
               </div>
-              <div className="border-l-2 border-gray-200 pl-4">
-                <div className="text-sm font-semibold text-gray-500 mb-2">Canary Approach</div>
-                <Link 
-                  href="/approach/overview"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Overview
-                </Link>
-                <Link 
-                  href="/approach/collaborations"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Collaborations & Partnership
-                </Link>
-                <Link 
-                  href="/approach/symposium"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Canary Symposium
-                </Link>
-              </div>
-              <div className="border-l-2 border-gray-200 pl-4">
-                <div className="text-sm font-semibold text-gray-500 mb-2">Canary Science</div>
-                <Link 
-                  href="/science/overview"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Overview
-                </Link>
-                <Link 
-                  href="/science/science"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Science
-                </Link>
-                <Link 
-                  href="/science/programs"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Programs
-                </Link>
-                <Link 
-                  href="/science/centers"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Centers
-                </Link>
-                <Link 
-                  href="/science/publications"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Publications
-                </Link>
-                <Link 
-                  href="/science/funding-by-invitation"
-                  className="block text-dark hover:text-primary transition-colors duration-300 text-left"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Funding by Invitation
-                </Link>
-              </div>
-              <Link 
-                href="/blog"
-                className="text-dark hover:text-primary transition-colors duration-300 text-left"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <Button 
-                onClick={() => {
-                  window.open('https://donorbox.org/annual-campaign-2023', '_blank');
-                  setIsMenuOpen(false);
-                }}
-                className="bg-primary text-white hover:bg-primary-dark w-full font-semibold"
-              >
-                Take Action
-              </Button>
             </div>
           </div>
         )}
