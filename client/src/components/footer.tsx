@@ -1,5 +1,6 @@
 
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
+import { Youtube } from "lucide-react";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -22,9 +23,26 @@ export default function Footer() {
               />
               <span className="text-xl font-bold">Canary Foundation</span>
             </div>
-            <p className="text-gray-300">
+            <p className="text-gray-300 mb-6">
               Advancing early cancer detection through innovative research, biomarker development, and precision medicine approaches since 2004.
             </p>
+            
+            {/* Social Media Links */}
+            <div>
+              <h4 className="text-md font-semibold mb-3">Follow Us</h4>
+              <div className="flex space-x-4">
+                <a 
+                  href="https://www.youtube.com/@canaryfoundation/videos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 text-gray-300 hover:text-primary transition-colors duration-300"
+                  aria-label="Visit Canary Foundation YouTube Channel"
+                >
+                  <Youtube className="w-5 h-5" />
+                  <span className="text-sm">YouTube</span>
+                </a>
+              </div>
+            </div>
           </div>
           
           <div>
