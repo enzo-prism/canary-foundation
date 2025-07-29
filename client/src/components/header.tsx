@@ -47,15 +47,12 @@ export default function Header() {
               Home
             </button>
             <div className="relative group">
-              <button 
-                onClick={() => scrollToSection("about")}
-                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
-              >
+              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
                 About Canary
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </span>
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
                   <Link href="/about/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -83,15 +80,12 @@ export default function Header() {
               </div>
             </div>
             <div className="relative group">
-              <button 
-                onClick={() => scrollToSection("programs")}
-                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
-              >
+              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
                 Canary Approach
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </span>
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
                   <Link href="/approach/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -107,15 +101,12 @@ export default function Header() {
               </div>
             </div>
             <div className="relative group">
-              <button 
-                onClick={() => scrollToSection("programs")}
-                className="text-dark hover:text-primary transition-colors duration-300 flex items-center"
-              >
+              <span className="text-dark hover:text-primary transition-colors duration-300 flex items-center cursor-pointer">
                 Canary Science
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </span>
               <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-1">
                   <Link href="/science/overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -174,108 +165,124 @@ export default function Header() {
               </button>
               <div className="border-l-2 border-gray-200 pl-4">
                 <div className="text-sm font-semibold text-gray-500 mb-2">About Canary</div>
-                <button 
-                  onClick={() => scrollToSection("about")}
+                <Link 
+                  href="/about/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Overview
-                </button>
-                <button 
-                  onClick={() => scrollToSection("about")}
+                </Link>
+                <Link 
+                  href="/about/founders-story"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Founder's Story
-                </button>
-                <button 
-                  onClick={() => scrollToSection("leadership")}
+                </Link>
+                <Link 
+                  href="/about/staff"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Staff
-                </button>
-                <button 
-                  onClick={() => scrollToSection("leadership")}
+                </Link>
+                <Link 
+                  href="/about/board-directors"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Board of Directors
-                </button>
-                <button 
-                  onClick={() => scrollToSection("leadership")}
+                </Link>
+                <Link 
+                  href="/about/leadership-council"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Leadership Council
-                </button>
-                <button 
-                  onClick={() => scrollToSection("leadership")}
+                </Link>
+                <Link 
+                  href="/about/scientific-leadership"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Scientific Leadership
-                </button>
-                <button 
-                  onClick={() => scrollToSection("financials")}
+                </Link>
+                <Link 
+                  href="/about/financials"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Financials
-                </button>
+                </Link>
               </div>
               <div className="border-l-2 border-gray-200 pl-4">
                 <div className="text-sm font-semibold text-gray-500 mb-2">Canary Approach</div>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                <Link 
+                  href="/approach/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Overview
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/approach/collaborations"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Collaborations & Partnership
-                </button>
-                <button 
-                  onClick={() => scrollToSection("events")}
+                </Link>
+                <Link 
+                  href="/approach/symposium"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Canary Symposium
-                </button>
+                </Link>
               </div>
               <div className="border-l-2 border-gray-200 pl-4">
                 <div className="text-sm font-semibold text-gray-500 mb-2">Canary Science</div>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Overview
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Science
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Programs
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Centers
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left mb-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Publications
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
+                </Link>
+                <Link 
+                  href="/science/overview"
                   className="block text-dark hover:text-primary transition-colors duration-300 text-left"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Funding by Invitation
-                </button>
+                </Link>
               </div>
               <Link 
                 href="/blog"
