@@ -45,10 +45,10 @@ const BiomarkerGrid: React.FC = () => {
     >
       {/* Background dot grid */}
       <div 
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-40"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(242,242,242,0.3) 1px, transparent 0)`,
-          backgroundSize: '12px 12px',
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(250,199,46,0.3) 1px, transparent 0)`,
+          backgroundSize: '16px 16px',
         }}
       />
       
@@ -57,17 +57,17 @@ const BiomarkerGrid: React.FC = () => {
         className="absolute inset-0 w-full h-full" 
         xmlns="http://www.w3.org/2000/svg"
         style={{
-          filter: 'blur(1px)',
+          filter: 'blur(0.3px)',
         }}
       >
         <defs>
           <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <circle cx="30" cy="30" r="1" fill="rgba(33, 33, 33, 0.05)" />
+            <circle cx="30" cy="30" r="1.5" fill="rgba(250, 199, 46, 0.2)" />
           </pattern>
           
           <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(250, 199, 46, 0)" />
-            <stop offset="50%" stopColor="rgba(250, 199, 46, 0.2)" />
+            <stop offset="50%" stopColor="rgba(250, 199, 46, 0.5)" />
             <stop offset="100%" stopColor="rgba(250, 199, 46, 0)" />
           </linearGradient>
           
@@ -84,7 +84,7 @@ const BiomarkerGrid: React.FC = () => {
         <rect width="100%" height="100%" fill="url(#grid)" />
         
         {/* Static connection lines - More subtle */}
-        <g opacity="0.03">
+        <g opacity="0.15">
           {Array.from({ length: 8 }, (_, i) => (
             <g key={i}>
               <line 
@@ -92,8 +92,8 @@ const BiomarkerGrid: React.FC = () => {
                 y1="25%" 
                 x2={`${35 + (i * 60)}%`} 
                 y2="35%" 
-                stroke="rgba(33, 33, 33, 0.15)" 
-                strokeWidth="0.5"
+                stroke="rgba(250, 199, 46, 0.4)" 
+                strokeWidth="0.8"
                 className="biomarker-drift"
                 style={{ 
                   animationDelay: `${i * 0.8}s`,
@@ -105,8 +105,8 @@ const BiomarkerGrid: React.FC = () => {
                 y1="65%" 
                 x2={`${45 + (i * 55)}%`} 
                 y2="75%" 
-                stroke="rgba(33, 33, 33, 0.15)" 
-                strokeWidth="0.5"
+                stroke="rgba(250, 199, 46, 0.4)" 
+                strokeWidth="0.8"
                 className="biomarker-drift"
                 style={{ 
                   animationDelay: `${i * 1.2}s`,
@@ -118,7 +118,7 @@ const BiomarkerGrid: React.FC = () => {
         </g>
         
         {/* Animated pulse lines - Fewer and more subtle */}
-        <g opacity="0.4">
+        <g opacity="0.7">
           {Array.from({ length: 3 }, (_, i) => (
             <line 
               key={i}
@@ -127,8 +127,8 @@ const BiomarkerGrid: React.FC = () => {
               x2={`${40 + (i * 40)}%`} 
               y2={`${40 + (i * 20)}%`} 
               stroke="url(#pulse)" 
-              strokeWidth="1"
-              strokeDasharray="10 90"
+              strokeWidth="1.5"
+              strokeDasharray="15 85"
               className="signal-flow"
               style={{ 
                 animationDelay: `${i * 4}s`,
@@ -145,8 +145,8 @@ const BiomarkerGrid: React.FC = () => {
               key={i}
               cx={`${20 + (i * 25) % 80}%`} 
               cy={`${30 + (i * 30) % 60}%`} 
-              r={i % 6 === 0 ? "2" : "1.5"} 
-              fill="rgba(33, 33, 33, 0.08)" 
+              r={i % 6 === 0 ? "2.5" : "2"} 
+              fill="rgba(250, 199, 46, 0.25)" 
               className="biomarker-pulse"
               style={{ 
                 animationDelay: `${i * 0.5}s`,
@@ -159,7 +159,7 @@ const BiomarkerGrid: React.FC = () => {
       
       {/* Overlay gradient for text legibility */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/20 to-white/60"
+        className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/30"
       />
     </div>
   );

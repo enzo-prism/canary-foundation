@@ -385,12 +385,12 @@
   /* Biomarker Grid Animations - More Subtle */
   @keyframes biomarker-pulse {
     0%, 100% {
-      opacity: 0.15;
+      opacity: 0.5;
       transform: scale(1);
     }
     50% {
-      opacity: 0.25;
-      transform: scale(1.02);
+      opacity: 0.8;
+      transform: scale(1.05);
     }
   }
   
@@ -411,17 +411,17 @@
   
   @keyframes signal-flow {
     0% {
-      transform: translateX(-20%);
+      transform: translateX(-15%);
       opacity: 0;
     }
     20% {
-      opacity: 0.15;
+      opacity: 0.4;
     }
     80% {
-      opacity: 0.15;
+      opacity: 0.4;
     }
     100% {
-      transform: translateX(20%);
+      transform: translateX(15%);
       opacity: 0;
     }
   }
