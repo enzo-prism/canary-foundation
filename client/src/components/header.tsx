@@ -4,6 +4,18 @@ import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 
+// Define navigation item types
+interface NavItem {
+  name: string;
+  path?: string | null;
+  subItems?: NavItem[];
+}
+
+interface NavSection {
+  path?: string | null;
+  items: NavItem[];
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -12,7 +24,7 @@ export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Navigation structure with all pages
-  const navigationStructure = {
+  const navigationStructure: Record<string, NavSection> = {
     'About Canary': {
       path: null,
       items: [
@@ -36,19 +48,54 @@ export default function Header() {
     'Canary Science': {
       path: null,
       items: [
-        { name: 'Overview', path: '/science/overview' },
         { 
-          name: 'Science', 
-          path: '/science/science',
+          name: 'Programs', 
+          path: null,
           subItems: [
-            { name: 'Imaging', path: '/science/science/imaging' },
-            { name: 'Biomarkers', path: '/science/science/biomarkers' }
+            { 
+              name: 'Tumors', 
+              path: null,
+              subItems: [
+                { name: 'Breast', path: '/science/programs/tumors/breast' },
+                { name: 'Lung', path: '/science/programs/tumors/lung' },
+                { name: 'Ovarian', path: '/science/programs/tumors/ovarian' },
+                { name: 'Pancreatic', path: '/science/programs/tumors/pancreatic' },
+                { name: 'Prostate', path: '/science/programs/tumors/prostate' }
+              ]
+            },
+            { 
+              name: 'Clinical Progress', 
+              path: null,
+              subItems: [
+                { name: 'Clinical Studies', path: '/science/programs/clinical-studies' }
+              ]
+            }
           ]
         },
-        { name: 'Programs', path: '/science/programs' },
-        { name: 'Centers', path: '/science/centers' },
-        { name: 'Publications', path: '/science/publications' },
-        { name: 'Funding by Invitation', path: '/science/funding-by-invitation' }
+        { 
+          name: 'Centers', 
+          path: null,
+          subItems: [
+            { 
+              name: 'Canary Center at Stanford', 
+              path: null,
+              subItems: [
+                { name: 'For Scientists', path: '/science/centers/stanford/for-scientists' },
+                { name: 'Biomarkers', path: '/science/centers/stanford/biomarkers' },
+                { name: 'Imaging', path: '/science/centers/stanford/imaging' }
+              ]
+            },
+            { name: 'FHCRC', path: '/science/centers/fhcrc' }
+          ]
+        },
+        { 
+          name: 'Publications', 
+          path: null,
+          subItems: [
+            { name: 'Canary-ACS Postdoctoral Fellowships', path: '/science/publications/fellowships' },
+            { name: 'Technology Seed Grants', path: '/science/publications/seed-grants' }
+          ]
+        }
       ]
     }
   };
@@ -141,29 +188,65 @@ export default function Header() {
                 >
                   <div className="py-2">
                     {section.items.map((item, index) => (
-                      <div key={index}>
-                        <Link 
-                          href={item.path} 
-                          className="group flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          <span className="font-medium">{item.name}</span>
-                          {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
-                        </Link>
+                      <div key={index} className="relative group">
+                        {item.path ? (
+                          <Link 
+                            href={item.path} 
+                            className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            <span className="font-medium">{item.name}</span>
+                            {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
+                          </Link>
+                        ) : (
+                          <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 transition-colors duration-200 cursor-default">
+                            <span className="font-medium">{item.name}</span>
+                            {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
+                          </div>
+                        )}
                         
-                        {/* Sub-items for Science section */}
+                        {/* Nested dropdown for sub-items */}
                         {item.subItems && (
-                          <div className="ml-4 border-l-2 border-gray-100">
-                            {item.subItems.map((subItem, subIndex) => (
-                              <Link 
-                                key={subIndex}
-                                href={subItem.path} 
-                                className="block px-4 py-2 text-xs text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
-                                onClick={() => setOpenDropdown(null)}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
+                          <div className="absolute left-full top-0 ml-1 w-64 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <div className="py-2">
+                              {item.subItems.map((subItem, subIndex) => (
+                                <div key={subIndex} className="relative group/sub">
+                                  {subItem.path ? (
+                                    <Link 
+                                      href={subItem.path} 
+                                      className="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
+                                      onClick={() => setOpenDropdown(null)}
+                                    >
+                                      <span>{subItem.name}</span>
+                                      {subItem.subItems && <ChevronRight className="w-3 h-3 opacity-50" />}
+                                    </Link>
+                                  ) : (
+                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 transition-colors duration-200 cursor-default">
+                                      <span>{subItem.name}</span>
+                                      {subItem.subItems && <ChevronRight className="w-3 h-3 opacity-50" />}
+                                    </div>
+                                  )}
+                                  
+                                  {/* Third level dropdown */}
+                                  {subItem.subItems && (
+                                    <div className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300">
+                                      <div className="py-2">
+                                        {subItem.subItems.map((thirdItem, thirdIndex) => (
+                                          <Link 
+                                            key={thirdIndex}
+                                            href={thirdItem.path} 
+                                            className="block px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
+                                            onClick={() => setOpenDropdown(null)}
+                                          >
+                                            {thirdItem.name}
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -227,26 +310,55 @@ export default function Header() {
                       <div className="mt-2 space-y-2">
                         {section.items.map((item, index) => (
                           <div key={index}>
-                            <Link 
-                              href={item.path}
-                              className="block text-dark hover:text-primary transition-colors duration-300 text-sm py-2 font-medium"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {item.name}
-                            </Link>
+                            {item.path ? (
+                              <Link 
+                                href={item.path}
+                                className="block text-dark hover:text-primary transition-colors duration-300 text-sm py-2 font-medium"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                {item.name}
+                              </Link>
+                            ) : (
+                              <div className="text-dark text-sm py-2 font-medium">
+                                {item.name}
+                              </div>
+                            )}
                             
                             {/* Sub-items for mobile */}
                             {item.subItems && (
                               <div className="ml-4 space-y-1">
                                 {item.subItems.map((subItem, subIndex) => (
-                                  <Link 
-                                    key={subIndex}
-                                    href={subItem.path}
-                                    className="block text-gray-600 hover:text-primary transition-colors duration-300 text-xs py-1"
-                                    onClick={() => setIsMenuOpen(false)}
-                                  >
-                                    • {subItem.name}
-                                  </Link>
+                                  <div key={subIndex}>
+                                    {subItem.path ? (
+                                      <Link 
+                                        href={subItem.path}
+                                        className="block text-gray-600 hover:text-primary transition-colors duration-300 text-xs py-1"
+                                        onClick={() => setIsMenuOpen(false)}
+                                      >
+                                        • {subItem.name}
+                                      </Link>
+                                    ) : (
+                                      <div className="text-gray-600 text-xs py-1 font-medium">
+                                        • {subItem.name}
+                                      </div>
+                                    )}
+                                    
+                                    {/* Third level for mobile */}
+                                    {subItem.subItems && (
+                                      <div className="ml-4 space-y-1">
+                                        {subItem.subItems.map((thirdItem, thirdIndex) => (
+                                          <Link 
+                                            key={thirdIndex}
+                                            href={thirdItem.path || '/'}
+                                            className="block text-gray-500 hover:text-primary transition-colors duration-300 text-xs py-1"
+                                            onClick={() => setIsMenuOpen(false)}
+                                          >
+                                            - {thirdItem.name}
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
                                 ))}
                               </div>
                             )}

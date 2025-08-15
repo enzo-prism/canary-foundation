@@ -24,6 +24,23 @@ import Publications from "@/pages/publications";
 import FundingByInvitation from "@/pages/funding-by-invitation";
 import Imaging from "@/pages/imaging";
 import Biomarkers from "@/pages/biomarkers";
+// Tumor-specific pages
+import BreastCancer from "@/pages/breast-cancer";
+import LungCancer from "@/pages/lung-cancer";
+import OvarianCancer from "@/pages/ovarian-cancer";
+import PancreaticCancer from "@/pages/pancreatic-cancer";
+import ProstateCancer from "@/pages/prostate-cancer";
+// Clinical Studies
+import ClinicalStudies from "@/pages/clinical-studies";
+// Stanford Center pages
+import StanfordForScientists from "@/pages/stanford-for-scientists";
+import StanfordBiomarkers from "@/pages/stanford-biomarkers";
+import StanfordImaging from "@/pages/stanford-imaging";
+// FHCRC
+import FHCRC from "@/pages/fhcrc";
+// Publications pages
+import Fellowships from "@/pages/fellowships";
+import SeedGrants from "@/pages/seed-grants";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -55,6 +72,28 @@ function Router() {
       <Route path="/science/funding-by-invitation" component={FundingByInvitation} />
       <Route path="/science/science/imaging" component={Imaging} />
       <Route path="/science/science/biomarkers" component={Biomarkers} />
+      
+      {/* Tumor-specific pages under Programs */}
+      <Route path="/science/programs/tumors/breast" component={BreastCancer} />
+      <Route path="/science/programs/tumors/lung" component={LungCancer} />
+      <Route path="/science/programs/tumors/ovarian" component={OvarianCancer} />
+      <Route path="/science/programs/tumors/pancreatic" component={PancreaticCancer} />
+      <Route path="/science/programs/tumors/prostate" component={ProstateCancer} />
+      
+      {/* Clinical Studies under Programs */}
+      <Route path="/science/programs/clinical-studies" component={ClinicalStudies} />
+      
+      {/* Stanford Center pages */}
+      <Route path="/science/centers/stanford/for-scientists" component={StanfordForScientists} />
+      <Route path="/science/centers/stanford/biomarkers" component={StanfordBiomarkers} />
+      <Route path="/science/centers/stanford/imaging" component={StanfordImaging} />
+      
+      {/* FHCRC page */}
+      <Route path="/science/centers/fhcrc" component={FHCRC} />
+      
+      {/* Publications sub-pages */}
+      <Route path="/science/publications/fellowships" component={Fellowships} />
+      <Route path="/science/publications/seed-grants" component={SeedGrants} />
       
       <Route component={NotFound} />
     </Switch>
