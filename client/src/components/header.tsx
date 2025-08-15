@@ -48,9 +48,18 @@ export default function Header() {
     'Canary Science': {
       path: null,
       items: [
+        { name: 'Overview', path: '/science/overview' },
+        { 
+          name: 'Science', 
+          path: '/science/science',
+          subItems: [
+            { name: 'Imaging', path: '/science/science/imaging' },
+            { name: 'Biomarkers', path: '/science/science/biomarkers' }
+          ]
+        },
         { 
           name: 'Programs', 
-          path: null,
+          path: '/science/programs',
           subItems: [
             { 
               name: 'Tumors', 
@@ -74,7 +83,7 @@ export default function Header() {
         },
         { 
           name: 'Centers', 
-          path: null,
+          path: '/science/centers',
           subItems: [
             { 
               name: 'Canary Center at Stanford', 
@@ -90,7 +99,7 @@ export default function Header() {
         },
         { 
           name: 'Publications', 
-          path: null,
+          path: '/science/publications',
           subItems: [
             { name: 'Canary-ACS Postdoctoral Fellowships', path: '/science/publications/fellowships' },
             { name: 'Technology Seed Grants', path: '/science/publications/seed-grants' }
