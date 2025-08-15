@@ -18,9 +18,10 @@ export default function FHCRC() {
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">Fred Hutchinson Cancer Research Center</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">FHCRC</h1>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Early Cancer Detection Research at the HUTCH</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Pioneering biomarker research and early detection studies at one of the world's leading cancer research institutions
+              After the death of Grace Listwin in 2001, her son Don set out to find a research institution that focused on the early detection of ovarian cancer. The search led to a researcher by the name of Dr. Nicole Urban located in Seattle at the Fred Hutchinson Cancer Research Center (FHCRC).
             </p>
           </div>
         </div>
@@ -33,13 +34,13 @@ export default function FHCRC() {
             <div className="mb-12">
               <h2 className="text-3xl font-bold text-dark mb-6">Partnership with Fred Hutch</h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                The Canary Foundation's partnership with Fred Hutchinson Cancer Research Center (Fred Hutch) represents one of 
-                our longest and most productive collaborations. Since 2002, this partnership has driven breakthrough discoveries 
-                in biomarker research, particularly for ovarian cancer early detection.
+                Don started funding some of Dr. Urban's work and also started learning about this new field called biomarkers. One marker, CA 125, was already being used as an indicator for ovarian cancer in women, but it was not proving to be an adequate marker for all women, especially for early detection.
+              </p>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Don later met Nobel Laureate Dr. Lee Hartwell, director of the FHCRC.  The idea of creating a full scale Biomarker Discovery and Analysis Program at the HUTCH was born. Don's $10-million investment helped establish the core of a biomarker discovery and analysis program, and the HUTCH remains one of Canary's 'Centers of Excellence' today.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Fred Hutch brings world-class expertise in cancer biology, population sciences, and clinical research, making it 
-                an ideal partner in our mission to develop reliable, affordable early detection methods that can be deployed globally.
+                Canary-funded research at the Hutch has gone from finding promising ovarian cancer detection blood biomarkers in clinical trials to now validating them in large clinical trials. 
               </p>
             </div>
 

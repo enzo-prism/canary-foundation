@@ -20,7 +20,7 @@ export default function StanfordForScientists() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">For Scientists</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Join the Canary Center at Stanford's world-class research community advancing early cancer detection
+              If you want to get involved or learn more about the research at the Canary Center at Stanford, please visit our website. Open positions are posted here. You may contact our faculty members directly. For more general information please contact us at: canarycenter@stanford.edu
             </p>
           </div>
         </div>

@@ -20,8 +20,11 @@ export default function StanfordOverview() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">Canary Center at Stanford</h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              The world's first facility dedicated solely to early cancer detection research, bringing together leading scientists to revolutionize cancer diagnosis
+            <p className="text-xl text-gray-600 leading-relaxed mb-6">
+              At the Canary Center at Stanford, world-class scientists from different disciplines combine their strengths to build tools for early cancer detection with the ultimate goal of saving lives.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              The mission of the Canary Center at Stanford is to foster research leading to the development of blood tests and molecular imaging approaches to detect and localize early cancers, because early intervention is far more effective than late stage cancer treatment.
             </p>
           </div>
         </div>

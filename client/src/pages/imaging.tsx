@@ -127,11 +127,10 @@ export default function Imaging() {
               {/* Mobile-first title */}
               <div className="text-center mb-8">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-4 leading-tight">
-                  Molecular Imaging for Early Cancer Detection
+                  Imaging
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-2">
-                  Leading breakthrough imaging technologies that allow us to see biological processes happening in the context of disease, 
-                  based on specific molecular events taking place at early stages of tumor development.
+                  Imaging plays a critical role in early cancer detection. It allows us to see the unseen and visualize tumor parameters such as imaging depth, spatial resolution, contrast and more. Our imaging projects are led by a world-renowned expert in molecular imaging—Dr. Sanjiv Sam Gambhir. He is Chair of the Radiology department and Virginia and D.K. Ludwig Professor of Cancer Research at the Stanford School of Medicine. Along with teams of scientists—each with their own labs—Sam is guiding the future of early cancer detection imaging.
                 </p>
               </div>
               

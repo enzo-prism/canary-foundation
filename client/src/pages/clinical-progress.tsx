@@ -20,8 +20,12 @@ export default function ClinicalProgress() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">Clinical Progress</h1>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">From Theory to Tractable Problem to Clinical Studies</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Translating breakthrough research into clinical practice through rigorous trials and real-world implementation
+              The goal of our cancer programs is to develop early detection screening strategies, consisting of blood tests and molecular imaging techniques, that will allow us to detect lethal cancers early enough to be curable.
+            </p>
+            <p className="text-lg text-gray-600 mt-4 italic">
+              Working in the Multimodality Molecular Imaging Lab
             </p>
           </div>
         </div>

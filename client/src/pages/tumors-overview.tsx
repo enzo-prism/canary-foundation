@@ -19,9 +19,10 @@ export default function TumorsOverview() {
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">Tumor Research Programs</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">Tumors</h1>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Finding Tissue Abnormalities</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Comprehensive early detection research across five major cancer types, led by world-class teams developing breakthrough technologies
+              Is it benign or malignant? Two words that carry a huge amount of emotional weight for patients, of course, and for the doctors caring for those patients. So what if finding tissue abnormalities was less invasive, less expensive, and offered fewer false-positives and more reliable results? Canary's work on tumors across a range of cancer types focuses on earlier detection and the use of advanced technologies to better image tumor formation and distinguish cancer from benign disease.
             </p>
           </div>
         </div>

@@ -20,14 +20,23 @@ export default function Programs() {
               <h1 className="text-4xl md:text-5xl font-bold text-dark mb-8">
                 Programs
               </h1>
+              <div className="text-lg text-gray-700 leading-relaxed mb-8 space-y-4">
+                <p className="font-semibold text-xl">
+                  10 more years… Imagine the gift of 10 more years after hearing the big, ugly C word. Unfortunately, today that gift is rare—a vast majority of patients live a few months past their diagnosis. Early detection can change that.
+                </p>
+                <p>
+                  10 more years for a parent translates to giving your kids the foundation to be a good human being. 10 more years means a parent could watch his or her child graduate and go to prom. 10 more years may mean living to hold your grandchild. We may not be able to cure cancer in this lifetime, but we definitely have a shot at early detection, early treatment and loving life longer.
+                </p>
+                <p className="italic text-gray-600">
+                  Dr. Nishita Kothary<br />
+                  Associate Professor, Radiology, Stanford Medicine
+                </p>
+              </div>
               <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8">
                 Our Focus: 5 Cancer Types—How Many Lives Saved?
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-6">
-                What if we could improve lung cancer screening for all people, regardless of smoking status? Or what if we found a way to identify ovarian cancer long before it became lethal? And why can't benign breast cancer tissue be more easily identified from cancerous tissue, resulting in less worry and trauma for the patient?
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                This is the program work done at the Canary Foundation.
+                What if we could improve lung cancer screening for all people, regardless of smoking status? Or what if we found a way to identify ovarian cancer long before it became lethal? And why can't benign breast cancer tissue be more easily identified from cancerous tissue, resulting in less worry and trauma for the patient? This is the program work done at the Canary Foundation.
               </p>
             </div>
           </div>
