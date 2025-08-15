@@ -45,10 +45,10 @@ const BiomarkerGrid: React.FC = () => {
     >
       {/* Background dot grid */}
       <div 
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-60"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(250,199,46,0.3) 1px, transparent 0)`,
-          backgroundSize: '16px 16px',
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(250,199,46,0.5) 1px, transparent 0)`,
+          backgroundSize: '20px 20px',
         }}
       />
       
@@ -57,7 +57,7 @@ const BiomarkerGrid: React.FC = () => {
         className="absolute inset-0 w-full h-full" 
         xmlns="http://www.w3.org/2000/svg"
         style={{
-          filter: 'blur(0.3px)',
+          filter: 'blur(0.2px)',
         }}
       >
         <defs>
@@ -67,9 +67,15 @@ const BiomarkerGrid: React.FC = () => {
           
           <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(250, 199, 46, 0)" />
-            <stop offset="50%" stopColor="rgba(250, 199, 46, 0.5)" />
+            <stop offset="50%" stopColor="rgba(250, 199, 46, 0.8)" />
             <stop offset="100%" stopColor="rgba(250, 199, 46, 0)" />
           </linearGradient>
+          
+          <radialGradient id="nodeGlow">
+            <stop offset="0%" stopColor="rgba(250, 199, 46, 0.8)" />
+            <stop offset="50%" stopColor="rgba(250, 199, 46, 0.4)" />
+            <stop offset="100%" stopColor="rgba(250, 199, 46, 0)" />
+          </radialGradient>
           
           <filter id="glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -83,20 +89,20 @@ const BiomarkerGrid: React.FC = () => {
         {/* Background pattern */}
         <rect width="100%" height="100%" fill="url(#grid)" />
         
-        {/* Static connection lines - More subtle */}
-        <g opacity="0.15">
-          {Array.from({ length: 8 }, (_, i) => (
+        {/* Static connection lines - More visible */}
+        <g opacity="0.3">
+          {Array.from({ length: 15 }, (_, i) => (
             <g key={i}>
               <line 
                 x1={`${15 + (i * 60)}%`} 
                 y1="25%" 
                 x2={`${35 + (i * 60)}%`} 
                 y2="35%" 
-                stroke="rgba(250, 199, 46, 0.4)" 
-                strokeWidth="0.8"
+                stroke="rgba(250, 199, 46, 0.6)" 
+                strokeWidth="1"
                 className="biomarker-drift"
                 style={{ 
-                  animationDelay: `${i * 0.8}s`,
+                  animationDelay: `${i * 0.4}s`,
                   transform: 'translateZ(0)',
                 }}
               />
@@ -105,11 +111,11 @@ const BiomarkerGrid: React.FC = () => {
                 y1="65%" 
                 x2={`${45 + (i * 55)}%`} 
                 y2="75%" 
-                stroke="rgba(250, 199, 46, 0.4)" 
-                strokeWidth="0.8"
+                stroke="rgba(250, 199, 46, 0.6)" 
+                strokeWidth="1"
                 className="biomarker-drift"
                 style={{ 
-                  animationDelay: `${i * 1.2}s`,
+                  animationDelay: `${i * 0.6}s`,
                   transform: 'translateZ(0)',
                 }}
               />
@@ -117,9 +123,9 @@ const BiomarkerGrid: React.FC = () => {
           ))}
         </g>
         
-        {/* Animated pulse lines - Fewer and more subtle */}
-        <g opacity="0.7">
-          {Array.from({ length: 3 }, (_, i) => (
+        {/* Animated pulse lines - More active */}
+        <g opacity="0.9">
+          {Array.from({ length: 6 }, (_, i) => (
             <line 
               key={i}
               x1={`${20 + (i * 40)}%`} 
@@ -127,30 +133,67 @@ const BiomarkerGrid: React.FC = () => {
               x2={`${40 + (i * 40)}%`} 
               y2={`${40 + (i * 20)}%`} 
               stroke="url(#pulse)" 
-              strokeWidth="1.5"
-              strokeDasharray="15 85"
+              strokeWidth="2"
+              strokeDasharray="30 70"
               className="signal-flow"
               style={{ 
-                animationDelay: `${i * 4}s`,
-                animationDuration: `${15 + i * 2}s`,
+                animationDelay: `${i * 0.8}s`,
+                animationDuration: `${3 + i * 0.5}s`,
               }}
             />
           ))}
         </g>
         
-        {/* Floating nodes - Fewer and more subtle */}
+        {/* Floating nodes - More active */}
         <g>
-          {Array.from({ length: 12 }, (_, i) => (
+          {Array.from({ length: 20 }, (_, i) => (
             <circle 
               key={i}
               cx={`${20 + (i * 25) % 80}%`} 
               cy={`${30 + (i * 30) % 60}%`} 
-              r={i % 6 === 0 ? "2.5" : "2"} 
-              fill="rgba(250, 199, 46, 0.25)" 
+              r={i % 6 === 0 ? "3" : "2"} 
+              fill="rgba(250, 199, 46, 0.4)" 
               className="biomarker-pulse"
               style={{ 
-                animationDelay: `${i * 0.5}s`,
+                animationDelay: `${i * 0.2}s`,
                 transform: 'translateZ(0)',
+              }}
+            />
+          ))}
+        </g>
+        
+        {/* Additional animated particles for more activity */}
+        <g opacity="0.6">
+          {Array.from({ length: 8 }, (_, i) => (
+            <circle 
+              key={`extra-${i}`}
+              cx={`${10 + (i * 30)}%`} 
+              cy={`${15 + (i * 25)}%`} 
+              r="15" 
+              fill="url(#nodeGlow)" 
+              className="signal-flow"
+              style={{ 
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: '3s',
+              }}
+            />
+          ))}
+        </g>
+        
+        {/* Moving gradient waves */}
+        <g opacity="0.3">
+          {Array.from({ length: 4 }, (_, i) => (
+            <rect 
+              key={`wave-${i}`}
+              x="-100%" 
+              y={`${i * 25}%`}
+              width="300%" 
+              height="25%"
+              fill="url(#pulse)"
+              className="signal-flow"
+              style={{ 
+                animationDelay: `${i * 1.2}s`,
+                animationDuration: '5s',
               }}
             />
           ))}
