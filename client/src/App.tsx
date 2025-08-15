@@ -25,14 +25,17 @@ import FundingByInvitation from "@/pages/funding-by-invitation";
 import Imaging from "@/pages/imaging";
 import Biomarkers from "@/pages/biomarkers";
 // Tumor-specific pages
+import TumorsOverview from "@/pages/tumors-overview";
 import BreastCancer from "@/pages/breast-cancer";
 import LungCancer from "@/pages/lung-cancer";
 import OvarianCancer from "@/pages/ovarian-cancer";
 import PancreaticCancer from "@/pages/pancreatic-cancer";
 import ProstateCancer from "@/pages/prostate-cancer";
 // Clinical Studies
+import ClinicalProgress from "@/pages/clinical-progress";
 import ClinicalStudies from "@/pages/clinical-studies";
 // Stanford Center pages
+import StanfordOverview from "@/pages/stanford-overview";
 import StanfordForScientists from "@/pages/stanford-for-scientists";
 import StanfordBiomarkers from "@/pages/stanford-biomarkers";
 import StanfordImaging from "@/pages/stanford-imaging";
@@ -74,16 +77,19 @@ function Router() {
       <Route path="/science/science/biomarkers" component={Biomarkers} />
       
       {/* Tumor-specific pages under Programs */}
+      <Route path="/science/programs/tumors" component={TumorsOverview} />
       <Route path="/science/programs/tumors/breast" component={BreastCancer} />
       <Route path="/science/programs/tumors/lung" component={LungCancer} />
       <Route path="/science/programs/tumors/ovarian" component={OvarianCancer} />
       <Route path="/science/programs/tumors/pancreatic" component={PancreaticCancer} />
       <Route path="/science/programs/tumors/prostate" component={ProstateCancer} />
       
-      {/* Clinical Studies under Programs */}
+      {/* Clinical Progress and Studies under Programs */}
+      <Route path="/science/programs/clinical-progress" component={ClinicalProgress} />
       <Route path="/science/programs/clinical-studies" component={ClinicalStudies} />
       
       {/* Stanford Center pages */}
+      <Route path="/science/centers/stanford" component={StanfordOverview} />
       <Route path="/science/centers/stanford/for-scientists" component={StanfordForScientists} />
       <Route path="/science/centers/stanford/biomarkers" component={StanfordBiomarkers} />
       <Route path="/science/centers/stanford/imaging" component={StanfordImaging} />

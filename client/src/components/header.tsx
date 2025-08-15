@@ -63,7 +63,7 @@ export default function Header() {
           subItems: [
             { 
               name: 'Tumors', 
-              path: null,
+              path: '/science/programs/tumors',
               subItems: [
                 { name: 'Breast', path: '/science/programs/tumors/breast' },
                 { name: 'Lung', path: '/science/programs/tumors/lung' },
@@ -74,7 +74,7 @@ export default function Header() {
             },
             { 
               name: 'Clinical Progress', 
-              path: null,
+              path: '/science/programs/clinical-progress',
               subItems: [
                 { name: 'Clinical Studies', path: '/science/programs/clinical-studies' }
               ]
@@ -87,7 +87,7 @@ export default function Header() {
           subItems: [
             { 
               name: 'Canary Center at Stanford', 
-              path: null,
+              path: '/science/centers/stanford',
               subItems: [
                 { name: 'For Scientists', path: '/science/centers/stanford/for-scientists' },
                 { name: 'Biomarkers', path: '/science/centers/stanford/biomarkers' },
