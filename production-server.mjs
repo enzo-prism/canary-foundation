@@ -11,6 +11,19 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configure compression FIRST before any other middleware
+app.use(compression({
+  threshold: 0, // Compress everything
+  level: 6, // Balanced compression level
+  filter: (req, res) => {
+    // Compress everything except images
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return true;
+  }
+}));
+
 // Detect build directory - when running from dist/, public is in same directory
 const BUILD_DIR = process.env.BUILD_DIR || 'public';
 const buildPath = __dirname.endsWith('/dist') ? join(__dirname, BUILD_DIR) : join(__dirname, 'dist', BUILD_DIR);
@@ -105,9 +118,6 @@ Sitemap: https://canaryfoundation.org/llm.xml`;
 function generateETag(content) {
   return `"${crypto.createHash('md5').update(content).digest('hex')}"`;
 }
-
-// Enable compression
-app.use(compression());
 
 // Force HTTPS redirect
 app.use((req, res, next) => {
@@ -233,11 +243,69 @@ app.get('/ai.txt', (req, res, next) => {
   }
 });
 
+// Middleware to serve pre-compressed files
+app.get('*.js', (req, res, next) => {
+  const acceptEncoding = req.headers['accept-encoding'] || '';
+  const filePath = join(buildPath, req.path);
+  
+  // Try brotli first (best compression)
+  if (acceptEncoding.includes('br') && fs.existsSync(`${filePath}.br`)) {
+    req.url = req.url + '.br';
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'application/javascript; charset=utf-8');
+    next();
+  }
+  // Then try gzip
+  else if (acceptEncoding.includes('gzip') && fs.existsSync(`${filePath}.gz`)) {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', 'application/javascript; charset=utf-8');
+    next();
+  }
+  // Fallback to uncompressed
+  else {
+    next();
+  }
+});
+
+app.get('*.css', (req, res, next) => {
+  const acceptEncoding = req.headers['accept-encoding'] || '';
+  const filePath = join(buildPath, req.path);
+  
+  // Try brotli first (best compression)
+  if (acceptEncoding.includes('br') && fs.existsSync(`${filePath}.br`)) {
+    req.url = req.url + '.br';
+    res.set('Content-Encoding', 'br');
+    res.set('Content-Type', 'text/css; charset=utf-8');
+    next();
+  }
+  // Then try gzip
+  else if (acceptEncoding.includes('gzip') && fs.existsSync(`${filePath}.gz`)) {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', 'text/css; charset=utf-8');
+    next();
+  }
+  // Fallback to uncompressed
+  else {
+    next();
+  }
+});
+
 // Serve static files with caching
 app.use(express.static(buildPath, {
   etag: true,
   lastModified: true,
   setHeaders: (res, path) => {
+    // Don't set Content-Type for pre-compressed files (already set above)
+    if (!path.endsWith('.gz') && !path.endsWith('.br')) {
+      if (path.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+      } else if (path.endsWith('.css')) {
+        res.setHeader('Content-Type', 'text/css; charset=utf-8');
+      }
+    }
+    
     // Cache static assets for 1 year
     if (path.includes('/assets/')) {
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
@@ -245,6 +313,9 @@ app.use(express.static(buildPath, {
       // Cache HTML for 1 hour
       res.setHeader('Cache-Control', 'public, max-age=3600');
     }
+    
+    // Add Vary header for compression negotiation
+    res.setHeader('Vary', 'Accept-Encoding');
   }
 }));
 

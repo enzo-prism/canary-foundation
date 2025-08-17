@@ -1,0 +1,169 @@
+Site Audit:  
+www.canaryfoundation.org
+Updated:
+Sun, Aug 17, 2025
+Mobile
+JS rendering:
+Disabled
+Pages crawled:
+14/1,000
+22 issues with uncompressed JavaScript and CSS files
+Warning
+Failed:
+22
+Successful:
+11
+
+Why and how to fix it
+Search
+
+Page URL
+Resource URL
+Resource Type
+Discovered
+Sortable
+
+Canary Foundation - Early Cancer Detection Research
+https://canaryfoundation.org/
+https://canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://canaryfoundation.org/
+https://canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/centers/canary-center-at-stanford/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/centers/canary-center-at-stanford/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/funding-by-invitation/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/funding-by-invitation/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/tumors/ovarian/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/tumors/ovarian/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/tumors/pancreatic/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/programs/tumors/pancreatic/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/science/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/science/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/science/biomarkers/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/canary-science/science/biomarkers/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/contact/
+https://www.canaryfoundation.org/assets/index-P81vo6ce.css
+CSS
+Aug 17, 2025, 11:32
+
+Canary Foundation - Early Cancer Detection Research
+https://www.canaryfoundation.org/contact/
+https://www.canaryfoundation.org/assets/index-BNrk0iHh.js
+JavaScript
+Aug 17, 2025, 11:32
+Page:
+1
+of
+1
+Page: 1
+How likely are you to recommend Site Audit to others?
+
+Contact us
+About us
+Blog
+Cookie settings
+Legal info
+Privacy policy
