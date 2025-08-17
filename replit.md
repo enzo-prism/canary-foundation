@@ -143,6 +143,14 @@ Preferred communication style: Simple, everyday language.
 - **Database Migrations**: Drizzle Kit for schema management
 - **Replit Integration**: Custom plugins for development environment
 
+## Critical Deployment Fix (Aug 17, 2025)
+
+### Robots.txt SEO Error Resolution
+- **Issue**: www.canaryfoundation.org/robots.txt was returning HTML instead of plain text
+- **Root Cause**: Production deployment was using TypeScript-compiled server (`dist/index.js`) instead of production server with crawl asset support
+- **Solution**: Deploy `production-server.mjs` which includes proper robots.txt handling and crawl asset generation
+- **Verified**: Both www and apex domains now correctly serve plain text robots.txt with proper Content-Type headers
+
 ## Deployment Strategy
 
 ### Development Environment
