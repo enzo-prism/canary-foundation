@@ -1,0 +1,92 @@
+You are my Replit Agent. Implement a robust, production-safe fix so crawlers never see 404s and our deployment is hardened.
+
+PROJECT: “CanaryWebsite” (already deployed on Autoscale; custom domains canaryfoundation.org + www.canaryfoundation.org are mapped)
+
+HIGH-LEVEL GOAL
+Serve the built site through a tiny Node/Express server that:
+  (1) Forces HTTPS (via x-forwarded-proto) 
+  (2) Canonicalizes host (www → apex canaryfoundation.org) 
+  (3) Handles HEAD as well as GET 
+  (4) Provides SPA fallback (serve index.html on deep routes) 
+  (5) Adds HSTS + basic security headers 
+  (6) Exposes /robots.txt and /health 
+  (7) Works on Replit Deployments with correct Build/Start commands
+
+OPERATING MODE (follow exactly)
+- First: Produce a short PLAN with numbered steps. Do not make changes until I approve the PLAN.
+- Then: After approval, create a CHECKPOINT before edits, implement changes, and create another CHECKPOINT after passing tests.
+- Use Extended Thinking; if available, enable High Power for reasoning steps (OK to turn off for build/run).
+
+NON-GOALS / SAFETY
+- Do NOT delete any project files or data.
+- Do NOT modify databases or secrets.
+- Keep existing analytics/pixels untouched.
+- No HSTS “preload” flag.
+
+TASKS (after I approve your PLAN)
+1) Detect build output folder:
+   - Prefer "dist" (Vite/most SPAs). If not present, fall back to "build".
+   - Use the detected folder as BUILD_DIR.
+
+2) Add server.js at repo root with this behavior (adjust BUILD_DIR):
+   - Express + compression
+   - Redirect: if x-forwarded-proto != https → 301 to https
+   - Redirect: if host === "www.canaryfoundation.org" → 301 to https://canaryfoundation.org{url}
+   - Headers: 
+       Strict-Transport-Security: max-age=31536000; includeSubDomains
+       X-Content-Type-Options: nosniff
+       Referrer-Policy: strict-origin-when-cross-origin
+   - Static: serve BUILD_DIR with etag + lastModified
+   - Robots: GET /robots.txt → 
+       text/plain:
+         User-agent: *
+         Allow: /
+         Sitemap: https://canaryfoundation.org/sitemap.xml
+   - Health: /health and /status → 200 "ok"
+   - HEAD handler: ensure HEAD routes return 200 (Express mirrors GET; provide explicit app.head("*", …) returning 200)
+   - SPA fallback: app.get("*") → sendFile(BUILD_DIR/index.html)
+   - Listen on process.env.PORT || 3000
+
+3) Update package.json
+   - Ensure deps: "express" ^4 and "compression" ^1.7
+   - Keep existing "build" script as-is.
+   - Add "start": "node server.js"
+
+4) Deployment → Edit commands and secrets
+   - Build: `npm ci && npm run build`
+   - Start:
+       If BUILD_DIR === "dist": `npm start`
+       If BUILD_DIR === "build": `BUILD_DIR=build npm start`
+   - Confirm BOTH domains are still attached (no changes needed).
+
+5) Canonical tag
+   - In the source HTML template, ensure exactly one:
+     <link rel="canonical" href="https://canaryfoundation.org/">
+
+6) Redeploy Production.
+
+7) Security pass (Deployments → Security Scanner)
+   - Run a pre-deployment security scan.
+   - If any HIGH/CRITICAL issues: use “Fix with Agent” or propose minimal changes; do NOT add new services or secrets.
+   - Re-run the scan until HIGH/CRITICAL are resolved or explicitly justified.
+
+ACCEPTANCE TESTS (run and paste outputs)
+Expect 200 or 301→200 in all cases:
+  a) curl -I https://canaryfoundation.org/
+  b) curl -I https://www.canaryfoundation.org/     # should 301 to apex
+  c) curl -I -A "SiteAuditBot/1.0" https://canaryfoundation.org/
+  d) curl -I -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" https://canaryfoundation.org/
+Confirm headers on apex root include:
+  - Strict-Transport-Security: max-age=31536000; includeSubDomains
+  - X-Content-Type-Options: nosniff
+  - Referrer-Policy: strict-origin-when-cross-origin
+
+WHAT TO RETURN
+- The PLAN (numbered), then wait for my “Approve”.
+- After approval: 
+  - BUILD_DIR you detected
+  - package.json diff (scripts + dependencies)
+  - First ~10 lines of server.js
+  - Each curl status line (+ Location if present)
+  - Confirmation of the two mapped domains in Production
+  - Security scan summary (and any fixes made)
