@@ -13,7 +13,7 @@ npm ci && npm run build && node postbuild.js
 
 ### Start Command  
 ```
-cd dist && node server.js
+cd dist && node index.js
 ```
 
 ## Production Server Features

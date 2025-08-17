@@ -3,6 +3,7 @@ import compression from 'compression';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,6 +19,91 @@ const buildPath = __dirname.endsWith('/dist') ? join(__dirname, BUILD_DIR) : joi
 if (!fs.existsSync(buildPath)) {
   console.error(`Build directory ${buildPath} does not exist. Please run 'npm run build' first.`);
   process.exit(1);
+}
+
+// Load crawl assets on startup
+let crawlAssets = loadCrawlAssets();
+
+function loadCrawlAssets() {
+  const crawlAssetFiles = [
+    'robots.txt',
+    'sitemap.xml',
+    'sitemap-index.xml',
+    'llm.xml',
+    'ai.txt'
+  ];
+  
+  const assets = {
+    robotsTxt: null,
+    sitemapXml: null,
+    sitemapIndexXml: null,
+    llmXml: null,
+    aiTxt: null,
+    sitemapParts: []
+  };
+  
+  // Try to load from build directory
+  try {
+    const robotsPath = join(buildPath, 'robots.txt');
+    if (fs.existsSync(robotsPath)) {
+      assets.robotsTxt = fs.readFileSync(robotsPath, 'utf-8');
+    }
+    
+    const sitemapPath = join(buildPath, 'sitemap.xml');
+    if (fs.existsSync(sitemapPath)) {
+      assets.sitemapXml = fs.readFileSync(sitemapPath, 'utf-8');
+    }
+    
+    const sitemapIndexPath = join(buildPath, 'sitemap-index.xml');
+    if (fs.existsSync(sitemapIndexPath)) {
+      assets.sitemapIndexXml = fs.readFileSync(sitemapIndexPath, 'utf-8');
+    }
+    
+    const llmPath = join(buildPath, 'llm.xml');
+    if (fs.existsSync(llmPath)) {
+      assets.llmXml = fs.readFileSync(llmPath, 'utf-8');
+    }
+    
+    const aiPath = join(buildPath, 'ai.txt');
+    if (fs.existsSync(aiPath)) {
+      assets.aiTxt = fs.readFileSync(aiPath, 'utf-8');
+    }
+    
+    // Load sitemap parts if they exist
+    const files = fs.readdirSync(buildPath);
+    files.forEach(file => {
+      if (file.match(/^sitemap-\d+\.xml$/)) {
+        const content = fs.readFileSync(join(buildPath, file), 'utf-8');
+        assets.sitemapParts.push({ name: file, xml: content });
+      }
+    });
+    
+    console.log('Crawl assets loaded:', {
+      robotsTxt: !!assets.robotsTxt,
+      sitemapXml: !!assets.sitemapXml,
+      sitemapIndexXml: !!assets.sitemapIndexXml,
+      llmXml: !!assets.llmXml,
+      aiTxt: !!assets.aiTxt,
+      sitemapParts: assets.sitemapParts.length
+    });
+  } catch (error) {
+    console.error('Error loading crawl assets:', error);
+  }
+  
+  // If no robots.txt found, use fallback
+  if (!assets.robotsTxt) {
+    assets.robotsTxt = `User-agent: *
+Allow: /
+Sitemap: https://canaryfoundation.org/sitemap.xml
+Sitemap: https://canaryfoundation.org/llm.xml`;
+  }
+  
+  return assets;
+}
+
+// Helper to generate ETag
+function generateETag(content) {
+  return `"${crypto.createHash('md5').update(content).digest('hex')}"`;
 }
 
 // Enable compression
@@ -63,20 +149,85 @@ app.get('/status', (req, res) => {
   res.status(200).send('ok');
 });
 
-// Robots.txt
+// Robots.txt - MUST be before static middleware and SPA fallback
 app.get('/robots.txt', (req, res) => {
-  res.type('text/plain');
-  res.send(`User-agent: *
-Allow: /
-Sitemap: https://canaryfoundation.org/sitemap.xml`);
+  res.type('text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.setHeader('X-Robots-Tag', 'all');
+  if (crawlAssets.robotsTxt) {
+    res.setHeader('ETag', generateETag(crawlAssets.robotsTxt));
+  }
+  res.send(crawlAssets.robotsTxt);
 });
 
-// Sitemap.xml (if it exists in build)
+// Sitemap.xml
 app.get('/sitemap.xml', (req, res, next) => {
-  const sitemapPath = join(buildPath, 'sitemap.xml');
-  if (fs.existsSync(sitemapPath)) {
-    res.type('application/xml');
-    res.sendFile(sitemapPath);
+  if (crawlAssets.sitemapXml) {
+    res.type('application/xml; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('ETag', generateETag(crawlAssets.sitemapXml));
+    res.send(crawlAssets.sitemapXml);
+  } else if (crawlAssets.sitemapIndexXml) {
+    // If we have an index, redirect to it
+    res.redirect(301, '/sitemap-index.xml');
+  } else {
+    // Try static file fallback
+    const sitemapPath = join(buildPath, 'sitemap.xml');
+    if (fs.existsSync(sitemapPath)) {
+      res.type('application/xml');
+      res.sendFile(sitemapPath);
+    } else {
+      next();
+    }
+  }
+});
+
+// Sitemap index
+app.get('/sitemap-index.xml', (req, res, next) => {
+  if (crawlAssets.sitemapIndexXml) {
+    res.type('application/xml; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('ETag', generateETag(crawlAssets.sitemapIndexXml));
+    res.send(crawlAssets.sitemapIndexXml);
+  } else {
+    next();
+  }
+});
+
+// Sitemap shards
+app.get('/sitemap-:id.xml', (req, res, next) => {
+  if (crawlAssets.sitemapParts) {
+    const shard = crawlAssets.sitemapParts.find(p => p.name === `sitemap-${req.params.id}.xml`);
+    if (shard) {
+      res.type('application/xml; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('ETag', generateETag(shard.xml));
+      res.send(shard.xml);
+      return;
+    }
+  }
+  next();
+});
+
+// LLM sitemap
+app.get('/llm.xml', (req, res, next) => {
+  if (crawlAssets.llmXml) {
+    res.type('application/xml; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('ETag', generateETag(crawlAssets.llmXml));
+    res.send(crawlAssets.llmXml);
+  } else {
+    next();
+  }
+});
+
+// AI.txt
+app.get('/ai.txt', (req, res, next) => {
+  if (crawlAssets.aiTxt) {
+    res.type('text/plain; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('ETag', generateETag(crawlAssets.aiTxt));
+    res.send(crawlAssets.aiTxt);
   } else {
     next();
   }
