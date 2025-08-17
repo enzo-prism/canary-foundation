@@ -19,7 +19,8 @@ cd dist && node server.js
 ## Production Server Features
 
 ✅ **HTTPS Enforcement** - Redirects all HTTP traffic to HTTPS via x-forwarded-proto header
-✅ **Domain Canonicalization** - Redirects www.canaryfoundation.org to canaryfoundation.org
+✅ **Domain Canonicalization** - Redirects www.canaryfoundation.org to canaryfoundation.org (except crawler files)
+✅ **Crawler File Support** - robots.txt, sitemap.xml, llm.xml, ai.txt served on both www and apex domains
 ✅ **Security Headers**:
   - Strict-Transport-Security: max-age=31536000; includeSubDomains
   - X-Content-Type-Options: nosniff

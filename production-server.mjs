@@ -32,10 +32,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Canonicalize domain (www → apex)
+// Canonicalize domain (www → apex) - but allow crawler files on both domains
 app.use((req, res, next) => {
   const host = req.headers.host;
-  if (host === 'www.canaryfoundation.org') {
+  const crawlerPaths = ['/robots.txt', '/sitemap.xml', '/sitemap-index.xml', '/llm.xml', '/ai.txt'];
+  
+  // Don't redirect crawler files - serve them on both domains
+  if (host === 'www.canaryfoundation.org' && !crawlerPaths.some(path => req.url.startsWith(path))) {
     return res.redirect(301, `https://canaryfoundation.org${req.url}`);
   }
   next();
