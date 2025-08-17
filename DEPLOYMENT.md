@@ -8,12 +8,12 @@
 
 ### Build Command
 ```
-npm ci && npm run build && cp production-server.mjs dist/index.js
+npm ci && npm run build
 ```
 
 ### Start Command  
 ```
-npm start
+cd dist && node server.js
 ```
 
 ## Production Server Features

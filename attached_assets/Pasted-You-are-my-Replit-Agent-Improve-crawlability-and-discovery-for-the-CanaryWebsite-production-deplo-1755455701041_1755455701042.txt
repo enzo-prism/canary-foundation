@@ -1,0 +1,133 @@
+You are my Replit Agent. Improve crawlability and discovery for the “CanaryWebsite” production deployment.
+
+PROJECT CONTEXT
+- Deployed on Replit (Autoscale). Custom domains already mapped: canaryfoundation.org and www.canaryfoundation.org
+- We’re already serving through an Express server (server.js) with HTTPS + canonical host (apex) + SPA fallback.
+
+PRIMARY GOAL
+Add robust, auto-updating crawl assets and endpoints:
+  1) robots.txt that references sitemaps
+  2) sitemap.xml (and optional sitemap-index.xml if needed)
+  3) llm.xml (an AI-focused mirror of our sitemap so LLM crawlers can find high-value pages easily)
+  4) Optional ai.txt (non-standard, but increasingly recognized) that points to llm.xml
+  5) Make these regenerate on each deploy without manual work
+  6) Add acceptance tests to verify content, headers, and status codes
+
+OPERATING MODE
+- First output a short PLAN with steps. Wait for my approval before making changes.
+- After approval: create a CHECKPOINT, implement changes, then another CHECKPOINT post-tests.
+- Use Extended Thinking/High Power for reasoning; normal power for build/run.
+
+NON-GOALS / SAFETY
+- Do not remove existing analytics, pixels, or content.
+- Do not change canonical host logic or HSTS settings already added.
+- No “preload” on HSTS.
+- No secrets or third-party services required (IndexNow keys etc. are out of scope).
+
+TASKS (implement after PLAN approval)
+
+A) DISCOVER BUILD OUTPUT
+- Detect the build output directory (BUILD_DIR): prefer “dist”; if missing, fall back to “build”.
+- We will generate sitemaps from:
+  (1) A recursive scan of BUILD_DIR for .html files to create canonical URLs (excluding 404 pages, service worker shells, etc.)
+  (2) If scanning yields only a single page (typical SPA) or < 5 HTML files, then fall back to a route list file we’ll create at repo path: seo/routes.json (seed it with ["/"] and include a comment telling me how to add routes).
+- The site origin is https://canaryfoundation.org (apex).
+
+B) GENERATION UTILITIES
+- Create a small Node module at scripts/generate-crawl-assets.mjs that:
+  - Loads BUILD_DIR from env or defaults to "dist".
+  - Builds a URL list by:
+      * Scanning BUILD_DIR for *.html → path → URL (strip BUILD_DIR, convert /index.html to /).
+      * Merging with seo/routes.json (if present) to ensure we include client-routed SPA paths.
+      * De-duping, sorting, and ensuring each URL starts with "/".
+  - Adds per-URL <lastmod> from file mtimes if available; otherwise uses the current ISO date.
+  - Emits strings for:
+      * sitemap.xml (standard <urlset>), respecting the 50k-URL/50MB limit. If we ever exceed, emit sitemap-index.xml plus shards: sitemap-1.xml, sitemap-2.xml, etc.
+      * llm.xml (same structure/content as sitemap.xml; just a dedicated endpoint).
+      * robots.txt that includes:
+          User-agent: *
+          Allow: /
+          Sitemap: https://canaryfoundation.org/sitemap.xml
+          Sitemap: https://canaryfoundation.org/llm.xml
+        (Keep it simple and permissive.)
+      * ai.txt (optional, non-standard) that contains:
+          User-agent: *
+          Allow: /
+          Sitemap: https://canaryfoundation.org/llm.xml
+  - Export a function buildCrawlAssets() that returns an object:
+      { robotsTxt, sitemapXml, sitemapIndexXml?, sitemapParts?: [{name, xml}], llmXml, aiTxt }
+
+- Add an npm script: 
+  "crawl:generate": "node scripts/generate-crawl-assets.mjs"
+  This script should print a short summary (counts of URLs, which sources were used, whether an index was created).
+
+C) SERVER ENDPOINTS
+- Enhance server.js to serve the assets from memory (generate once at startup) with correct content types and caching:
+  - On server start, call buildCrawlAssets() and hold results in module scope.
+  - Routes (GET only; HEAD should work automatically):
+      /robots.txt            → text/plain; charset=utf-8
+      /sitemap.xml           → application/xml; charset=utf-8
+      /sitemap-index.xml     → application/xml; charset=utf-8 (only if index was created)
+      /sitemap-*.xml         → application/xml; charset=utf-8 (if shards exist)
+      /llm.xml               → application/xml; charset=utf-8
+      /ai.txt                → text/plain; charset=utf-8
+  - Set Cache-Control for these to a modest max-age (e.g., 1h) and ETag.
+  - Log a brief summary at startup: total URLs, BUILD_DIR used, and whether index/shards were emitted.
+
+D) BUILD/DEPLOY HOOK
+- Update package.json scripts (leave existing build/start intact). Add:
+  - "crawl:generate": as above.
+  - "postbuild": "npm run crawl:generate" (so a local build shows the summary in logs).
+- In Deployments → Edit commands and secrets, ensure:
+  - Build: `npm ci && npm run build`   (postbuild will run and log)
+  - Start: unchanged (we already run `node server.js`).
+
+E) HTML HINTS (OPTIONAL but nice)
+- If the main HTML template (source index.html) lacks a canonical tag, add:
+    <link rel="canonical" href="https://canaryfoundation.org/">
+- If <html> lacks a lang attribute, set lang="en".
+- Do NOT add noindex anywhere.
+
+F) REDEPLOY PRODUCTION
+- Redeploy after implementing all changes.
+
+ACCEPTANCE TESTS (run and paste outputs)
+1) Robots
+   - `curl -sS https://canaryfoundation.org/robots.txt | head -n 20`
+   Expect two "Sitemap:" lines (sitemap.xml and llm.xml) and "Allow: /"
+
+2) Sitemaps
+   - `curl -I https://canaryfoundation.org/sitemap.xml`          # 200, Content-Type: application/xml
+   - `curl -sS https://canaryfoundation.org/sitemap.xml | head`
+   - If an index was created, also:
+     `curl -I https://canaryfoundation.org/sitemap-index.xml`
+     `curl -sS https://canaryfoundation.org/sitemap-index.xml | head`
+
+3) LLM sitemap
+   - `curl -I https://canaryfoundation.org/llm.xml`               # 200, application/xml
+   - `curl -sS https://canaryfoundation.org/llm.xml | head`
+
+4) AI directives (optional)
+   - `curl -I https://canaryfoundation.org/ai.txt`                # 200, text/plain
+   - `curl -sS https://canaryfoundation.org/ai.txt | head`
+
+5) HEAD handling
+   - `curl -I -X HEAD https://canaryfoundation.org/sitemap.xml`   # 200
+   - `curl -I -X HEAD https://canaryfoundation.org/robots.txt`    # 200
+
+6) URL count + source
+   - Provide the startup log line that reports: BUILD_DIR used, total URLs, and whether we used dist scan vs seo/routes.json (and how many from each).
+
+WHAT TO RETURN
+- PLAN (numbered). Wait for my “Approve” first.
+- After execution:
+  - The detected BUILD_DIR
+  - The generated URL count and whether index/shards were needed
+  - A snippet (first ~15 lines) of scripts/generate-crawl-assets.mjs
+  - The new/updated routes added to server.js (just the route handlers)
+  - The output from all acceptance test commands above
+  - Confirmation that Deployments build/start commands remain correct
+
+NOTES
+- If BUILD_DIR scan finds only index.html, continue and also create seo/routes.json with [" / "] and an instructional comment; include its path in your reply so I can add more SPA routes later.
+- Keep responses concise but complete; no speculative libraries.
