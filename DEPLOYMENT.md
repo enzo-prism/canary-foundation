@@ -8,7 +8,7 @@
 
 ### Build Command
 ```
-npm ci && npm run build
+npm ci && npm run build && node postbuild.js
 ```
 
 ### Start Command  
