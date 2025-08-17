@@ -172,7 +172,7 @@ Sitemap: ${SITE_ORIGIN}/llm.xml`;
 }
 
 /**
- * Build all crawl assets
+ * Build all crawl assets and write to disk
  */
 export function buildCrawlAssets() {
   const scanUrls = scanBuildDirectory();
@@ -194,6 +194,22 @@ export function buildCrawlAssets() {
     totalCount: allUrls.length
   };
   
+  // Build directory path
+  const buildPath = path.join(rootDir, BUILD_DIR);
+  
+  // Ensure build directory exists
+  if (!fs.existsSync(buildPath)) {
+    fs.mkdirSync(buildPath, { recursive: true });
+  }
+  
+  // Write robots.txt
+  fs.writeFileSync(path.join(buildPath, 'robots.txt'), result.robotsTxt);
+  console.log(`  ✓ robots.txt written to ${BUILD_DIR}/robots.txt`);
+  
+  // Write ai.txt
+  fs.writeFileSync(path.join(buildPath, 'ai.txt'), result.aiTxt);
+  console.log(`  ✓ ai.txt written to ${BUILD_DIR}/ai.txt`);
+  
   // Check if we need to shard the sitemap
   if (allUrls.length > MAX_URLS_PER_SITEMAP) {
     const sitemapParts = [];
@@ -204,20 +220,33 @@ export function buildCrawlAssets() {
     }
     
     chunks.forEach((chunk, index) => {
-      sitemapParts.push({
-        name: `sitemap-${index + 1}.xml`,
-        xml: generateSitemapXml(chunk)
-      });
+      const fileName = `sitemap-${index + 1}.xml`;
+      const xml = generateSitemapXml(chunk);
+      fs.writeFileSync(path.join(buildPath, fileName), xml);
+      sitemapParts.push({ name: fileName, xml });
     });
     
     result.sitemapIndexXml = generateSitemapIndexXml(sitemapParts.length);
     result.sitemapParts = sitemapParts;
-    console.log(`  Sitemap shards created: ${sitemapParts.length}`);
+    
+    // Write sitemap index
+    fs.writeFileSync(path.join(buildPath, 'sitemap-index.xml'), result.sitemapIndexXml);
+    console.log(`  ✓ Sitemap shards created: ${sitemapParts.length}`);
+    console.log(`  ✓ sitemap-index.xml written to ${BUILD_DIR}/sitemap-index.xml`);
   } else {
     result.sitemapXml = generateSitemapXml(allUrls);
     result.llmXml = generateSitemapXml(allUrls); // LLM XML is same as sitemap
-    console.log(`  Single sitemap generated (no sharding needed)`);
+    
+    // Write sitemap.xml
+    fs.writeFileSync(path.join(buildPath, 'sitemap.xml'), result.sitemapXml);
+    console.log(`  ✓ sitemap.xml written to ${BUILD_DIR}/sitemap.xml`);
+    
+    // Write llm.xml
+    fs.writeFileSync(path.join(buildPath, 'llm.xml'), result.llmXml);
+    console.log(`  ✓ llm.xml written to ${BUILD_DIR}/llm.xml`);
   }
+  
+  console.log(`\n✅ All crawl assets generated successfully!`);
   
   return result;
 }
