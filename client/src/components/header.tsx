@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
+import { trackClick } from "@/lib/analytics";
 
 // Define navigation item types
 interface NavItem {
@@ -243,7 +244,7 @@ export default function Header() {
                                         {subItem.subItems.map((thirdItem, thirdIndex) => (
                                           <Link 
                                             key={thirdIndex}
-                                            href={thirdItem.path} 
+                                            href={thirdItem.path || '/'} 
                                             className="block px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
                                             onClick={() => setOpenDropdown(null)}
                                           >
@@ -272,7 +273,10 @@ export default function Header() {
               Blog
             </Link>
             <Button 
-              onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+              onClick={() => {
+                trackClick('take_action_header', 'cta');
+                window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+              }}
               className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300"
             >
               Take Action

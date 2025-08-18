@@ -130,6 +130,7 @@ Preferred communication style: Simple, everyday language.
 - **Icons**: Lucide React icons
 - **Date Handling**: date-fns library
 - **Form Management**: React Hook Form with Zod resolvers
+- **Analytics**: Google Analytics 4 (Measurement ID: G-D368QS08VY)
 
 ### Backend Dependencies
 - **Database**: Neon Database serverless PostgreSQL
@@ -182,3 +183,24 @@ Preferred communication style: Simple, everyday language.
 4. **Component-First UI**: Leverages Radix UI primitives with shadcn/ui styling for accessible, customizable components.
 
 5. **Type-Safe API**: Uses Zod for runtime validation and TypeScript for compile-time safety throughout the application stack.
+
+## Analytics Implementation (August 18, 2025)
+
+### Google Analytics 4 Integration
+- **Measurement ID**: G-D368QS08VY (hardcoded for production)
+- **Implementation Date**: August 18, 2025
+- **Features Implemented**:
+  - Automatic page view tracking for single-page application routing
+  - Event tracking for user interactions (form submissions, search, external links)
+  - Outbound link tracking for external blog posts and donation links
+  - Contact form submission tracking
+  - Blog search query tracking with 1-second debouncing
+  - Category filter interaction tracking in blog
+  - CTA button click tracking ("Take Action", "Support Our Mission")
+  - Custom events for element visibility and scroll depth
+- **Technical Details**:
+  - Core analytics library in `client/src/lib/analytics.ts`
+  - Custom React hook for page tracking in `client/src/hooks/use-analytics.tsx`
+  - Initialization in App component on mount
+  - Comprehensive event tracking throughout the application
+  - Console logging for development debugging

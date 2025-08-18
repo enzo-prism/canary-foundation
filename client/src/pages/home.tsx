@@ -16,6 +16,7 @@ import Footer from "@/components/footer";
 import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import BiomarkerGrid from "@/components/BiomarkerGrid";
+import { trackFormSubmission, trackClick, trackVideo } from "@/lib/analytics";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -82,7 +83,7 @@ export default function Home() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setVisibleElements(prev => new Set([...prev, entry.target.id]));
+          setVisibleElements(prev => new Set(Array.from(prev).concat(entry.target.id)));
         }
       });
     }, observerOptions);
@@ -164,6 +165,8 @@ export default function Home() {
       return await apiRequest("POST", "/api/contact", data);
     },
     onSuccess: () => {
+      // Track successful form submission
+      trackFormSubmission('contact_form');
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you soon.",
@@ -363,6 +366,9 @@ export default function Home() {
                     style={{
                       objectFit: 'cover'
                     }}
+                    onPlay={() => trackVideo('play', 'canary_animated_logo')}
+                    onPause={() => trackVideo('pause', 'canary_animated_logo')}
+                    onEnded={() => trackVideo('complete', 'canary_animated_logo')}
                   >
                     <source src={canaryAnimatedVideo} type="video/mp4" />
                     Your browser does not support the video element.
@@ -1105,7 +1111,10 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark font-semibold"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => {
+                    trackClick('support_mission_hero', 'cta');
+                    window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                  }}
                 >
                   Support Our Mission
                 </Button>

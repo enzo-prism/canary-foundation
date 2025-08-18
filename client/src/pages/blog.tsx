@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowRight, Search, Tag, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import { trackSearch, trackOutboundLink, trackClick } from '@/lib/analytics';
 
 // Blog post data with authentic Canary Foundation content from 2024 and 2023
 const blogPosts = [
@@ -112,7 +113,7 @@ export default function Blog() {
     window.scrollTo(0, 0);
   }, []);
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
-  const [visibleElements, setVisibleElements] = useState(new Set());
+  const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
 
   // Filter posts based on category and search term
   useEffect(() => {
@@ -120,6 +121,8 @@ export default function Blog() {
     
     if (selectedCategory !== "All") {
       filtered = filtered.filter(post => post.category === selectedCategory);
+      // Track category filter selection
+      trackClick(`blog_category_${selectedCategory}`, 'blog_navigation');
     }
     
     if (searchTerm) {
@@ -128,6 +131,13 @@ export default function Blog() {
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
       );
+      // Track search queries (debounced)
+      const timer = setTimeout(() => {
+        if (searchTerm.length > 2) {
+          trackSearch(searchTerm);
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
     }
     
     setFilteredPosts(filtered);
@@ -143,7 +153,7 @@ export default function Blog() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.target.id) {
-          setVisibleElements(prev => new Set([...prev, entry.target.id]));
+          setVisibleElements(prev => new Set(Array.from(prev).concat(entry.target.id)));
         }
       });
     }, observerOptions);
@@ -157,7 +167,7 @@ export default function Blog() {
   // Apply visibility classes
   useEffect(() => {
     const visibleElementsArray = Array.from(visibleElements);
-    visibleElementsArray.forEach(id => {
+    visibleElementsArray.forEach((id: string) => {
       const element = document.getElementById(id);
       if (element) {
         element.classList.add('animate-visible');
@@ -233,7 +243,11 @@ export default function Blog() {
                   
                   <Button 
                     className="bg-primary text-white hover:bg-primary-dark animate-shimmer"
-                    onClick={() => window.open(featuredPost.url, '_blank')}
+                    onClick={() => {
+                      trackOutboundLink(featuredPost.url);
+                      trackClick(`blog_featured_${featuredPost.id}`, 'blog_engagement');
+                      window.open(featuredPost.url, '_blank');
+                    }}
                   >
                     Read Full Article
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -321,7 +335,11 @@ export default function Blog() {
                           variant="ghost" 
                           size="sm" 
                           className="text-primary hover:text-primary-dark animate-shimmer"
-                          onClick={() => window.open(post.url, '_blank')}
+                          onClick={() => {
+                            trackOutboundLink(post.url);
+                            trackClick(`blog_post_${post.id}`, 'blog_engagement');
+                            window.open(post.url, '_blank');
+                          }}
                         >
                           Read More
                           <ArrowRight className="w-4 h-4 ml-1" />
