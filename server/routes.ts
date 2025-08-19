@@ -7,6 +7,9 @@ import fs from "fs";
 import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // NOTE: Legacy redirects are now handled in server/index.ts BEFORE Vite middleware
+  // This ensures they work properly in development mode
+  
   // Serve crawl assets for development
   app.get("/robots.txt", (req, res) => {
     const robotsPath = path.join(process.cwd(), "dist", "public", "robots.txt");

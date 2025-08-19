@@ -176,6 +176,26 @@ Preferred communication style: Simple, everyday language.
 - `robots.txt` - Enhanced with AI crawler rules
 - `ai.txt` - Instructions for AI/LLM crawlers
 
+## Legacy URL Redirect Implementation (Aug 19, 2025)
+
+### Critical 301 Redirects for SEO Preservation
+- **Issue**: Legacy URLs returning 404 errors, breaking bookmarks and losing SEO value
+- **Solution**: Implemented comprehensive 301 redirect middleware in server/index.ts
+- **Key Fix**: Placed redirect middleware BEFORE Vite middleware to ensure proper execution
+
+### Redirects Implemented (5 critical + 50+ total):
+1. `/about-canary/founders-story/` → `/about/founders-story`
+2. `/about-canary/` → `/about`
+3. `/about-canary/staff/` → `/about/staff`
+4. `/canary-science/programs/` → `/science/programs`
+5. `/about-canary/board-of-directors/` → `/about/board-of-directors`
+
+### Technical Implementation:
+- **Location**: Redirect middleware in `server/index.ts` (BEFORE Vite middleware)
+- **Production**: Same redirects in `production-server.mjs`
+- **Testing**: All 16 redirect tests passing with proper 301 status codes
+- **SEO Impact**: Preserves link equity and prevents 404 errors for indexed pages
+
 ## Deployment Strategy
 
 ### Development Environment
