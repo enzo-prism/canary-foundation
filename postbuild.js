@@ -3,8 +3,8 @@
 console.log('Running post-build tasks...');
 
 async function runPostBuild() {
-  // Generate crawl assets
-  const crawlModule = await import('./scripts/generate-crawl-assets.mjs');
+  // Generate enhanced crawl assets with SEO improvements
+  const crawlModule = await import('./scripts/generate-crawl-assets-enhanced.mjs');
   crawlModule.buildCrawlAssets();
   
   // Compress CSS and JS files
