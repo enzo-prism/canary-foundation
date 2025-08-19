@@ -8,6 +8,7 @@ import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import Home from "@/pages/home";
 import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
 import AboutOverview from "@/pages/about-overview";
 import FoundersStory from "@/pages/founders-story";
 import Staff from "@/pages/staff";
@@ -56,6 +57,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug" component={BlogPost} />
       
       {/* About Canary pages */}
       <Route path="/about/overview" component={AboutOverview} />
