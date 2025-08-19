@@ -23,6 +23,13 @@ node postbuild.js
 echo "Copying production server..."
 cp production-server.mjs dist/
 
+# Copy generation script to dist for runtime generation
+echo "Copying generation script for runtime..."
+mkdir -p dist/scripts dist/seo
+cp scripts/generate-crawl-assets-enhanced.mjs dist/scripts/
+cp scripts/compress-assets.mjs dist/scripts/ 2>/dev/null || true
+cp -r seo/* dist/seo/ 2>/dev/null || true
+
 # Verify critical SEO files exist
 echo ""
 echo "Verifying SEO files..."
