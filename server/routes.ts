@@ -17,12 +17,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.type("text/plain");
       res.sendFile(robotsPath);
     } else {
-      // Fallback robots.txt for development
-      res.type("text/plain");
-      res.send(`User-agent: *
+      // Generate and save robots.txt if it doesn't exist
+      const robotsTxt = `User-agent: *
 Allow: /
 Sitemap: https://canaryfoundation.org/sitemap.xml
-Sitemap: https://canaryfoundation.org/llm.xml`);
+Sitemap: https://www.canaryfoundation.org/sitemap.xml
+
+# Search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI/LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /`;
+      
+      // Try to create the directory and save for future use
+      const distPublicPath = path.join(process.cwd(), "dist", "public");
+      if (!fs.existsSync(distPublicPath)) {
+        fs.mkdirSync(distPublicPath, { recursive: true });
+      }
+      fs.writeFileSync(robotsPath, robotsTxt, 'utf-8');
+      
+      res.type("text/plain");
+      res.send(robotsTxt);
     }
   });
 
@@ -32,7 +64,96 @@ Sitemap: https://canaryfoundation.org/llm.xml`);
       res.type("application/xml");
       res.sendFile(sitemapPath);
     } else {
-      res.status(404).send("Sitemap not found. Run 'npm run build && node postbuild.js' to generate.");
+      // Generate a minimal sitemap on-the-fly if it doesn't exist
+      const minimalSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://canaryfoundation.org/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about/our-mission</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about/founders-story</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about/impact-success</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about/staff</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/about/board-of-directors</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/science</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/science/programs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/science/centers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/approach</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/blog/don-listwin-award-2024-antonis-antoniou</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/blog/edx24-conference-stanford-cancer-research</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://canaryfoundation.org/contact</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>`;
+      
+      // Try to create the directory and save the sitemap for future use
+      const distPublicPath = path.join(process.cwd(), "dist", "public");
+      if (!fs.existsSync(distPublicPath)) {
+        fs.mkdirSync(distPublicPath, { recursive: true });
+      }
+      fs.writeFileSync(sitemapPath, minimalSitemap, 'utf-8');
+      
+      // Serve the generated sitemap
+      res.type("application/xml");
+      res.send(minimalSitemap);
     }
   });
 

@@ -1,250 +1,57 @@
 # Canary Foundation Website
 
 ## Overview
-
-This is a full-stack web application for the Canary Foundation, a non-profit organization focused on early cancer detection research and precision medicine. Founded in 2004, the foundation develops breakthrough technologies and biomarkers for detecting cancer at its earliest stages. The application features a modern, responsive design built with React and TypeScript on the frontend, Express.js on the backend, and uses PostgreSQL with Drizzle ORM for data management.
+This project is a full-stack web application for the Canary Foundation, a non-profit dedicated to early cancer detection research. It aims to showcase the foundation's work, research programs, and impact through a modern, responsive online presence. The application provides comprehensive information about the foundation's mission, scientific approach, leadership, and opportunities for engagement. Key capabilities include displaying detailed research programs, authentic content on various scientific topics, and facilitating user interaction through a contact form.
 
 ## User Preferences
-
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend Architecture
+### Design and Technology Stack
+The application features a modern, responsive design built with React 18 and TypeScript on the frontend, utilizing Radix UI components with shadcn/ui and Tailwind CSS for styling. The backend is powered by Express.js with TypeScript. Data management is handled by PostgreSQL with Drizzle ORM.
+
+### Frontend Architecture Decisions
 - **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite for development and production builds
-- **UI Library**: Radix UI components with shadcn/ui design system
-- **Styling**: Tailwind CSS with custom CSS variables for theming
-- **State Management**: TanStack Query (React Query) for server state management
-- **Routing**: Wouter for client-side routing
-- **Forms**: React Hook Form with Zod validation
+- **Build Tool**: Vite
+- **UI System**: Radix UI components with shadcn/ui for accessible and customizable UI
+- **Styling**: Tailwind CSS for utility-first styling and custom theming
+- **State Management**: TanStack Query for server state
+- **Routing**: Wouter for client-side navigation
+- **Forms**: React Hook Form with Zod for robust form handling and validation
 
-### Backend Architecture
+### Backend Architecture Decisions
 - **Framework**: Express.js with TypeScript
-- **Database**: PostgreSQL with Drizzle ORM
-- **Database Client**: Neon Database serverless driver
-- **Validation**: Zod schemas for request/response validation
-- **Development**: tsx for TypeScript execution in development
+- **Database**: PostgreSQL with Drizzle ORM for type-safe query building
+- **Validation**: Zod schemas for API request and response validation, ensuring data integrity across the stack
+- **Development**: tsx for efficient TypeScript execution
 
-### Project Structure
-- `client/` - Frontend React application
-  - `src/pages/home.tsx` - Main homepage with all sections
-  - `src/pages/blog.tsx` - Blog page with 2024 authentic content
-  - `src/pages/not-found.tsx` - 404 error page
-  - `src/components/` - Reusable UI components
-- `server/` - Backend Express.js application
-- `shared/` - Shared TypeScript types and schemas
-- `migrations/` - Database migration files
-
-## Key Components
-
-### Database Schema
-- **Users Table**: Basic user management with username/password
-- **Contact Messages Table**: Stores contact form submissions with name, email, subject, message, and timestamp
-
-### API Endpoints
-- `POST /api/contact` - Submit contact form messages
-- `GET /api/contact` - Retrieve contact messages (admin functionality)
-- `/blog` - Blog page with authentic 2024 Canary Foundation content
-
-### Individual Navigation Pages
-- **About Canary**: 7 dedicated pages (Overview, Founder's Story, Staff, Board of Directors, Leadership Council, Scientific Leadership, Financials)
-- **Canary Approach**: 3 dedicated pages (Overview, Collaborations & Partnership, Canary Symposium)
-- **Canary Science**: 1 comprehensive page (Overview covering Programs, Centers, Publications, Funding)
-- All pages feature authentic content from Canary Foundation materials and real research data
-- Updated Canary Symposium page with authentic evolution story to Early Detection of Cancer Conference
-- Updated Canary Science Overview page with authentic content about being world's only non-profit focused solely on early cancer detection
-- Created dedicated Science page (/science/science) with authentic content featuring "It's All About the Science" theme and Jelena Levi scientist spotlight
-- Added Imaging subpage (/science/science/imaging) featuring Dr. Sanjiv Gambhir's molecular imaging expertise, FDA-approved microbubble technology, and photoacoustic imaging research
-- Added Biomarkers subpage (/science/science/biomarkers) featuring Richard Kimura's biomarker research, blood-based detection methods, and multi-cancer screening trials
-- Created Programs page (/science/programs) featuring authentic content about 5 cancer types with Dr. Sanjiv Gambhir leadership spotlight and multidisciplinary team approach
-- Created Centers page (/science/centers) with authentic foundation story including Don Listwin's $10M investment, Dr. Nicole Urban's biomarker work, and Nobel Laureate Dr. Lee Hartwell partnership
-- Created Publications page (/science/publications) featuring 100+ authentic Canary-funded research papers across 7 cancer types with complete bibliographic details
-- Created Funding by Invitation page (/science/funding-by-invitation) detailing invitation-only research award process and Board of Directors oversight
-
-### Research Programs Featured
-- **Prostate Cancer Program**: PASS study (1,100+ participants), PATROL genetic risk cohort
-- **Ovarian Cancer Program**: BRCA pre-cancer atlas, fallopian tube precursor studies
-- **Pancreatic Cancer Program**: Advanced ultrasound imaging, POCUS technology
-- **Liquid Biopsy Center**: Urine analysis, interstitial fluid research, microneedle patches
-- **Molecular Imaging**: Photoacoustic imaging, microbubble contrast agents
-- **Education & Training**: NCI R25 CREST program, Phillips Postdoc Fellowship
-- **Cyclotron & Radiochemistry Facility**: 36+ FDA-approved radiotracers, radiation safety education
-- **Interventional Radiology (IRIS)**: Endovascular neuromodulation, stem cell implantation
-- **Lung Cancer Program**: Never-smoker biomarkers, MD Anderson partnerships, community outreach
-
-### Frontend Features
-- Multi-page application with smooth scrolling navigation and routing
-- Responsive design with mobile-first approach
-- Contact form with client-side validation
-- Toast notifications for user feedback
-- Modern UI components from Radix UI/shadcn
-- Yellow and white branding for cancer research focus
-- Research program showcases with detailed descriptions
-- Impact stories highlighting breakthrough discoveries
-- Navigation structure: Home, About Canary, Canary Approach, Canary Science, Blog, Take Action
-- Take Action button prominently styled as primary call-to-action
-- Canary Approach dropdown: Overview, Canary Collaborations and Partnership, Canary Symposium
-- Canary Science dropdown: Overview, Science, Programs, Centers, Publications, Funding by Invitation
-- About Canary dropdown: Our Mission, Founder's Story, Impact & Success
-- Dedicated blog page with authentic 2022-2024 content from Canary Foundation
-- Blog features: search functionality, category filtering, featured posts, external links
-- 7 authentic blog posts covering Don Listwin Awards, EDx conferences, and research milestones
-- Three years of continuous EDx conference coverage (2022: sold-out, 2023: London with 500 attendees, 2024: San Francisco)
-- News & Blog section with recent awards and research updates
-- Events section covering conferences, symposiums, and training programs
-- Comprehensive horizontal timeline with 24+ authentic milestones (2000-2024)
-- Leadership section featuring key personnel and Scientific Advisory Board
-- Community outreach section highlighting health disparities initiatives
-- Dedicated Financials section separate from Contact with enhanced transparency
-- "Our Community Legacy" photo gallery showcasing historic foundation supporters and past fundraising events
-- Animated Canary Foundation logo video positioned between timeline and mission
-- Hero section simplified with innovation highlight instead of image slider
-- GPU-accelerated animations with scroll-triggered effects throughout the site
-
-### Storage Layer
-- In-memory storage implementation for development (`MemStorage`)
-- Database-ready architecture with Drizzle ORM configuration
-- Prepared for PostgreSQL production deployment
-
-## Data Flow
-
-1. **Contact Form Submission**:
-   - User fills out contact form on frontend
-   - Form data validated with Zod schema
-   - API request sent to `/api/contact` endpoint
-   - Server validates data and stores in database
-   - Success/error response returned to client
-   - Toast notification shown to user
-
-2. **Server-Side Validation**:
-   - All API endpoints use Zod schemas for validation
-   - Shared schemas between frontend and backend ensure consistency
-   - Error handling with proper HTTP status codes
+### Core System Design
+- **Shared Schema Approach**: Utilizes a shared TypeScript schema between frontend and backend to ensure type safety and consistency.
+- **Monorepo Structure**: Organizes `client/`, `server/`, and `shared/` directories within a single repository for streamlined development.
+- **Database Schema**: Includes `Users` for basic management and `Contact Messages` for form submissions.
+- **API Endpoints**: Key endpoints include `POST /api/contact` for form submissions and `GET /api/contact` (admin).
+- **Multi-page Application**: Supports extensive content through dedicated navigation pages for "About Canary", "Canary Approach", and "Canary Science", each with detailed sub-sections and authentic content.
+- **Responsive Design**: Mobile-first approach for optimal viewing across devices.
+- **SEO Enhancements**: Implemented comprehensive sitemap generation, dynamic priority and change frequencies, and robust 301 redirect middleware for legacy URLs to preserve SEO value.
+- **Analytics Integration**: Google Analytics 4 is integrated for tracking page views, user interactions, and specific events like form submissions and CTA clicks.
 
 ## External Dependencies
 
 ### Frontend Dependencies
-- **UI Components**: Extensive Radix UI component library
-- **Styling**: Tailwind CSS with PostCSS
-- **Icons**: Lucide React icons
-- **Date Handling**: date-fns library
-- **Form Management**: React Hook Form with Zod resolvers
-- **Analytics**: Google Analytics 4 (Measurement ID: G-D368QS08VY)
+- **UI Components**: Radix UI
+- **Styling**: Tailwind CSS, PostCSS
+- **Icons**: Lucide React
+- **Date Handling**: date-fns
+- **Form Management**: React Hook Form, Zod
+- **Analytics**: Google Analytics 4
 
 ### Backend Dependencies
-- **Database**: Neon Database serverless PostgreSQL
-- **ORM**: Drizzle ORM with PostgreSQL dialect
-- **Session Management**: connect-pg-simple for PostgreSQL sessions
-- **Development Tools**: tsx for TypeScript execution
+- **Database**: Neon Database (serverless PostgreSQL)
+- **ORM**: Drizzle ORM
+- **Session Management**: connect-pg-simple (for PostgreSQL sessions)
 
 ### Development Tools
-- **Build**: Vite with React plugin
-- **TypeScript**: Strict configuration with path aliases
-- **Database Migrations**: Drizzle Kit for schema management
-- **Replit Integration**: Custom plugins for development environment
-
-## Critical Deployment Fix (Aug 17, 2025)
-
-### Robots.txt SEO Error Resolution
-- **Issue**: www.canaryfoundation.org/robots.txt was returning HTML instead of plain text
-- **Root Cause**: Production deployment was using TypeScript-compiled server (`dist/index.js`) instead of production server with crawl asset support
-- **Solution**: Deploy `production-server.mjs` which includes proper robots.txt handling and crawl asset generation
-- **Verified**: Both www and apex domains now correctly serve plain text robots.txt with proper Content-Type headers
-
-## Comprehensive SEO Improvements (Aug 19, 2025)
-
-### Enhanced Sitemap Generation System
-- **Issue**: All pages had identical priority (0.8) and changefreq (weekly), missing blog posts
-- **Solution**: Implemented `generate-crawl-assets-enhanced.mjs` with intelligent SEO optimization
-- **Improvements Verified**: 26/26 tests passed in verification suite
-
-### Key SEO Enhancements Implemented:
-1. **Priority Hierarchy**: Dynamic 6-level priority system (1.0 for home → 0.5 for blog posts)
-2. **Realistic Change Frequencies**: Page-specific update frequencies (daily for home, monthly for static)
-3. **Blog Post Pages**: All 7 individual blog posts now indexed with proper metadata
-4. **News Sitemap**: Dedicated Google News sitemap for blog content with article metadata
-5. **AI/LLM Optimization**: Enhanced llm.xml with semantic hints for AI crawlers
-6. **Comprehensive Robots.txt**: Rules for 4+ AI crawlers (GPTBot, Claude, ChatGPT, Anthropic)
-7. **AI Instructions**: Detailed ai.txt file with organization context and crawling guidelines
-
-### Files Generated:
-- `sitemap.xml` - 328 lines, 54 URLs with priority hierarchy
-- `news-sitemap.xml` - 87 lines, 7 news articles
-- `llm.xml` - 303 lines, 47 important URLs for AI
-- `sitemap-index.xml` - Master index for all sitemaps
-- `robots.txt` - Enhanced with AI crawler rules
-- `ai.txt` - Instructions for AI/LLM crawlers
-
-## Legacy URL Redirect Implementation (Aug 19, 2025)
-
-### Critical 301 Redirects for SEO Preservation
-- **Issue**: Legacy URLs returning 404 errors, breaking bookmarks and losing SEO value
-- **Solution**: Implemented comprehensive 301 redirect middleware in server/index.ts
-- **Key Fix**: Placed redirect middleware BEFORE Vite middleware to ensure proper execution
-
-### Redirects Implemented (5 critical + 50+ total):
-1. `/about-canary/founders-story/` → `/about/founders-story`
-2. `/about-canary/` → `/about`
-3. `/about-canary/staff/` → `/about/staff`
-4. `/canary-science/programs/` → `/science/programs`
-5. `/about-canary/board-of-directors/` → `/about/board-of-directors`
-
-### Technical Implementation:
-- **Location**: Redirect middleware in `server/index.ts` (BEFORE Vite middleware)
-- **Production**: Same redirects in `production-server.mjs`
-- **Testing**: All 16 redirect tests passing with proper 301 status codes
-- **SEO Impact**: Preserves link equity and prevents 404 errors for indexed pages
-
-## Deployment Strategy
-
-### Development Environment
-- Vite dev server for frontend with HMR
-- Express server with automatic TypeScript compilation
-- In-memory storage for rapid development
-- Replit-specific plugins for cloud development
-
-### Production Build
-- Frontend built with Vite to static assets
-- Backend compiled with esbuild to ES modules
-- Database migrations applied with Drizzle Kit
-- Environment variables for database connection
-
-### Database Configuration
-- PostgreSQL database with Drizzle ORM
-- Connection via DATABASE_URL environment variable
-- Migration files stored in `/migrations` directory
-- Schema definitions in `shared/schema.ts`
-
-### Key Architectural Decisions
-
-1. **Shared Schema Approach**: Uses a shared TypeScript schema file to ensure type safety between frontend and backend, reducing duplication and maintaining consistency.
-
-2. **Memory Storage Pattern**: Implements an in-memory storage layer for development that can be easily swapped for database persistence in production.
-
-3. **Monorepo Structure**: Organizes code into logical directories (client, server, shared) while maintaining a single repository for easier development and deployment.
-
-4. **Component-First UI**: Leverages Radix UI primitives with shadcn/ui styling for accessible, customizable components.
-
-5. **Type-Safe API**: Uses Zod for runtime validation and TypeScript for compile-time safety throughout the application stack.
-
-## Analytics Implementation (August 18, 2025)
-
-### Google Analytics 4 Integration
-- **Measurement ID**: G-D368QS08VY (hardcoded for production)
-- **Implementation Date**: August 18, 2025
-- **Features Implemented**:
-  - Automatic page view tracking for single-page application routing
-  - Event tracking for user interactions (form submissions, search, external links)
-  - Outbound link tracking for external blog posts and donation links
-  - Contact form submission tracking
-  - Blog search query tracking with 1-second debouncing
-  - Category filter interaction tracking in blog
-  - CTA button click tracking ("Take Action", "Support Our Mission")
-  - Custom events for element visibility and scroll depth
-- **Technical Details**:
-  - Core analytics library in `client/src/lib/analytics.ts`
-  - Custom React hook for page tracking in `client/src/hooks/use-analytics.tsx`
-  - Initialization in App component on mount
-  - Comprehensive event tracking throughout the application
-  - Console logging for development debugging
+- **Build**: Vite
+- **TypeScript**: Strict configuration
+- **Database Migrations**: Drizzle Kit
