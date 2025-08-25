@@ -95,7 +95,7 @@ export default function Header() {
                 { name: 'Imaging', path: '/science/centers/stanford/imaging' }
               ]
             },
-            { name: 'FHCRC', path: '/science/centers/fhcrc' }
+            { name: 'FHCC', path: '/science/centers/fhcc' }
           ]
         },
         { 

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Building2, Microscope, Users, Award, Heart, TrendingUp, Target, Shield } from "lucide-react";
 
-export default function FHCRC() {
+export default function FHCC() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -18,10 +18,10 @@ export default function FHCRC() {
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">FHCRC</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">FHCC</h1>
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Early Cancer Detection Research at the HUTCH</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              After the death of Grace Listwin in 2001, her son Don set out to find a research institution that focused on the early detection of ovarian cancer. The search led to a researcher by the name of Dr. Nicole Urban located in Seattle at the Fred Hutchinson Cancer Research Center (FHCRC).
+              After the death of Grace Listwin in 2001, her son Don set out to find a research institution that focused on the early detection of ovarian cancer. The search led to a researcher by the name of Dr. Nicole Urban located in Seattle at the Fred Hutchinson Cancer Center (FHCC).
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function FHCRC() {
                 Don started funding some of Dr. Urban's work and also started learning about this new field called biomarkers. One marker, CA 125, was already being used as an indicator for ovarian cancer in women, but it was not proving to be an adequate marker for all women, especially for early detection.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Don later met Nobel Laureate Dr. Lee Hartwell, director of the FHCRC.  The idea of creating a full scale Biomarker Discovery and Analysis Program at the HUTCH was born. Don's $10-million investment helped establish the core of a biomarker discovery and analysis program, and the HUTCH remains one of Canary's 'Centers of Excellence' today.
+                Don later met Nobel Laureate Dr. Lee Hartwell, director of the FHCC.  The idea of creating a full scale Biomarker Discovery and Analysis Program at the HUTCH was born. Don's $10-million investment helped establish the core of a biomarker discovery and analysis program, and the HUTCH remains one of Canary's 'Centers of Excellence' today.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 Canary-funded research at the Hutch has gone from finding promising ovarian cancer detection blood biomarkers in clinical trials to now validating them in large clinical trials. 

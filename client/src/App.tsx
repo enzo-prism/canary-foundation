@@ -43,8 +43,8 @@ import StanfordOverview from "@/pages/stanford-overview";
 import StanfordForScientists from "@/pages/stanford-for-scientists";
 import StanfordBiomarkers from "@/pages/stanford-biomarkers";
 import StanfordImaging from "@/pages/stanford-imaging";
-// FHCRC
-import FHCRC from "@/pages/fhcrc";
+// FHCC
+import FHCC from "@/pages/fhcc";
 // Publications pages
 import Fellowships from "@/pages/fellowships";
 import SeedGrants from "@/pages/seed-grants";
@@ -101,8 +101,8 @@ function Router() {
       <Route path="/science/centers/stanford/biomarkers" component={StanfordBiomarkers} />
       <Route path="/science/centers/stanford/imaging" component={StanfordImaging} />
       
-      {/* FHCRC page */}
-      <Route path="/science/centers/fhcrc" component={FHCRC} />
+      {/* FHCC page */}
+      <Route path="/science/centers/fhcc" component={FHCC} />
       
       {/* Publications sub-pages */}
       <Route path="/science/publications/fellowships" component={Fellowships} />

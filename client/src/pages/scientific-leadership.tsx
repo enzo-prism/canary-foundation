@@ -43,7 +43,7 @@ export default function ScientificLeadership() {
                     <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Lee Hartwell</h3>
                     <p className="text-primary font-semibold text-center mb-4">Nobel Laureate, Scientific Advisor</p>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      Nobel Prize winner and former President of Fred Hutchinson Cancer Research Center. 
+                      Nobel Prize winner and former President of Fred Hutchinson Cancer Center. 
                       Pioneer in cancer biomarker research and early detection technologies.
                     </p>
                   </CardContent>

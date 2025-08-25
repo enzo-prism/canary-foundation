@@ -153,7 +153,7 @@ export default function Centers() {
 
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-3">Fred Hutchinson Cancer Research Center</h3>
+                    <h3 className="text-xl font-bold text-dark mb-3">Fred Hutchinson Cancer Center</h3>
                     <div className="text-sm text-primary font-semibold mb-4">Center of Excellence, Seattle, Washington</div>
                     <p className="text-gray-600 mb-4">
                       The genesis institution for Canary Foundation. Home to biomarker discovery and analysis program.

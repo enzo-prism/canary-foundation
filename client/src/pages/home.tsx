@@ -43,7 +43,7 @@ export default function Home() {
     { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", icon: Heart, category: "founding" },
     { year: 2001, title: "Grace Listwin Dies", description: "Grace Listwin dies of late-stage ovarian cancer due to detection of her cancer at a late stage", icon: Heart, category: "founding" },
     { year: 2002, title: "First Biomarker Work", description: "Ovarian cancer biomarker work for Dr. Nicole Urban funded by Listwin Family Foundation at the Fred Hutch Cancer Research Center", icon: Microscope, category: "research" },
-    { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCRC focusing on cancer biomarkers", icon: Building, category: "research" },
+    { year: 2003, title: "Center of Excellence Established", description: "Center of Excellence for early cancer detection established by Dr. Lee Hartwell at FHCC focusing on cancer biomarkers", icon: Building, category: "research" },
     { year: 2004, title: "Canary Foundation Formed", description: "Canary Foundation formed by Don Listwin following his mother's death from late-stage ovarian cancer", icon: Star, category: "founding" },
     { year: 2005, title: "First Scientific Symposium", description: "First annual Scientific Symposium and pancreatic cancer team formed", icon: Users, category: "milestone" },
     { year: 2006, title: "Pancreatic Gene Mutations", description: "Discovery of pancreatic cancer gene mutations, advancing understanding of genetic factors", icon: Microscope, category: "breakthrough" },

@@ -110,7 +110,7 @@ export default function AboutOverview() {
                           <p className="text-gray-600 text-sm">Leading cancer early detection research</p>
                         </div>
                         <div className="border-l-4 border-primary pl-4">
-                          <h4 className="font-semibold text-dark">Fred Hutchinson Cancer Research Center</h4>
+                          <h4 className="font-semibold text-dark">Fred Hutchinson Cancer Center</h4>
                           <p className="text-gray-600 text-sm">Center of Excellence for early detection</p>
                         </div>
                         <div className="border-l-4 border-primary pl-4">

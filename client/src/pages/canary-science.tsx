@@ -136,7 +136,7 @@ export default function CanaryScience() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-8">Research Centers</h2>
               <p className="text-lg text-gray-600 text-center mb-16 max-w-4xl mx-auto">
-                To further ensure our success, we funded the Canary Center at Stanford for Cancer Early Detection, a world-class facility that hopes to save lives through early detection. We also have a center of excellence in early cancer detection at the Fred Hutchinson Cancer Research Center in Seattle. The 'HUTCH' as it's called was the genesis for the Canary Foundation.
+                To further ensure our success, we funded the Canary Center at Stanford for Cancer Early Detection, a world-class facility that hopes to save lives through early detection. We also have a center of excellence in early cancer detection at the Fred Hutchinson Cancer Center in Seattle. The 'HUTCH' as it's called was the genesis for the Canary Foundation.
               </p>
               
               <div className="grid md:grid-cols-2 gap-12">
@@ -168,7 +168,7 @@ export default function CanaryScience() {
 
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-dark mb-4">Fred Hutchinson Cancer Research Center</h3>
+                    <h3 className="text-2xl font-bold text-dark mb-4">Fred Hutchinson Cancer Center</h3>
                     <div className="text-sm text-primary font-semibold mb-4">Seattle, Washington</div>
                     <p className="text-gray-600 mb-6">
                       The 'HUTCH' as it's called was the genesis for the Canary Foundation. We have a center of excellence in early cancer detection that continues to drive breakthrough research and serves as our founding institutional partner.

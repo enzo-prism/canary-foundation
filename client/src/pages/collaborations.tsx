@@ -44,10 +44,10 @@ export default function Collaborations() {
                 {/* Major Active Collaborations */}
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-dark mb-3">Fred Hutchinson Cancer Research Center (FHCRC)</h3>
+                    <h3 className="text-xl font-bold text-dark mb-3">Fred Hutchinson Cancer Center (FHCC)</h3>
                     <div className="text-sm text-primary font-semibold mb-3">Seattle, Washington</div>
                     <p className="text-gray-600 text-sm mb-3">
-                      Canary supports ovary and prostate team research and PASS at FHCRC. For PASS, FHCRC houses the data management and coordinating center and the central biospecimen repository.
+                      Canary supports ovary and prostate team research and PASS at FHCC. For PASS, FHCC houses the data management and coordinating center and the central biospecimen repository.
                     </p>
                     <div className="text-xs text-gray-500">
                       Past support: lung, ovarian, prostate, and baseline team awards
