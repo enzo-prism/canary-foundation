@@ -55,12 +55,12 @@ export default function ClinicalStudies() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">PASS Study</h4>
                     <p className="text-gray-600 mb-4">
-                      Prostate Active Surveillance Study monitoring over 1,100 men with low-risk prostate cancer to optimize 
+                      Prostate Active Surveillance Study monitoring over 2,400 men with low-risk prostate cancer to optimize 
                       treatment timing and avoid unnecessary interventions.
                     </p>
                     <div className="flex items-center text-primary">
                       <Users className="w-4 h-4 mr-2" />
-                      <span className="text-sm font-semibold">1,100+ Participants</span>
+                      <span className="text-sm font-semibold">2,400+ Participants</span>
                     </div>
                   </CardContent>
                 </Card>

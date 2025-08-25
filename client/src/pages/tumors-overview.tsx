@@ -131,7 +131,7 @@ export default function TumorsOverview() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">Prostate Cancer</h4>
                     <p className="text-gray-600 mb-4">
-                      Leading PASS study with 1,100+ participants shaping national screening guidelines.
+                      Leading PASS study with 2,400+ participants shaping national screening guidelines.
                     </p>
                     <Link 
                       href="/science/programs/tumors/prostate"

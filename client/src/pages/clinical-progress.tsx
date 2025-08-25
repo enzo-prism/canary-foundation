@@ -86,7 +86,7 @@ export default function ClinicalProgress() {
                     <div>
                       <h4 className="font-semibold text-dark mb-2">PASS Study Success</h4>
                       <p className="text-gray-600">
-                        The Prostate Active Surveillance Study with over 1,100 participants has directly influenced 
+                        The Prostate Active Surveillance Study with over 2,400 participants has directly influenced 
                         national screening guidelines, helping thousands avoid unnecessary treatment while maintaining 
                         excellent outcomes.
                       </p>

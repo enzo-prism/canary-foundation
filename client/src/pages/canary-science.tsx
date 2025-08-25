@@ -88,7 +88,7 @@ export default function CanaryScience() {
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Prostate Cancer</h3>
                     <p className="text-gray-600 mb-4">
-                      PASS study with 1,100+ participants and PATROL genetic risk cohort advancing personalized screening.
+                      PASS study with 2,400+ participants and PATROL genetic risk cohort advancing personalized screening.
                     </p>
                     <div className="text-sm text-primary font-semibold">Research Focus: Active Surveillance</div>
                   </CardContent>

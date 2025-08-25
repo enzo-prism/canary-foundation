@@ -236,7 +236,7 @@ export default function Home() {
               <div className="text-white/90">Years of Research</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">1,100+</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">2,400+</div>
               <div className="text-white/90">PASS Study Participants</div>
             </div>
             <div className="text-center">
@@ -1154,7 +1154,7 @@ export default function Home() {
               <div className="text-primary text-lg font-semibold mb-4">Research Breakthrough</div>
               <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">PASS Study Shapes National Guidelines</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                "The PASS study's findings with over 1,100 participants have directly influenced national screening guidelines 
+                "The PASS study's findings with over 2,400 participants have directly influenced national screening guidelines 
                 and risk assessment protocols. Our research is helping doctors make better decisions about prostate cancer 
                 screening, ultimately saving lives through earlier detection."
               </p>
