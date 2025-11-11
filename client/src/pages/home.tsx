@@ -205,7 +205,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-6 justify-center animate-bounceIn animate-stagger-2">
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer px-8 py-4 text-lg"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
                   Support Research
                 </Button>
@@ -1113,7 +1113,7 @@ export default function Home() {
                   className="bg-primary text-white hover:bg-primary-dark font-semibold"
                   onClick={() => {
                     trackClick('support_mission_hero', 'cta');
-                    window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                    window.open('https://donorbox.org/canary-campaign', '_blank');
                   }}
                 >
                   Support Our Mission
@@ -1294,7 +1294,7 @@ export default function Home() {
                     <Button 
                       variant="link" 
                       className="text-primary hover:text-primary-dark font-semibold p-0"
-                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                      onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                     >
                       Support Research →
                     </Button>
@@ -1334,7 +1334,7 @@ export default function Home() {
                     <Button 
                       variant="link" 
                       className="text-primary hover:text-primary-dark font-semibold p-0"
-                      onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                      onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                     >
                       Support Research →
                     </Button>
@@ -1366,7 +1366,7 @@ export default function Home() {
                 <p className="text-gray-600 mb-6">Your support accelerates breakthrough discoveries in cancer detection and treatment.</p>
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
                   Donate Now
                 </Button>
@@ -1382,7 +1382,7 @@ export default function Home() {
                 <p className="text-gray-600 mb-6">Explore fellowship opportunities and contribute to cutting-edge cancer research.</p>
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
                   Support Research
                 </Button>
@@ -1398,7 +1398,7 @@ export default function Home() {
                 <p className="text-gray-600 mb-6">Collaborate with us to advance cancer detection technologies and improve patient outcomes.</p>
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
                   Support Research
                 </Button>
@@ -1573,7 +1573,7 @@ export default function Home() {
                   </div>
                   <Button 
                     className="bg-primary text-white hover:bg-primary-dark mt-6 w-full"
-                    onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                    onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                   >
                     Donate Now
                   </Button>

@@ -274,7 +274,7 @@ export default function StanfordImaging() {
               </p>
               <Button 
                 className="bg-primary text-white hover:bg-primary-dark"
-                onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
               >
                 Donate Now
               </Button>

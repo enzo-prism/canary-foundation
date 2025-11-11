@@ -275,7 +275,7 @@ export default function Header() {
             <Button 
               onClick={() => {
                 trackClick('take_action_header', 'cta');
-                window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                window.open('https://donorbox.org/canary-campaign', '_blank');
               }}
               className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300"
             >
@@ -392,7 +392,7 @@ export default function Header() {
                 
                 <Button 
                   onClick={() => {
-                    window.open('https://donorbox.org/annual-campaign-2023', '_blank');
+                    window.open('https://donorbox.org/canary-campaign', '_blank');
                     setIsMenuOpen(false);
                   }}
                   className="bg-primary text-white hover:bg-primary-dark w-full font-semibold py-3 rounded-lg shadow-md"

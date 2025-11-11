@@ -324,7 +324,7 @@ export default function SeedGrants() {
                 <Button 
                   variant="outline"
                   className="border-primary text-primary hover:bg-primary/10"
-                  onClick={() => window.open('https://donorbox.org/annual-campaign-2023', '_blank')}
+                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
                   Fund Innovation
                 </Button>
