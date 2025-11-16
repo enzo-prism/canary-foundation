@@ -25,6 +25,9 @@ import { blogPosts } from '@/data/blog-posts';
 import { trackPageView, trackClick } from '@/lib/analytics';
 import { useToast } from '@/hooks/use-toast';
 
+const PROGRAM_REPORT_SLUG = "canary-foundation-program-report-2025";
+const showDateFor = (slug?: string) => slug === PROGRAM_REPORT_SLUG;
+
 export default function BlogPost() {
   const params = useParams();
   const [, setLocation] = useLocation();
@@ -173,14 +176,16 @@ export default function BlogPost() {
                     <User className="w-4 h-4" />
                     <span>{post.author}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.date).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}</span>
-                  </div>
+                  {showDateFor(post.slug) && (
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(post.date).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
                     <span>{post.readTime}</span>
@@ -376,9 +381,13 @@ export default function BlogPost() {
                               {relatedPost.excerpt}
                             </p>
                             <div className="flex items-center gap-2 text-xs text-gray-500">
-                              <Calendar className="w-3 h-3" />
-                              <span>{new Date(relatedPost.date).toLocaleDateString()}</span>
-                              <span>•</span>
+                              {showDateFor(relatedPost.slug) && (
+                                <>
+                                  <Calendar className="w-3 h-3" />
+                                  <span>{new Date(relatedPost.date).toLocaleDateString()}</span>
+                                  <span>•</span>
+                                </>
+                              )}
                               <Clock className="w-3 h-3" />
                               <span>{relatedPost.readTime}</span>
                             </div>

@@ -33,6 +33,8 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
+const FEATURED_REPORT_PATH = "/blog/canary-foundation-program-report-2025";
+
 export default function Home() {
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -222,6 +224,23 @@ export default function Home() {
                   Our Programs
                 </Button>
               </div>
+              <Link href={FEATURED_REPORT_PATH}>
+                <div
+                  className="mt-6 inline-flex items-center gap-4 bg-primary/5 border border-primary/10 rounded-2xl px-6 py-4 text-left cursor-pointer hover:bg-primary/10 transition-colors duration-200 justify-center w-full sm:w-auto mx-auto"
+                  onClick={() => trackClick('hero_report_callout', 'home_hero')}
+                >
+                  <Star className="w-5 h-5 text-primary" />
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-primary font-semibold">
+                      Program Report
+                    </p>
+                    <p className="text-sm text-gray-700 font-medium">
+                      Canary Foundation Program Report: Accelerating Early Detection
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-primary" />
+                </div>
+              </Link>
             </div>
           </div>
         </div>

@@ -55,7 +55,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Don Listwin Award", "Risk Prediction", "Breast Cancer", "Ovarian Cancer", "CanRisk"],
     readTime: "5 min read",
     wordCount: 420,
-    featured: true,
+    featured: false,
     originalUrl: "https://www.canaryfoundation.org/2024/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2024-goes-to-professor-antonis-antoniou/"
   },
   {
@@ -224,7 +224,7 @@ export const blogPosts: BlogPost[] = [
     author: "Renata Barnes",
     date: "2023-11-01",
     category: "Research",
-    tags: ["Ovarian Cancer", "BRCA", "Fallopian Tubes", "HGSOC", "Molecular Research"],
+    tags: ["Research", "Ovarian Cancer", "BRCA", "Fallopian Tubes", "HGSOC", "Molecular Research"],
     readTime: "4 min read",
     wordCount: 350,
     featured: false,
@@ -354,5 +354,65 @@ export const blogPosts: BlogPost[] = [
     wordCount: 580,
     featured: false,
     originalUrl: "https://www.canaryfoundation.org/2022/11/16/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2022-goes-to-sudhir-srivastava-ph-d-mph-ms/"
+  },
+  {
+    id: 8,
+    slug: "canary-foundation-program-report-2025",
+    title: "Canary Foundation Program Report: Accelerating Early Detection",
+    excerpt: "A cross-program update on how Canary Foundation teams are advancing ovarian, pancreatic, prostate, ultrasound imaging, and lung cancer initiatives to find and treat disease sooner.",
+    fullContent: `
+      <p>The Canary Foundation is leading groundbreaking research to detect and prevent some of the deadliest cancers at their earliest, most treatable stages. By advancing science and technology, we aim to save lives through earlier diagnosis and smarter prevention.</p>
+      
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ovarian Program</h2>
+      <p>The Canary ovary team is developing innovative tools to stop high-grade serous ovarian cancer (SOC) at its earliest phase by focusing on prevention and early detection. Their research shows SOC often begins as a precancerous lesion in the fallopian tubes, and the team is using advanced technologies to identify biomarkers that flag disease early.</p>
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Expand access to fallopian tube removal surgery as a preventive measure beyond high-risk women.</li>
+        <li>Create a web-based platform with risk calculators and prevention strategies for personalized SOC management.</li>
+        <li>Innovate imaging and blood test methods to detect precancerous lesions and early-stage SOC effectively.</li>
+      </ul>
+      
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Pancreatic Program</h2>
+      <p>Led by Dr. Walter Park at the Stanford/Canary Center, the Pancreas Program targets earlier detection of pancreatic ductal adenocarcinoma (PDAC) by identifying high-risk individuals, mining biomarkers, and deploying point-of-care ultrasound (POCUS). The team maintains a growing high-risk patient database while collecting and studying fluids from pancreatic cysts, a key precursor of pancreatic cancer.</p>
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Focus screening on high-risk groups, analyze pancreatic cyst fluids, and deploy bedside ultrasound screening (POCUS).</li>
+        <li>Collaborate across the Canary Center on biomarker discovery, leveraging glycoproteomics with Dr. Sharon Pitteri.</li>
+        <li>Publish proof-of-concept research showing POCUS can visualize the pancreas reliably at the bedside.</li>
+      </ul>
+      <p>Parallel work at UC San Diego, led by Dr. Ahmed El Kaffas, is developing advanced ultrasound technologies—including contrast-enhanced POCUS with microbubbles and molecular imaging—to accelerate clinical adoption.</p>
+      
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Prostate Program</h2>
+      <p>The Canary Prostate team concentrates on detecting lethal prostate cancer sooner while avoiding unnecessary treatment for low-risk disease via two multicenter clinical studies: Canary PASS and Canary PATROL. PASS tracks more than 2,400 men opting for active surveillance, while PATROL monitors individuals with genetic risk.</p>
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Collected 1,257 biopsy tissue specimens to build the largest transcriptomic database of active-surveillance patients.</li>
+        <li>Digitized biopsy slides from 1,800 participants and are co-developing AI algorithms to improve risk assessment.</li>
+        <li>Published 17+ peer-reviewed papers, including a JAMA study validating active surveillance as a safe strategy.</li>
+      </ul>
+      
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ultrasound Imaging Innovation</h2>
+      <p>Ultrasound is highly portable, affordable, non-ionizing, and widely available for real-time bedside imaging. Canary Foundation supports Dr. Ahmed El Kaffas’s Translational Ultrasound Program at UC San Diego’s Moores Cancer Center, a unique hub that unites lab innovation and patient care to accelerate ultrasound research for early cancer detection.</p>
+      <p>The program bridges engineering and clinical practice to pioneer contrast-enhanced POCUS with microbubbles and targeted molecular imaging approaches that improve accuracy and access.</p>
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Advance contrast-enhanced POCUS using microbubbles to lower costs and increase access for liver, pancreatic, and other cancers.</li>
+        <li>Fund research into clinically translatable targeted microbubbles for non-invasive molecular ultrasound imaging.</li>
+        <li>Invest in integrating engineering and clinical research to accelerate regulatory approvals and adoption.</li>
+      </ul>
+      
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Lung Program</h2>
+      <p>Low-dose CT screening often reveals lung nodules that imaging alone cannot classify, leading to avoidable invasive procedures. Researchers at the Canary Center at Stanford, led by Dr. Utkan Demirci, are developing integrated diagnostic tests that combine biomarkers with imaging so clinicians can identify malignant nodules earlier.</p>
+      <p>Recent studies focus on exosomes—tiny extracellular vesicles isolated from plasma using the ExoTIC (exosome total isolation chip) method developed at the Canary Center—to capture molecular insights from lung tissue.</p>
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Leverage exosomal DNA, RNA, and proteins as specific lung cancer biomarkers.</li>
+        <li>Refine the ExoTIC method to isolate analyzable exosomes from patient plasma.</li>
+        <li>Enable early intervention for high-risk nodules and non-invasive monitoring of low-risk cases.</li>
+      </ul>
+    `,
+    author: "Canary Foundation Research Team",
+    authorBio: "The Canary Foundation Research Team highlights program milestones that advance early cancer detection across our global network.",
+    date: "2025-11-16",
+    category: "Report",
+    tags: ["Report", "Program Update", "Ovarian Cancer", "Pancreatic Cancer", "Prostate Cancer", "Ultrasound", "Lung Cancer"],
+    readTime: "7 min read",
+    wordCount: 720,
+    featured: true
   }
 ];

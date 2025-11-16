@@ -1,31 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, ArrowRight, Search, Tag, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Calendar, Clock, ArrowRight, Search, Tag, User } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import { trackSearch, trackOutboundLink, trackClick } from '@/lib/analytics';
+import { trackClick } from '@/lib/analytics';
 import { blogPosts } from '@/data/blog-posts';
 
 // Categories for filtering
-const categories = ["All", "Awards", "Conference", "Research"];
+const categories = ["All", "Awards", "Conference", "Research", "Report"];
+const PROGRAM_REPORT_SLUG = "canary-foundation-program-report-2025";
+const showDateFor = (slug?: string) => slug === PROGRAM_REPORT_SLUG;
 
 export default function Blog() {
+  const postsByNewest = useMemo(
+    () =>
+      [...blogPosts].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      ),
+    [],
+  );
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+  const [filteredPosts, setFilteredPosts] = useState(postsByNewest);
   const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
 
   // Filter posts based on category and search term
   useEffect(() => {
-    let filtered = blogPosts;
+    let filtered = postsByNewest;
     
     if (selectedCategory !== "All") {
       filtered = filtered.filter(post => post.category === selectedCategory);
@@ -33,23 +41,8 @@ export default function Blog() {
       trackClick(`blog_category_${selectedCategory}`, 'blog_navigation');
     }
     
-    if (searchTerm) {
-      filtered = filtered.filter(post => 
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
-      // Track search queries (debounced)
-      const timer = setTimeout(() => {
-        if (searchTerm.length > 2) {
-          trackSearch(searchTerm);
-        }
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-    
     setFilteredPosts(filtered);
-  }, [selectedCategory, searchTerm]);
+  }, [selectedCategory, postsByNewest]);
 
   // Animation on scroll
   useEffect(() => {
@@ -123,10 +116,12 @@ export default function Blog() {
                       <User className="w-4 h-4" />
                       <span>{featuredPost.author}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      <span>{new Date(featuredPost.date).toLocaleDateString()}</span>
-                    </div>
+                    {showDateFor(featuredPost.slug) && (
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        <span>{new Date(featuredPost.date).toLocaleDateString()}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4" />
                       <span>{featuredPost.readTime}</span>
@@ -137,12 +132,12 @@ export default function Blog() {
                   </div>
                   
                   <p className="text-gray-700 mb-6 leading-relaxed">
-                    {featuredPost.content}
+                    {featuredPost.excerpt}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-6">
                     {featuredPost.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="animate-float">
+                      <Badge key={tag} variant="secondary">
                         <Tag className="w-3 h-3 mr-1" />
                         {tag}
                       </Badge>
@@ -171,28 +166,17 @@ export default function Blog() {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-4 mb-8 animate-on-scroll" id="search-filter">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  placeholder="Search articles..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 animate-shimmer"
-                />
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {categories.map(category => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`animate-shimmer ${selectedCategory === category ? 'bg-primary text-white' : ''}`}
-                  >
-                    {category}
-                  </Button>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2 mb-8 animate-on-scroll" id="category-filter">
+              {categories.map(category => (
+                <Button
+                  key={category}
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`animate-shimmer ${selectedCategory === category ? 'bg-primary text-white' : ''}`}
+                >
+                  {category}
+                </Button>
+              ))}
             </div>
           </div>
         </div>
@@ -228,17 +212,23 @@ export default function Blog() {
                       
                       <div className="flex flex-wrap gap-1 mb-4">
                         {post.tags.slice(0, 2).map(tag => (
-                          <Badge key={tag} variant="secondary" className="text-xs animate-float">
+                          <Badge key={tag} variant="secondary" className="text-xs">
                             {tag}
                           </Badge>
                         ))}
                       </div>
                       
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <Calendar className="w-4 h-4" />
-                          <span>{new Date(post.date).toLocaleDateString()}</span>
-                        </div>
+                      <div
+                        className={`flex items-center ${
+                          showDateFor(post.slug) ? "justify-between" : "justify-end"
+                        }`}
+                      >
+                        {showDateFor(post.slug) && (
+                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <Calendar className="w-4 h-4" />
+                            <span>{new Date(post.date).toLocaleDateString()}</span>
+                          </div>
+                        )}
                         <Link href={`/blog/${post.slug}`}>
                           <Button 
                             variant="ghost" 
@@ -263,7 +253,7 @@ export default function Blog() {
                   <Search className="w-8 h-8 text-gray-400" />
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-2">No articles found</h3>
-                <p className="text-gray-600">Try adjusting your search terms or filters.</p>
+                <p className="text-gray-600">Try choosing a different category.</p>
               </div>
             )}
           </div>
