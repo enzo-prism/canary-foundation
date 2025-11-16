@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Calendar, Clock, ArrowRight, Search, Tag, User } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Search, User } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -29,7 +29,6 @@ export default function Blog() {
     window.scrollTo(0, 0);
   }, []);
   const [filteredPosts, setFilteredPosts] = useState(postsByNewest);
-  const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
 
   // Filter posts based on category and search term
   useEffect(() => {
@@ -44,40 +43,10 @@ export default function Blog() {
     setFilteredPosts(filtered);
   }, [selectedCategory, postsByNewest]);
 
-  // Animation on scroll
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.target.id) {
-          setVisibleElements(prev => new Set(Array.from(prev).concat(entry.target.id)));
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Apply visibility classes
-  useEffect(() => {
-    const visibleElementsArray = Array.from(visibleElements);
-    visibleElementsArray.forEach((id: string) => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.classList.add('animate-visible');
-      }
-    });
-  }, [visibleElements]);
-
   const featuredPost = blogPosts.find(post => post.featured);
-  const regularPosts = filteredPosts.filter(post => !post.featured);
+  const regularPosts = filteredPosts.filter(post =>
+    selectedCategory === "All" ? !post.featured : true,
+  );
 
   return (
     <div className="min-h-screen bg-light">
@@ -86,7 +55,7 @@ export default function Blog() {
       {/* Blog Header */}
       <section className="bg-white py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto animate-on-scroll" id="blog-header">
+          <div className="text-center max-w-3xl mx-auto" id="blog-header">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 animate-slideUp">
               Canary Foundation <span className="text-primary animate-text-glow">Blog</span>
             </h1>
@@ -101,7 +70,7 @@ export default function Blog() {
       {featuredPost && (
         <section className="py-12 bg-gradient-to-r from-primary/5 to-yellow-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto animate-on-scroll" id="featured-post">
+            <div className="max-w-4xl mx-auto" id="featured-post">
               <div className="text-center mb-8">
                 <Badge className="bg-primary text-white mb-4 animate-pulse-glow">Featured Article</Badge>
                 <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 animate-slideUp">
@@ -135,15 +104,6 @@ export default function Blog() {
                     {featuredPost.excerpt}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {featuredPost.tags.map(tag => (
-                      <Badge key={tag} variant="secondary">
-                        <Tag className="w-3 h-3 mr-1" />
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
                   <Link href={`/blog/${featuredPost.slug}`}>
                     <Button 
                       className="bg-primary text-white hover:bg-primary-dark animate-shimmer"
@@ -166,7 +126,7 @@ export default function Blog() {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap gap-2 mb-8 animate-on-scroll" id="category-filter">
+            <div className="flex flex-wrap gap-2 mb-8" id="category-filter">
               {categories.map(category => (
                 <Button
                   key={category}
@@ -191,7 +151,7 @@ export default function Blog() {
                 {regularPosts.map((post, index) => (
                   <Card 
                     key={post.id} 
-                    className="bg-white animate-card-hover animate-on-scroll animate-stagger-1"
+                    className="bg-white animate-card-hover animate-stagger-1"
                     id={`blog-post-${post.id}`}
                   >
                     <CardContent className="p-6">
@@ -209,14 +169,6 @@ export default function Blog() {
                       <p className="text-gray-600 mb-4 leading-relaxed">
                         {post.excerpt}
                       </p>
-                      
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {post.tags.slice(0, 2).map(tag => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
                       
                       <div
                         className={`flex items-center ${
@@ -248,7 +200,7 @@ export default function Blog() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 animate-on-scroll" id="no-results">
+              <div className="text-center py-12" id="no-results">
                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Search className="w-8 h-8 text-gray-400" />
                 </div>
@@ -256,29 +208,6 @@ export default function Blog() {
                 <p className="text-gray-600">Try choosing a different category.</p>
               </div>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Signup */}
-      <section className="py-16 bg-gradient-to-r from-primary to-yellow-400">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center animate-on-scroll" id="newsletter">
-            <h2 className="text-3xl font-bold text-white mb-4 animate-slideUp">
-              Stay Updated
-            </h2>
-            <p className="text-white/90 mb-8 animate-fadeIn animate-stagger-1">
-              Subscribe to our newsletter for the latest research updates, breakthrough discoveries, and inspiring patient stories.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                placeholder="Your email address"
-                className="bg-white animate-shimmer"
-              />
-              <Button className="bg-white text-primary hover:bg-gray-100 animate-shimmer">
-                Subscribe
-              </Button>
-            </div>
           </div>
         </div>
       </section>
