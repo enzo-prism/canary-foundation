@@ -358,7 +358,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 8,
     slug: "canary-foundation-program-report-2025",
-    title: "Canary Foundation 2025 Program Highlights Report: Accelerating Early Detection",
+    title: "Canary Foundation 2025 Program Highlights: Accelerating Early Detection",
     excerpt: "A cross-program update on how Canary Foundation teams are advancing ovarian, pancreatic, prostate, ultrasound imaging, and lung cancer initiatives to find and treat disease sooner.",
     fullContent: `
       <p>The Canary Foundation is leading groundbreaking research to detect and prevent some of the deadliest cancers at their earliest, most treatable stages. By advancing science and technology, we aim to save lives through earlier diagnosis and smarter prevention.</p>
