@@ -389,7 +389,7 @@ export const blogPosts: BlogPost[] = [
       </ul>
       
       <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ultrasound Imaging Innovation</h2>
-      <p>Ultrasound is highly portable, affordable, non-ionizing, and widely available for real-time bedside imaging. Canary Foundation supports Dr. Ahmed El Kaffas’s Translational Ultrasound Program at UC San Diego’s Moores Cancer Center, a unique hub that unites lab innovation and patient care to accelerate ultrasound research for early cancer detection.</p>
+      <p>Ultrasound is highly portable, affordable, non-ionizing, and widely available technology for real-time bedside imaging. Canary Foundation supports Dr. Ahmed El Kaffas’s Translational Ultrasound Program at UC San Diego’s Moores Cancer Center, a unique hub that unites lab innovation and patient care to accelerate ultrasound research for early cancer detection.</p>
       <p>The program bridges engineering and clinical practice to pioneer contrast-enhanced POCUS with microbubbles and targeted molecular imaging approaches that improve accuracy and access.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
         <li>Advance contrast-enhanced POCUS using microbubbles to lower costs and increase access for liver, pancreatic, and other cancers.</li>
