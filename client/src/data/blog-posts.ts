@@ -405,6 +405,16 @@ export const blogPosts: BlogPost[] = [
         <li>Refine the ExoTIC method to isolate analyzable exosomes from patient plasma.</li>
         <li>Enable early intervention for high-risk nodules and non-invasive monitoring of low-risk cases.</li>
       </ul>
+      
+      <div class="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8 mt-12">
+        <h3 class="text-2xl font-semibold text-dark mb-4">Support Our Research</h3>
+        <p class="text-gray-600 mb-6">
+          Help us advance these groundbreaking programs and bring life-saving early detection technologies to patients worldwide.
+        </p>
+        <a href="https://donorbox.org/canary-campaign" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-white hover:bg-primary-dark font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+          Donate Now
+        </a>
+      </div>
     `,
     author: "Canary Foundation Research Team",
     authorBio: "The Canary Foundation Research Team highlights program milestones that advance early cancer detection across our global network.",
