@@ -381,7 +381,7 @@ export const blogPosts: BlogPost[] = [
       <p>Parallel work at UC San Diego, led by Dr. Ahmed El Kaffas, is developing advanced ultrasound technologies—including contrast-enhanced POCUS with microbubbles and molecular imaging—to accelerate clinical adoption.</p>
       
       <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Prostate Program</h2>
-      <p>The Canary Prostate team concentrates on detecting lethal prostate cancer sooner while avoiding unnecessary treatment for low-risk disease via two multicenter clinical studies: Canary PASS and Canary PATROL. PASS tracks more than 2,400 men opting for active surveillance, while PATROL monitors individuals with genetic risk.</p>
+      <p>The Canary Prostate team focuses on early detection of lethal prostate cancer while minimizing unnecessary treatment for low-risk cases through two multicenter clinical studies, Canary PASS and Canary PATROL. PASS monitors men with early-stage, low-risk prostate cancer choosing active surveillance, and PATROL studies individuals with genetic risk. With over 2,400 PASS participants at 11 sites, the team has developed a rich biobank and data set for research, leading to advancements in risk stratification using transcriptomic data and AI, as well as impactful publications and ongoing grant-supported projects.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
         <li>Collect 1,257 biopsy tissue specimens to build the largest transcriptomic database of active-surveillance patients.</li>
         <li>Digitize biopsy slides from 1,800 participants and co-develop AI algorithms to improve risk assessment.</li>
