@@ -232,10 +232,10 @@ export default function Home() {
                   <Star className="w-5 h-5 text-primary" />
                   <div>
                     <p className="text-xs uppercase tracking-widest text-primary font-semibold">
-                      Program Report
+                      2025 Highlights
                     </p>
                     <p className="text-sm text-gray-700 font-medium">
-                      Canary Foundation Program Report: Accelerating Early Detection
+                      Canary Foundation 2025 Program Highlights: Accelerating Early Detection
                     </p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-primary" />
