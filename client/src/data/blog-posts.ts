@@ -363,7 +363,7 @@ export const blogPosts: BlogPost[] = [
     fullContent: `
       <p>The Canary Foundation is leading groundbreaking research to detect and prevent some of the deadliest cancers at their earliest, most treatable stages. By advancing science and technology, we aim to save lives through earlier diagnosis and smarter prevention.</p>
       
-      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ovarian Program</h2>
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ovarian</h2>
       <p>The Canary ovary team is developing innovative tools to stop high-grade serous ovarian cancer (SOC) at its earliest phase by focusing on prevention and early detection. Their research shows SOC often begins as a precancerous lesion in the fallopian tubes, and the team is using advanced technologies to identify biomarkers that flag disease early.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
         <li>Expand access to fallopian tube removal surgery as a preventive measure beyond high-risk women.</li>
@@ -371,7 +371,7 @@ export const blogPosts: BlogPost[] = [
         <li>Innovate imaging and blood test methods to detect precancerous lesions and early-stage SOC effectively.</li>
       </ul>
       
-      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Pancreatic Program</h2>
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Pancreatic</h2>
       <p>Led by Dr. Walter Park at the Stanford/Canary Center, the Pancreas Program targets earlier detection of pancreatic ductal adenocarcinoma (PDAC) by identifying high-risk individuals, mining biomarkers, and deploying point-of-care ultrasound (POCUS). The team maintains a growing high-risk patient database while collecting and studying fluids from pancreatic cysts, a key precursor of pancreatic cancer.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
         <li>Focus screening on high-risk groups, analyze pancreatic cyst fluids, and deploy bedside ultrasound screening (POCUS).</li>
@@ -380,7 +380,7 @@ export const blogPosts: BlogPost[] = [
       </ul>
       <p>Parallel work at UC San Diego, led by Dr. Ahmed El Kaffas, is developing advanced ultrasound technologies—including contrast-enhanced POCUS with microbubbles and molecular imaging—to accelerate clinical adoption.</p>
       
-      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Prostate Program</h2>
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Prostate</h2>
       <p>The Canary Prostate team focuses on early detection of lethal prostate cancer while minimizing unnecessary treatment for low-risk cases through two multicenter clinical studies, Canary PASS and Canary PATROL. PASS monitors men with early-stage, low-risk prostate cancer choosing active surveillance, and PATROL studies individuals with genetic risk. With over 2,400 PASS participants at 11 sites, the team has developed a rich biobank and data set for research, leading to advancements in risk stratification using transcriptomic data and AI, as well as impactful publications and ongoing grant-supported projects.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
         <li>Collect 1,257 biopsy tissue specimens to build the largest transcriptomic database of active-surveillance patients.</li>
@@ -397,7 +397,7 @@ export const blogPosts: BlogPost[] = [
         <li>Invest in integrating engineering and clinical research to accelerate regulatory approvals and adoption.</li>
       </ul>
       
-      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Lung Program</h2>
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Lung</h2>
       <p>Low-dose CT screening often reveals lung nodules that imaging alone cannot classify, leading to avoidable invasive procedures. Researchers at the Canary Center at Stanford, led by Dr. Utkan Demirci, are developing integrated diagnostic tests that combine biomarkers with imaging so clinicians can identify malignant nodules earlier.</p>
       <p>Recent studies focus on exosomes—tiny extracellular vesicles isolated from plasma using the ExoTIC (exosome total isolation chip) method developed at the Canary Center—to capture molecular insights from lung tissue.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
