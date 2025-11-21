@@ -383,9 +383,9 @@ export const blogPosts: BlogPost[] = [
       <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Prostate Program</h2>
       <p>The Canary Prostate team concentrates on detecting lethal prostate cancer sooner while avoiding unnecessary treatment for low-risk disease via two multicenter clinical studies: Canary PASS and Canary PATROL. PASS tracks more than 2,400 men opting for active surveillance, while PATROL monitors individuals with genetic risk.</p>
       <ul class="list-disc pl-6 my-4 space-y-2">
-        <li>Collected 1,257 biopsy tissue specimens to build the largest transcriptomic database of active-surveillance patients.</li>
-        <li>Digitized biopsy slides from 1,800 participants and are co-developing AI algorithms to improve risk assessment.</li>
-        <li>Published 17+ peer-reviewed papers, including a JAMA study validating active surveillance as a safe strategy.</li>
+        <li>Collect 1,257 biopsy tissue specimens to build the largest transcriptomic database of active-surveillance patients.</li>
+        <li>Digitize biopsy slides from 1,800 participants and co-develop AI algorithms to improve risk assessment.</li>
+        <li>Publish 17+ peer-reviewed papers, including a JAMA study validating active surveillance as a safe strategy.</li>
       </ul>
       
       <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Ultrasound Imaging Innovation</h2>
