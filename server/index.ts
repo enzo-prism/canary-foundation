@@ -1,6 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import type { ListenOptions } from "net";
+import type { Server } from "http";
 
 // Legacy URL redirect mappings - MUST be defined early
 const LEGACY_REDIRECTS: Record<string, string> = {
@@ -135,15 +137,62 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  const DEFAULT_PORT = 5000;
+  // Default to the shared tunnel port but allow overrides for local dev
+  // so we can run alongside other services binding to 5000.
+  let port = DEFAULT_PORT;
+  const envPort = process.env.PORT;
+  if (envPort) {
+    const parsedPort = Number.parseInt(envPort, 10);
+    if (!Number.isNaN(parsedPort) && parsedPort > 0) {
+      port = parsedPort;
+    } else {
+      log(
+        `[server] Invalid PORT value \"${envPort}\" supplied, falling back to ${DEFAULT_PORT}`,
+      );
+    }
+  }
+  const host = "0.0.0.0";
+
+  const listenWithOptions = (targetServer: Server, options: ListenOptions) => {
+    return new Promise<void>((resolve, reject) => {
+      const handleError = (err: NodeJS.ErrnoException) => {
+        targetServer.off("listening", handleListening);
+        reject(err);
+      };
+
+      const handleListening = () => {
+        targetServer.off("error", handleError);
+        resolve();
+      };
+
+      targetServer.once("error", handleError);
+      targetServer.once("listening", handleListening);
+      targetServer.listen(options);
+    });
+  };
+
+  const baseOptions: ListenOptions = { port, host };
+  const reusePortOptions: ListenOptions = { ...baseOptions, reusePort: true };
+  const shouldFallback = (err: NodeJS.ErrnoException) =>
+    err?.code === "ENOTSUP" ||
+    err?.code === "EOPNOTSUPP" ||
+    err?.code === "EINVAL" ||
+    err?.code === "ERR_FEATURE_UNAVAILABLE_ON_PLATFORM";
+
+  try {
+    await listenWithOptions(server, reusePortOptions);
+  } catch (err) {
+    const errorWithCode = err as NodeJS.ErrnoException;
+    if (shouldFallback(errorWithCode)) {
+      log(
+        "[server] reusePort not supported in this environment, retrying without it",
+      );
+      await listenWithOptions(server, baseOptions);
+    } else {
+      throw err;
+    }
+  }
+
+  log(`serving on port ${port}`);
 })();
