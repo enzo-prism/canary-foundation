@@ -325,7 +325,6 @@ export default function Donate() {
                     <address className="not-italic mt-4 rounded-xl border border-gray-200 bg-light p-4 leading-relaxed">
                       <div className="font-semibold text-dark">Canary Foundation</div>
                       <div>P.O. Box 620134</div>
-                      <div>2995 Woodside Road, Suite #200</div>
                       <div>Woodside, CA 94062-9991</div>
                     </address>
                   </AccordionContent>
