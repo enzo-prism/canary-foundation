@@ -1724,9 +1724,9 @@ export default function Home() {
                   <div>
                     <div className="font-semibold text-dark">Address</div>
                     <div className="text-gray-600">
-                      CANARY FOUNDATION<br />
+                      Canary Foundation<br />
                       PO Box 620134<br />
-                      2995 Woodside Road, Suite #200<br />
+                      <br />
                       Woodside, CA 94062-9991
                     </div>
                   </div>
