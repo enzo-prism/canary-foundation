@@ -272,14 +272,16 @@ export default function Header() {
             >
               Blog
             </Link>
-            <Button 
-              onClick={() => {
-                trackClick('take_action_header', 'cta');
-                window.open('https://donorbox.org/canary-campaign', '_blank');
-              }}
+            <Button
+              asChild
               className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Take Action
+              <Link
+                href="/donate"
+                onClick={() => trackClick("take_action_header", "cta")}
+              >
+                Take Action
+              </Link>
             </Button>
           </div>
           
@@ -391,13 +393,18 @@ export default function Header() {
                 </Link>
                 
                 <Button 
-                  onClick={() => {
-                    window.open('https://donorbox.org/canary-campaign', '_blank');
-                    setIsMenuOpen(false);
-                  }}
+                  asChild
                   className="bg-primary text-white hover:bg-primary-dark w-full font-semibold py-3 rounded-lg shadow-md"
                 >
-                  Take Action
+                  <Link
+                    href="/donate"
+                    onClick={() => {
+                      trackClick("take_action_mobile", "cta");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Take Action
+                  </Link>
                 </Button>
               </div>
             </div>

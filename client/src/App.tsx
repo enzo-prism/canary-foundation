@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import Home from "@/pages/home";
+import Contact from "@/pages/contact";
+import Donate from "@/pages/donate";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import AboutOverview from "@/pages/about-overview";
@@ -56,6 +58,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/donate" component={Donate} />
+      <Route path="/take-action" component={Donate} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
       
