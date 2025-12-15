@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 // Test script to verify SEO improvements
 
-const fs = require('fs');
-const path = require('path');
-const xml2js = require('xml2js');
-
-const parser = new xml2js.Parser();
+import fs from "node:fs";
 
 console.log('\n🔍 SEO Improvements Verification');
 console.log('=====================================\n');

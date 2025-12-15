@@ -173,7 +173,11 @@ app.use((req, res, next) => {
   };
 
   const baseOptions: ListenOptions = { port, host };
-  const reusePortOptions: ListenOptions = { ...baseOptions, reusePort: true };
+  type ListenOptionsWithReusePort = ListenOptions & { reusePort?: boolean };
+  const reusePortOptions: ListenOptionsWithReusePort = {
+    ...baseOptions,
+    reusePort: true,
+  };
   const shouldFallback = (err: NodeJS.ErrnoException) =>
     err?.code === "ENOTSUP" ||
     err?.code === "EOPNOTSUPP" ||

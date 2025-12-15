@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, useLocation } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -35,16 +35,27 @@ export default function BlogPost() {
   const [readingProgress, setReadingProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
   
+  const postsByNewest = useMemo(
+    () =>
+      [...blogPosts].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      ),
+    [],
+  );
+
   const slug = params.slug as string;
-  const post = blogPosts.find(p => p.slug === slug);
+  const post = postsByNewest.find(p => p.slug === slug);
   
   // Find previous and next posts
-  const currentIndex = blogPosts.findIndex(p => p.slug === slug);
-  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const currentIndex = postsByNewest.findIndex(p => p.slug === slug);
+  const prevPost = currentIndex > 0 ? postsByNewest[currentIndex - 1] : null;
+  const nextPost =
+    currentIndex >= 0 && currentIndex < postsByNewest.length - 1
+      ? postsByNewest[currentIndex + 1]
+      : null;
   
   // Related posts - get 3 posts from same category or with similar tags
-  const relatedPosts = blogPosts
+  const relatedPosts = postsByNewest
     .filter(p => p.slug !== slug && (
       p.category === post?.category || 
       p.tags.some(tag => post?.tags.includes(tag))

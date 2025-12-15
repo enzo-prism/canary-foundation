@@ -424,5 +424,115 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     wordCount: 720,
     featured: true
+  },
+  {
+    id: 9,
+    slug: "don-listwin-award-2025-ruth-etzioni",
+    title: "Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2025 goes to: Ruth Etzioni",
+    excerpt: "The 2025 Early Detection Impact Award recognizes Ruth Etzioni, Fred Hutch Cancer Center, for outstanding contributions that help inform how best to screen for different cancers.",
+    fullContent: `
+      <p>The Don Listwin Award (Early Detection Impact Award) for Outstanding Contribution to Cancer Early Detection recognizes a sustained contribution to, or singular achievement in, the cancer early detection field.</p>
+
+      <p>The 2025 Award goes to: <strong>Ruth Etzioni</strong>, <strong>Fred Hutch Cancer Center</strong>.</p>
+
+      <figure class="my-8">
+        <img src="https://www.earlydetectionresearch.com/wp-content/uploads/Ruth-Etzioni-1.jpg" alt="Ruth Etzioni, Fred Hutch Cancer Center" loading="lazy" decoding="async" class="mx-auto w-full max-w-sm rounded-lg shadow-md" />
+        <figcaption class="mt-2 text-center text-sm text-gray-600">Ruth Etzioni, Fred Hutch Cancer Center</figcaption>
+      </figure>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">About the Award</h2>
+
+      <p>The Early Detection Impact Award for Outstanding Contribution to Cancer Early Detection recognizes a sustained contribution to, or singular achievement in, the cancer early detection field.</p>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">Eligibility and Selection Process</h3>
+
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>Nominations are open to any individual or team of individuals who have contributed to the field of cancer early detection through an outstanding sustained commitment or a singular achievement.</li>
+        <li>All nominations are kept for three years.</li>
+        <li>Decisions are made by an awards committee consisting of the scientific organizers of the annual Early Detection of Cancer conference and an additional representative from each organizing institution.</li>
+        <li>The main criterion for judging nominations is impact on the cancer early detection field, whether scientific, translational, advocacy, or other.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">2025 Winner: Ruth Etzioni</h2>
+
+      <p>Ruth Etzioni is a Professor in the Biostatistics Program, Public Health Sciences Division, at the Fred Hutch Cancer Center, where she holds the Rosalie and Harold Rea Brown Endowed Chair.</p>
+
+      <p>She has been involved in cancer early detection research since the early days of PSA, when she became fascinated with the many ways of screening for cancer using blood-based biomarkers. The driving motivation of her research program is to develop the evidence needed to inform decisions about how best to screen for different cancers.</p>
+
+      <p>Her work has focused primarily on prostate cancer, with additional contributions in breast and ovarian cancer. She is currently supported by an NCI Outstanding Investigator Award to develop models and methods for novel cancer diagnostics, with a primary focus on multi-cancer early detection tests.</p>
+
+      <div class="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8 mt-12">
+        <h3 class="text-2xl font-semibold text-dark mb-4">Make a nomination</h3>
+        <p class="text-gray-600 mb-6">
+          Submit a nomination for the Early Detection Impact Award at <a href="https://www.earlydetectionresearch.com/award/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">earlydetectionresearch.com/award</a>.
+        </p>
+        <a href="https://www.earlydetectionresearch.com/award/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-white hover:bg-primary-dark font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+          Nominate now
+        </a>
+      </div>
+    `,
+    author: "Renata Barnes",
+    authorBio: "Renata Barnes is a science communications specialist at the Canary Foundation, dedicated to sharing breakthrough research in early cancer detection.",
+    date: "2025-11-01",
+    category: "Awards",
+    tags: ["Don Listwin Award", "Early Detection Impact Award", "Ruth Etzioni", "Fred Hutch Cancer Center", "Biostatistics", "Cancer Screening", "Multi-Cancer Early Detection"],
+    readTime: "5 min read",
+    wordCount: 460,
+    featured: false
+  },
+  {
+    id: 10,
+    slug: "edx25-conference-portland-early-detection",
+    title: "Early Detection of Cancer Annual Conference - EDx25",
+    excerpt: "Held October 21–23, 2025 in Portland, Oregon, EDx25 convened international experts to share advances in AI, multi-cancer early detection, next-generation biomarkers, and bringing early detection into primary care and communities.",
+    fullContent: `
+      <p>The Early Detection of Cancer Conference (EDx25) was held October 21–23, 2025 in Portland, Oregon, USA. Presented by Cancer Research UK, the Canary Center at Stanford, and the OHSU Knight Cancer Institute, the meeting brought together researchers, clinicians, technologists, and public health leaders to translate cutting-edge discovery into real-world early detection.</p>
+
+      <p>Across sessions, speakers highlighted the role of artificial intelligence, innovative technologies, and the practical work of getting early detection into the community and primary care—so clinicians can focus testing and follow-up on the people who need it most.</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Key highlights from EDx25</h2>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">Long-term registry follow-up for MCED in symptomatic patients</h3>
+
+      <p>One major update featured long-term data from the SYMPLIFY study (GRAIL and the University of Oxford), evaluating the Galleri multi-cancer early detection (MCED) test in symptomatic individuals.</p>
+
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>With follow-up extended to 24 months in national cancer registries, the positive predictive value (PPV) increased to <strong>84.2%</strong> (up from 75.5%).</li>
+        <li>About <strong>one-third</strong> of participants initially considered “false positive” were later diagnosed with cancer during extended follow-up.</li>
+        <li>These results reinforce the test’s ability to predict the cancer signal origin and the value of longer-term outcome capture when evaluating early detection tools.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">Innovation across AI, biomarkers, and liquid biopsy</h3>
+
+      <p>The agenda emphasized how new technologies—and the way we evaluate them—can accelerate early detection while supporting clinical adoption. Talks highlighted:</p>
+
+      <ul class="list-disc pl-6 my-4 space-y-2">
+        <li>How AI can support detection, triage, and decision-making across screening and diagnostic pathways.</li>
+        <li>Emerging biomarker strategies and assay designs aimed at improving early-stage sensitivity and specificity.</li>
+        <li>Implementation-oriented research focused on pathways that work in real care settings.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">DNA methylation signals that sharpen colorectal cancer detection</h3>
+
+      <p>Research presented at EDx25 demonstrated that distinguishing between DNA methylation types <strong>5mC</strong> and <strong>5hmC</strong> can significantly enhance the diagnostic accuracy of liquid biopsy tests for early-stage colorectal cancer (<strong>AUC = 0.95</strong>).</p>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">Primary care integration and community impact</h3>
+
+      <p>A recurring theme was the importance of moving early detection strategies into community and primary care settings—where most patients first present—so that risk-informed tools and pathways can help identify who should receive further testing.</p>
+
+      <h3 class="text-xl font-semibold text-dark mt-6 mb-3">Collaboration across disciplines and institutions</h3>
+
+      <p>Hosted by Cancer Research UK, the Canary Center at Stanford, and the OHSU Knight Cancer Institute, EDx25 underscored international, multidisciplinary collaboration as essential for progress in early detection—bringing together experts in research, clinical practice, engineering, and public health to accelerate translation and improve outcomes through earlier diagnosis.</p>
+
+      <p class="mt-8">Learn more about the Early Detection of Cancer Conference at <a href="https://www.earlydetectionresearch.com/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">earlydetectionresearch.com</a>.</p>
+    `,
+    author: "Renata Barnes",
+    authorBio: "Renata Barnes is a science communications specialist at the Canary Foundation, dedicated to sharing breakthrough research in early cancer detection.",
+    date: "2025-11-01",
+    category: "Conference",
+    tags: ["EDx25", "Conference", "Portland", "Cancer Research UK", "Stanford", "OHSU", "Collaboration", "AI", "MCED", "Galleri", "SYMPLIFY", "Liquid Biopsy", "Biomarkers", "DNA Methylation", "Primary Care", "Colorectal Cancer"],
+    readTime: "6 min read",
+    wordCount: 520,
+    featured: false
   }
 ];
