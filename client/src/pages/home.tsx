@@ -205,11 +205,16 @@ export default function Home() {
                 The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center animate-bounceIn animate-stagger-2">
-                <Button 
+                <Button
+                  asChild
                   className="bg-primary text-white hover:bg-primary-dark font-semibold animate-pulse-glow animate-shimmer px-8 py-4 text-lg"
-                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                 >
-                  Support Research
+                  <Link
+                    href="/donate"
+                    onClick={() => trackClick("support_research_hero", "cta")}
+                  >
+                    Support Research
+                  </Link>
                 </Button>
                 <Button 
                   variant="outline" 
@@ -1310,12 +1315,17 @@ export default function Home() {
                     <p className="text-gray-600 mb-4">
                       Annual gathering of researchers and clinicians to share latest findings in biomarker development and imaging.
                     </p>
-                    <Button 
-                      variant="link" 
+                    <Button
+                      asChild
+                      variant="link"
                       className="text-primary hover:text-primary-dark font-semibold p-0"
-                      onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                     >
-                      Support Research →
+                      <Link
+                        href="/donate"
+                        onClick={() => trackClick("support_research_symposium", "cta")}
+                      >
+                        Support Research →
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -1350,12 +1360,17 @@ export default function Home() {
                     <p className="text-gray-600 mb-4">
                       NCI R25 CREST summer training program and fellowship opportunities for emerging researchers.
                     </p>
-                    <Button 
-                      variant="link" 
+                    <Button
+                      asChild
+                      variant="link"
                       className="text-primary hover:text-primary-dark font-semibold p-0"
-                      onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
                     >
-                      Support Research →
+                      <Link
+                        href="/donate"
+                        onClick={() => trackClick("support_research_training", "cta")}
+                      >
+                        Support Research →
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -1399,11 +1414,13 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Join Our Team</h3>
                 <p className="text-gray-600 mb-6">Explore fellowship opportunities and contribute to cutting-edge cancer research.</p>
-                <Button 
-                  className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
-                >
-                  Support Research
+                <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                  <Link
+                    href="/donate"
+                    onClick={() => trackClick("support_research_join_team", "cta")}
+                  >
+                    Support Research
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -1415,11 +1432,13 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Partner With Us</h3>
                 <p className="text-gray-600 mb-6">Collaborate with us to advance cancer detection technologies and improve patient outcomes.</p>
-                <Button 
-                  className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
-                >
-                  Support Research
+                <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                  <Link
+                    href="/donate"
+                    onClick={() => trackClick("support_research_partner", "cta")}
+                  >
+                    Support Research
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
