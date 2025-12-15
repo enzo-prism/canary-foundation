@@ -229,22 +229,21 @@ export default function Home() {
                   Our Programs
                 </Button>
               </div>
-              <Link href={FEATURED_REPORT_PATH}>
-                <div
-                  className="mt-6 inline-flex items-center gap-4 bg-primary/5 border border-primary/10 rounded-2xl px-6 py-4 text-left cursor-pointer hover:bg-primary/10 transition-colors duration-200 justify-center w-full sm:w-auto mx-auto"
-                  onClick={() => trackClick('hero_report_callout', 'home_hero')}
-                >
-                  <Star className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-primary font-semibold">
-                      2025 Highlights
-                    </p>
-                    <p className="text-sm text-gray-700 font-medium">
-                      Canary Foundation 2025 Program Highlights: Accelerating Early Detection
-                    </p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-primary" />
+              <Link
+                href={FEATURED_REPORT_PATH}
+                className="group mt-6 inline-flex items-center gap-4 bg-primary/5 border border-primary/10 rounded-2xl px-6 py-4 text-left no-underline cursor-pointer justify-center w-full sm:w-auto mx-auto transition-all duration-200 hover:bg-primary/10 hover:border-primary/20 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                onClick={() => trackClick("hero_report_callout", "home_hero")}
+              >
+                <Star className="w-5 h-5 text-primary transition-transform duration-200 group-hover:scale-110 group-hover:rotate-6" />
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-primary font-semibold">
+                    2025 Highlights
+                  </p>
+                  <p className="text-sm text-gray-700 font-medium group-hover:text-gray-900 transition-colors duration-200">
+                    Canary Foundation 2025 Program Highlights: Accelerating Early Detection
+                  </p>
                 </div>
+                <ArrowRight className="w-5 h-5 text-primary transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
