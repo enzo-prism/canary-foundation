@@ -62,8 +62,8 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   '/canary-approach/canary-symposium/': '/approach/canary-symposium',
   '/news-blog': '/blog',
   '/news-blog/': '/blog',
-  '/take-action-2': '/contact',
-  '/take-action-2/': '/contact'
+  '/take-action-2': '/donate',
+  '/take-action-2/': '/donate'
 };
 
 const app = express();

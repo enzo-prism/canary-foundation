@@ -82,7 +82,7 @@ test_redirect "/about-canary/board-of-directors" "/about/board-of-directors" "Bo
 test_redirect "/canary-science" "/science" "Science Main Page"
 test_redirect "/canary-approach" "/approach" "Approach Main Page"
 test_redirect "/news-blog" "/blog" "News Blog Page"
-test_redirect "/take-action-2" "/contact" "Take Action Page"
+test_redirect "/take-action-2" "/donate" "Take Action Page"
 
 # Test deep nested URLs
 test_redirect "/canary-science/programs/tumors/prostate/" "/science/programs/tumors/prostate" "Prostate Cancer Page"
