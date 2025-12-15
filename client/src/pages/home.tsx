@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Phone, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import BiomarkerGrid from "@/components/BiomarkerGrid";
 import { trackFormSubmission, trackClick, trackVideo } from "@/lib/analytics";
@@ -1723,17 +1723,12 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold text-dark">Address</div>
-                    <div className="text-gray-600">Redwood City, CA<br />United States</div>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <Phone className="text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-dark">Phone</div>
-                    <div className="text-gray-600">+1 (555) 123-4567</div>
+                    <div className="text-gray-600">
+                      CANARY FOUNDATION<br />
+                      PO Box 620134<br />
+                      2995 Woodside Road, Suite #200<br />
+                      Woodside, CA 94062-9991
+                    </div>
                   </div>
                 </div>
                 
