@@ -293,6 +293,24 @@ export default function Donate() {
                   </AccordionContent>
                 </AccordionItem>
 
+                <AccordionItem value="insurance-annuities" className="px-6">
+                  <AccordionTrigger className="text-left">
+                    <div className="flex items-center gap-3">
+                      <ShieldCheck className="h-5 w-5 text-primary" />
+                      <span>Insurance annuities and life insurance gifts</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600">
+                    <p className="leading-relaxed">
+                      There are a number of ways to include life insurance or annuities in a charitable gift plan. Please contact us for more information at{" "}
+                      <a href={`mailto:${DONATE_EMAIL}`} className="text-primary hover:text-primary-dark underline underline-offset-4">
+                        {DONATE_EMAIL}
+                      </a>
+                      .
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+
                 <AccordionItem value="mail" className="px-6">
                   <AccordionTrigger className="text-left">
                     <div className="flex items-center gap-3">
@@ -334,6 +352,25 @@ export default function Donate() {
                     </p>
                   </AccordionContent>
                 </AccordionItem>
+
+                <AccordionItem value="shop" className="px-6">
+                  <AccordionTrigger className="text-left">
+                    <div className="flex items-center gap-3">
+                      <Gift className="h-5 w-5 text-primary" />
+                      <span>Donate while you shop</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600">
+                    <p className="leading-relaxed">
+                      Some shopping programs allow a portion of purchases to support nonprofits. Amazon has discontinued AmazonSmile; if you’d like the current
+                      “shop to support” options available for Canary Foundation, email{" "}
+                      <a href={`mailto:${DONATE_EMAIL}`} className="text-primary hover:text-primary-dark underline underline-offset-4">
+                        {DONATE_EMAIL}
+                      </a>
+                      .
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
 
               <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6">
@@ -365,4 +402,3 @@ export default function Donate() {
     </div>
   );
 }
-
