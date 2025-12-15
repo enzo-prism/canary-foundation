@@ -1716,44 +1716,57 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-semibold text-dark mb-6">Get in Touch</h3>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <MapPin className="text-white" />
+              <div className="rounded-2xl border border-gray-200 bg-light p-6 md:p-8">
+                <div className="grid gap-4">
+                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
+                      <MapPin className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                        Address
+                      </div>
+                      <address className="not-italic mt-1 text-gray-600 leading-relaxed">
+                        <span className="block">Canary Foundation</span>
+                        <span className="block">PO Box 620134</span>
+                        <span className="block mt-2">Woodside, CA 94062-9991</span>
+                      </address>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-semibold text-dark">Address</div>
-                    <div className="text-gray-600">
-                      Canary Foundation<br />
-                      PO Box 620134<br />
-                      <br />
-                      Woodside, CA 94062-9991
+
+                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
+                      <Mail className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                        Email
+                      </div>
+                      <a
+                        href="mailto:info@canaryfoundation.org"
+                        className="mt-1 inline-block text-gray-600 hover:text-primary-dark hover:underline"
+                      >
+                        info@canaryfoundation.org
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
+                      <Clock className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                        Office Hours
+                      </div>
+                      <div className="mt-1 text-gray-600 leading-relaxed">
+                        <span className="block">Monday – Friday</span>
+                        <span className="block">9:00 AM – 6:00 PM</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <Mail className="text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-dark">Email</div>
-                    <div className="text-gray-600">info@canaryfoundation.org</div>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <Clock className="text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-dark">Office Hours</div>
-                    <div className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</div>
-                  </div>
-                </div>
               </div>
-              
-
             </div>
             
             <div>
