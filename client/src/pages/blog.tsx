@@ -2,24 +2,22 @@ import { useEffect, useMemo, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Calendar, Clock, ArrowRight, Search, User } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Search } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { trackClick } from '@/lib/analytics';
 import { blogPosts } from '@/data/blog-posts';
+import { getPostDateMeta, getPostSortTimestamp } from '@/lib/blog-post-utils';
 
 // Categories for filtering
-const categories = ["All", "Awards", "Conference", "Research", "Report"];
-const PROGRAM_REPORT_SLUG = "canary-foundation-program-report-2025";
-const showDateFor = (slug?: string) => slug === PROGRAM_REPORT_SLUG;
+const categories = ["All", "Awards", "Conference", "Research", "Report", "Interview"];
 
 export default function Blog() {
   const postsByNewest = useMemo(
     () =>
       [...blogPosts].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        (a, b) => getPostSortTimestamp(b) - getPostSortTimestamp(a),
       ),
     [],
   );
@@ -28,24 +26,20 @@ export default function Blog() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [filteredPosts, setFilteredPosts] = useState(postsByNewest);
 
-  // Filter posts based on category and search term
+  // Track category filtering interactions.
   useEffect(() => {
-    let filtered = postsByNewest;
-    
     if (selectedCategory !== "All") {
-      filtered = filtered.filter(post => post.category === selectedCategory);
-      // Track category filter selection
       trackClick(`blog_category_${selectedCategory}`, 'blog_navigation');
     }
-    
-    setFilteredPosts(filtered);
-  }, [selectedCategory, postsByNewest]);
+  }, [selectedCategory]);
 
-  const featuredPost = blogPosts.find(post => post.featured);
-  const regularPosts = filteredPosts.filter(post =>
-    selectedCategory === "All" ? !post.featured : true,
+  const filteredPosts = useMemo(
+    () =>
+      selectedCategory === "All"
+        ? postsByNewest
+        : postsByNewest.filter(post => post.category === selectedCategory),
+    [selectedCategory, postsByNewest],
   );
 
   return (
@@ -65,62 +59,6 @@ export default function Blog() {
           </div>
         </div>
       </section>
-
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className="py-12 bg-gradient-to-r from-primary/5 to-yellow-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto" id="featured-post">
-              <div className="text-center mb-8">
-                <Badge className="bg-primary text-white mb-4 animate-pulse-glow">Featured Article</Badge>
-                <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 animate-slideUp">
-                  {featuredPost.title}
-                </h2>
-              </div>
-              
-              <Card className="bg-white shadow-xl animate-card-hover animate-scaleIn">
-                <CardContent className="p-8">
-                  <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <User className="w-4 h-4" />
-                      <span>{featuredPost.author}</span>
-                    </div>
-                    {showDateFor(featuredPost.slug) && (
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{new Date(featuredPost.date).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span>{featuredPost.readTime}</span>
-                    </div>
-                    <Badge variant="outline" className="animate-shimmer">
-                      {featuredPost.category}
-                    </Badge>
-                  </div>
-                  
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    {featuredPost.excerpt}
-                  </p>
-                  
-                  <Link href={`/blog/${featuredPost.slug}`}>
-                    <Button 
-                      className="bg-primary text-white hover:bg-primary-dark animate-shimmer"
-                      onClick={() => {
-                        trackClick(`blog_featured_${featuredPost.id}`, 'blog_engagement');
-                      }}
-                    >
-                      Read Full Article
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Search and Filter */}
       <section className="py-12 bg-white">
@@ -146,19 +84,24 @@ export default function Blog() {
       <section className="py-12 bg-light">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {regularPosts.length > 0 ? (
+            {filteredPosts.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {regularPosts.map((post, index) => (
+                {filteredPosts.map((post) => {
+                  const dateMeta = getPostDateMeta(post);
+                  return (
                   <Card 
                     key={post.id} 
                     className="bg-white animate-card-hover animate-stagger-1"
                     id={`blog-post-${post.id}`}
                   >
                     <CardContent className="p-6">
-                      <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center gap-2 mb-4 flex-wrap">
                         <Badge variant="outline" className="animate-shimmer">
                           {post.category}
                         </Badge>
+                        {post.featured && (
+                          <Badge className="bg-primary text-white">Featured</Badge>
+                        )}
                         <span className="text-sm text-gray-500">{post.readTime}</span>
                       </div>
                       
@@ -169,18 +112,21 @@ export default function Blog() {
                       <p className="text-gray-600 mb-4 leading-relaxed">
                         {post.excerpt}
                       </p>
-                      
-                      <div
-                        className={`flex items-center ${
-                          showDateFor(post.slug) ? "justify-between" : "justify-end"
-                        }`}
-                      >
-                        {showDateFor(post.slug) && (
+
+                      <div className="space-y-2 mb-3">
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <Calendar className="w-4 h-4" />
+                          <span>{`${dateMeta.primaryLabel}: ${dateMeta.primaryDate}`}</span>
+                        </div>
+                        {dateMeta.secondaryLabel && dateMeta.secondaryDate && (
                           <div className="flex items-center gap-2 text-sm text-gray-500">
                             <Calendar className="w-4 h-4" />
-                            <span>{new Date(post.date).toLocaleDateString()}</span>
+                            <span>{`${dateMeta.secondaryLabel}: ${dateMeta.secondaryDate}`}</span>
                           </div>
                         )}
+                      </div>
+
+                      <div className="flex items-center justify-end">
                         <Link href={`/blog/${post.slug}`}>
                           <Button 
                             variant="ghost" 
@@ -197,7 +143,8 @@ export default function Blog() {
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+                );
+                })}
               </div>
             ) : (
               <div className="text-center py-12" id="no-results">

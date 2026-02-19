@@ -8,6 +8,8 @@ export interface BlogPost {
   author: string;
   authorBio?: string;
   date: string;
+  dateLabel?: string;
+  publishedDate?: string;
   category: string;
   tags: string[];
   readTime: string;
@@ -423,7 +425,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Report", "Program Update", "Ovarian Cancer", "Pancreatic Cancer", "Prostate Cancer", "Ultrasound", "Lung Cancer"],
     readTime: "7 min read",
     wordCount: 720,
-    featured: true
+    featured: false
   },
   {
     id: 9,
@@ -534,5 +536,170 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     wordCount: 520,
     featured: false
-  }
+  },
+  {
+    id: 11,
+    slug: "oral-history-caltech",
+    title: "Caltech Heritage Project Oral History (2025) — Don Listwin",
+    excerpt: "A four-part 2025 Caltech Heritage Project interview with Don Listwin about building early-stage cancer detection systems through lessons learned from Cisco, Openwave, and his team science approach at the Canary Foundation.",
+    fullContent: `
+      <section class="space-y-6">
+        <div class="space-y-3 rounded-2xl bg-white/95 p-6 shadow-panel ring-1 ring-white/60">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Interview</p>
+          <h1 class="text-3xl font-semibold text-dark md:text-4xl">Caltech Heritage Project Oral History (2025)</h1>
+          <p class="text-gray-700">
+            A four-part oral history recorded March–April 2025 with David Zierler (Caltech Heritage Project). Don Listwin traces the arc from building Cisco’s growth engine to leading Openwave through the dot-com collapse—and then rebuilding his life around early cancer detection through the Canary Foundation.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold text-dark mt-10">What this series covers</h2>
+        <ul class="list-disc pl-6 my-4 space-y-2 text-gray-700">
+          <li>Building markets, not just products: Cisco-era lessons on platform shifts, distribution, and customer-pulled roadmaps</li>
+          <li>The pivot from tech to science: why early detection became the mission, and what team science fixes</li>
+          <li>The Canary model: seed funding to early data, leveraging major grant support, and why milestones matter</li>
+          <li>Why imaging is the next big bet: biomarker + confirmatory imaging as a practical path to action</li>
+          <li>AI’s near-term impact: imaging + pathology as domains where algorithms are reliably outpacing variability</li>
+        </ul>
+      </section>
+
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold text-dark">Listen + download</h2>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1771359675/Don_Listwin_xojqyi.pdf" target="_blank" rel="noopener noreferrer" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Download full transcript (PDF)
+          </a>
+          <a href="https://www.listwinventures.com/media/oral-history/caltech-2025/transcript-full.txt" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Download full transcript (TXT)
+          </a>
+        </div>
+      </section>
+
+      <section class="space-y-8">
+        <h2 class="text-2xl font-semibold text-dark">Episodes</h2>
+
+        <article class="space-y-4 rounded-2xl border border-gray-200 bg-white p-5 text-gray-700">
+          <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-dark">Episode 1 — March 25, 2025</h3>
+            <p class="text-sm font-medium text-gray-600">From Cisco to Canary: building early detection as a system</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Runtime: 1h 04m</p>
+          </div>
+
+          <audio class="w-full" controls preload="metadata">
+            <source src="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-1-2025-03-25.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <a href="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-1-2025-03-25-transcript.txt" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Episode transcript (TXT)
+          </a>
+
+          <ul class="list-disc space-y-1 pl-5 text-sm">
+            <li>Why the “two-step” early detection model matters (biomarker + imaging)</li>
+            <li>The leverage strategy: seed dollars that unlock major grant funding</li>
+            <li>What progress looks like today—and what still hasn’t broken through</li>
+            <li>How a first $1M gift and later $10M Fred Hutch investment set the early team-science model</li>
+          </ul>
+        </article>
+
+        <article class="space-y-4 rounded-2xl border border-gray-200 bg-white p-5 text-gray-700">
+          <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-dark">Episode 2 — April 2, 2025</h3>
+            <p class="text-sm font-medium text-gray-600">Origins: family, Canada, and the making of a builder</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Runtime: 1h 00m</p>
+          </div>
+
+          <audio class="w-full" controls preload="metadata">
+            <source src="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-2-2025-04-02.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <a href="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-2-2025-04-02-transcript.txt" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Episode transcript (TXT)
+          </a>
+
+          <ul class="list-disc space-y-1 pl-5 text-sm">
+            <li>Growing up in Saskatchewan; early work ethic and entrepreneurship</li>
+            <li>Engineering education and early networking sales/product lessons</li>
+            <li>How early personal experiences shaped later leadership instincts</li>
+            <li>A ground-level operating lens built from factory work, field sales, and product management discipline</li>
+          </ul>
+        </article>
+
+        <article class="space-y-4 rounded-2xl border border-gray-200 bg-white p-5 text-gray-700">
+          <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-dark">Episode 3 — April 7, 2025</h3>
+            <p class="text-sm font-medium text-gray-600">Cisco years: product rigor, acquisitions, and the internet boom</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Runtime: 1h 04m</p>
+          </div>
+
+          <audio class="w-full" controls preload="metadata">
+            <source src="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-3-2025-04-07.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <a href="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-3-2025-04-07-transcript.txt" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Episode transcript (TXT)
+          </a>
+
+          <ul class="list-disc space-y-1 pl-5 text-sm">
+            <li>Product management under hypergrowth: engineering vs sales vs customers</li>
+            <li>The IBM interoperability push as a market unlock</li>
+            <li>Scaling lines of business and what it takes to go from $100M → $250M → billions</li>
+            <li>How release discipline, roadmap arbitration, and customer signal translated into repeatable growth</li>
+          </ul>
+        </article>
+
+        <article class="space-y-4 rounded-2xl border border-gray-200 bg-white p-5 text-gray-700">
+          <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-dark">Episode 4 — April 28, 2025</h3>
+            <p class="text-sm font-medium text-gray-600">Loss, purpose, and the next decade of early detection</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Runtime: 1h 18m</p>
+          </div>
+
+          <audio class="w-full" controls preload="metadata">
+            <source src="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-4-2025-04-28.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <a href="https://www.listwinventures.com/media/oral-history/caltech-2025/episode-4-2025-04-28-transcript.txt" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Episode transcript (TXT)
+          </a>
+
+          <ul class="list-disc space-y-1 pl-5 text-sm">
+            <li>His mother’s ovarian cancer story as the catalyst</li>
+            <li>Why diagnostics economics are still broken—and how that affects adoption</li>
+            <li>The forward bet: molecular imaging + ultrasound + AI as the next frontier</li>
+            <li>A practical thesis: fix care-continuum bottlenecks first, then scale delivery economics</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-dark">Related links</h2>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://www.listwinventures.com/company/canary-foundation" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Canary Foundation
+          </a>
+          <a href="https://www.listwinventures.com/oral-history" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Oral History (Computer History Museum, 2018)
+          </a>
+          <a href="https://www.listwinventures.com/press" class="inline-block text-primary hover:text-primary-dark hover:underline">
+            Press & References
+          </a>
+        </div>
+      </section>
+    `,
+    author: "Don Listwin",
+    date: "2025-04-28",
+    dateLabel: "Recorded",
+    publishedDate: "2026-02-19",
+    category: "Interview",
+    tags: ["Don Listwin", "Oral History", "Caltech Heritage Project", "Canary Foundation", "Interview", "Interview Series"],
+    readTime: "30 min read",
+    wordCount: 1900,
+    featured: true,
+    originalUrl: "https://www.listwinventures.com/oral-history-caltech"
+  },
 ];

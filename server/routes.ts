@@ -138,6 +138,11 @@ Allow: /`;
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://canaryfoundation.org/blog/oral-history-caltech</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://canaryfoundation.org/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

@@ -3,7 +3,6 @@ import { useParams, Link, useLocation } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { 
   Calendar, 
   Clock, 
@@ -11,8 +10,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   User, 
-  Share2, 
-  BookOpen,
   Link as LinkIcon,
   Twitter,
   Linkedin,
@@ -23,10 +20,8 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { blogPosts } from '@/data/blog-posts';
 import { trackPageView, trackClick } from '@/lib/analytics';
+import { getPostDateMeta, getPostSortTimestamp } from '@/lib/blog-post-utils';
 import { useToast } from '@/hooks/use-toast';
-
-const PROGRAM_REPORT_SLUG = "canary-foundation-program-report-2025";
-const showDateFor = (slug?: string) => slug === PROGRAM_REPORT_SLUG;
 
 export default function BlogPost() {
   const params = useParams();
@@ -38,7 +33,7 @@ export default function BlogPost() {
   const postsByNewest = useMemo(
     () =>
       [...blogPosts].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        (a, b) => getPostSortTimestamp(b) - getPostSortTimestamp(a),
       ),
     [],
   );
@@ -90,6 +85,8 @@ export default function BlogPost() {
   if (!post) {
     return null;
   }
+
+  const dateMeta = getPostDateMeta(post);
   
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -187,14 +184,14 @@ export default function BlogPost() {
                     <User className="w-4 h-4" />
                     <span>{post.author}</span>
                   </div>
-                  {showDateFor(post.slug) && (
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{`${dateMeta.primaryLabel}: ${dateMeta.primaryDate}`}</span>
+                  </div>
+                  {dateMeta.secondaryLabel && dateMeta.secondaryDate && (
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{new Date(post.date).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      })}</span>
+                      <span>{`${dateMeta.secondaryLabel}: ${dateMeta.secondaryDate}`}</span>
                     </div>
                   )}
                   <div className="flex items-center gap-2">
@@ -378,34 +375,32 @@ export default function BlogPost() {
                 <div className="mt-12">
                   <h2 className="text-2xl font-bold text-dark mb-6">Related Articles</h2>
                   <div className="grid md:grid-cols-3 gap-6">
-                    {relatedPosts.map(relatedPost => (
-                      <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>
-                        <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
-                          <CardContent className="p-6">
-                            <Badge variant="outline" className="mb-3">
-                              {relatedPost.category}
-                            </Badge>
-                            <h3 className="font-semibold text-dark mb-2 line-clamp-2">
-                              {relatedPost.title}
-                            </h3>
-                            <p className="text-sm text-gray-600 line-clamp-3 mb-4">
-                              {relatedPost.excerpt}
-                            </p>
-                            <div className="flex items-center gap-2 text-xs text-gray-500">
-                              {showDateFor(relatedPost.slug) && (
-                                <>
-                                  <Calendar className="w-3 h-3" />
-                                  <span>{new Date(relatedPost.date).toLocaleDateString()}</span>
-                                  <span>•</span>
-                                </>
-                              )}
-                              <Clock className="w-3 h-3" />
-                              <span>{relatedPost.readTime}</span>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
+                    {relatedPosts.map(relatedPost => {
+                      const relatedDateMeta = getPostDateMeta(relatedPost);
+                      return (
+                        <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>
+                          <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+                            <CardContent className="p-6">
+                              <Badge variant="outline" className="mb-3">
+                                {relatedPost.category}
+                              </Badge>
+                              <h3 className="font-semibold text-dark mb-2 line-clamp-2">
+                                {relatedPost.title}
+                              </h3>
+                              <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+                                {relatedPost.excerpt}
+                              </p>
+                              <div className="flex items-center gap-2 text-xs text-gray-500">
+                                <Calendar className="w-3 h-3" />
+                                <span>{`${relatedDateMeta.primaryLabel}: ${relatedDateMeta.primaryDate}`}</span>
+                                <Clock className="w-3 h-3" />
+                                <span>{relatedPost.readTime}</span>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}

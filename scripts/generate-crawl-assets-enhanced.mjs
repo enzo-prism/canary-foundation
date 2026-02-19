@@ -16,6 +16,7 @@ const MAX_URLS_PER_SITEMAP = 50000;
 const blogPosts = [
   { slug: 'don-listwin-award-2025-ruth-etzioni', date: '2025-11-01', category: 'Awards' },
   { slug: 'edx25-conference-portland-early-detection', date: '2025-11-01', category: 'Conference' },
+  { slug: 'oral-history-caltech', date: '2025-04-28', category: 'Interview' },
   { slug: 'don-listwin-award-2024-antonis-antoniou', date: '2024-11-01', category: 'Awards' },
   { slug: 'edx24-conference-stanford-cancer-research', date: '2024-11-01', category: 'Conference' },
   { slug: 'edx23-conference-london-cancer-research', date: '2023-11-01', category: 'Conference' },
