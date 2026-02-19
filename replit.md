@@ -36,6 +36,13 @@ The application features a modern, responsive design built with React 18 and Typ
 - **SEO Enhancements**: Implemented comprehensive sitemap generation, dynamic priority and change frequencies, and robust 301 redirect middleware for legacy URLs to preserve SEO value.
 - **Analytics Integration**: Google Analytics 4 is integrated for tracking page views, user interactions, and specific events like form submissions and CTA clicks.
 
+### Blog Content Model (2026 Update)
+- **Data source**: Blog listing and detail pages are fully data-driven from `client/src/data/blog-posts.ts`.
+- **Ordering**: Posts are sorted by `publishedDate ?? date` so recently published content appears first, while preserving historical source dates.
+- **Date semantics**: `date` represents the content-native date (for example recording date), `publishedDate` represents when the Canary blog entry was published, and `dateLabel` provides explicit context like `Recorded`.
+- **Shared logic**: Sorting and display labels are centralized in `client/src/lib/blog-post-utils.ts` and used by both `client/src/pages/blog.tsx` and `client/src/pages/blog-post.tsx`.
+- **Filtering behavior**: Category filters only filter by `category`; they do not apply separate featured-only rendering paths.
+
 ## External Dependencies
 
 ### Frontend Dependencies
