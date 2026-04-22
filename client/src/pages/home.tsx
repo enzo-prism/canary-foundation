@@ -17,6 +17,7 @@ import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Drop
 import { Link } from "wouter";
 import BiomarkerGrid from "@/components/BiomarkerGrid";
 import { trackFormSubmission, trackClick, trackVideo } from "@/lib/analytics";
+import { DON_LISTWIN_TITLE } from "@/data/leadership";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
@@ -793,7 +794,7 @@ export default function Home() {
                     <Star className="w-10 h-10 text-white animate-icon-spin" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Don Listwin</h3>
-                  <p className="text-primary font-medium mb-3 text-center">Founder, CEO, Co-Chairman</p>
+                  <p className="text-primary font-medium mb-3 text-center">{DON_LISTWIN_TITLE}</p>
                   <p className="text-gray-600 text-sm mb-3 italic">
                     "After 30 years in the technology industry, I launched Canary Foundation in 2004. I was motivated by a personal experience with cancer."
                   </p>
@@ -983,7 +984,7 @@ export default function Home() {
                       Partner at Black & White Design. Board of Directors of Valentine Family Foundation. Co-Founder of Belize Kids improving lives for children in Belize.
                     </p>
                     <p className="text-gray-600 text-sm">
-                      Chair of Room to Read Emeritus Board after serving 2003-2012. Former Co-Chair of Board of Directors 2005-2008. B.S. in Psychology from St. Lawrence University.
+                      Chair of Room to Read Emeritus Board after serving 2003-2012. Helped lead the Board of Directors from 2005 to 2008. B.S. in Psychology from St. Lawrence University.
                     </p>
                   </CardContent>
                 </Card>

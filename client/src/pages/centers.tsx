@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { DON_LISTWIN_TITLE_WITH_ORG } from "@/data/leadership";
 
 export default function Centers() {
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Centers() {
                   <CardContent className="p-8 md:p-12">
                     <h3 className="text-2xl font-bold text-dark mb-6">The Beginning at Fred Hutchinson</h3>
                     <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                      It all began when Canary Founder Don Listwin discovered the work of epidemiologist Dr. Nicole Urban and a new field called biomarkers at the Fred Hutchinson Cancer Center in Seattle in 2001. He ended up funding some of her work and then later met Nobel Laureate Dr. Lee Hartwell, director of the center.
+                      It all began when Don Listwin, {DON_LISTWIN_TITLE_WITH_ORG}, discovered the work of epidemiologist Dr. Nicole Urban and a new field called biomarkers at the Fred Hutchinson Cancer Center in Seattle in 2001. He ended up funding some of her work and then later met Nobel Laureate Dr. Lee Hartwell, director of the center.
                     </p>
                     <p className="text-lg text-gray-600 leading-relaxed mb-6">
                       Don's $10-million investment helped establish the core of a biomarker discovery and analysis program at the HUTCH, and the HUTCH remains one of Canary's 'Centers of Excellence' today.

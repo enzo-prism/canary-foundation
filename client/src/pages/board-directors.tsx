@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { DON_LISTWIN_TITLE } from "@/data/leadership";
 
 export default function BoardDirectors() {
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function BoardDirectors() {
                   </div>
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Don Listwin</h3>
-                    <p className="text-lg font-semibold text-primary mb-6">Founder and Chairman, Canary Foundation</p>
+                    <p className="text-lg font-semibold text-primary mb-6">{DON_LISTWIN_TITLE}</p>
                     <p className="text-gray-600 leading-relaxed mb-6">
                       Don Listwin is a 30-year veteran of the technology industry. Currently Don is acting President and CEO of ISchemaView and head of Listwin Ventures; investing in the future. Don has served as CEO of Sana Security, Openwave, and had been the #2 executive at Cisco Systems. Today, in addition to his work at the foundation, he serves on the board of directors of several private and public companies including POET Technologies and Robin Systems.
                     </p>
@@ -117,7 +118,7 @@ export default function BoardDirectors() {
                     <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Hilary Valentine</h3>
                     <p className="text-lg font-semibold text-primary mb-6">Board Member</p>
                     <p className="text-gray-600 leading-relaxed">
-                      Hilary Valentine is a partner at Black & White Design and serves on the Board of Directors of the Valentine Family Foundation. She is co-Founder of Belize Kids with the mission of improving lives for children in Belize. She also serves on the Emeritus Board of Breast Cancer Connections. Hilary is the Chair of the Room to Read Emeritus Board after serving on the Room to Read board of directors from 2003 to 2012. She was Co-Chair of the Board of Directors from 2005 to 2008.
+                      Hilary Valentine is a partner at Black & White Design and serves on the Board of Directors of the Valentine Family Foundation. She is co-Founder of Belize Kids with the mission of improving lives for children in Belize. She also serves on the Emeritus Board of Breast Cancer Connections. Hilary is the Chair of the Room to Read Emeritus Board after serving on the Room to Read board of directors from 2003 to 2012 and helped lead the Board of Directors from 2005 to 2008.
                     </p>
                     <p className="text-gray-600 leading-relaxed mt-4">
                       Hilary graduated with a B.S. in Psychology from St. Lawrence University.

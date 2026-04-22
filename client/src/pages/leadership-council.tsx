@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { DON_LISTWIN_TITLE } from "@/data/leadership";
 
 export default function LeadershipCouncil() {
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function LeadershipCouncil() {
                   </div>
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Bill Bowes</h3>
-                    <p className="text-lg font-semibold text-primary mb-6">Founding Partner US Venture Partners, Former Co-Chair</p>
+                    <p className="text-lg font-semibold text-primary mb-6">Founding Partner, US Venture Partners</p>
                     <p className="text-gray-600 leading-relaxed mb-6">
                       Canary honors the contributions of the late Bill Bowes in furthering our mission, and we appreciate his leadership from 2007-2016.
                     </p>
@@ -59,7 +60,7 @@ export default function LeadershipCouncil() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div className="order-2 md:order-1">
                     <h3 className="text-2xl md:text-3xl font-bold text-dark mb-2">Don Listwin</h3>
-                    <p className="text-lg font-semibold text-primary mb-6">Founder Canary Foundation, Co-Chair</p>
+                    <p className="text-lg font-semibold text-primary mb-6">{DON_LISTWIN_TITLE}</p>
                     <p className="text-gray-600 leading-relaxed mb-6">
                       Don was determined to launch a radical new assault on cancer. His target? The early cancer detection field.
                     </p>

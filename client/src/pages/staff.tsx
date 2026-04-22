@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { DON_LISTWIN_TITLE } from "@/data/leadership";
 
 export default function Staff() {
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function Staff() {
                 </div>
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold text-dark mb-2">Don Listwin</h2>
-                  <p className="text-lg font-semibold text-primary mb-6">Founder, CEO, Co-Chairman</p>
+                  <p className="text-lg font-semibold text-primary mb-6">{DON_LISTWIN_TITLE}</p>
                   <blockquote className="text-lg text-gray-600 italic border-l-4 border-primary pl-6">
                     "After 30 years in the technology industry, I launched Canary Foundation in 2004. I was motivated by a personal experience with cancer.
                     When my mother was misdiagnosed and died from ovarian cancer, I decided to commit my life to advancing early detection diagnostics."

@@ -1,3 +1,5 @@
+import { DON_LISTWIN_TITLE_WITH_ORG } from "@/data/leadership";
+
 // Blog post data with full content from Canary Foundation
 export interface BlogPost {
   id: number;
@@ -31,7 +33,7 @@ export const blogPosts: BlogPost[] = [
     fullContent: `
       <p>Prof Antonis Antoniou, Professor of Cancer Risk Prediction in the Department of Public Health and Primary Care, has been named as the 2024 winner of the Don Listwin award for outstanding contribution to early cancer detection.</p>
       
-      <p>Announced on October 23rd at the <a href="https://www.earlydetectionresearch.com/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Early Detection of Cancer Conference</a> in San Francisco, the award recognises a sustained contribution to, or singular achievement in, the cancer early detection field. The award is named in honour of Don Listwin, founder and chairman of the Canary Foundation, dedicated to research into early cancer detection.</p>
+      <p>Announced on October 23rd at the <a href="https://www.earlydetectionresearch.com/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Early Detection of Cancer Conference</a> in San Francisco, the award recognises a sustained contribution to, or singular achievement in, the cancer early detection field. The award is named in honour of Don Listwin, ${DON_LISTWIN_TITLE_WITH_ORG}, dedicated to research into early cancer detection.</p>
       
       <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Recognition for Risk Prediction Innovation</h2>
       
