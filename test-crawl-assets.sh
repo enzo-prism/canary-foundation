@@ -1,51 +1,91 @@
 #!/bin/bash
 
+set -euo pipefail
+
+source "$(dirname "$0")/scripts/production-test-helpers.sh"
+
+FAILURES=0
+
+trap stop_production_server EXIT
+
 echo "Testing Crawl Assets Configuration..."
 echo "======================================"
 
-# Start the production server
+echo "Building application..."
+build_production_bundle > /dev/null
+
 echo "Starting production server..."
-cd dist && timeout 10 node server.js > /dev/null 2>&1 &
-SERVER_PID=$!
-sleep 3
+start_production_server
+BASE_URL="$TEST_BASE_URL"
 
-BASE_URL="http://localhost:3000"
+declare -a assets=(
+  "robots.txt:text/plain:# Canary Foundation Robots.txt"
+  "sitemap.xml:application/xml:<urlset"
+  "sitemap-index.xml:application/xml:<sitemapindex"
+  "news-sitemap.xml:application/xml:<urlset"
+  "llm.xml:application/xml:<urlset"
+  "ai.txt:text/plain:Sitemap: https://canaryfoundation.org/llm.xml"
+)
 
-echo -e "\n1. Testing robots.txt:"
-echo "----------------------"
-curl -sS $BASE_URL/robots.txt | head -n 20
-echo ""
-curl -I $BASE_URL/robots.txt 2>/dev/null | grep -E "^HTTP|Content-Type"
+echo -e "\n1. Validating crawl asset responses:"
+echo "------------------------------------"
+for asset in "${assets[@]}"; do
+  path="${asset%%:*}"
+  remainder="${asset#*:}"
+  expected_type="${remainder%%:*}"
+  expected_snippet="${remainder#*:}"
 
-echo -e "\n2. Testing sitemap.xml:"
-echo "-----------------------"
-curl -I $BASE_URL/sitemap.xml 2>/dev/null | grep -E "^HTTP|Content-Type"
-echo "First 10 lines:"
-curl -sS $BASE_URL/sitemap.xml | head -10
+  headers="$(curl -sSI "${BASE_URL}/${path}" | tr -d '\r')"
+  body="$(curl -fsS "${BASE_URL}/${path}")"
+  status="$(echo "${headers}" | awk 'NR==1 {print $2}')"
+  type_header="$(extract_header_value "${headers}" "content-type")"
 
-echo -e "\n3. Testing llm.xml:"
-echo "-------------------"
-curl -I $BASE_URL/llm.xml 2>/dev/null | grep -E "^HTTP|Content-Type"
-echo "First 10 lines:"
-curl -sS $BASE_URL/llm.xml | head -10
+  echo "/${path}: ${status} ${type_header}"
 
-echo -e "\n4. Testing ai.txt:"
-echo "------------------"
-curl -I $BASE_URL/ai.txt 2>/dev/null | grep -E "^HTTP|Content-Type"
-curl -sS $BASE_URL/ai.txt | head
+  if [[ "${status}" != "200" ]]; then
+    echo "❌ Unexpected status for /${path}"
+    FAILURES=$((FAILURES + 1))
+  fi
 
-echo -e "\n5. Testing HEAD requests:"
+  if [[ "${type_header}" != "${expected_type}"* ]]; then
+    echo "❌ Unexpected content type for /${path}"
+    FAILURES=$((FAILURES + 1))
+  fi
+
+  if ! echo "${body}" | grep -q "${expected_snippet}"; then
+    echo "❌ Body for /${path} is missing the expected content snippet"
+    FAILURES=$((FAILURES + 1))
+  fi
+done
+
+echo -e "\n2. Testing HEAD requests:"
 echo "-------------------------"
-echo "HEAD /sitemap.xml:"
-curl -I -X HEAD $BASE_URL/sitemap.xml 2>/dev/null | grep "^HTTP"
-echo "HEAD /robots.txt:"
-curl -I -X HEAD $BASE_URL/robots.txt 2>/dev/null | grep "^HTTP"
+for path in "robots.txt" "sitemap.xml" "sitemap-index.xml" "news-sitemap.xml"; do
+  status="$(curl -sS -I -X HEAD -o /dev/null -w "%{http_code}" "${BASE_URL}/${path}")"
+  echo "HEAD /${path}: ${status}"
+  if [[ "${status}" != "200" ]]; then
+    echo "❌ HEAD request failed for /${path}"
+    FAILURES=$((FAILURES + 1))
+  fi
+done
 
-echo -e "\n6. Testing Cache Headers:"
-echo "-------------------------"
-curl -I $BASE_URL/robots.txt 2>/dev/null | grep -E "Cache-Control|ETag"
+echo -e "\n3. Testing cache validators:"
+echo "----------------------------"
+headers="$(curl -sSI "${BASE_URL}/robots.txt" | tr -d '\r')"
+if echo "${headers}" | grep -Eq "Cache-Control|ETag"; then
+  echo "✅ Cache validators present on robots.txt"
+else
+  echo "❌ No Cache-Control or ETag header found on robots.txt"
+  FAILURES=$((FAILURES + 1))
+fi
 
-# Kill the server
-kill $SERVER_PID 2>/dev/null
+echo -e "\n======================================"
+if [[ "${FAILURES}" -eq 0 ]]; then
+  echo "✅ Crawl asset tests complete"
+  echo "======================================"
+  exit 0
+fi
 
-echo -e "\n✅ Crawl asset tests complete!"
+echo "❌ Crawl asset tests failed with ${FAILURES} issue(s)"
+echo "======================================"
+exit 1

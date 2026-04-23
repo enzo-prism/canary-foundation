@@ -1,93 +1,72 @@
-# Canary Foundation - Production Deployment Guide
+# Canary Foundation Production Deployment Guide
 
-## Build Configuration
+## Runtime
 
-**BUILD_DIR detected:** `dist/public`
+The live app is the bundled Express server at `dist/index.js`. Do not deploy the legacy `production-server*.mjs` files; they are not the current production path.
 
-## Deployment Commands
+## Build And Start Commands
 
-### Build Command
-```
-npm ci && npm run build && cp production-server.mjs dist/production-server.mjs && node postbuild.js
-```
-
-### Start Command  
-```
-cd dist && node production-server.mjs
-```
-
-## Production Server Features
-
-✅ **HTTPS Enforcement** - Redirects all HTTP traffic to HTTPS via x-forwarded-proto header
-✅ **Domain Canonicalization** - Redirects www.canaryfoundation.org to canaryfoundation.org (except crawler files)
-✅ **Crawler File Support** - robots.txt, sitemap.xml, llm.xml, ai.txt served on both www and apex domains
-✅ **Security Headers**:
-  - Strict-Transport-Security: max-age=31536000; includeSubDomains
-  - X-Content-Type-Options: nosniff
-  - Referrer-Policy: strict-origin-when-cross-origin
-  - X-Frame-Options: SAMEORIGIN
-  - X-XSS-Protection: 1; mode=block
-
-✅ **SPA Support** - Falls back to index.html for client-side routing
-✅ **HEAD Request Support** - Returns 200 for all HEAD requests
-✅ **Health Endpoints** - `/health` and `/status` return 200 OK
-✅ **Robots.txt** - Dynamically serves SEO-friendly robots.txt
-✅ **Static Asset Caching** - 1 year cache for assets, 1 hour for HTML
-✅ **Compression** - Gzip compression enabled for all responses
-✅ **Canonical Tag** - Added to HTML template: https://canaryfoundation.org/
-
-## Verified Domains
-
-- **Primary:** canaryfoundation.org  
-- **Secondary:** www.canaryfoundation.org (redirects to primary)
-
-## Testing Commands
-
-### Local Testing
+### Build
 ```bash
-# Build the application
+npm ci && npm run build && node postbuild.js
+```
+
+### Start
+```bash
+npm run start
+```
+
+## What The Production Server Now Handles
+
+- Canonical host redirects from `www.canaryfoundation.org` to `https://canaryfoundation.org` for regular pages
+- Direct serving of generated crawl assets on both `www` and apex:
+  `robots.txt`, `sitemap.xml`, `sitemap-index.xml`, `news-sitemap.xml`, `llm.xml`, `ai.txt`
+- Legacy URL redirects for old Canary routes
+- Brotli and gzip delivery for built `.js` and `.css` assets when the precompressed files exist
+- Security headers:
+  `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `X-XSS-Protection`
+- SPA fallback via the bundled Express + static Vite output
+
+## Local Verification
+
+### Build The Production Bundle
+```bash
 ./deploy-build.sh
-
-# Start the server locally
-PORT=3000 npm start
 ```
 
-### Acceptance Tests
+### Start The Production Server Locally
 ```bash
-# Test apex domain
-curl -I https://canaryfoundation.org/
-
-# Test www redirect
-curl -I https://www.canaryfoundation.org/
-
-# Test crawler user agents
-curl -I -A "SiteAuditBot/1.0" https://canaryfoundation.org/
-curl -I -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" https://canaryfoundation.org/
-
-# Test health endpoint
-curl https://canaryfoundation.org/health
-
-# Test robots.txt
-curl https://canaryfoundation.org/robots.txt
+PORT=3000 npm run start
 ```
 
-## Security Scan
+### Run The Verification Scripts
+```bash
+./test-server.sh
+./test-crawl-assets.sh
+./test-www-crawler-files.sh
+./test-seo-fix.sh
+./test-redirects.sh
+./final-test-production.sh
+```
 
-Run the security scanner in Replit Deployments after deployment to verify no HIGH/CRITICAL issues exist.
+## Deployment Checklist
 
-## Deployment Steps
+1. Build with `npm ci && npm run build && node postbuild.js`
+2. Start with `npm run start`
+3. Confirm the crawl assets exist in `dist/public/`
+4. Run the local verification scripts above
+5. Deploy
+6. Verify the public domain and crawler endpoints after deploy
 
-1. Ensure all changes are committed
-2. Navigate to Deployments tab
-3. Update Build command: `npm ci && npm run build && cp production-server.mjs dist/index.js`
-4. Update Start command: `npm start`
-5. Deploy to Production
-6. Run acceptance tests
-7. Run security scan
+## Public Smoke Checks
 
-## Rollback Procedure
-
-If issues occur:
-1. Use Replit's deployment rollback feature
-2. Restore previous deployment version
-3. Investigate issues in staging environment
+```bash
+curl -I https://canaryfoundation.org/
+curl -I https://www.canaryfoundation.org/about
+curl -I https://canaryfoundation.org/robots.txt
+curl -I https://canaryfoundation.org/sitemap.xml
+curl -I https://canaryfoundation.org/sitemap-index.xml
+curl -I https://canaryfoundation.org/news-sitemap.xml
+curl -I https://canaryfoundation.org/llm.xml
+curl -I https://canaryfoundation.org/ai.txt
+```

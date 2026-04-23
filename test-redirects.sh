@@ -1,4 +1,9 @@
 #!/bin/bash
+
+set -euo pipefail
+
+source "$(dirname "$0")/scripts/production-test-helpers.sh"
+
 # Test script to verify legacy URL redirects are working
 
 echo "================================================="
@@ -13,12 +18,18 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Server URL
-BASE_URL="http://localhost:5000"
-
 # Counter
 PASSED=0
 FAILED=0
+
+trap stop_production_server EXIT
+
+echo "Preparing production build..."
+build_production_bundle > /dev/null
+
+echo "Starting production server..."
+start_production_server
+BASE_URL="$TEST_BASE_URL"
 
 # Function to test redirect
 test_redirect() {
@@ -30,17 +41,12 @@ test_redirect() {
     echo "  Old URL: $OLD_PATH"
     echo "  Expected redirect to: $EXPECTED_PATH"
     
-    # Follow redirects and get the final URL
-    RESPONSE=$(curl -s -o /dev/null -w "%{http_code} %{redirect_url}" "${BASE_URL}${OLD_PATH}")
-    HTTP_CODE=$(echo $RESPONSE | cut -d' ' -f1)
-    REDIRECT_URL=$(echo $RESPONSE | cut -d' ' -f2)
+    HEADERS=$(curl -sSI "${BASE_URL}${OLD_PATH}" | tr -d '\r')
+    HTTP_CODE=$(echo "${HEADERS}" | awk 'NR==1 {print $2}')
     
-    # For 301 redirects, check the Location header
     if [ "$HTTP_CODE" = "301" ]; then
-        # Get the Location header
-        LOCATION=$(curl -s -I "${BASE_URL}${OLD_PATH}" | grep -i "^location:" | sed 's/location: //i' | tr -d '\r')
-        
-        if [[ "$LOCATION" == *"$EXPECTED_PATH"* ]]; then
+        LOCATION=$(extract_header_value "${HEADERS}" "location")
+        if [[ "$LOCATION" == "${EXPECTED_PATH}" ]]; then
             echo -e "  ${GREEN}✅ PASS: 301 redirect to $LOCATION${NC}"
             ((PASSED++))
         else
@@ -63,30 +69,34 @@ echo "================================================="
 
 # Test the specific URLs the user mentioned
 test_redirect "/about-canary/founders-story/" "/about/founders-story" "Founder's Story Page"
-test_redirect "/about-canary/" "/about" "About Canary Main Page"
+test_redirect "/about-canary/" "/about/overview" "About Canary Main Page"
 test_redirect "/about-canary/staff/" "/about/staff" "Staff Page"
 test_redirect "/canary-science/programs/" "/science/programs" "Science Programs Page"
-test_redirect "/about-canary/board-of-directors/" "/about/board-of-directors" "Board of Directors Page"
+test_redirect "/about-canary/board-of-directors/" "/about/board-directors" "Board of Directors Page"
 
 echo -e "${BLUE}📋 Testing Additional Legacy URLs:${NC}"
 echo "================================================="
 
 # Test without trailing slashes
 test_redirect "/about-canary/founders-story" "/about/founders-story" "Founder's Story (no slash)"
-test_redirect "/about-canary" "/about" "About Canary (no slash)"
+test_redirect "/about-canary" "/about/overview" "About Canary (no slash)"
 test_redirect "/about-canary/staff" "/about/staff" "Staff (no slash)"
 test_redirect "/canary-science/programs" "/science/programs" "Programs (no slash)"
-test_redirect "/about-canary/board-of-directors" "/about/board-of-directors" "Board (no slash)"
+test_redirect "/about-canary/board-of-directors" "/about/board-directors" "Board (no slash)"
 
 # Test other important legacy URLs
-test_redirect "/canary-science" "/science" "Science Main Page"
-test_redirect "/canary-approach" "/approach" "Approach Main Page"
+test_redirect "/canary-science" "/science/overview" "Science Main Page"
+test_redirect "/canary-approach" "/approach/overview" "Approach Main Page"
 test_redirect "/news-blog" "/blog" "News Blog Page"
 test_redirect "/take-action-2" "/donate" "Take Action Page"
 
 # Test deep nested URLs
 test_redirect "/canary-science/programs/tumors/prostate/" "/science/programs/tumors/prostate" "Prostate Cancer Page"
 test_redirect "/canary-science/science/imaging/" "/science/science/imaging" "Imaging Science Page"
+
+echo -e "${BLUE}📋 Testing Query String Preservation:${NC}"
+echo "================================================="
+test_redirect "/about-canary/founders-story?utm_source=test" "/about/founders-story?utm_source=test" "Founder's Story query params"
 
 echo ""
 echo "================================================="
@@ -108,7 +118,7 @@ else
     echo -e "${RED}⚠️ Some redirect tests failed.${NC}"
     echo ""
     echo "Please ensure:"
-    echo "1. The server is running (npm run dev)"
+    echo "1. The production bundle was built successfully"
     echo "2. Redirect middleware is properly configured"
     echo "3. Redirects are returning 301 status codes"
     exit 1

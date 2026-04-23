@@ -62,6 +62,12 @@ export default function BlogPost() {
       setLocation('/blog');
       return;
     }
+
+    document.title = `${post.title} | Canary Foundation`;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', post.excerpt);
+    }
     
     // Track page view
     trackPageView(`/blog/${slug}`);

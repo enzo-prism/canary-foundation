@@ -1,36 +1,20 @@
 #!/bin/bash
-# Production build script that ensures sitemap generation
 
-echo "🚀 Starting production build with sitemap generation..."
+set -euo pipefail
 
-# Clean previous build
+# Production build script that ensures crawl asset generation
+
+echo "🚀 Starting production build with crawl asset generation..."
+
 echo "Cleaning previous build..."
 rm -rf dist
 
-# Build frontend with Vite
-echo "Building frontend with Vite..."
-npx vite build
+echo "Building application..."
+npm run build
 
-# Build server with esbuild
-echo "Building server with esbuild..."
-npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
-
-# CRITICAL: Generate sitemap and crawl assets
 echo "Generating sitemap and crawl assets..."
 node postbuild.js
 
-# Copy production server to dist
-echo "Copying production server..."
-cp production-server.mjs dist/
-
-# Copy generation script to dist for runtime generation
-echo "Copying generation script for runtime..."
-mkdir -p dist/scripts dist/seo
-cp scripts/generate-crawl-assets-enhanced.mjs dist/scripts/
-cp scripts/compress-assets.mjs dist/scripts/ 2>/dev/null || true
-cp -r seo/* dist/seo/ 2>/dev/null || true
-
-# Verify critical SEO files exist
 echo ""
 echo "Verifying SEO files..."
 if [ -f "dist/public/sitemap.xml" ]; then
@@ -72,4 +56,4 @@ echo "SEO files generated in dist/public/:"
 ls -lh dist/public/*.xml dist/public/*.txt 2>/dev/null | awk '{print "  - " $9 " (" $5 ")"}'
 echo ""
 echo "To deploy to production, use:"
-echo "  cd dist && node production-server.mjs"
+echo "  npm run start"

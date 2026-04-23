@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/about/founders-story" className="text-gray-300 hover:text-primary transition-colors duration-300">
-                  Founder's Story
+                  Founder & Oral History
                 </Link>
               </li>
             </ul>

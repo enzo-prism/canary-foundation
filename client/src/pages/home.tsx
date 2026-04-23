@@ -774,12 +774,12 @@ export default function Home() {
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
-                  <Link href="/about/founder-story">
+                  <Link href="/about/founders-story">
                     <Button 
                       variant="outline" 
                       className="border-gray-400 text-gray-600 hover:bg-gray-600 hover:text-white font-semibold"
                     >
-                      Founder's Story
+                      Founder & Oral History
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
@@ -801,6 +801,14 @@ export default function Home() {
                   <p className="text-gray-600 text-sm">
                     Former CEO of Sana Security, Openwave, and #2 executive at Cisco Systems. Serves on NCI Board of Scientific Advisors and multiple company boards.
                   </p>
+                  <div className="mt-4 text-center">
+                    <Link href="/about/founders-story">
+                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary-dark">
+                        Founder & Oral History
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
               
@@ -911,7 +919,7 @@ export default function Home() {
               
               {/* Learn More About Board */}
               <div className="text-center mb-8">
-                <Link href="/about/board-of-directors">
+                <Link href="/about/board-directors">
                   <Button 
                     variant="outline" 
                     className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"

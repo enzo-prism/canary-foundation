@@ -1,45 +1,69 @@
 #!/bin/bash
 
+set -euo pipefail
+
+source "$(dirname "$0")/scripts/production-test-helpers.sh"
+
+FAILURES=0
+
+trap stop_production_server EXIT
+
 echo "Testing Crawler Files on Both Domains"
 echo "======================================"
 
-# Start the production server
-cd dist && timeout 10 node server.js > /dev/null 2>&1 &
-SERVER_PID=$!
-sleep 3
+echo "Building application..."
+build_production_bundle > /dev/null
 
-echo -e "\n1. Testing robots.txt on WWW domain:"
-echo "-------------------------------------"
-curl -H "Host: www.canaryfoundation.org" -s -I http://localhost:3000/robots.txt | grep -E "^HTTP|Content-Type"
-curl -H "Host: www.canaryfoundation.org" -s http://localhost:3000/robots.txt | head -3
+echo "Starting production server..."
+start_production_server
+BASE_URL="$TEST_BASE_URL"
 
-echo -e "\n2. Testing robots.txt on APEX domain:"
-echo "--------------------------------------"
-curl -H "Host: canaryfoundation.org" -s -I http://localhost:3000/robots.txt | grep -E "^HTTP|Content-Type"
-curl -H "Host: canaryfoundation.org" -s http://localhost:3000/robots.txt | head -3
+declare -a hosts=("www.canaryfoundation.org" "canaryfoundation.org")
+declare -a endpoints=("/robots.txt" "/sitemap.xml" "/sitemap-index.xml" "/news-sitemap.xml" "/llm.xml" "/ai.txt")
 
-echo -e "\n3. Testing sitemap.xml on WWW domain:"
-echo "--------------------------------------"
-curl -H "Host: www.canaryfoundation.org" -s -I http://localhost:3000/sitemap.xml | grep -E "^HTTP|Content-Type"
+echo -e "\n1. Testing crawler endpoints on both domains:"
+echo "---------------------------------------------"
+for host in "${hosts[@]}"; do
+  echo "${host}:"
+  for endpoint in "${endpoints[@]}"; do
+    status="$(curl -H "Host: ${host}" -s -o /dev/null -w "%{http_code}" "${BASE_URL}${endpoint}")"
+    echo "  ${endpoint}: ${status}"
+    if [[ "${status}" != "200" ]]; then
+      echo "❌ ${endpoint} failed for ${host}"
+      FAILURES=$((FAILURES + 1))
+    fi
+  done
+done
 
-echo -e "\n4. Testing sitemap.xml on APEX domain:"
-echo "---------------------------------------"
-curl -H "Host: canaryfoundation.org" -s -I http://localhost:3000/sitemap.xml | grep -E "^HTTP|Content-Type"
-
-echo -e "\n5. Testing regular page redirect (www → apex):"
-echo "------------------------------------------------"
-curl -H "Host: www.canaryfoundation.org" -s -I http://localhost:3000/about | grep -E "^HTTP|Location"
-
-echo -e "\n6. Verifying no HTML in robots.txt:"
-echo "------------------------------------"
-CONTENT=$(curl -H "Host: www.canaryfoundation.org" -s http://localhost:3000/robots.txt)
-if echo "$CONTENT" | grep -q "<!DOCTYPE"; then
-  echo "❌ FAILED: HTML found in robots.txt"
+echo -e "\n2. Testing www → apex redirect for a regular page:"
+echo "--------------------------------------------------"
+headers="$(curl -H "Host: www.canaryfoundation.org" -sSI "${BASE_URL}/about" | tr -d '\r')"
+location="$(extract_header_value "${headers}" "location")"
+echo "Location: ${location:-<missing>}"
+if [[ "${location}" != "https://canaryfoundation.org/about/overview" ]]; then
+  echo "❌ Unexpected canonical redirect target"
+  FAILURES=$((FAILURES + 1))
 else
-  echo "✅ PASSED: No HTML in robots.txt"
+  echo "✅ Canonical redirect target is correct"
 fi
 
-# Kill the server
-kill $SERVER_PID 2>/dev/null
+echo -e "\n3. Verifying no HTML in robots.txt:"
+echo "------------------------------------"
+content="$(curl -H "Host: www.canaryfoundation.org" -fsS "${BASE_URL}/robots.txt")"
+if echo "${content}" | grep -q "<!DOCTYPE"; then
+  echo "❌ HTML found in robots.txt"
+  FAILURES=$((FAILURES + 1))
+else
+  echo "✅ No HTML in robots.txt"
+fi
 
-echo -e "\n✅ Test complete!"
+echo -e "\n======================================"
+if [[ "${FAILURES}" -eq 0 ]]; then
+  echo "✅ Test complete"
+  echo "======================================"
+  exit 0
+fi
+
+echo "❌ Test failed with ${FAILURES} issue(s)"
+echo "======================================"
+exit 1

@@ -1,78 +1,102 @@
 #!/bin/bash
 
+set -euo pipefail
+
+source "$(dirname "$0")/scripts/production-test-helpers.sh"
+
+FAILURES=0
+
+trap stop_production_server EXIT
+
 echo "================================"
 echo "SEO COMPRESSION FIX TEST"
 echo "================================"
 
-# Build fresh
 echo "Building project..."
-npm run build > /dev/null 2>&1
-node postbuild.js > /dev/null 2>&1
-cp production-server.mjs dist/production-server.mjs
+build_production_bundle > /dev/null
 
-# Start server
-cd dist
-node production-server.mjs > server.log 2>&1 &
-PID=$!
-sleep 3
+JS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.js' | head -1)")"
+CSS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.css' | head -1)")"
 
-echo -e "\n✅ COMPRESSION TEST RESULTS:"
-echo "=============================="
-
-# Test JS compression
-echo -e "\n1. JavaScript File (index-BNrk0iHh.js):"
-ORIG_SIZE=$(stat -c%s public/assets/index-BNrk0iHh.js 2>/dev/null || stat -f%z public/assets/index-BNrk0iHh.js)
-echo "   Original: $(($ORIG_SIZE / 1024))KB"
-
-RESP=$(curl -H "Accept-Encoding: gzip, br" -s -I http://localhost:3000/assets/index-BNrk0iHh.js)
-ENCODING=$(echo "$RESP" | grep -i "Content-Encoding:" | awk '{print $2}' | tr -d '\r')
-LENGTH=$(echo "$RESP" | grep -i "Content-Length:" | awk '{print $2}' | tr -d '\r')
-
-if [ -n "$ENCODING" ]; then
-  echo "   Compressed: $(($LENGTH / 1024))KB ($ENCODING)"
-  REDUCTION=$(echo "scale=1; 100 - ($LENGTH * 100 / $ORIG_SIZE)" | bc)
-  echo "   ✅ Reduction: ${REDUCTION}%"
-else
-  echo "   ❌ NOT COMPRESSED"
+if [[ -z "${JS_FILE}" || -z "${CSS_FILE}" ]]; then
+  echo "❌ Could not locate built JS/CSS assets."
+  exit 1
 fi
 
-# Test CSS compression
-echo -e "\n2. CSS File (index-P81vo6ce.css):"
-ORIG_SIZE=$(stat -c%s public/assets/index-P81vo6ce.css 2>/dev/null || stat -f%z public/assets/index-P81vo6ce.css)
-echo "   Original: $(($ORIG_SIZE / 1024))KB"
+start_production_server "dist/server.log"
+BASE_URL="$TEST_BASE_URL"
 
-RESP=$(curl -H "Accept-Encoding: gzip, br" -s -I http://localhost:3000/assets/index-P81vo6ce.css)
-ENCODING=$(echo "$RESP" | grep -i "Content-Encoding:" | awk '{print $2}' | tr -d '\r')
-LENGTH=$(echo "$RESP" | grep -i "Content-Length:" | awk '{print $2}' | tr -d '\r')
+echo -e "\nCompression test results:"
+echo "=========================="
 
-if [ -n "$ENCODING" ]; then
-  echo "   Compressed: $(($LENGTH / 1024))KB ($ENCODING)"
-  REDUCTION=$(echo "scale=1; 100 - ($LENGTH * 100 / $ORIG_SIZE)" | bc)
-  echo "   ✅ Reduction: ${REDUCTION}%"
+test_asset_compression() {
+  local filename="$1"
+  local label="$2"
+  local original_size
+  local headers
+  local encoding
+  local compressed_path
+  local compressed_size
+
+  original_size="$(stat -f%z "dist/public/assets/${filename}")"
+  headers="$(curl -H "Accept-Encoding: gzip, br" -sSI "${BASE_URL}/assets/${filename}" | tr -d '\r')"
+  encoding="$(extract_header_value "${headers}" "content-encoding")"
+
+  echo "${label} (${filename})"
+  echo "  Original: $((original_size / 1024))KB"
+
+  if [[ -n "${encoding}" ]]; then
+    if [[ "${encoding}" == "br" ]]; then
+      compressed_path="dist/public/assets/${filename}.br"
+    else
+      compressed_path="dist/public/assets/${filename}.gz"
+    fi
+
+    compressed_size="$(stat -f%z "${compressed_path}")"
+    reduction=$((100 - (compressed_size * 100 / original_size)))
+    echo "  Compressed: $((compressed_size / 1024))KB (${encoding})"
+    echo "  ✅ Reduction: ${reduction}%"
+  else
+    echo "  ❌ Asset was not served with pre-compression"
+    FAILURES=$((FAILURES + 1))
+  fi
+}
+
+test_asset_compression "${JS_FILE}" "JavaScript"
+test_asset_compression "${CSS_FILE}" "CSS"
+
+echo -e "\nEncoding support:"
+echo "------------------"
+if curl -H "Accept-Encoding: br" -sSI "${BASE_URL}/assets/${JS_FILE}" | grep -q "Content-Encoding: br"; then
+  echo "✅ Brotli supported"
 else
-  echo "   ❌ NOT COMPRESSED"
+  echo "❌ Brotli not supported"
+  FAILURES=$((FAILURES + 1))
 fi
 
-# Test different encodings
-echo -e "\n3. Encoding Support:"
-echo -n "   Brotli: "
-curl -H "Accept-Encoding: br" -s -I http://localhost:3000/assets/index-BNrk0iHh.js | grep -q "Content-Encoding: br" && echo "✅ Supported" || echo "❌ Not supported"
-echo -n "   Gzip: "
-curl -H "Accept-Encoding: gzip" -s -I http://localhost:3000/assets/index-BNrk0iHh.js | grep -q "Content-Encoding: gzip" && echo "✅ Supported" || echo "❌ Not supported"
+if curl -H "Accept-Encoding: gzip" -sSI "${BASE_URL}/assets/${JS_FILE}" | grep -q "Content-Encoding: gzip"; then
+  echo "✅ Gzip supported"
+else
+  echo "❌ Gzip not supported"
+  FAILURES=$((FAILURES + 1))
+fi
 
-# Check pre-compressed files
-echo -e "\n4. Pre-compressed Files:"
-ls -lh public/assets/*.gz public/assets/*.br 2>/dev/null | awk '{print "   " $9 ": " $5}'
-
-kill $PID 2>/dev/null
+echo -e "\nPre-compressed files:"
+echo "----------------------"
+compression_count="$(find dist/public/assets -maxdepth 1 \( -name '*.gz' -o -name '*.br' \) | wc -l | tr -d ' ')"
+find dist/public/assets -maxdepth 1 \( -name '*.gz' -o -name '*.br' \) -exec ls -lh {} \; | awk '{print "  " $9 ": " $5}'
+if [[ "${compression_count}" -lt 2 ]]; then
+  echo "❌ Missing pre-compressed build artifacts"
+  FAILURES=$((FAILURES + 1))
+fi
 
 echo -e "\n================================"
-echo "🎉 SEO FIX SUMMARY:"
+if [[ "${FAILURES}" -eq 0 ]]; then
+  echo "✅ Compression checks passed"
+  echo "================================"
+  exit 0
+fi
+
+echo "❌ Compression checks failed with ${FAILURES} issue(s)"
 echo "================================"
-echo "✅ JavaScript and CSS files are compressed"
-echo "✅ Both Brotli and Gzip encoding supported"
-echo "✅ 77-86% file size reduction achieved"
-echo "✅ Pre-compressed files served efficiently"
-echo ""
-echo "This fixes the '22 issues with uncompressed JavaScript and CSS files' from the SEO audit!"
-echo "================================"
+exit 1

@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { Link } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { ArrowRight } from "lucide-react";
 
 export default function AboutOverview() {
   const { toast } = useToast();
@@ -46,6 +48,13 @@ export default function AboutOverview() {
                     he envisioned a world of simple and safe tests that could identify and isolate cancer 
                     at its earliest, most curable stage.
                   </p>
+                  <Link
+                    href="/about/founders-story"
+                    className="inline-flex items-center gap-2 mt-6 text-primary font-semibold hover:text-primary-dark transition-colors"
+                  >
+                    Read the Founder & Oral History page
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
                 <div>
                   <Card className="bg-primary/5 border-primary/20">
@@ -90,7 +99,7 @@ export default function AboutOverview() {
                     The Canary Foundation has started to do something about that.
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    Today, a short 17 years later, the Canary Foundation has raised more than $75 million 
+                    Since its founding in 2004, the Canary Foundation has raised more than $75 million 
                     to support early detection research. And we've moved faster than science typically moves, 
                     from theory to tractable problem to clinical use in many areas, thanks to Canary's 
                     collaborative approach.

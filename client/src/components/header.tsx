@@ -30,7 +30,7 @@ export default function Header() {
       path: null,
       items: [
         { name: 'Our Mission', path: '/about/overview' },
-        { name: "Founder's Story", path: '/about/founders-story' },
+        { name: 'Founder & Oral History', path: '/about/founders-story' },
         { name: 'Staff', path: '/about/staff' },
         { name: 'Board of Directors', path: '/about/board-directors' },
         { name: 'Leadership Council', path: '/about/leadership-council' },
