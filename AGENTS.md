@@ -5,6 +5,7 @@
 - `client/src/` is the Vite React app: `pages/` contains route surfaces, `components/` reusable UI, `hooks/` shared logic, `lib/` helpers, and `assets/` static data. Global styles sit in `client/src/index.css` plus `client/public/` for static files.
 - Blog content is data-driven in `client/src/data/blog-posts.ts`; shared blog sorting/date-display behavior lives in `client/src/lib/blog-post-utils.ts`.
 - Data contracts live in `shared/schema.ts` and are consumed with the `@shared` alias defined in `tsconfig.json`.
+- SEO is centralized in `shared/seo.ts` (route metadata table + JSON-LD builders). It is the single source of truth consumed by both the Express server (`server/vite.ts`, which injects per-route `<head>` meta + JSON-LD into served HTML) and the client router (`client/src/App.tsx`, which keeps them in sync on SPA navigation). Add new routes' metadata here, not in `App.tsx`.
 - SEO, automation, and crawl tooling lives in `scripts/`, `seo/`, and `attached_assets/`; they expect build outputs in `dist/`.
 
 ## Build, Test, and Development Commands

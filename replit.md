@@ -36,6 +36,11 @@ The application features a modern, responsive design built with React 18 and Typ
 - **SEO Enhancements**: Implemented comprehensive sitemap generation, dynamic priority and change frequencies, and robust 301 redirect middleware for legacy URLs to preserve SEO value.
 - **Analytics Integration**: Google Analytics 4 is integrated for tracking page views, user interactions, and specific events like form submissions and CTA clicks.
 
+### Deployment
+- **Platform**: Replit autoscale deployment. Build and run commands live in `.replit` (`build = npm run build`, `run = npm run start`).
+- **Production runtime**: the bundled Express server at `dist/index.js` (not a static host). It serves the SPA and performs server-side per-route metadata/JSON-LD injection, legacy 301 redirects, `www`→apex canonicalization, crawler-asset serving, and security headers.
+- **SEO/meta source of truth**: route metadata and JSON-LD builders live in `shared/seo.ts`, consumed by both the Express server (`server/vite.ts`) and the client router (`client/src/App.tsx`) so server-rendered HTML and client navigation stay in sync.
+
 ### Blog Content Model (2026 Update)
 - **Data source**: Blog listing and detail pages are fully data-driven from `client/src/data/blog-posts.ts`.
 - **Ordering**: Posts are sorted by `publishedDate ?? date` so recently published content appears first, while preserving historical source dates.

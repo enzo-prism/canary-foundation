@@ -5,25 +5,20 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import {
+  SITE_NAME,
+  resolveRouteMetadata,
+  normalizeRoutePath,
+  buildCanonicalUrl,
+  buildWebPageJsonLd,
+  buildArticleJsonLd,
+  renderJsonLdScript,
+  PAGE_JSONLD_ELEMENT_ID,
+  type RouteMetadata,
+} from "@shared/seo";
+import { blogPosts } from "@/data/blog-posts";
 
 const viteLogger = createLogger();
-
-const SITE_ORIGIN = "https://canaryfoundation.org";
-
-const DEFAULT_METADATA = {
-  title: "Canary Foundation - Early Cancer Detection Research",
-  description:
-    "Canary Foundation advances early cancer detection research through collaborative science, biomarker discovery, imaging innovation, and translational partnerships.",
-};
-
-const ROUTE_METADATA: Record<string, { title: string; description: string }> = {
-  "/": DEFAULT_METADATA,
-  "/science/programs/team-updates": {
-    title: "Team Updates | Canary Foundation",
-    description:
-      "Read current Canary Foundation team updates for ovarian, prostate, and pancreatic early cancer detection programs.",
-  },
-};
 
 function escapeHtmlAttribute(value: string) {
   return value
@@ -33,24 +28,68 @@ function escapeHtmlAttribute(value: string) {
     .replace(/>/g, "&gt;");
 }
 
-function normalizeRoutePath(originalUrl: string) {
-  const pathname = originalUrl.split("?")[0] || "/";
-  if (pathname === "/") {
-    return "/";
+interface ResolvedPageSeo {
+  metadata: RouteMetadata;
+  canonicalUrl: string;
+  jsonLdScript: string;
+}
+
+// Resolve title/description/canonical and JSON-LD for a request URL. Blog post
+// detail pages get post-specific metadata + Article schema; every other route
+// uses the shared static table + WebPage schema. Mirrors the client logic in
+// client/src/App.tsx so server HTML and SPA navigation stay identical.
+function resolvePageSeo(originalUrl: string): ResolvedPageSeo {
+  const routePath = normalizeRoutePath(originalUrl);
+  const canonicalUrl = buildCanonicalUrl(routePath);
+
+  if (routePath.startsWith("/blog/")) {
+    const slug = routePath.slice("/blog/".length);
+    const post = blogPosts.find((entry) => entry.slug === slug);
+    if (post) {
+      return {
+        metadata: {
+          title: `${post.title} | ${SITE_NAME}`,
+          description: post.excerpt,
+        },
+        canonicalUrl,
+        jsonLdScript: renderJsonLdScript(
+          buildArticleJsonLd({
+            headline: post.title,
+            description: post.excerpt,
+            url: canonicalUrl,
+            datePublished: post.publishedDate ?? post.date,
+            dateModified: post.date,
+            author: post.author,
+            keywords: post.tags,
+          }),
+          PAGE_JSONLD_ELEMENT_ID,
+        ),
+      };
+    }
   }
 
-  return pathname.replace(/\/+$/, "") || "/";
+  const metadata = resolveRouteMetadata(routePath);
+  return {
+    metadata,
+    canonicalUrl,
+    jsonLdScript: renderJsonLdScript(
+      buildWebPageJsonLd({
+        title: metadata.title,
+        description: metadata.description,
+        url: canonicalUrl,
+      }),
+      PAGE_JSONLD_ELEMENT_ID,
+    ),
+  };
 }
 
 function injectSpaMetadata(originalUrl: string, html: string) {
-  const routePath = normalizeRoutePath(originalUrl);
-  const metadata = ROUTE_METADATA[routePath] ?? DEFAULT_METADATA;
-  const canonicalUrl = `${SITE_ORIGIN}${routePath === "/" ? "/" : routePath}`;
+  const { metadata, canonicalUrl, jsonLdScript } = resolvePageSeo(originalUrl);
   const escapedTitle = escapeHtmlAttribute(metadata.title);
   const escapedDescription = escapeHtmlAttribute(metadata.description);
   const escapedCanonical = escapeHtmlAttribute(canonicalUrl);
 
-  return html
+  const withMetadata = html
     .replace(/<title>.*?<\/title>/, `<title>${escapedTitle}</title>`)
     .replace(
       /<meta name="description" content="[^"]*"\s*\/>/,
@@ -80,6 +119,9 @@ function injectSpaMetadata(originalUrl: string, html: string) {
       /<link rel="canonical" href="[^"]*"\s*\/>/,
       `<link rel="canonical" href="${escapedCanonical}" />`,
     );
+
+  // Inject the per-page JSON-LD immediately before </head>.
+  return withMetadata.replace(/<\/head>/, `  ${jsonLdScript}\n  </head>`);
 }
 
 export function log(message: string, source = "express") {
@@ -151,7 +193,10 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Disable the automatic directory index so "/" flows through the catch-all
+  // below and receives server-side metadata + JSON-LD injection like every
+  // other route (otherwise express.static would serve raw index.html for "/").
+  app.use(express.static(distPath, { index: false }));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", async (req, res, next) => {

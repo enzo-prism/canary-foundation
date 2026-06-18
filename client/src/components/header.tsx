@@ -79,8 +79,7 @@ export default function Header() {
               subItems: [
                 { name: 'Clinical Studies', path: '/science/programs/clinical-studies' }
               ]
-            },
-            { name: 'Team Updates', path: '/science/programs/team-updates' }
+            }
           ]
         },
         { 

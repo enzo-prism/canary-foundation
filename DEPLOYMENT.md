@@ -2,7 +2,9 @@
 
 ## Runtime
 
-The live app is the bundled Express server at `dist/index.js`. Do not deploy the legacy `production-server*.mjs` files; they are not the current production path.
+The site is deployed on **Replit** (autoscale deployment). The live app is the bundled Express server at `dist/index.js`, started with `npm run start`. Replit's deployment build/run commands are defined in `.replit` (`build = npm run build`, `run = npm run start`).
+
+The Express server — not a static host — is what serves the app in production, so it is responsible for per-route HTML/meta injection, legacy redirects, host canonicalization, crawler assets, and security headers. Keep that in mind when changing routing or SEO behavior.
 
 ## Build And Start Commands
 

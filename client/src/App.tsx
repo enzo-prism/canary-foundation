@@ -6,6 +6,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Suspense, lazy, useEffect } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
+import {
+  resolveRouteMetadata,
+  normalizeRoutePath,
+  buildCanonicalUrl,
+  buildWebPageJsonLd,
+  buildArticleJsonLd,
+  PAGE_JSONLD_ELEMENT_ID,
+} from "@shared/seo";
+import { blogPosts } from "@/data/blog-posts";
 
 const Home = lazy(() => import("@/pages/home"));
 const Contact = lazy(() => import("@/pages/contact"));
@@ -25,7 +34,6 @@ const Symposium = lazy(() => import("@/pages/symposium"));
 const CanaryScience = lazy(() => import("@/pages/canary-science"));
 const Science = lazy(() => import("@/pages/science"));
 const Programs = lazy(() => import("@/pages/programs"));
-const TeamUpdates = lazy(() => import("@/pages/team-updates"));
 const Centers = lazy(() => import("@/pages/centers"));
 const Publications = lazy(() => import("@/pages/publications"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
@@ -48,170 +56,6 @@ const Fellowships = lazy(() => import("@/pages/fellowships"));
 const SeedGrants = lazy(() => import("@/pages/seed-grants"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
-const DEFAULT_METADATA = {
-  title: "Canary Foundation - Early Cancer Detection Research",
-  description:
-    "Canary Foundation advances early cancer detection research through collaborative science, biomarker discovery, imaging innovation, and translational partnerships.",
-};
-
-const SITE_ORIGIN = "https://canaryfoundation.org";
-
-const EXACT_ROUTE_METADATA: Record<string, { title: string; description: string }> = {
-  "/": DEFAULT_METADATA,
-  "/contact": {
-    title: "Contact Canary Foundation | Canary Foundation",
-    description:
-      "Get in touch with Canary Foundation about early cancer detection research, partnerships, and ways to support the mission.",
-  },
-  "/donate": {
-    title: "Support Canary Foundation | Canary Foundation",
-    description:
-      "Support Canary Foundation's mission to detect cancer early and fund the science that makes earlier diagnosis possible.",
-  },
-  "/take-action": {
-    title: "Support Canary Foundation | Canary Foundation",
-    description:
-      "Support Canary Foundation's mission to detect cancer early and fund the science that makes earlier diagnosis possible.",
-  },
-  "/blog": {
-    title: "Canary Foundation Blog | Canary Foundation",
-    description:
-      "Read the latest research updates, oral histories, and stories from Canary Foundation.",
-  },
-  "/about/overview": {
-    title: "About Canary Foundation | Canary Foundation",
-    description:
-      "Learn about Canary Foundation's mission, history, and commitment to earlier cancer detection.",
-  },
-  "/about/founders-story": {
-    title: "Don Listwin | Founder's Story & Oral History | Canary Foundation",
-    description:
-      "Explore Don Listwin's founder story, oral history, and the personal journey that shaped Canary Foundation.",
-  },
-  "/about/staff": {
-    title: "Canary Foundation Staff | Canary Foundation",
-    description:
-      "Meet the Canary Foundation team supporting early cancer detection research and philanthropic partnerships.",
-  },
-  "/about/board-directors": {
-    title: "Board of Directors | Canary Foundation",
-    description:
-      "Meet the Canary Foundation board of directors guiding the organization and its mission.",
-  },
-  "/about/leadership-council": {
-    title: "Leadership Council | Canary Foundation",
-    description:
-      "Meet the leadership council supporting Canary Foundation's strategy, partnerships, and growth.",
-  },
-  "/about/scientific-leadership": {
-    title: "Scientific Leadership | Canary Foundation",
-    description:
-      "Learn about the scientific leaders helping shape Canary Foundation's approach to early cancer detection.",
-  },
-  "/about/financials": {
-    title: "Financials | Canary Foundation",
-    description:
-      "Review Canary Foundation financial information and organizational stewardship.",
-  },
-  "/approach/overview": {
-    title: "Canary Approach | Canary Foundation",
-    description:
-      "Learn how Canary Foundation approaches early cancer detection through collaborative science, biomarkers, and imaging.",
-  },
-  "/approach/collaborations": {
-    title: "Collaborations | Canary Foundation",
-    description:
-      "Explore the collaborations and partnerships that help Canary Foundation accelerate early detection research.",
-  },
-  "/approach/symposium": {
-    title: "Canary Symposium | Canary Foundation",
-    description:
-      "Learn about the Canary Symposium and how it brings researchers together around early cancer detection.",
-  },
-  "/science/overview": {
-    title: "Canary Science | Canary Foundation",
-    description:
-      "Explore the science behind Canary Foundation's work in early cancer detection.",
-  },
-  "/science/science": {
-    title: "Scientific Focus Areas | Canary Foundation",
-    description:
-      "Explore the scientific foundations behind Canary Foundation's early detection strategy.",
-  },
-  "/science/programs": {
-    title: "Research Programs | Canary Foundation",
-    description:
-      "Explore Canary Foundation research programs across tumor types, clinical studies, and translational science.",
-  },
-  "/science/programs/team-updates": {
-    title: "Team Updates | Canary Foundation",
-    description:
-      "Read current Canary Foundation team updates for ovarian, prostate, and pancreatic early cancer detection programs.",
-  },
-  "/science/centers": {
-    title: "Research Centers | Canary Foundation",
-    description:
-      "Learn about the research centers and institutions advancing Canary Foundation's mission.",
-  },
-  "/science/publications": {
-    title: "Publications | Canary Foundation",
-    description:
-      "Read publications and research outputs supported by Canary Foundation.",
-  },
-  "/science/funding-by-invitation": {
-    title: "Funding By Invitation | Canary Foundation",
-    description:
-      "Learn about invitation-based funding opportunities connected to Canary Foundation science.",
-  },
-};
-
-const PREFIX_ROUTE_METADATA = [
-  {
-    prefix: "/blog/",
-    metadata: EXACT_ROUTE_METADATA["/blog"],
-  },
-  {
-    prefix: "/about/",
-    metadata: EXACT_ROUTE_METADATA["/about/overview"],
-  },
-  {
-    prefix: "/approach/",
-    metadata: EXACT_ROUTE_METADATA["/approach/overview"],
-  },
-  {
-    prefix: "/science/programs/tumors/",
-    metadata: {
-      title: "Tumor Programs | Canary Foundation",
-      description:
-        "Explore tumor-focused early detection programs supported by Canary Foundation.",
-    },
-  },
-  {
-    prefix: "/science/programs/",
-    metadata: EXACT_ROUTE_METADATA["/science/programs"],
-  },
-  {
-    prefix: "/science/centers/stanford",
-    metadata: {
-      title: "Canary Center at Stanford | Canary Foundation",
-      description:
-        "Learn about the Canary Center at Stanford and the translational research happening there.",
-    },
-  },
-  {
-    prefix: "/science/centers/",
-    metadata: EXACT_ROUTE_METADATA["/science/centers"],
-  },
-  {
-    prefix: "/science/publications/",
-    metadata: EXACT_ROUTE_METADATA["/science/publications"],
-  },
-  {
-    prefix: "/science/",
-    metadata: EXACT_ROUTE_METADATA["/science/overview"],
-  },
-];
-
 function setMetaDescription(content: string) {
   setMetaTag("name", "description", content);
 }
@@ -229,10 +73,7 @@ function setMetaTag(attribute: "name" | "property", key: string, content: string
   document.head.appendChild(metaTag);
 }
 
-function setCanonicalUrl(location: string) {
-  const normalizedPath =
-    location === "/" ? "/" : location.replace(/\/+$/, "") || "/";
-  const canonicalUrl = `${SITE_ORIGIN}${normalizedPath}`;
+function setCanonicalUrl(canonicalUrl: string) {
   let canonicalTag = document.querySelector<HTMLLinkElement>(
     'link[rel="canonical"]',
   );
@@ -247,15 +88,61 @@ function setCanonicalUrl(location: string) {
   setMetaTag("property", "og:url", canonicalUrl);
 }
 
-function resolveRouteMetadata(location: string) {
-  if (EXACT_ROUTE_METADATA[location]) {
-    return EXACT_ROUTE_METADATA[location];
+function upsertJsonLd(data: Record<string, unknown>) {
+  let script = document.querySelector<HTMLScriptElement>(
+    `script#${PAGE_JSONLD_ELEMENT_ID}`,
+  );
+
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = PAGE_JSONLD_ELEMENT_ID;
+    document.head.appendChild(script);
   }
 
-  const matchedPrefix = PREFIX_ROUTE_METADATA.find(({ prefix }) =>
-    location.startsWith(prefix),
-  );
-  return matchedPrefix?.metadata ?? DEFAULT_METADATA;
+  script.textContent = JSON.stringify(data);
+}
+
+// Mirrors resolvePageSeo() in server/vite.ts so SPA navigation produces the
+// same title/description/canonical/JSON-LD that the server rendered into the
+// initial HTML. Route metadata and JSON-LD builders are shared via @shared/seo.
+function resolveClientPageSeo(location: string) {
+  const routePath = normalizeRoutePath(location);
+  const canonicalUrl = buildCanonicalUrl(routePath);
+
+  if (routePath.startsWith("/blog/")) {
+    const slug = routePath.slice("/blog/".length);
+    const post = blogPosts.find((entry) => entry.slug === slug);
+    if (post) {
+      return {
+        metadata: {
+          title: `${post.title} | Canary Foundation`,
+          description: post.excerpt,
+        },
+        canonicalUrl,
+        jsonLd: buildArticleJsonLd({
+          headline: post.title,
+          description: post.excerpt,
+          url: canonicalUrl,
+          datePublished: post.publishedDate ?? post.date,
+          dateModified: post.date,
+          author: post.author,
+          keywords: post.tags,
+        }),
+      };
+    }
+  }
+
+  const metadata = resolveRouteMetadata(routePath);
+  return {
+    metadata,
+    canonicalUrl,
+    jsonLd: buildWebPageJsonLd({
+      title: metadata.title,
+      description: metadata.description,
+      url: canonicalUrl,
+    }),
+  };
 }
 
 function RouteLoadingFallback() {
@@ -272,14 +159,15 @@ function Router() {
   useAnalytics();
 
   useEffect(() => {
-    const metadata = resolveRouteMetadata(location);
+    const { metadata, canonicalUrl, jsonLd } = resolveClientPageSeo(location);
     document.title = metadata.title;
     setMetaDescription(metadata.description);
     setMetaTag("property", "og:title", metadata.title);
     setMetaTag("property", "og:description", metadata.description);
     setMetaTag("name", "twitter:title", metadata.title);
     setMetaTag("name", "twitter:description", metadata.description);
-    setCanonicalUrl(location);
+    setCanonicalUrl(canonicalUrl);
+    upsertJsonLd(jsonLd);
   }, [location]);
 
   return (
@@ -310,7 +198,6 @@ function Router() {
         <Route path="/science/overview" component={CanaryScience} />
         <Route path="/science/science" component={Science} />
         <Route path="/science/programs" component={Programs} />
-        <Route path="/science/programs/team-updates" component={TeamUpdates} />
         <Route path="/science/centers" component={Centers} />
         <Route path="/science/publications" component={Publications} />
         <Route
