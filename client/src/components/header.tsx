@@ -218,7 +218,7 @@ export default function Header() {
                         
                         {/* Nested dropdown for sub-items */}
                         {item.subItems && (
-                          <div className="absolute left-full top-0 ml-1 w-64 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                          <div className="absolute left-full top-0 ml-1 hidden w-64 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible transition-all duration-300 group-hover:block group-hover:opacity-100 group-hover:visible">
                             <div className="py-2">
                               {item.subItems.map((subItem, subIndex) => (
                                 <div key={subIndex} className="relative group/sub">
@@ -240,7 +240,7 @@ export default function Header() {
                                   
                                   {/* Third level dropdown */}
                                   {subItem.subItems && (
-                                    <div className="absolute left-full top-0 ml-1 w-56 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300">
+                                    <div className="absolute left-full top-0 ml-1 hidden w-56 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible transition-all duration-300 group-hover/sub:block group-hover/sub:opacity-100 group-hover/sub:visible">
                                       <div className="py-2">
                                         {subItem.subItems.map((thirdItem, thirdIndex) => (
                                           <Link 

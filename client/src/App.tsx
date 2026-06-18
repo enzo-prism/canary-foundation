@@ -54,6 +54,8 @@ const DEFAULT_METADATA = {
     "Canary Foundation advances early cancer detection research through collaborative science, biomarker discovery, imaging innovation, and translational partnerships.",
 };
 
+const SITE_ORIGIN = "https://canaryfoundation.org";
+
 const EXACT_ROUTE_METADATA: Record<string, { title: string; description: string }> = {
   "/": DEFAULT_METADATA,
   "/contact": {
@@ -211,16 +213,38 @@ const PREFIX_ROUTE_METADATA = [
 ];
 
 function setMetaDescription(content: string) {
-  const existingTag = document.querySelector('meta[name="description"]');
+  setMetaTag("name", "description", content);
+}
+
+function setMetaTag(attribute: "name" | "property", key: string, content: string) {
+  const existingTag = document.querySelector(`meta[${attribute}="${key}"]`);
   if (existingTag) {
     existingTag.setAttribute("content", content);
     return;
   }
 
   const metaTag = document.createElement("meta");
-  metaTag.name = "description";
+  metaTag.setAttribute(attribute, key);
   metaTag.content = content;
   document.head.appendChild(metaTag);
+}
+
+function setCanonicalUrl(location: string) {
+  const normalizedPath =
+    location === "/" ? "/" : location.replace(/\/+$/, "") || "/";
+  const canonicalUrl = `${SITE_ORIGIN}${normalizedPath}`;
+  let canonicalTag = document.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]',
+  );
+
+  if (!canonicalTag) {
+    canonicalTag = document.createElement("link");
+    canonicalTag.rel = "canonical";
+    document.head.appendChild(canonicalTag);
+  }
+
+  canonicalTag.href = canonicalUrl;
+  setMetaTag("property", "og:url", canonicalUrl);
 }
 
 function resolveRouteMetadata(location: string) {
@@ -251,6 +275,11 @@ function Router() {
     const metadata = resolveRouteMetadata(location);
     document.title = metadata.title;
     setMetaDescription(metadata.description);
+    setMetaTag("property", "og:title", metadata.title);
+    setMetaTag("property", "og:description", metadata.description);
+    setMetaTag("name", "twitter:title", metadata.title);
+    setMetaTag("name", "twitter:description", metadata.description);
+    setCanonicalUrl(location);
   }, [location]);
 
   return (
