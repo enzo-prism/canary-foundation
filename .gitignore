@@ -6,3 +6,4 @@ pnpm-lock.yaml
 server/public
 vite.config.ts.*
 *.tar.gz
+.vercel
