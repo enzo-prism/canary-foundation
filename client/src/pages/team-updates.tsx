@@ -44,9 +44,9 @@ const highlights = [
     text: "The team used computational approaches and prior precancer atlas work to nominate candidates for early detection testing.",
   },
   {
-    label: "4",
-    title: "markers in the initial blood panel",
-    text: "An initial panel combining CA125, HE4, CRABp2, and ORF1p showed encouraging performance in an early case-control cohort.",
+    label: "0.973",
+    title: "AUC for the four-marker panel",
+    text: "The strongest early signal combines CA125, HE4, CRABp2, and ORF1p in an initial case-control cohort.",
   },
   {
     label: "20",
@@ -67,7 +67,7 @@ const strategies = [
     purpose:
       "Find molecules that appear in blood early enough to detect cancer before symptoms develop.",
     progress:
-      "The team built a pipeline from fallopian tube biology to blood testing, evaluated ovarian-specific candidate markers, and is advancing CRABp2, ORF1p, and other promising markers into deeper validation.",
+      "The team built a pipeline from fallopian tube biology to blood testing, nominated 37 candidate biomarkers, lab-tested 20, and found 5 candidates that appear ovarian-cell-specific. CRABp2, ORF1p, and other promising markers are moving into deeper validation.",
   },
   {
     icon: Microscope,
@@ -83,7 +83,7 @@ const strategies = [
     purpose:
       "Prevent ovarian cancer by removing fallopian tubes while preserving the ovaries and hormone function.",
     progress:
-      "A multidisciplinary team is working with the Michigan Surgical Quality Collaborative to promote fallopian tube removal as a statewide quality initiative for 2026-2027.",
+      "A multidisciplinary team is working with the Michigan Surgical Quality Collaborative to promote fallopian tube removal as a statewide quality initiative for 2026-2027. The group is also addressing billing, training, consent, and pathology workflows before first pilot procedures begin.",
   },
   {
     icon: Users,
@@ -91,7 +91,7 @@ const strategies = [
     purpose:
       "Give women and clinicians clearer tools for prevention, early detection, and informed decision-making.",
     progress:
-      "The team is updating risk modeling with international experts, running focus groups for average-risk women, and evaluating launch requirements for an easy-to-use risk and education resource.",
+      "The team is building a personalized ovarian cancer risk calculator, patient-friendly education, and links to current research resources. Work includes updating CanRisk with international experts, running focus groups for average-risk women, and reviewing launch requirements.",
   },
   {
     icon: Stethoscope,
@@ -99,7 +99,7 @@ const strategies = [
     purpose:
       "Develop imaging methods that can directly visualize fallopian tubes and detect tiny early lesions.",
     progress:
-      "IRB-approved and submitted studies are preparing high-frequency ultrasound, intravascular ultrasound, microbubble contrast-enhanced ultrasound, and advanced MR diffusion approaches for human and sample-based testing.",
+      "IRB-approved and submitted studies are preparing high-frequency ultrasound, intravascular ultrasound, microbubble contrast-enhanced ultrasound, and advanced MR diffusion approaches for human and sample-based testing. The first fallopian tube ultrasound studies are anticipated in summer 2026.",
   },
 ];
 
@@ -174,7 +174,7 @@ export default function TeamUpdates() {
                       High-grade serous ovarian cancer is the most common and aggressive form of ovarian cancer. Because most women are still diagnosed after the disease has reached a hard-to-treat stage, the Canary Ovarian Cancer Team is focused on finding cancer sooner and expanding practical prevention.
                     </p>
                     <p>
-                      A core insight now shapes the program: many of these cancers begin in the fallopian tubes. That discovery is guiding new work in blood biomarkers, precursor-lesion biology, preventive surgery, personalized risk resources, and imaging.
+                      A core insight now shapes the program: many of these cancers begin in the fallopian tubes. What began as a discovery about cancer origin is now guiding a practical portfolio of blood biomarkers, precursor-lesion biology, preventive surgery, personalized risk resources, and imaging.
                     </p>
                   </div>
                 </CardContent>
@@ -255,6 +255,37 @@ export default function TeamUpdates() {
         </section>
 
         <section className="bg-light py-16 md:py-20">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div>
+                <h2 className="mb-6 text-3xl font-bold text-dark md:text-4xl">
+                  Early Blood Test Evidence
+                </h2>
+                <div className="space-y-5 text-lg leading-relaxed text-gray-700">
+                  <p>
+                    The report's clearest visual evidence is the biomarker panel chart. It shows that combining the established markers CA125 and HE4 with the newly discovered CRABp2 and ORF1p improved the team's ability to distinguish ovarian cancer cases from healthy controls in an initial blood-sample cohort.
+                  </p>
+                  <p>
+                    This is still validation-stage science, so the page frames it as encouraging progress rather than a finished screening test. The next step is testing these markers in blood collected before diagnosis to confirm whether they can detect cancer earlier.
+                  </p>
+                </div>
+              </div>
+
+              <figure className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+                <img
+                  src="/team-updates/ovarian-biomarker-panel-roc.jpg"
+                  alt="Four receiver operating characteristic charts comparing ovarian cancer biomarker panel performance."
+                  className="w-full bg-white"
+                />
+                <figcaption className="border-t border-gray-100 p-4 text-sm leading-relaxed text-gray-600">
+                  Initial case-control results: ORF1p alone showed AUC 0.899; ORF1p plus CRABp2 showed AUC 0.944; adding CA125 increased AUC to 0.972; adding HE4 reached AUC 0.973.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="mb-6 text-3xl font-bold text-dark md:text-4xl">
