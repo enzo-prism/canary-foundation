@@ -25,6 +25,7 @@ const Symposium = lazy(() => import("@/pages/symposium"));
 const CanaryScience = lazy(() => import("@/pages/canary-science"));
 const Science = lazy(() => import("@/pages/science"));
 const Programs = lazy(() => import("@/pages/programs"));
+const TeamUpdates = lazy(() => import("@/pages/team-updates"));
 const Centers = lazy(() => import("@/pages/centers"));
 const Publications = lazy(() => import("@/pages/publications"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
@@ -139,6 +140,11 @@ const EXACT_ROUTE_METADATA: Record<string, { title: string; description: string 
     title: "Research Programs | Canary Foundation",
     description:
       "Explore Canary Foundation research programs across tumor types, clinical studies, and translational science.",
+  },
+  "/science/programs/team-updates": {
+    title: "Team Updates | Canary Foundation",
+    description:
+      "Read current Canary Foundation team updates for ovarian, prostate, and pancreatic early cancer detection programs.",
   },
   "/science/centers": {
     title: "Research Centers | Canary Foundation",
@@ -275,6 +281,7 @@ function Router() {
         <Route path="/science/overview" component={CanaryScience} />
         <Route path="/science/science" component={Science} />
         <Route path="/science/programs" component={Programs} />
+        <Route path="/science/programs/team-updates" component={TeamUpdates} />
         <Route path="/science/centers" component={Centers} />
         <Route path="/science/publications" component={Publications} />
         <Route

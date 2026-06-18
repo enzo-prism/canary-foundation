@@ -1,7 +1,10 @@
 import { useEffect } from "react";
+import { Link } from "wouter";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, FileText } from "lucide-react";
 
 export default function Programs() {
   useEffect(() => {
@@ -177,6 +180,60 @@ export default function Programs() {
                     </div>
                   </CardContent>
                 </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Team Updates */}
+        <section className="py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-[1fr,420px] gap-10 items-start">
+                <div>
+                  <div className="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary mb-5">
+                    <FileText className="w-4 h-4 mr-2" />
+                    New section
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">
+                    Team Updates
+                  </h2>
+                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                    Current progress reports from Canary Foundation research teams, starting with the June 2026 ovarian cancer update and ready for upcoming prostate and pancreatic updates.
+                  </p>
+                  <Button
+                    asChild
+                    className="bg-primary text-white hover:bg-primary-dark"
+                  >
+                    <Link href="/science/programs/team-updates">
+                      Read Team Updates <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="grid gap-4">
+                  <div className="rounded-lg border border-primary/20 bg-primary/5 p-6">
+                    <div className="text-sm font-semibold text-primary mb-2">Posted</div>
+                    <h3 className="text-xl font-bold text-dark mb-2">Ovarian Cancer Team</h3>
+                    <p className="text-gray-600">
+                      June 2026 progress on blood biomarkers, STIC lesion research, prevention, risk tools, and imaging.
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-gray-200 bg-light p-6">
+                    <div className="text-sm font-semibold text-gray-500 mb-2">Coming next</div>
+                    <h3 className="text-xl font-bold text-dark mb-2">Prostate Cancer Team</h3>
+                    <p className="text-gray-600">
+                      Placeholder ready for the next report when the team sends it.
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-gray-200 bg-light p-6">
+                    <div className="text-sm font-semibold text-gray-500 mb-2">Pending</div>
+                    <h3 className="text-xl font-bold text-dark mb-2">Pancreatic Cancer Team</h3>
+                    <p className="text-gray-600">
+                      Placeholder ready for the pancreatic update.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
