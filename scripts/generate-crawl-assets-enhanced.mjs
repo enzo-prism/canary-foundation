@@ -12,8 +12,10 @@ const BUILD_DIR = process.env.BUILD_DIR || 'dist/public';
 const SEO_ROUTES_FILE = path.join(rootDir, 'seo', 'routes.json');
 const MAX_URLS_PER_SITEMAP = 50000;
 
-// Blog posts data for individual pages
+// Blog post SEO metadata for individual /blog/:slug pages.
+// IMPORTANT: keep in sync with client/src/data/blog-posts.ts (slug, date, category).
 const blogPosts = [
+  { slug: 'canary-foundation-program-report-2025', date: '2025-11-16', category: 'Report' },
   { slug: 'don-listwin-award-2025-ruth-etzioni', date: '2025-11-01', category: 'Awards' },
   { slug: 'edx25-conference-portland-early-detection', date: '2025-11-01', category: 'Conference' },
   { slug: 'oral-history-caltech', date: '2025-04-28', category: 'Interview' },

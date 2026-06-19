@@ -56,8 +56,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get contact messages (for admin use)
+  // Get contact messages (admin only). Guarded by CONTACT_ADMIN_TOKEN so the
+  // endpoint never publicly exposes submitted names/emails/messages. When no
+  // token is configured the endpoint is disabled (404) rather than open.
   app.get("/api/contact", async (req, res) => {
+    const adminToken = process.env.CONTACT_ADMIN_TOKEN;
+    if (!adminToken) {
+      return res.status(404).json({ error: "Not found" });
+    }
+
+    if (req.headers.authorization !== `Bearer ${adminToken}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     try {
       const messages = await storage.getContactMessages();
       res.json(messages);

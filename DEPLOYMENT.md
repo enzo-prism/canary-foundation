@@ -28,6 +28,14 @@ npm run start
 - Security headers:
   `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `X-XSS-Protection`
 - SPA fallback via the bundled Express + static Vite output
+- Per-route `<head>` metadata + JSON-LD injection and removal of the dev-only Replit banner
+
+## Environment Variables
+
+- `DATABASE_URL` — when set, contact-form submissions are durably persisted to Postgres (Neon) via Drizzle. When unset, the server falls back to in-memory storage and submissions are **not** retained across restarts.
+- `CONTACT_ADMIN_TOKEN` — required to read submissions via `GET /api/contact` (send `Authorization: Bearer <token>`). When unset, that endpoint is disabled (returns 404) so contact PII is never publicly exposed.
+
+> Recommended follow-up: wire an email notification (e.g. a transactional email provider) so new contact submissions reach the team directly. This needs a provider API key/secret and is not yet configured.
 
 ## Local Verification
 

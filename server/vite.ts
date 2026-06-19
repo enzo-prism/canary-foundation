@@ -124,6 +124,14 @@ function injectSpaMetadata(originalUrl: string, html: string) {
   return withMetadata.replace(/<\/head>/, `  ${jsonLdScript}\n  </head>`);
 }
 
+// Remove dev-only artifacts from production HTML. The Replit dev banner loads an
+// external script on every page; it is only useful in development.
+function stripDevOnlyArtifacts(html: string) {
+  return html
+    .replace(/<!--[^>]*?replit script[\s\S]*?-->\s*/i, "")
+    .replace(/<script[^>]*replit-dev-banner[^>]*><\/script>\s*/i, "");
+}
+
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
@@ -206,7 +214,7 @@ export function serveStatic(app: Express) {
       res
         .status(200)
         .set({ "Content-Type": "text/html; charset=UTF-8" })
-        .end(injectSpaMetadata(req.originalUrl, template));
+        .end(stripDevOnlyArtifacts(injectSpaMetadata(req.originalUrl, template)));
     } catch (error) {
       next(error);
     }

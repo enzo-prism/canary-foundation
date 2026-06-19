@@ -29,8 +29,9 @@ The application features a modern, responsive design built with React 18 and Typ
 ### Core System Design
 - **Shared Schema Approach**: Utilizes a shared TypeScript schema between frontend and backend to ensure type safety and consistency.
 - **Monorepo Structure**: Organizes `client/`, `server/`, and `shared/` directories within a single repository for streamlined development.
-- **Database Schema**: Includes `Users` for basic management and `Contact Messages` for form submissions.
-- **API Endpoints**: Key endpoints include `POST /api/contact` for form submissions and `GET /api/contact` (admin).
+- **Database Schema**: Includes `Users` for basic management and `Contact Messages` for form submissions (defined in `shared/schema.ts`).
+- **Contact storage**: Submissions persist to Postgres (Neon) via Drizzle when `DATABASE_URL` is set; otherwise an in-memory fallback is used (not retained across restarts). See `server/storage.ts` and `server/db.ts`.
+- **API Endpoints**: `POST /api/contact` accepts Zod-validated form submissions. `GET /api/contact` returns submissions for admins and is gated by `CONTACT_ADMIN_TOKEN` (Bearer auth); it is disabled (404) when no token is configured.
 - **Multi-page Application**: Supports extensive content through dedicated navigation pages for "About Canary", "Canary Approach", and "Canary Science", each with detailed sub-sections and authentic content.
 - **Responsive Design**: Mobile-first approach for optimal viewing across devices.
 - **SEO Enhancements**: Implemented comprehensive sitemap generation, dynamic priority and change frequencies, and robust 301 redirect middleware for legacy URLs to preserve SEO value.

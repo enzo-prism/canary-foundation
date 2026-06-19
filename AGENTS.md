@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- `server/` holds the Express entrypoint (`server/index.ts`), route wiring, and in-memory storage; middleware order matters because redirects must execute before Vite (`server/vite.ts`).
+- `server/` holds the Express entrypoint (`server/index.ts`), route wiring, and storage (`server/storage.ts`: Postgres via Drizzle when `DATABASE_URL` is set, else in-memory); middleware order matters because redirects must execute before Vite (`server/vite.ts`).
 - `client/src/` is the Vite React app: `pages/` contains route surfaces, `components/` reusable UI, `hooks/` shared logic, `lib/` helpers, and `assets/` static data. Global styles sit in `client/src/index.css` plus `client/public/` for static files.
 - Blog content is data-driven in `client/src/data/blog-posts.ts`; shared blog sorting/date-display behavior lives in `client/src/lib/blog-post-utils.ts`.
 - Data contracts live in `shared/schema.ts` and are consumed with the `@shared` alias defined in `tsconfig.json`.
