@@ -34,6 +34,7 @@ const Symposium = lazy(() => import("@/pages/symposium"));
 const CanaryScience = lazy(() => import("@/pages/canary-science"));
 const Science = lazy(() => import("@/pages/science"));
 const Programs = lazy(() => import("@/pages/programs"));
+const TeamUpdates = lazy(() => import("@/pages/team-updates"));
 const Centers = lazy(() => import("@/pages/centers"));
 const Publications = lazy(() => import("@/pages/publications"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
@@ -198,6 +199,7 @@ function Router() {
         <Route path="/science/overview" component={CanaryScience} />
         <Route path="/science/science" component={Science} />
         <Route path="/science/programs" component={Programs} />
+        <Route path="/science/programs/team-updates" component={TeamUpdates} />
         <Route path="/science/centers" component={Centers} />
         <Route path="/science/publications" component={Publications} />
         <Route

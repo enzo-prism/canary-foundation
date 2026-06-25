@@ -106,6 +106,11 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Explore Canary Foundation research programs across tumor types, clinical studies, and translational science.",
   },
+  "/science/programs/team-updates": {
+    title: "Team Updates | Canary Foundation",
+    description:
+      "Read current Canary Foundation team updates for ovarian, prostate, and pancreatic early cancer detection programs.",
+  },
   "/science/centers": {
     title: "Research Centers | Canary Foundation",
     description:
