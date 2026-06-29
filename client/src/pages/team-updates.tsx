@@ -51,7 +51,7 @@ const highlights = [
   {
     label: "0.973",
     title: "AUC for the four-marker panel",
-    text: "The strongest initial blood panel combined FTC1p, FTC2, CA125, and HE4 in a case-control cohort.",
+    text: "The strongest initial blood panel combined FTC1p, FTC2, CA125, and HE4 across a 160-sample case-control cohort.",
   },
   {
     label: "365+",
@@ -75,15 +75,15 @@ const strategies = [
     purpose:
       "Learn which early fallopian tube lesions progress to aggressive cancer and which remain harmless.",
     progress:
-      "The international STIC network now includes 20 participating institutions, more than 365 assembled STIC cases, molecular profiling on 36 samples, and a centralized REDCap database for pathology, molecular, and clinical outcome data.",
+      "The international STIC network, part of Pre-Cancer Atlas 2.0, now spans 20 participating institutions across the United States and abroad — including sites in Israel, the United Kingdom, Switzerland, and Nigeria — with more than 365 assembled STIC cases, molecular profiling on 36 samples, and a centralized REDCap database for pathology, molecular, and clinical outcome data.",
   },
   {
     icon: ShieldCheck,
     title: "Expanding preventive surgery approaches",
     purpose:
-      "Prevent ovarian cancer by removing fallopian tubes while preserving the ovaries and hormone function.",
+      "Prevent ovarian cancer through salpingectomy — removing the fallopian tubes while preserving the ovaries and their hormone function.",
     progress:
-      "A multidisciplinary team is working with the Michigan Surgical Quality Collaborative to promote fallopian tube removal as a statewide quality initiative for 2026-2027. The group is addressing billing, surgeon training, consent, and pathology workflows before the first pilot procedures begin in late 2026.",
+      "A multidisciplinary team of surgeons, gynecologic oncologists, health-outcomes researchers, and communication experts is working with the Michigan Surgical Quality Collaborative to promote fallopian tube removal during non-gynecologic abdominal surgeries as a statewide quality initiative for 2026-2027. Starting at the University of Michigan and backed by new philanthropic and grant support, the group is addressing billing, surgeon training, consent, and pathology workflows before the first pilot procedures begin in late 2026, with later expansion across Michigan and into Washington state under exploration.",
   },
   {
     icon: Users,
@@ -91,13 +91,13 @@ const strategies = [
     purpose:
       "Give women and clinicians clearer tools for prevention, early detection, and informed decision-making.",
     progress:
-      "The team is building an ovarian cancer risk calculator, patient-friendly education, and links to current resources, clinical studies, and trials. Work includes updating CanRisk with international experts, running focus groups for average-risk women, and evaluating launch requirements.",
+      "The team is building an ovarian cancer risk calculator, patient-friendly education, and links to current resources, clinical studies, and trials. Work includes updating CanRisk — the validated risk model from Cancer Research UK and the University of Cambridge — with international experts, aligning with the International Patient Decision Aid Standards (PDAS) collaboration, running focus groups for average-risk women, and evaluating regulatory and launch requirements.",
   },
   {
     icon: Stethoscope,
     title: "Ultrasound and MR-based imaging strategies",
     purpose:
-      "Develop imaging methods that can directly visualize fallopian tubes and detect tiny early lesions.",
+      "Develop imaging methods that can directly visualize fallopian tubes and detect tiny early lesions, complementing the emerging blood tests and improving diagnostic accuracy.",
     progress:
       "The team has an IRB-approved protocol for high-frequency and intravascular ultrasound imaging of surgically removed fallopian tubes, submitted a first-of-its-kind 2D and 3D microbubble contrast-enhanced ultrasound study for high-risk patients, and evaluated an advanced MR diffusion model on 44 patients.",
   },
@@ -263,10 +263,10 @@ export default function TeamUpdates() {
                 </h2>
                 <div className="space-y-5 text-lg leading-relaxed text-gray-700">
                   <p>
-                    The report's clearest visual evidence is the biomarker panel chart. It shows that combining the known markers CA125 and HE4 with the newly discovered FTC1p and FTC2 improves the team's ability to distinguish ovarian cancer cases from healthy controls in an initial blood-sample cohort.
+                    The report's clearest visual evidence is the biomarker panel chart. It shows that combining the known markers CA125 and HE4 with the newly discovered FTC1p and FTC2 improves the team's ability to distinguish ovarian cancer cases from healthy controls in an initial cohort of 160 blood samples — 90 from ovarian cancer patients and 60 from healthy women.
                   </p>
                   <p>
-                    This is still validation-stage science, so the page frames it as encouraging progress rather than a finished screening test. The next step is testing these markers in blood collected up to years before diagnosis to confirm whether they can detect cancer earlier.
+                    This is still validation-stage science, so we frame it as encouraging progress rather than a finished screening test. The next step is testing these markers in blood collected up to years before diagnosis to confirm whether they can detect cancer earlier.
                   </p>
                 </div>
               </div>
