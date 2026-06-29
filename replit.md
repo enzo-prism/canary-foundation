@@ -42,6 +42,12 @@ The application features a modern, responsive design built with React 18 and Typ
 - **Production runtime**: the bundled Express server at `dist/index.js` (not a static host). It serves the SPA and performs server-side per-route metadata/JSON-LD injection, legacy 301 redirects, `www`→apex canonicalization, crawler-asset serving, and security headers.
 - **SEO/meta source of truth**: route metadata and JSON-LD builders live in `shared/seo.ts`, consumed by both the Express server (`server/vite.ts`) and the client router (`client/src/App.tsx`) so server-rendered HTML and client navigation stay in sync.
 
+### Team Updates / Program Progress (June 2026)
+- **Route**: `/science/programs/team-updates` (`client/src/pages/team-updates.tsx`), linked from the Science → Programs navigation; metadata in `shared/seo.ts` and path in `seo/routes.json`.
+- **Purpose**: A single page summarizing the latest progress reports from the ovarian, prostate, and pancreatic research teams in accessible language.
+- **Current content**: The Ovarian Cancer Team's June 2026 update — a five-part research strategy, key progress signals, and the biomarker-panel ROC figure (`client/public/team-updates/ovarian-biomarker-panel-roc.png`). Prostate and pancreatic slots are queued for future reports.
+- **Source of truth**: Page copy mirrors the team's progress report (`Canary Foundation Ovarian Cancer Team Progress Report, June 2026`). Content is held in inline data arrays at the top of the page module (`updateQueue`, `highlights`, `strategies`) plus the prose sections; update these when a new report lands and verify each figure/number against the PDF.
+
 ### Blog Content Model (2026 Update)
 - **Data source**: Blog listing and detail pages are fully data-driven from `client/src/data/blog-posts.ts`.
 - **Ordering**: Posts are sorted by `publishedDate ?? date` so recently published content appears first, while preserving historical source dates.
