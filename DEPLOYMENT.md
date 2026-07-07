@@ -65,7 +65,7 @@ PORT=3000 npm run start
 2. Start with `npm run start`
 3. Confirm the crawl assets exist in `dist/public/`
 4. Run the local verification scripts above
-5. Deploy
+5. Deploy from Replit's Publishing tool. A GitHub push updates `main`, but production remains on the previous Replit deployment until the Replit app is published again.
 6. Verify the public domain and crawler endpoints after deploy
 
 ## Public Smoke Checks
