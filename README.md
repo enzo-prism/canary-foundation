@@ -100,7 +100,7 @@ Page content is data-driven and lives in `client/src/data/`:
 - **`blog-posts.ts`** — blog listing + detail pages (HTML content, dual `date`/`publishedDate` semantics; sorted by `publishedDate ?? date`). Shared sorting/date-label logic in `client/src/lib/blog-post-utils.ts`.
 - **`leadership.ts`**, **`don-listwin-oral-history.ts`** — reusable copy/constants and the founder oral-history content.
 
-The **Team Updates** page (`/science/programs/team-updates`, `client/src/pages/team-updates.tsx`) summarizes research-team progress reports. Its content lives in inline data arrays at the top of the page module rather than `client/src/data/`; it currently carries the Ovarian Cancer Team's June 2026 update and mirrors that team's progress-report PDF.
+The **Team Updates** page (`/science/programs/team-updates`, `client/src/pages/team-updates.tsx`) summarizes research-team progress reports. Its content lives in inline data arrays at the top of the page module rather than `client/src/data/`; it currently carries the Ovarian Cancer Team's June 2026 update and mirrors Heidi's final donor-friendly PDF (`Canary Ovary Team Progress_June2026_final.pdf`). Because the earlier June PDF was pulled for confidential data, future edits should stay tightly grounded in the final/approved source: do not reintroduce superseded terms such as `CRABp2`, `ORF1p`, or `165 cases`, and do not add prostate/pancreas details until Heidi or Don sends an approved final version.
 
 ## Deployment
 

@@ -75,7 +75,7 @@ const strategies = [
     purpose:
       "Learn which early fallopian tube lesions progress to aggressive cancer and which remain harmless.",
     progress:
-      "The international STIC network, part of Pre-Cancer Atlas 2.0, now spans 20 participating institutions across the United States and abroad — including sites in Israel, the United Kingdom, Switzerland, and Nigeria — with more than 365 assembled STIC cases, molecular profiling on 36 samples, and a centralized REDCap database for pathology, molecular, and clinical outcome data.",
+      "The international STIC network now spans 20 participating institutions and has assembled the world's largest collection of these rare fallopian tube precursor lesions, totaling more than 365 cases. The team has completed molecular profiling on 36 STIC samples and built a centralized REDCap database to integrate pathology, molecular, and clinical outcome data.",
   },
   {
     icon: ShieldCheck,
@@ -91,7 +91,7 @@ const strategies = [
     purpose:
       "Give women and clinicians clearer tools for prevention, early detection, and informed decision-making.",
     progress:
-      "The team is building an ovarian cancer risk calculator, patient-friendly education, and links to current resources, clinical studies, and trials. Work includes updating CanRisk — the validated risk model from Cancer Research UK and the University of Cambridge — with international experts, aligning with the International Patient Decision Aid Standards (PDAS) collaboration, running focus groups for average-risk women, and evaluating regulatory and launch requirements.",
+      "The team is building an ovarian cancer risk calculator, patient-friendly education, and links to current resources, clinical studies, and trials. Work includes collaborating with international experts to update CRUK/Cambridge's validated CanRisk platform, running focus groups for average-risk women, and evaluating regulatory and launch requirements.",
   },
   {
     icon: Stethoscope,

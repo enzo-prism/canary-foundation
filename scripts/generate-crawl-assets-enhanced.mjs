@@ -45,6 +45,7 @@ const CHANGEFREQ_MAP = {
   blog: 'weekly',
   blogPost: 'monthly',
   news: 'weekly',
+  monthly: 'monthly',
   program: 'monthly',
   about: 'yearly',
   static: 'yearly',
