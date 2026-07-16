@@ -32,9 +32,11 @@ The application features a modern, responsive design built with React 18 and Typ
 - **Database Schema**: Includes `Users` for basic management and `Contact Messages` for form submissions (defined in `shared/schema.ts`).
 - **Contact storage**: Submissions persist to Postgres (Neon) via Drizzle when `DATABASE_URL` is set; otherwise an in-memory fallback is used (not retained across restarts). See `server/storage.ts` and `server/db.ts`.
 - **API Endpoints**: `POST /api/contact` accepts Zod-validated form submissions. `GET /api/contact` returns submissions for admins and is gated by `CONTACT_ADMIN_TOKEN` (Bearer auth); it is disabled (404) when no token is configured.
+- **Contact protections**: Requests have a 32 KB size limit, bounded field lengths, a hidden honeypot, and an in-memory per-IP rate limit. Successful responses distinguish durable Postgres storage (`201`) from temporary in-memory acceptance (`202`).
 - **Multi-page Application**: Supports extensive content through dedicated navigation pages for "About Canary", "Canary Approach", and "Canary Science", each with detailed sub-sections and authentic content.
 - **Responsive Design**: Mobile-first approach for optimal viewing across devices.
 - **SEO Enhancements**: Implemented comprehensive sitemap generation, dynamic priority and change frequencies, and robust 301 redirect middleware for legacy URLs to preserve SEO value.
+- **HTTP hardening**: Unknown routes return real `404` responses, page 404s are `noindex`, hashed assets are immutable-cached, HTML is `no-store`, and baseline security headers include a report-only CSP and Permissions Policy.
 - **Analytics Integration**: Google Analytics 4 is integrated for tracking page views, user interactions, and specific events like form submissions and CTA clicks.
 
 ### Deployment
@@ -42,11 +44,12 @@ The application features a modern, responsive design built with React 18 and Typ
 - **Production runtime**: the bundled Express server at `dist/index.js` (not a static host). It serves the SPA and performs server-side per-route metadata/JSON-LD injection, legacy 301 redirects, `www`→apex canonicalization, crawler-asset serving, and security headers.
 - **SEO/meta source of truth**: route metadata and JSON-LD builders live in `shared/seo.ts`, consumed by both the Express server (`server/vite.ts`) and the client router (`client/src/App.tsx`) so server-rendered HTML and client navigation stay in sync.
 
-### Team Updates / Program Progress (June 2026)
-- **Route**: `/science/programs/team-updates` (`client/src/pages/team-updates.tsx`), linked from the Science → Programs navigation; metadata in `shared/seo.ts` and path in `seo/routes.json`.
-- **Purpose**: A single page summarizing the latest progress reports from the ovarian, prostate, and pancreatic research teams in accessible language.
-- **Current content**: The Ovarian Cancer Team's June 2026 update — a five-part research strategy, key progress signals, and the biomarker-panel ROC figure (`client/public/team-updates/ovarian-biomarker-panel-roc.png`). Prostate and pancreatic slots are queued for future reports.
-- **Source of truth**: Page copy mirrors Heidi's final donor-friendly ovarian PDF (`Canary Ovary Team Progress_June2026_final.pdf`). The earlier June PDF was pulled down for confidential data, so do not reintroduce superseded terms such as `CRABp2`, `ORF1p`, or `165 cases`, and do not add extra details that are not in the final/approved source without client confirmation. Content is held in inline data arrays at the top of the page module (`updateQueue`, `highlights`, `strategies`) plus the prose sections; update these when a new approved report lands and verify each figure/number against the PDF.
+### Team Updates / Program Progress
+- **Archive route**: `/science/programs/team-updates` lists only records with `status: "published"` and `approvedForPublicUse: true`.
+- **Approved detail route**: `/science/programs/team-updates/ovarian-june-2026` presents the June 2026 ovarian update in a reusable report layout.
+- **Content model**: `client/src/data/team-updates.ts` holds only approved public records. `client/src/components/team-updates/` owns shared archive/detail presentation. Public routes must also be added to `shared/seo.ts` and `seo/routes.json`.
+- **Private preparation**: Prostate, pancreas, Q4, and CTUC are content-free pending shells in `internal/team-update-shells.ts`, a module that must never be imported by `client/`. They contain no report facts, routes, metadata, or assets and do not enter the public browser bundle.
+- **Source and safety**: The ovarian copy mirrors Heidi's final donor-friendly PDF. Never reintroduce the confidential draft terms `CRABp2`, `ORF1p`, or `165 cases`. Run `npm run test:team-updates` and follow `docs/team-update-publication-workflow.md` before publication.
 
 ### Blog Content Model (2026 Update)
 - **Data source**: Blog listing and detail pages are fully data-driven from `client/src/data/blog-posts.ts`.

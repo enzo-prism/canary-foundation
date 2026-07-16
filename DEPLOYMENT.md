@@ -26,8 +26,10 @@ npm run start
 - Legacy URL redirects for old Canary routes
 - Brotli and gzip delivery for built `.js` and `.css` assets when the precompressed files exist
 - Security headers:
-  `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `X-XSS-Protection`
-- SPA fallback via the bundled Express + static Vite output
+  `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `X-XSS-Protection`, `Permissions-Policy`, and a report-only Content Security Policy
+- Real `404` HTML with `noindex` for unknown page routes, plus JSON `404` responses for unknown API routes
+- Immutable one-year caching for hashed assets and `no-store` for HTML documents
+- Size-limited, honeypot-protected, rate-limited contact submissions
 - Per-route `<head>` metadata + JSON-LD injection and removal of the dev-only Replit banner
 
 ## Environment Variables
@@ -35,7 +37,7 @@ npm run start
 - `DATABASE_URL` — when set, contact-form submissions are durably persisted to Postgres (Neon) via Drizzle. When unset, the server falls back to in-memory storage and submissions are **not** retained across restarts.
 - `CONTACT_ADMIN_TOKEN` — required to read submissions via `GET /api/contact` (send `Authorization: Bearer <token>`). When unset, that endpoint is disabled (returns 404) so contact PII is never publicly exposed.
 
-> Recommended follow-up: wire an email notification (e.g. a transactional email provider) so new contact submissions reach the team directly. This needs a provider API key/secret and is not yet configured.
+The contact endpoint returns `201` only when the message is durably stored in Postgres. Without `DATABASE_URL`, it returns `202` and explains that the message is only in temporary server memory. Email notification is not configured; adding it requires an approved delivery provider, destination, and secret.
 
 ## Local Verification
 
@@ -56,6 +58,9 @@ PORT=3000 npm run start
 ./test-www-crawler-files.sh
 ./test-seo-fix.sh
 ./test-redirects.sh
+./scripts/test-platform-hardening.sh
+npm run test:team-updates
+npm run check:links -- --network
 ./final-test-production.sh
 ```
 
@@ -64,9 +69,10 @@ PORT=3000 npm run start
 1. Build with `npm ci && npm run build && node postbuild.js`
 2. Start with `npm run start`
 3. Confirm the crawl assets exist in `dist/public/`
-4. Run the local verification scripts above
-5. Deploy from Replit's Publishing tool. A GitHub push updates `main`, but production remains on the previous Replit deployment until the Replit app is published again.
-6. Verify the public domain and crawler endpoints after deploy
+4. Run the local verification scripts above and confirm `npm audit --omit=dev` reports no findings
+5. Confirm pending Team Updates have no public route, metadata, sitemap entry, or built content
+6. Deploy from Replit's Publishing tool. A GitHub push updates `main`, but production remains on the previous Replit deployment until the Replit app is published again.
+7. Verify the public domain and crawler endpoints after deploy
 
 ## Public Smoke Checks
 

@@ -11,6 +11,7 @@ const SITE_ORIGIN = 'https://canaryfoundation.org';
 const BUILD_DIR = process.env.BUILD_DIR || 'dist/public';
 const SEO_ROUTES_FILE = path.join(rootDir, 'seo', 'routes.json');
 const MAX_URLS_PER_SITEMAP = 50000;
+const GOOGLE_NEWS_MAX_AGE_MS = 2 * 24 * 60 * 60 * 1000;
 
 // Blog post SEO metadata for individual /blog/:slug pages.
 // IMPORTANT: keep in sync with client/src/data/blog-posts.ts (slug, date, category).
@@ -262,7 +263,13 @@ function generateSitemapXml(urls) {
  * Generate news sitemap for blog posts
  */
 function generateNewsSitemapXml(urls) {
-  const newsUrls = urls.filter(url => url.isNews || url.path.startsWith('/blog/'));
+  const now = Date.now();
+  const newsUrls = urls.filter(url => {
+    if (!url.isNews) return false;
+    const publishedAt = Date.parse(`${url.lastmod}T00:00:00Z`);
+    const age = now - publishedAt;
+    return Number.isFinite(publishedAt) && age >= 0 && age <= GOOGLE_NEWS_MAX_AGE_MS;
+  });
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
@@ -417,8 +424,8 @@ function generateAiTxt() {
 # Last Updated: ${new Date().toISOString()}
 
 ## About This Site
-The Canary Foundation is the world's only non-profit organization solely dedicated to the early detection of cancer. 
-Founded in 2004, we have invested over $100 million in research aimed at detecting cancer at its earliest, most treatable stages.
+Canary Foundation is a nonprofit organization dedicated to the early detection of cancer.
+Founded in 2004, it supports collaborative research aimed at detecting cancer at its earliest, most treatable stages.
 
 ## Content Guidelines for AI
 - This site contains scientific research information about cancer early detection
@@ -514,7 +521,9 @@ export function buildCrawlAssets() {
   // Generate news sitemap
   result.newsSitemapXml = generateNewsSitemapXml(allUrls);
   fs.writeFileSync(path.join(buildPath, 'news-sitemap.xml'), result.newsSitemapXml);
-  const newsCount = allUrls.filter(u => u.isNews || u.path.startsWith('/blog/')).length;
+  const newsCount = (
+    result.newsSitemapXml.match(/<news:news>/g) || []
+  ).length;
   console.log(`✅ News sitemap written (${newsCount} articles)`);
   
   // Generate LLM sitemap

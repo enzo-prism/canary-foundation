@@ -242,7 +242,7 @@ export default function StanfordForScientists() {
               <div className="flex justify-center space-x-4">
                 <Button 
                   className="bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => window.open('https://med.stanford.edu/canaryfoundation', '_blank')}
+                  onClick={() => window.open('https://canarycenter.stanford.edu/', '_blank', 'noopener,noreferrer')}
                 >
                   Learn More
                 </Button>

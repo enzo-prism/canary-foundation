@@ -8,6 +8,7 @@ import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import {
   resolveRouteMetadata,
+  NOT_FOUND_METADATA,
   normalizeRoutePath,
   buildCanonicalUrl,
   buildWebPageJsonLd,
@@ -15,6 +16,9 @@ import {
   PAGE_JSONLD_ELEMENT_ID,
 } from "@shared/seo";
 import { blogPosts } from "@/data/blog-posts";
+import seoRoutes from "../../seo/routes.json";
+
+const KNOWN_CLIENT_STATIC_ROUTES = new Set([...seoRoutes.routes, "/take-action"]);
 
 const Home = lazy(() => import("@/pages/home"));
 const Contact = lazy(() => import("@/pages/contact"));
@@ -35,6 +39,9 @@ const CanaryScience = lazy(() => import("@/pages/canary-science"));
 const Science = lazy(() => import("@/pages/science"));
 const Programs = lazy(() => import("@/pages/programs"));
 const TeamUpdates = lazy(() => import("@/pages/team-updates"));
+const OvarianJune2026TeamUpdate = lazy(
+  () => import("@/pages/team-updates/ovarian-june-2026"),
+);
 const Centers = lazy(() => import("@/pages/centers"));
 const Publications = lazy(() => import("@/pages/publications"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
@@ -104,6 +111,19 @@ function upsertJsonLd(data: Record<string, unknown>) {
   script.textContent = JSON.stringify(data);
 }
 
+function setRobotsDirective(isKnownRoute: boolean) {
+  const existingTag = document.querySelector<HTMLMetaElement>(
+    'meta[name="robots"]',
+  );
+
+  if (isKnownRoute) {
+    existingTag?.remove();
+    return;
+  }
+
+  setMetaTag("name", "robots", "noindex, nofollow");
+}
+
 // Mirrors resolvePageSeo() in server/vite.ts so SPA navigation produces the
 // same title/description/canonical/JSON-LD that the server rendered into the
 // initial HTML. Route metadata and JSON-LD builders are shared via @shared/seo.
@@ -130,11 +150,15 @@ function resolveClientPageSeo(location: string) {
           author: post.author,
           keywords: post.tags,
         }),
+        isKnownRoute: true,
       };
     }
   }
 
-  const metadata = resolveRouteMetadata(routePath);
+  const isKnownRoute = KNOWN_CLIENT_STATIC_ROUTES.has(routePath);
+  const metadata = isKnownRoute
+    ? resolveRouteMetadata(routePath)
+    : NOT_FOUND_METADATA;
   return {
     metadata,
     canonicalUrl,
@@ -143,6 +167,7 @@ function resolveClientPageSeo(location: string) {
       description: metadata.description,
       url: canonicalUrl,
     }),
+    isKnownRoute,
   };
 }
 
@@ -160,7 +185,8 @@ function Router() {
   useAnalytics();
 
   useEffect(() => {
-    const { metadata, canonicalUrl, jsonLd } = resolveClientPageSeo(location);
+    const { metadata, canonicalUrl, jsonLd, isKnownRoute } =
+      resolveClientPageSeo(location);
     document.title = metadata.title;
     setMetaDescription(metadata.description);
     setMetaTag("property", "og:title", metadata.title);
@@ -168,6 +194,7 @@ function Router() {
     setMetaTag("name", "twitter:title", metadata.title);
     setMetaTag("name", "twitter:description", metadata.description);
     setCanonicalUrl(canonicalUrl);
+    setRobotsDirective(isKnownRoute);
     upsertJsonLd(jsonLd);
   }, [location]);
 
@@ -200,6 +227,10 @@ function Router() {
         <Route path="/science/science" component={Science} />
         <Route path="/science/programs" component={Programs} />
         <Route path="/science/programs/team-updates" component={TeamUpdates} />
+        <Route
+          path="/science/programs/team-updates/ovarian-june-2026"
+          component={OvarianJune2026TeamUpdate}
+        />
         <Route path="/science/centers" component={Centers} />
         <Route path="/science/publications" component={Publications} />
         <Route

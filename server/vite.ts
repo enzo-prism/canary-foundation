@@ -7,6 +7,8 @@ import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import {
   SITE_NAME,
+  SITE_ORIGIN,
+  NOT_FOUND_METADATA,
   resolveRouteMetadata,
   normalizeRoutePath,
   buildCanonicalUrl,
@@ -17,6 +19,7 @@ import {
   type RouteMetadata,
 } from "@shared/seo";
 import { blogPosts } from "@/data/blog-posts";
+import seoRoutes from "../seo/routes.json";
 
 const viteLogger = createLogger();
 
@@ -32,7 +35,10 @@ interface ResolvedPageSeo {
   metadata: RouteMetadata;
   canonicalUrl: string;
   jsonLdScript: string;
+  isKnownRoute: boolean;
 }
+
+const KNOWN_STATIC_ROUTES = new Set([...seoRoutes.routes, "/take-action"]);
 
 // Resolve title/description/canonical and JSON-LD for a request URL. Blog post
 // detail pages get post-specific metadata + Article schema; every other route
@@ -64,11 +70,15 @@ function resolvePageSeo(originalUrl: string): ResolvedPageSeo {
           }),
           PAGE_JSONLD_ELEMENT_ID,
         ),
+        isKnownRoute: true,
       };
     }
   }
 
-  const metadata = resolveRouteMetadata(routePath);
+  const isKnownRoute = KNOWN_STATIC_ROUTES.has(routePath);
+  const metadata = isKnownRoute
+    ? resolveRouteMetadata(routePath)
+    : NOT_FOUND_METADATA;
   return {
     metadata,
     canonicalUrl,
@@ -80,11 +90,13 @@ function resolvePageSeo(originalUrl: string): ResolvedPageSeo {
       }),
       PAGE_JSONLD_ELEMENT_ID,
     ),
+    isKnownRoute,
   };
 }
 
 function injectSpaMetadata(originalUrl: string, html: string) {
-  const { metadata, canonicalUrl, jsonLdScript } = resolvePageSeo(originalUrl);
+  const { metadata, canonicalUrl, jsonLdScript, isKnownRoute } =
+    resolvePageSeo(originalUrl);
   const escapedTitle = escapeHtmlAttribute(metadata.title);
   const escapedDescription = escapeHtmlAttribute(metadata.description);
   const escapedCanonical = escapeHtmlAttribute(canonicalUrl);
@@ -108,6 +120,10 @@ function injectSpaMetadata(originalUrl: string, html: string) {
       `<meta property="og:url" content="${escapedCanonical}" />`,
     )
     .replace(
+      /<meta property="og:image" content="[^"]*"\s*\/>/,
+      `<meta property="og:image" content="${SITE_ORIGIN}/opengraph.png" />`,
+    )
+    .replace(
       /<meta name="twitter:title" content="[^"]*"\s*\/>/,
       `<meta name="twitter:title" content="${escapedTitle}" />`,
     )
@@ -116,12 +132,23 @@ function injectSpaMetadata(originalUrl: string, html: string) {
       `<meta name="twitter:description" content="${escapedDescription}" />`,
     )
     .replace(
+      /<meta name="twitter:image" content="[^"]*"\s*\/>/,
+      `<meta name="twitter:image" content="${SITE_ORIGIN}/opengraph.png" />`,
+    )
+    .replace(
       /<link rel="canonical" href="[^"]*"\s*\/>/,
       `<link rel="canonical" href="${escapedCanonical}" />`,
     );
 
+  const withRobots = isKnownRoute
+    ? withMetadata
+    : withMetadata.replace(
+        /<\/head>/,
+        '  <meta name="robots" content="noindex, nofollow" />\n  </head>',
+      );
+
   // Inject the per-page JSON-LD immediately before </head>.
-  return withMetadata.replace(/<\/head>/, `  ${jsonLdScript}\n  </head>`);
+  return withRobots.replace(/<\/head>/, `  ${jsonLdScript}\n  </head>`);
 }
 
 // Remove dev-only artifacts from production HTML. The Replit dev banner loads an
@@ -184,7 +211,14 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
       const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      const { isKnownRoute } = resolvePageSeo(url);
+      res
+        .status(isKnownRoute ? 200 : 404)
+        .set({
+          "Content-Type": "text/html; charset=UTF-8",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        })
+        .end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -204,16 +238,36 @@ export function serveStatic(app: Express) {
   // Disable the automatic directory index so "/" flows through the catch-all
   // below and receives server-side metadata + JSON-LD injection like every
   // other route (otherwise express.static would serve raw index.html for "/").
-  app.use(express.static(distPath, { index: false }));
+  app.use(
+    express.static(distPath, {
+      index: false,
+      setHeaders(res, filePath) {
+        const relativePath = path
+          .relative(distPath, filePath)
+          .replaceAll(path.sep, "/");
+        if (/^assets\/.+-[A-Za-z0-9_-]{8,}\./i.test(relativePath)) {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        } else if (path.extname(relativePath) === ".html") {
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        } else {
+          res.setHeader("Cache-Control", "public, max-age=3600");
+        }
+      },
+    }),
+  );
 
   // fall through to index.html if the file doesn't exist
   app.use("*", async (req, res, next) => {
     try {
       const indexPath = path.resolve(distPath, "index.html");
       const template = await fs.promises.readFile(indexPath, "utf-8");
+      const { isKnownRoute } = resolvePageSeo(req.originalUrl);
       res
-        .status(200)
-        .set({ "Content-Type": "text/html; charset=UTF-8" })
+        .status(isKnownRoute ? 200 : 404)
+        .set({
+          "Content-Type": "text/html; charset=UTF-8",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        })
         .end(stripDevOnlyArtifacts(injectSpaMetadata(req.originalUrl, template)));
     } catch (error) {
       next(error);

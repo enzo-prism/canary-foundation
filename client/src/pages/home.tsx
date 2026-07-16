@@ -1,22 +1,13 @@
-import { useState, useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Mail, Clock, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { Heart, Handshake, Sprout, GraduationCap, Stethoscope, Leaf, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Quote, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import BiomarkerGrid from "@/components/BiomarkerGrid";
-import { trackFormSubmission, trackClick, trackVideo } from "@/lib/analytics";
+import { trackClick, trackVideo } from "@/lib/analytics";
 import { DON_LISTWIN_TITLE } from "@/data/leadership";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
@@ -25,22 +16,16 @@ import canaryBooth from "@assets/Canary Challenge Booth_1752514185862.webp";
 import canaryBiker from "@assets/Canary Challenge Biker_1752514185863.webp";
 import canaryAnimatedVideo from "@assets/canary foundation animated video_1753284730466.mp4";
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
-
 const FEATURED_REPORT_PATH = "/blog/canary-foundation-program-report-2025";
 
 export default function Home() {
-  const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isCarouselPlaying, setIsCarouselPlaying] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
   const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   const timelineEvents = [
     { year: 2000, title: "Grace Listwin Misdiagnosed", description: "Don Listwin's mother, Grace Listwin, misdiagnosed with bladder infection", icon: Heart, category: "founding" },
@@ -74,6 +59,22 @@ export default function Home() {
   // Scroll to top on component mount
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+      if (mediaQuery.matches) {
+        setIsCarouselPlaying(false);
+        setIsVideoPlaying(false);
+        videoRef.current?.pause();
+      }
+    };
+
+    updateMotionPreference();
+    mediaQuery.addEventListener("change", updateMotionPreference);
+    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
   }, []);
 
   // Scroll-triggered animations
@@ -137,62 +138,43 @@ export default function Home() {
     }
   ];
   
-  // Auto-advance carousel every 5 seconds
+  // Auto-advance only while the visitor has left the gallery playing.
   useEffect(() => {
+    if (!isCarouselPlaying || prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [heroImages.length]);
+  }, [heroImages.length, isCarouselPlaying, prefersReducedMotion]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!isVideoPlaying || prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    video.play().catch(() => setIsVideoPlaying(false));
+  }, [isVideoPlaying, prefersReducedMotion]);
   
   const nextSlide = () => {
+    setIsCarouselPlaying(false);
     setCurrentSlide((prev) => (prev + 1) % heroImages.length);
   };
   
   const prevSlide = () => {
+    setIsCarouselPlaying(false);
     setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
-  };
-  
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      return await apiRequest("POST", "/api/contact", data);
-    },
-    onSuccess: () => {
-      // Track successful form submission
-      trackFormSubmission('contact_form');
-      toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you soon.",
-      });
-      form.reset();
-    },
-    onError: (error) => {
-      toast({
-        title: "Error sending message",
-        description: error.message,
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
   };
 
   return (
     <div className="min-h-screen bg-light">
       <Header />
-      
+
+      <main id="main-content" tabIndex={-1}>
       {/* Hero Section */}
       <section id="home" className="relative bg-white py-12 md:py-20 overflow-hidden">
         <BiomarkerGrid />
@@ -381,22 +363,43 @@ export default function Home() {
               <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto relative">
                 <div className="absolute inset-0 rounded-full overflow-hidden shadow-lg border-4 border-primary/10">
                   <video
+                    ref={videoRef}
                     src={canaryAnimatedVideo}
-                    autoPlay
+                    autoPlay={!prefersReducedMotion}
                     loop
                     muted
                     playsInline
+                    aria-label="Animated Canary Foundation logo"
                     className="w-full h-full object-cover"
                     style={{
                       objectFit: 'cover'
                     }}
-                    onPlay={() => trackVideo('play', 'canary_animated_logo')}
-                    onPause={() => trackVideo('pause', 'canary_animated_logo')}
+                    onPlay={() => {
+                      setIsVideoPlaying(true);
+                      trackVideo('play', 'canary_animated_logo');
+                    }}
+                    onPause={() => {
+                      setIsVideoPlaying(false);
+                      trackVideo('pause', 'canary_animated_logo');
+                    }}
                     onEnded={() => trackVideo('complete', 'canary_animated_logo')}
                   >
                     <source src={canaryAnimatedVideo} type="video/mp4" />
                     Your browser does not support the video element.
                   </video>
+                  <button
+                    type="button"
+                    className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-sm font-semibold text-dark shadow-md hover:bg-white"
+                    aria-label={isVideoPlaying ? "Pause logo animation" : "Play logo animation"}
+                    onClick={() => setIsVideoPlaying((isPlaying) => !isPlaying)}
+                  >
+                    {isVideoPlaying ? (
+                      <Pause aria-hidden="true" className="h-4 w-4" />
+                    ) : (
+                      <Play aria-hidden="true" className="h-4 w-4" />
+                    )}
+                    {isVideoPlaying ? "Pause" : "Play"}
+                  </button>
                 </div>
               </div>
               
@@ -1051,7 +1054,12 @@ export default function Home() {
             </div>
             
             {/* Interactive Photo Gallery */}
-            <div className="relative">
+            <div
+              className="relative"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="Canary Foundation community history"
+            >
               {/* Image Container */}
               <div className="rounded-2xl shadow-xl bg-white overflow-hidden">
                 <div 
@@ -1059,7 +1067,11 @@ export default function Home() {
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {heroImages.map((image, index) => (
-                    <div key={index} className="w-full flex-shrink-0 relative group">
+                    <div
+                      key={index}
+                      className="w-full flex-shrink-0 relative group"
+                      aria-hidden={index !== currentSlide}
+                    >
                       <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                         <img 
                           src={image.src}
@@ -1090,7 +1102,11 @@ export default function Home() {
                 </button>
                 
                 {/* Caption Container Below Image */}
-                <div className="bg-white p-6 border-t border-gray-100">
+                <div
+                  className="bg-white p-6 border-t border-gray-100"
+                  aria-live={isCarouselPlaying ? "off" : "polite"}
+                  aria-atomic="true"
+                >
                   <div className="text-center">
                     <h3 className="text-xl md:text-2xl font-bold text-dark mb-3">
                       {heroImages[currentSlide]?.title}
@@ -1111,7 +1127,10 @@ export default function Home() {
                 {heroImages.map((image, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => {
+                      setIsCarouselPlaying(false);
+                      setCurrentSlide(index);
+                    }}
                     className={`group transition-all duration-300 ${
                       index === currentSlide ? 'scale-110' : 'hover:scale-105'
                     }`}
@@ -1132,6 +1151,19 @@ export default function Home() {
                 <span className="text-sm text-gray-500">
                   {currentSlide + 1} of {heroImages.length}
                 </span>
+                <button
+                  type="button"
+                  className="ml-4 inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm font-semibold text-primary hover:bg-primary/10"
+                  aria-label={isCarouselPlaying ? "Pause photo gallery" : "Play photo gallery"}
+                  onClick={() => setIsCarouselPlaying((isPlaying) => !isPlaying)}
+                >
+                  {isCarouselPlaying ? (
+                    <Pause aria-hidden="true" className="h-4 w-4" />
+                  ) : (
+                    <Play aria-hidden="true" className="h-4 w-4" />
+                  )}
+                  {isCarouselPlaying ? "Pause" : "Play"}
+                </button>
               </div>
             </div>
             
@@ -1150,17 +1182,8 @@ export default function Home() {
                 >
                   Support Our Mission
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-primary text-primary hover:bg-primary hover:text-white font-semibold"
-                  onClick={() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  Get Involved
+                <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold">
+                  <Link href="/contact">Get Involved</Link>
                 </Button>
               </div>
             </div>
@@ -1284,13 +1307,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section id="events" className="py-16 md:py-20 bg-light">
+      {/* Current ways to follow Canary work */}
+      <section id="updates" className="py-16 md:py-20 bg-light">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Upcoming Events</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Follow Canary's Work</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Join us at conferences, symposiums, and educational events focused on advancing cancer detection research.
+              Explore published research updates and learn how Canary brings scientists together around early detection.
             </p>
           </div>
           
@@ -1299,41 +1322,15 @@ export default function Home() {
               <CardContent className="p-8">
                 <div className="flex items-start space-x-4">
                   <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                    <GraduationCap className="text-white text-2xl" />
+                    <Microscope className="text-dark text-2xl" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-dark mb-2">Annual Early Detection Conference</h3>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Research Team Updates</h3>
                     <p className="text-gray-600 mb-4">
-                      Co-hosted with OHSU and CRUK, featuring the latest advances in cancer detection technologies and research.
+                      Read public, donor-friendly progress reports from Canary-supported research teams.
                     </p>
-                    <div className="text-primary font-semibold">Coming Soon</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                    <Users className="text-white text-2xl" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-dark mb-2">Scientific Symposium</h3>
-                    <p className="text-gray-600 mb-4">
-                      Annual gathering of researchers and clinicians to share latest findings in biomarker development and imaging.
-                    </p>
-                    <Button
-                      asChild
-                      variant="link"
-                      className="text-primary hover:text-primary-dark font-semibold p-0"
-                    >
-                      <Link
-                        href="/donate"
-                        onClick={() => trackClick("support_research_symposium", "cta")}
-                      >
-                        Support Research →
-                      </Link>
+                    <Button asChild variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                      <Link href="/science/programs/team-updates">View Team Updates →</Link>
                     </Button>
                   </div>
                 </div>
@@ -1344,41 +1341,19 @@ export default function Home() {
               <CardContent className="p-8">
                 <div className="flex items-start space-x-4">
                   <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                    <Handshake className="text-white text-2xl" />
+                    <Users className="text-dark text-2xl" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-dark mb-2">EDx24 Conference</h3>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Canary Symposium</h3>
                     <p className="text-gray-600 mb-4">
-                      Focused on addressing disparities in cancer detection and advancing equity in healthcare access.
-                    </p>
-                    <div className="text-primary font-semibold">Past Event</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                    <GraduationCap className="text-white text-2xl" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-dark mb-2">Research Training Programs</h3>
-                    <p className="text-gray-600 mb-4">
-                      NCI R25 CREST summer training program and fellowship opportunities for emerging researchers.
+                      Learn about Canary's collaborative scientific symposium and its role in advancing early detection.
                     </p>
                     <Button
                       asChild
                       variant="link"
                       className="text-primary hover:text-primary-dark font-semibold p-0"
                     >
-                      <Link
-                        href="/donate"
-                        onClick={() => trackClick("support_research_training", "cta")}
-                      >
-                        Support Research →
-                      </Link>
+                      <Link href="/approach/symposium">Explore the Symposium →</Link>
                     </Button>
                   </div>
                 </div>
@@ -1730,163 +1705,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-16 md:py-20 bg-white">
+      <section id="contact" className="bg-white py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Contact Us</h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Have questions about our research or want to learn more about supporting early cancer detection? We'd love to hear from you.
+          <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200 bg-light p-8 text-center md:p-12">
+            <h2 className="mb-4 text-3xl font-bold text-dark md:text-4xl">Questions for Canary?</h2>
+            <p className="mb-7 text-lg leading-relaxed text-gray-600">
+              Contact the foundation about research, giving, or general information.
             </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold text-dark mb-6">Get in Touch</h3>
-              <div className="rounded-2xl border border-gray-200 bg-light p-6 md:p-8">
-                <div className="grid gap-4">
-                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
-                      <MapPin className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                        Address
-                      </div>
-                      <address className="not-italic mt-1 text-gray-600 leading-relaxed">
-                        <span className="block">Canary Foundation</span>
-                        <span className="block">PO Box 620134</span>
-                        <span className="block mt-2">Woodside, CA 94062-9991</span>
-                      </address>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
-                      <Mail className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                        Email
-                      </div>
-                      <a
-                        href="mailto:info@canaryfoundation.org"
-                        className="mt-1 inline-block text-gray-600 hover:text-primary-dark hover:underline"
-                      >
-                        info@canaryfoundation.org
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                    <div className="mt-0.5 flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-primary">
-                      <Clock className="h-5 w-5 text-white" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                        Office Hours
-                      </div>
-                      <div className="mt-1 text-gray-600 leading-relaxed">
-                        <span className="block">Monday – Friday</span>
-                        <span className="block">9:00 AM – 6:00 PM</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-dark">Full Name</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Enter your full name" 
-                            {...field} 
-                            className="focus:ring-primary focus:border-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-dark">Email Address</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="email" 
-                            placeholder="Enter your email address" 
-                            {...field} 
-                            className="focus:ring-primary focus:border-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="subject"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-dark">Subject</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Enter subject" 
-                            {...field} 
-                            className="focus:ring-primary focus:border-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-dark">Message</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            rows={5} 
-                            placeholder="Enter your message" 
-                            {...field} 
-                            className="focus:ring-primary focus:border-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary text-white hover:bg-primary-dark font-semibold"
-                    disabled={contactMutation.isPending}
-                  >
-                    {contactMutation.isPending ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </Form>
-            </div>
+            <Button asChild className="bg-primary px-7 font-semibold text-dark hover:bg-primary-dark">
+              <Link href="/contact">Contact Canary Foundation</Link>
+            </Button>
           </div>
         </div>
       </section>
-
+      </main>
       <Footer />
     </div>
   );

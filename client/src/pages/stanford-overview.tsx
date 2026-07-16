@@ -297,7 +297,7 @@ export default function StanfordOverview() {
                 <Button 
                   variant="outline"
                   className="border-primary text-primary hover:bg-primary/10"
-                  onClick={() => window.open('https://med.stanford.edu/canaryfoundation', '_blank')}
+                  onClick={() => window.open('https://canarycenter.stanford.edu/', '_blank', 'noopener,noreferrer')}
                 >
                   Visit Center Website
                 </Button>

@@ -19,6 +19,12 @@ export const DEFAULT_METADATA: RouteMetadata = {
     "Canary Foundation advances early cancer detection research through collaborative science, biomarker discovery, imaging innovation, and translational partnerships.",
 };
 
+export const NOT_FOUND_METADATA: RouteMetadata = {
+  title: "Page Not Found | Canary Foundation",
+  description:
+    "The requested page could not be found. Explore Canary Foundation's work in early cancer detection research.",
+};
+
 export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
   "/": DEFAULT_METADATA,
   "/contact": {
@@ -110,6 +116,11 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     title: "Team Updates | Canary Foundation",
     description:
       "Read current Canary Foundation team updates for ovarian, prostate, and pancreatic early cancer detection programs.",
+  },
+  "/science/programs/team-updates/ovarian-june-2026": {
+    title: "Ovarian Cancer Team Update, June 2026 | Canary Foundation",
+    description:
+      "Read the approved June 2026 update from the Canary Foundation Ovarian Cancer Team on earlier detection and prevention research.",
   },
   "/science/centers": {
     title: "Research Centers | Canary Foundation",

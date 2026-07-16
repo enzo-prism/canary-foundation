@@ -120,11 +120,35 @@ app.use((_, res, next) => {
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+  );
+  res.setHeader(
+    "Content-Security-Policy-Report-Only",
+    [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'self'",
+      "form-action 'self'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.hotjar.com https://script.hotjar.com https://replit.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data:",
+      "media-src 'self' blob: https:",
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://vars.hotjar.com",
+      "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.hotjar.com wss://*.hotjar.com",
+      "upgrade-insecure-requests",
+    ].join("; "),
+  );
   next();
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "32kb" }));
+app.use(
+  express.urlencoded({ extended: false, limit: "32kb", parameterLimit: 20 }),
+);
 
 // Canonicalize the public host while allowing crawler files on both domains.
 app.use((req, res, next) => {
@@ -170,6 +194,9 @@ app.get(/\.(css|js)$/, (req, res, next) => {
     res.setHeader("Content-Encoding", encoding);
     res.setHeader("Content-Type", contentType);
     res.setHeader("Vary", "Accept-Encoding");
+    if (/^assets\/.+-[A-Za-z0-9_-]{8,}\.(?:css|js)$/i.test(requestedPath)) {
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    }
     res.sendFile(filePath);
   };
 
@@ -212,27 +239,12 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
-
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      log(logLine);
+      // Log only request metadata. API bodies may contain contact PII.
+      log(`${req.method} ${path} ${res.statusCode} in ${duration}ms`);
     }
   });
 
@@ -244,10 +256,18 @@ app.use((req, res, next) => {
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    const message =
+      status >= 500 ? "Internal Server Error" : err.message || "Request failed";
 
+    if (res.headersSent) {
+      _next(err);
+      return;
+    }
+
+    if (status >= 500) {
+      console.error("[server] Request failed", err);
+    }
     res.status(status).json({ message });
-    throw err;
   });
 
   // importantly only setup vite in development and after

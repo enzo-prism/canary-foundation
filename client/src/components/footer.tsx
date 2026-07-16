@@ -4,6 +4,8 @@ import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 import { Youtube } from "lucide-react";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-dark text-white py-12">
       <div className="container mx-auto px-4">
@@ -140,7 +142,7 @@ export default function Footer() {
         
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
           <p className="text-gray-300">
-            &copy; 2025 Canary Foundation. All rights reserved.
+            &copy; {currentYear} Canary Foundation. All rights reserved.
           </p>
         </div>
       </div>

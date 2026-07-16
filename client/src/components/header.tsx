@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import canaryLogo from "@assets/Canary Foundation Logo_1752513431783.webp";
 import { trackClick } from "@/lib/analytics";
 
-// Define navigation item types
 interface NavItem {
   name: string;
   path?: string | null;
@@ -13,405 +12,404 @@ interface NavItem {
 }
 
 interface NavSection {
-  path?: string | null;
   items: NavItem[];
+}
+
+const navigationStructure: Record<string, NavSection> = {
+  "About Canary": {
+    items: [
+      { name: "Our Mission", path: "/about/overview" },
+      { name: "Founder & Oral History", path: "/about/founders-story" },
+      { name: "Staff", path: "/about/staff" },
+      { name: "Board of Directors", path: "/about/board-directors" },
+      { name: "Leadership Council", path: "/about/leadership-council" },
+      { name: "Scientific Leadership", path: "/about/scientific-leadership" },
+      { name: "Financials", path: "/about/financials" },
+    ],
+  },
+  "Canary Approach": {
+    items: [
+      { name: "Overview", path: "/approach/overview" },
+      { name: "Collaborations & Partnership", path: "/approach/collaborations" },
+      { name: "Canary Symposium", path: "/approach/symposium" },
+    ],
+  },
+  "Canary Science": {
+    items: [
+      { name: "Overview", path: "/science/overview" },
+      {
+        name: "Science",
+        path: "/science/science",
+        subItems: [
+          { name: "Imaging", path: "/science/science/imaging" },
+          { name: "Biomarkers", path: "/science/science/biomarkers" },
+        ],
+      },
+      {
+        name: "Programs",
+        path: "/science/programs",
+        subItems: [
+          {
+            name: "Tumors",
+            path: "/science/programs/tumors",
+            subItems: [
+              { name: "Breast", path: "/science/programs/tumors/breast" },
+              { name: "Lung", path: "/science/programs/tumors/lung" },
+              { name: "Ovarian", path: "/science/programs/tumors/ovarian" },
+              { name: "Pancreatic", path: "/science/programs/tumors/pancreatic" },
+              { name: "Prostate", path: "/science/programs/tumors/prostate" },
+            ],
+          },
+          {
+            name: "Clinical Progress",
+            path: "/science/programs/clinical-progress",
+            subItems: [
+              { name: "Clinical Studies", path: "/science/programs/clinical-studies" },
+            ],
+          },
+          { name: "Team Updates", path: "/science/programs/team-updates" },
+        ],
+      },
+      {
+        name: "Centers",
+        path: "/science/centers",
+        subItems: [
+          {
+            name: "Canary Center at Stanford",
+            path: "/science/centers/stanford",
+            subItems: [
+              { name: "For Scientists", path: "/science/centers/stanford/for-scientists" },
+              { name: "Biomarkers", path: "/science/centers/stanford/biomarkers" },
+              { name: "Imaging", path: "/science/centers/stanford/imaging" },
+            ],
+          },
+          { name: "FHCC", path: "/science/centers/fhcc" },
+        ],
+      },
+      {
+        name: "Publications",
+        path: "/science/publications",
+        subItems: [
+          { name: "Canary-ACS Postdoctoral Fellowships", path: "/science/publications/fellowships" },
+          { name: "Technology Seed Grants", path: "/science/publications/seed-grants" },
+        ],
+      },
+    ],
+  },
+};
+
+function pathIsActive(location: string, path?: string | null) {
+  if (!path) return false;
+  return path === "/" ? location === path : location === path || location.startsWith(`${path}/`);
+}
+
+function NavItems({
+  items,
+  location,
+  onNavigate,
+  depth = 0,
+}: {
+  items: NavItem[];
+  location: string;
+  onNavigate: () => void;
+  depth?: number;
+}) {
+  return (
+    <ul className={depth === 0 ? "space-y-1" : "ml-4 mt-1 space-y-1 border-l border-gray-200 pl-3"}>
+      {items.map((item) => (
+        <li key={`${item.name}-${item.path ?? depth}`}>
+          {item.path ? (
+            <Link
+              href={item.path}
+              className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-primary/10 hover:text-primary focus-visible:bg-primary/10"
+              aria-current={pathIsActive(location, item.path) ? "page" : undefined}
+              onClick={onNavigate}
+            >
+              {item.name}
+            </Link>
+          ) : (
+            <span className="block px-3 py-2 text-sm font-semibold text-gray-700">{item.name}</span>
+          )}
+          {item.subItems && (
+            <NavItems
+              items={item.subItems}
+              location={location}
+              onNavigate={onNavigate}
+              depth={depth + 1}
+            />
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileOpenSections, setMobileOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [mobileOpenSections, setMobileOpenSections] = useState<Record<string, boolean>>({});
   const [location] = useLocation();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const desktopButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  // Navigation structure with all pages
-  const navigationStructure: Record<string, NavSection> = {
-    'About Canary': {
-      path: null,
-      items: [
-        { name: 'Our Mission', path: '/about/overview' },
-        { name: 'Founder & Oral History', path: '/about/founders-story' },
-        { name: 'Staff', path: '/about/staff' },
-        { name: 'Board of Directors', path: '/about/board-directors' },
-        { name: 'Leadership Council', path: '/about/leadership-council' },
-        { name: 'Scientific Leadership', path: '/about/scientific-leadership' },
-        { name: 'Financials', path: '/about/financials' }
-      ]
-    },
-    'Canary Approach': {
-      path: null,
-      items: [
-        { name: 'Overview', path: '/approach/overview' },
-        { name: 'Collaborations & Partnership', path: '/approach/collaborations' },
-        { name: 'Canary Symposium', path: '/approach/symposium' }
-      ]
-    },
-    'Canary Science': {
-      path: null,
-      items: [
-        { name: 'Overview', path: '/science/overview' },
-        { 
-          name: 'Science', 
-          path: '/science/science',
-          subItems: [
-            { name: 'Imaging', path: '/science/science/imaging' },
-            { name: 'Biomarkers', path: '/science/science/biomarkers' }
-          ]
-        },
-        { 
-          name: 'Programs', 
-          path: '/science/programs',
-          subItems: [
-            { 
-              name: 'Tumors', 
-              path: '/science/programs/tumors',
-              subItems: [
-                { name: 'Breast', path: '/science/programs/tumors/breast' },
-                { name: 'Lung', path: '/science/programs/tumors/lung' },
-                { name: 'Ovarian', path: '/science/programs/tumors/ovarian' },
-                { name: 'Pancreatic', path: '/science/programs/tumors/pancreatic' },
-                { name: 'Prostate', path: '/science/programs/tumors/prostate' }
-              ]
-            },
-            { 
-              name: 'Clinical Progress', 
-              path: '/science/programs/clinical-progress',
-              subItems: [
-                { name: 'Clinical Studies', path: '/science/programs/clinical-studies' }
-              ]
-            },
-            { name: 'Team Updates', path: '/science/programs/team-updates' }
-          ]
-        },
-        { 
-          name: 'Centers', 
-          path: '/science/centers',
-          subItems: [
-            { 
-              name: 'Canary Center at Stanford', 
-              path: '/science/centers/stanford',
-              subItems: [
-                { name: 'For Scientists', path: '/science/centers/stanford/for-scientists' },
-                { name: 'Biomarkers', path: '/science/centers/stanford/biomarkers' },
-                { name: 'Imaging', path: '/science/centers/stanford/imaging' }
-              ]
-            },
-            { name: 'FHCC', path: '/science/centers/fhcc' }
-          ]
-        },
-        { 
-          name: 'Publications', 
-          path: '/science/publications',
-          subItems: [
-            { name: 'Canary-ACS Postdoctoral Fellowships', path: '/science/publications/fellowships' },
-            { name: 'Technology Seed Grants', path: '/science/publications/seed-grants' }
-          ]
-        }
-      ]
-    }
-  };
-
-  // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setOpenDropdown(null);
+        setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
   }, [location]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (isMenuOpen) {
+      mobileMenuRef.current?.querySelector<HTMLElement>("a, button")?.focus();
     }
-    setIsMenuOpen(false);
+  }, [isMenuOpen]);
+
+  const closeDesktopMenu = (restoreFocus = false) => {
+    const sectionName = openDropdown;
+    setOpenDropdown(null);
+    if (restoreFocus && sectionName) {
+      desktopButtonRefs.current[sectionName]?.focus();
+    }
   };
 
-  const navigateToHome = () => {
-    if (location !== "/") {
-      window.location.href = "/";
-    } else {
-      scrollToSection("home");
-    }
-    setIsMenuOpen(false);
-  };
+  const handleNavKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Escape") return;
 
-  const toggleMobileSection = (sectionName: string) => {
-    setMobileOpenSections(prev => ({
-      ...prev,
-      [sectionName]: !prev[sectionName]
-    }));
+    if (isMenuOpen) {
+      event.preventDefault();
+      setIsMenuOpen(false);
+      mobileToggleRef.current?.focus();
+      return;
+    }
+
+    if (openDropdown) {
+      event.preventDefault();
+      closeDesktopMenu(true);
+    }
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4" ref={dropdownRef}>
-        <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-3">
-            <img 
-              src={canaryLogo} 
-              alt="Canary Foundation Logo" 
-              className="w-10 h-10 object-contain"
-            />
-            <span className="text-xl font-bold text-dark">Canary Foundation</span>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <button 
-              onClick={navigateToHome}
-              className="text-dark hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Home
-            </button>
-            
-            {/* Dynamic Desktop Dropdowns */}
-            {Object.entries(navigationStructure).map(([sectionName, section]) => (
-              <div key={sectionName} className="relative">
-                <button 
-                  className="text-dark hover:text-primary transition-colors duration-300 flex items-center font-medium"
-                  onMouseEnter={() => setOpenDropdown(sectionName)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  {sectionName}
-                  <ChevronDown className="w-4 h-4 ml-1 transition-transform duration-200" />
-                </button>
-                
-                {/* Dropdown Menu */}
-                <div 
-                  className={`absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 transition-all duration-300 ${
-                    openDropdown === sectionName 
-                      ? 'opacity-100 visible transform translate-y-0' 
-                      : 'opacity-0 invisible transform -translate-y-2'
-                  }`}
-                  onMouseEnter={() => setOpenDropdown(sectionName)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <div className="py-2">
-                    {section.items.map((item, index) => (
-                      <div key={index} className="relative group">
-                        {item.path ? (
-                          <Link 
-                            href={item.path} 
-                            className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
-                            onClick={() => setOpenDropdown(null)}
-                          >
-                            <span className="font-medium">{item.name}</span>
-                            {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
-                          </Link>
-                        ) : (
-                          <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 transition-colors duration-200 cursor-default">
-                            <span className="font-medium">{item.name}</span>
-                            {item.subItems && <ChevronRight className="w-4 h-4 opacity-50" />}
-                          </div>
-                        )}
-                        
-                        {/* Nested dropdown for sub-items */}
-                        {item.subItems && (
-                          <div className="absolute left-full top-0 ml-1 hidden w-64 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible transition-all duration-300 group-hover:block group-hover:opacity-100 group-hover:visible">
-                            <div className="py-2">
-                              {item.subItems.map((subItem, subIndex) => (
-                                <div key={subIndex} className="relative group/sub">
-                                  {subItem.path ? (
-                                    <Link 
-                                      href={subItem.path} 
-                                      className="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
-                                      onClick={() => setOpenDropdown(null)}
-                                    >
-                                      <span>{subItem.name}</span>
-                                      {subItem.subItems && <ChevronRight className="w-3 h-3 opacity-50" />}
-                                    </Link>
-                                  ) : (
-                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 transition-colors duration-200 cursor-default">
-                                      <span>{subItem.name}</span>
-                                      {subItem.subItems && <ChevronRight className="w-3 h-3 opacity-50" />}
-                                    </div>
-                                  )}
-                                  
-                                  {/* Third level dropdown */}
-                                  {subItem.subItems && (
-                                    <div className="absolute left-full top-0 ml-1 hidden w-56 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible transition-all duration-300 group-hover/sub:block group-hover/sub:opacity-100 group-hover/sub:visible">
-                                      <div className="py-2">
-                                        {subItem.subItems.map((thirdItem, thirdIndex) => (
-                                          <Link 
-                                            key={thirdIndex}
-                                            href={thirdItem.path || '/'} 
-                                            className="block px-4 py-2 text-sm text-gray-600 hover:bg-primary/5 hover:text-primary transition-colors duration-200"
-                                            onClick={() => setOpenDropdown(null)}
-                                          >
-                                            {thirdItem.name}
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-            
-            <Link 
-              href="/blog"
-              className="text-dark hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Blog
+    <>
+      <a
+        href="#main-content"
+        className="skip-link fixed left-4 top-3 z-[100] rounded-md bg-dark px-4 py-3 font-semibold text-white shadow-lg"
+        onClick={(event) => {
+          const target = document.getElementById("main-content") ?? document.querySelector<HTMLElement>("main");
+          if (!target || target.id === "main-content") return;
+
+          event.preventDefault();
+          if (!target.hasAttribute("tabindex")) target.tabIndex = -1;
+          target.focus();
+          target.scrollIntoView();
+        }}
+      >
+        Skip to main content
+      </a>
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <nav
+          ref={navRef}
+          className="container mx-auto px-4 py-4"
+          aria-label="Main navigation"
+          onKeyDown={handleNavKeyDown}
+        >
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-3 rounded-md">
+              <img src={canaryLogo} alt="" className="h-10 w-10 object-contain" />
+              <span className="text-xl font-bold text-dark">Canary Foundation</span>
             </Link>
-            <Button
-              asChild
-              className="bg-primary text-white hover:bg-primary-dark px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-300"
-            >
+
+            <div className="hidden items-center gap-5 lg:flex">
               <Link
-                href="/donate"
-                onClick={() => trackClick("take_action_header", "cta")}
+                href="/"
+                className="rounded-md font-medium text-dark transition-colors hover:text-primary"
+                aria-current={location === "/" ? "page" : undefined}
               >
-                Take Action
+                Home
               </Link>
-            </Button>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden text-dark p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-        
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden mt-6 border-t border-gray-100 pt-6">
-            <div className="max-h-96 overflow-y-auto">
-              <div className="space-y-4">
-                <button 
-                  onClick={navigateToHome}
-                  className="text-dark hover:text-primary transition-colors duration-300 text-left font-medium block w-full"
-                >
-                  Home
-                </button>
-                
-                {/* Dynamic Mobile Navigation */}
-                {Object.entries(navigationStructure).map(([sectionName, section]) => (
-                  <div key={sectionName} className="border-l-2 border-primary/20 pl-4">
+
+              {Object.entries(navigationStructure).map(([sectionName, section]) => {
+                const sectionId = `desktop-${sectionName.toLowerCase().replace(/\s+/g, "-")}`;
+                const isOpen = openDropdown === sectionName;
+
+                return (
+                  <div key={sectionName} className="relative">
                     <button
-                      onClick={() => toggleMobileSection(sectionName)}
-                      className="flex items-center justify-between w-full text-left py-2"
+                      ref={(element) => {
+                        desktopButtonRefs.current[sectionName] = element;
+                      }}
+                      type="button"
+                      className="flex items-center rounded-md font-medium text-dark transition-colors hover:text-primary"
+                      aria-expanded={isOpen}
+                      aria-controls={sectionId}
+                      onClick={() => setOpenDropdown(isOpen ? null : sectionName)}
+                      onKeyDown={(event) => {
+                        if (event.key === "ArrowDown") {
+                          event.preventDefault();
+                          setOpenDropdown(sectionName);
+                          requestAnimationFrame(() => {
+                            document.getElementById(sectionId)?.querySelector<HTMLElement>("a")?.focus();
+                          });
+                        }
+                      }}
                     >
-                      <span className="text-sm font-semibold text-gray-600">{sectionName}</span>
-                      <ChevronDown 
-                        className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
-                          mobileOpenSections[sectionName] ? 'rotate-180' : ''
-                        }`} 
+                      {sectionName}
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={`ml-1 h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
-                    
-                    {mobileOpenSections[sectionName] && (
-                      <div className="mt-2 space-y-2">
-                        {section.items.map((item, index) => (
-                          <div key={index}>
-                            {item.path ? (
-                              <Link 
-                                href={item.path}
-                                className="block text-dark hover:text-primary transition-colors duration-300 text-sm py-2 font-medium"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                {item.name}
-                              </Link>
-                            ) : (
-                              <div className="text-dark text-sm py-2 font-medium">
-                                {item.name}
-                              </div>
-                            )}
-                            
-                            {/* Sub-items for mobile */}
-                            {item.subItems && (
-                              <div className="ml-4 space-y-1">
-                                {item.subItems.map((subItem, subIndex) => (
-                                  <div key={subIndex}>
-                                    {subItem.path ? (
-                                      <Link 
-                                        href={subItem.path}
-                                        className="block text-gray-600 hover:text-primary transition-colors duration-300 text-xs py-1"
-                                        onClick={() => setIsMenuOpen(false)}
-                                      >
-                                        • {subItem.name}
-                                      </Link>
-                                    ) : (
-                                      <div className="text-gray-600 text-xs py-1 font-medium">
-                                        • {subItem.name}
-                                      </div>
-                                    )}
-                                    
-                                    {/* Third level for mobile */}
-                                    {subItem.subItems && (
-                                      <div className="ml-4 space-y-1">
-                                        {subItem.subItems.map((thirdItem, thirdIndex) => (
-                                          <Link 
-                                            key={thirdIndex}
-                                            href={thirdItem.path || '/'}
-                                            className="block text-gray-500 hover:text-primary transition-colors duration-300 text-xs py-1"
-                                            onClick={() => setIsMenuOpen(false)}
-                                          >
-                                            - {thirdItem.name}
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))}
+
+                    {isOpen && (
+                      <div
+                        id={sectionId}
+                        className="absolute left-0 mt-3 max-h-[70vh] w-72 overflow-y-auto rounded-lg border border-gray-200 bg-white p-2 shadow-xl"
+                      >
+                        <NavItems
+                          items={section.items}
+                          location={location}
+                          onNavigate={() => closeDesktopMenu()}
+                        />
                       </div>
                     )}
                   </div>
-                ))}
-                
-                <Link 
-                  href="/blog"
-                  className="text-dark hover:text-primary transition-colors duration-300 text-left font-medium block py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Blog
+                );
+              })}
+
+              <Link
+                href="/blog"
+                className="rounded-md font-medium text-dark transition-colors hover:text-primary"
+                aria-current={pathIsActive(location, "/blog") ? "page" : undefined}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/contact"
+                className="rounded-md font-medium text-dark transition-colors hover:text-primary"
+                aria-current={location === "/contact" ? "page" : undefined}
+              >
+                Contact
+              </Link>
+              <Button asChild className="rounded-full bg-primary px-6 py-2 font-semibold text-dark shadow-md hover:bg-primary-dark">
+                <Link href="/donate" onClick={() => trackClick("take_action_header", "cta")}>
+                  Take Action
                 </Link>
-                
-                <Button 
-                  asChild
-                  className="bg-primary text-white hover:bg-primary-dark w-full font-semibold py-3 rounded-lg shadow-md"
-                >
-                  <Link
-                    href="/donate"
-                    onClick={() => {
-                      trackClick("take_action_mobile", "cta");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Take Action
-                  </Link>
-                </Button>
-              </div>
+              </Button>
             </div>
+
+            <button
+              ref={mobileToggleRef}
+              type="button"
+              className="rounded-md p-2 text-dark lg:hidden"
+              aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-main-menu"
+              onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+            >
+              {isMenuOpen ? <X aria-hidden="true" className="h-6 w-6" /> : <Menu aria-hidden="true" className="h-6 w-6" />}
+            </button>
           </div>
-        )}
-      </nav>
-    </header>
+
+          {isMenuOpen && (
+            <div
+              ref={mobileMenuRef}
+              id="mobile-main-menu"
+              className="mt-5 max-h-[calc(100vh-7rem)] overflow-y-auto border-t border-gray-200 pt-5 lg:hidden"
+            >
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/"
+                    className="block rounded-md px-3 py-2 font-medium text-dark hover:bg-primary/10 hover:text-primary"
+                    aria-current={location === "/" ? "page" : undefined}
+                  >
+                    Home
+                  </Link>
+                </li>
+                {Object.entries(navigationStructure).map(([sectionName, section]) => {
+                  const sectionId = `mobile-${sectionName.toLowerCase().replace(/\s+/g, "-")}`;
+                  const isOpen = Boolean(mobileOpenSections[sectionName]);
+
+                  return (
+                    <li key={sectionName} className="border-l-2 border-primary/30 pl-2">
+                      <button
+                        type="button"
+                        className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left font-semibold text-gray-700 hover:bg-primary/10"
+                        aria-expanded={isOpen}
+                        aria-controls={sectionId}
+                        onClick={() =>
+                          setMobileOpenSections((sections) => ({
+                            ...sections,
+                            [sectionName]: !sections[sectionName],
+                          }))
+                        }
+                      >
+                        {sectionName}
+                        <ChevronDown
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      {isOpen && (
+                        <div id={sectionId} className="mt-1">
+                          <NavItems
+                            items={section.items}
+                            location={location}
+                            onNavigate={() => setIsMenuOpen(false)}
+                          />
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+                <li>
+                  <Link
+                    href="/blog"
+                    className="block rounded-md px-3 py-2 font-medium text-dark hover:bg-primary/10 hover:text-primary"
+                    aria-current={pathIsActive(location, "/blog") ? "page" : undefined}
+                  >
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="block rounded-md px-3 py-2 font-medium text-dark hover:bg-primary/10 hover:text-primary"
+                    aria-current={location === "/contact" ? "page" : undefined}
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li className="pt-2">
+                  <Button asChild className="w-full bg-primary py-3 font-semibold text-dark shadow-md hover:bg-primary-dark">
+                    <Link
+                      href="/donate"
+                      onClick={() => {
+                        trackClick("take_action_mobile", "cta");
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Take Action
+                    </Link>
+                  </Button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </nav>
+      </header>
+    </>
   );
 }

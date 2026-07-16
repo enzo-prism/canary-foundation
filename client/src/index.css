@@ -15,6 +15,7 @@
   --input: hsl(0, 0%, 90%);
   --primary: hsl(45, 100%, 51%);
   --primary-foreground: hsl(0, 0%, 100%);
+  --primary-text: hsl(38, 100%, 27%);
   --secondary: hsl(0, 0%, 96%);
   --secondary-foreground: hsl(0, 0%, 9%);
   --accent: hsl(0, 0%, 96%);
@@ -25,6 +26,66 @@
   --radius: 0.5rem;
   --light: hsl(0, 0%, 98%);
   --dark: hsl(0, 0%, 20%);
+}
+
+@layer utilities {
+  /* Keep Canary yellow for surfaces while using an accessible amber for text. */
+  .text-primary {
+    color: var(--primary-text);
+  }
+
+  .hover\:text-primary:hover {
+    color: var(--primary-text);
+  }
+
+  .bg-primary.text-white,
+  .bg-primary .text-white,
+  .bg-primary .text-white\/90,
+  .hover\:bg-primary:hover {
+    color: var(--dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid hsl(38, 100%, 27%);
+  outline-offset: 3px;
+}
+
+main[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.skip-link {
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .dark {
@@ -110,11 +171,11 @@
   }
   
   .text-primary-dark {
-    color: hsl(45, 100%, 45%);
+    color: var(--primary-text);
   }
   
   .hover\:text-primary-dark:hover {
-    color: hsl(45, 100%, 45%);
+    color: var(--primary-text);
   }
   
   /* GPU-Accelerated Animations */
