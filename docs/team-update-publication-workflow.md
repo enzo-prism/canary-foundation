@@ -48,7 +48,7 @@ Every public report must record:
 | Report | State | Public action |
 | --- | --- | --- |
 | Ovarian Team Progress, June 2026 | Approved and published | Preserve the final donor-friendly facts. |
-| Prostate Program, July 2026 | Awaiting explicit public-use approval | Keep content private; do not publish or expose report details. |
+| Prostate Program, July 2026 | Approved for public HTML publication by Don Listwin on July 17, 2026 | Publish the donor-friendly web report. Keep the source PDF private because download permission was not explicit. |
 | Pancreatic update | Not supplied | Keep a content-free placeholder only. |
 | Q4 general overview | Not supplied | Keep a content-free placeholder only. |
 | UCSD CTUC launch | Not supplied | Keep a content-free placeholder only. |
@@ -60,3 +60,14 @@ Every public report must record:
 - Do not host a full paper without confirmed open-access rights; link to an official citation or PubMed instead.
 - Never publish unaudited or incomplete internal financial material.
 - Do not add a pending route to client navigation, metadata, JSON-LD, crawler files, or a sitemap.
+
+## Prostate Program, July 2026 publication evidence
+
+- Final source: `Canary Prostate Program July 2026_updated.pdf` (10 pages).
+- Program and period: Canary Foundation Prostate Cancer Team, July 2026.
+- Donor-friendly coordination: Heidi Auman, who reattached the fixed report on July 17, 2026 and asked for it to be added to the website.
+- Public-use approval: Don Listwin, July 17, 2026, in the `DONOR REPORT` email thread: “This is the fixed update.”
+- Public intent: Don had already directed a reader to the public website to find the update.
+- Download permission: not explicit. Do not place the source PDF in `client/public/` or offer a download.
+- Claim source: every metric and medical statement on the web report must trace directly to the final 10-page PDF.
+- Figures: no prostate PDF figures are published in this release, so no new figure alt text or caption is required.

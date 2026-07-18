@@ -91,7 +91,7 @@ export function PublishedTeamUpdateReport({
             id="progress-signals"
             className="mb-10 text-3xl font-bold text-slate-950 sm:text-4xl"
           >
-            Key Progress Signals
+            {update.highlightsTitle}
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {update.highlights.map((highlight) => (
@@ -121,13 +121,10 @@ export function PublishedTeamUpdateReport({
               id="research-strategy"
               className="mb-4 text-3xl font-bold text-slate-950 sm:text-4xl"
             >
-              Five-Part Research Strategy
+              {update.strategySectionTitle}
             </h2>
             <p className="text-lg leading-8 text-slate-700">
-              The ovarian update is organized around five connected strategies:
-              find earlier signals, understand which lesions become dangerous,
-              expand prevention, support personalized decisions, and improve
-              imaging.
+              {update.strategySectionSummary}
             </p>
           </div>
 
@@ -172,39 +169,93 @@ export function PublishedTeamUpdateReport({
         </div>
       </section>
 
-      <section
-        aria-labelledby="evidence-title"
-        className="bg-slate-50 py-12 sm:py-16 lg:py-20"
-      >
-        <div className="container mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div>
+      {update.features && update.features.length > 0 ? (
+        <section
+          aria-labelledby="report-tools"
+          className="bg-slate-50 py-12 sm:py-16 lg:py-20"
+        >
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <h2
-              id="evidence-title"
-              className="mb-5 text-3xl font-bold text-slate-950 sm:text-4xl"
+              id="report-tools"
+              className="mb-10 text-3xl font-bold text-slate-950 sm:text-4xl"
             >
-              {update.evidence.title}
+              Patient Tools
             </h2>
-            <div className="space-y-5 text-lg leading-8 text-slate-700">
-              {update.evidence.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+            <div className="grid gap-6 lg:grid-cols-2">
+              {update.features.map((feature) => {
+                const Icon = strategyIcons[feature.icon];
+                return (
+                  <article
+                    key={feature.title}
+                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+                  >
+                    <div
+                      className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-slate-950"
+                      aria-hidden="true"
+                    >
+                      <Icon className="h-7 w-7" />
+                    </div>
+                    <h3 className="mb-4 text-2xl font-bold text-slate-950">
+                      {feature.title}
+                    </h3>
+                    <p className="text-base leading-7 text-slate-700">
+                      {feature.text}
+                    </p>
+                    {feature.link ? (
+                      <a
+                        href={feature.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-slate-900 bg-white px-5 py-3 font-semibold text-slate-950 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 motion-reduce:transition-none"
+                      >
+                        {feature.link.label}
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                    ) : null}
+                  </article>
+                );
+              })}
             </div>
           </div>
+        </section>
+      ) : null}
 
-          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <img
-              src={update.evidence.image.src}
-              alt={update.evidence.image.alt}
-              className="h-auto w-full bg-white"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption className="border-t border-slate-200 p-5 text-sm leading-6 text-slate-700">
-              {update.evidence.image.caption}
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+      {update.evidence ? (
+        <section
+          aria-labelledby="evidence-title"
+          className="bg-slate-50 py-12 sm:py-16 lg:py-20"
+        >
+          <div className="container mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <h2
+                id="evidence-title"
+                className="mb-5 text-3xl font-bold text-slate-950 sm:text-4xl"
+              >
+                {update.evidence.title}
+              </h2>
+              <div className="space-y-5 text-lg leading-8 text-slate-700">
+                {update.evidence.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <img
+                src={update.evidence.image.src}
+                alt={update.evidence.image.alt}
+                className="h-auto w-full bg-white"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption className="border-t border-slate-200 p-5 text-sm leading-6 text-slate-700">
+                {update.evidence.image.caption}
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+      ) : null}
 
       <section aria-labelledby="looking-ahead" className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6">
@@ -212,7 +263,7 @@ export function PublishedTeamUpdateReport({
             id="looking-ahead"
             className="mb-5 text-3xl font-bold text-slate-950 sm:text-4xl"
           >
-            Looking Ahead
+            {update.lookingAheadTitle}
           </h2>
           <p className="mx-auto mb-9 max-w-3xl text-lg leading-8 text-slate-700">
             {update.lookingAhead}
@@ -222,7 +273,7 @@ export function PublishedTeamUpdateReport({
               href={update.programRoute}
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
-              Explore Ovarian Research
+              {update.programLinkLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link

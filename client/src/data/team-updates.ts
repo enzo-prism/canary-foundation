@@ -18,6 +18,16 @@ export interface TeamUpdateStrategy {
   progress: string;
 }
 
+export interface TeamUpdateFeature {
+  icon: TeamUpdateIcon;
+  title: string;
+  text: string;
+  link?: {
+    href: string;
+    label: string;
+  };
+}
+
 export interface PublishedTeamUpdate {
   id: string;
   status: "published";
@@ -29,9 +39,13 @@ export interface PublishedTeamUpdate {
   title: string;
   summary: string;
   introduction: readonly string[];
+  highlightsTitle: string;
   highlights: readonly TeamUpdateHighlight[];
+  strategySectionTitle: string;
+  strategySectionSummary: string;
   strategies: readonly TeamUpdateStrategy[];
-  evidence: {
+  features?: readonly TeamUpdateFeature[];
+  evidence?: {
     title: string;
     paragraphs: readonly string[];
     image: {
@@ -40,9 +54,13 @@ export interface PublishedTeamUpdate {
       caption: string;
     };
   };
+  lookingAheadTitle: string;
   lookingAhead: string;
   programRoute: string;
+  programLinkLabel: string;
   sourceLabel: string;
+  sourceFileName: string;
+  sourcePdfDownloadApproved: boolean;
 }
 
 export const ovarianJune2026Update: PublishedTeamUpdate = {
@@ -61,6 +79,7 @@ export const ovarianJune2026Update: PublishedTeamUpdate = {
     "High-grade serous ovarian cancer is the most common and aggressive form of ovarian cancer. Because most women are still diagnosed at a late, hard-to-treat stage, the Canary Ovarian Cancer Team is focused on finding cancer sooner and expanding practical prevention.",
     "A core insight now shapes the program: many of these cancers begin in the fallopian tubes. What began as a discovery about cancer origin is now guiding work in blood biomarkers, precursor-lesion biology, preventive surgery, personalized risk resources, and imaging.",
   ],
+  highlightsTitle: "Key Progress Signals",
   highlights: [
     {
       label: "37",
@@ -83,6 +102,9 @@ export const ovarianJune2026Update: PublishedTeamUpdate = {
       text: "The international STIC network has built the world's largest collection of these rare fallopian tube precursor lesions.",
     },
   ],
+  strategySectionTitle: "Five-Part Research Strategy",
+  strategySectionSummary:
+    "The ovarian update is organized around five connected strategies: find earlier signals, understand which lesions become dangerous, expand prevention, support personalized decisions, and improve imaging.",
   strategies: [
     {
       icon: "dna",
@@ -138,16 +160,123 @@ export const ovarianJune2026Update: PublishedTeamUpdate = {
         "Initial case-control results: FTC1p alone showed AUC 0.899; FTC1p plus FTC2 showed AUC 0.944; adding CA125 increased AUC to 0.972; adding HE4 reached AUC 0.973.",
     },
   },
+  lookingAheadTitle: "Looking Ahead",
   lookingAhead:
     "The next wave of work includes expanding blood biomarker validation, beginning fallopian tube ultrasound studies in summer 2026, scaling prevention implementation efforts statewide, and continuing to build the STIC network and centralized data infrastructure.",
   programRoute: "/science/programs/tumors/ovarian",
+  programLinkLabel: "Explore Ovarian Research",
   sourceLabel:
     "Canary Foundation Ovarian Cancer Team Progress Report, June 2026.",
+  sourceFileName: "Canary Ovary Team Progress_June2026_final.pdf",
+  sourcePdfDownloadApproved: false,
+};
+
+export const prostateJuly2026Update: PublishedTeamUpdate = {
+  id: "prostate-july-2026",
+  status: "published",
+  approvedForPublicUse: true,
+  slug: "prostate-july-2026",
+  route: "/science/programs/team-updates/prostate-july-2026",
+  teamName: "Prostate Cancer Team",
+  dateLabel: "July 2026",
+  title: "Transforming the Future of Prostate Cancer Care",
+  summary:
+    "The Canary Prostate Cancer Team is advancing active surveillance, inherited-risk screening, imaging, and patient-centered tools to improve care decisions.",
+  introduction: [
+    "The Canary Prostate Cancer Team is working to ensure that cancers unlikely to cause harm are not overtreated, while life-threatening cancers are detected and treated early, when cure is most likely.",
+    "The program combines clinical studies, biomarkers, advanced imaging, and patient-centered tools to help patients and physicians make more confident care decisions.",
+  ],
+  highlightsTitle: "Prostate Program Impact",
+  highlights: [
+    {
+      label: "2,500+",
+      title: "PASS participants",
+      text: "The world's largest multi-institutional active surveillance cohort spans 11 sites.",
+    },
+    {
+      label: "65+",
+      title: "peer-reviewed publications",
+      text: "PASS findings are cited in major international guidelines and influence treatment decisions for tens of thousands of men each year.",
+    },
+    {
+      label: "$28M+",
+      title: "external grant funding",
+      text: "PASS has generated more than $28 million in external grant funding.",
+    },
+    {
+      label: "500+",
+      title: "PATROL participants",
+      text: "Men with elevated genetic risk are enrolled across seven U.S. sites.",
+    },
+  ],
+  strategySectionTitle: "Four-Part Prostate Research Strategy",
+  strategySectionSummary:
+    "The team is connecting active surveillance, inherited-risk screening, prostate-specific imaging, and patient-centered tools to improve early detection and treatment decisions.",
+  strategies: [
+    {
+      icon: "shield-check",
+      title: "Distinguishing cancers that need treatment",
+      purpose:
+        "Identify biomarkers and tools that separate favorable-risk cancers from aggressive disease.",
+      progress:
+        "Canary PASS follows men with early-stage, low-risk prostate cancer who choose active surveillance. The study has reduced treatment of favorable-risk cancers by 50%, and its findings are cited in major international guidelines.",
+    },
+    {
+      icon: "dna",
+      title: "Screening men with inherited risk",
+      purpose:
+        "Establish evidence-based screening for men at genetic risk of aggressive prostate cancer.",
+      progress:
+        "Canary PATROL has enrolled more than 500 men across seven U.S. sites, advanced MR imaging for high-risk screening, refined PSA thresholds for biopsy decisions, and helped define how imaging and biomarkers should be used for genetically high-risk populations. The work has support from the National Institutes of Health and CureBRCA and received Best Poster at the 2026 American Urological Association Annual Meeting.",
+    },
+    {
+      icon: "microscope",
+      title: "Prostate-specific imaging",
+      purpose:
+        "Develop imaging tools that identify aggressive disease earlier and support more precise care decisions.",
+      progress:
+        "MRI images from more than 1,000 PASS participants are being collected across U.S. and Canadian sites for an AI platform designed to map the prostate, detect lesions, and extract imaging features. The SOUND project is also developing handheld quantitative ultrasound and preparing a 100-participant pilot for fall 2026 at the University of California San Diego with the Canary Translational Ultrasound Center at UCSD.",
+    },
+    {
+      icon: "users",
+      title: "Patient-centered tools",
+      purpose:
+        "Make prostate cancer information easier to understand and support shared decisions between patients and physicians.",
+      progress:
+        "An initial Prostate Biopsy Viewer model turns text-based pathology reports into a visual guide showing where tissue was sampled and what each biopsy found. The Canary PASS Risk Calculator helps men using active surveillance estimate the risk that more serious cancer may be found in the future.",
+    },
+  ],
+  features: [
+    {
+      icon: "users",
+      title: "Prostate Biopsy Viewer",
+      text: "Canary researchers, patient advocates, clinicians, and engineers have built an initial visual model that turns text-based pathology reports into a 3D guide to biopsy locations and results.",
+    },
+    {
+      icon: "dna",
+      title: "Canary PASS Risk Calculator",
+      text: "The calculator helps men already diagnosed with prostate cancer and using active surveillance estimate the risk that more serious cancer may be found in the future.",
+      link: {
+        href: "https://canarypass.org",
+        label: "Visit Canary PASS",
+      },
+    },
+  ],
+  lookingAheadTitle: "Prostate Team: Looking Ahead",
+  lookingAhead:
+    "MRI collection and AI analysis are underway across multiple U.S. and Canadian sites, and SOUND pilot studies of 100 participants are set to begin in fall 2026 at the University of California San Diego.",
+  programRoute: "/science/programs/tumors/prostate",
+  programLinkLabel: "Explore Prostate Research",
+  sourceLabel:
+    "Canary Foundation Prostate Cancer Team Program Highlights Report, July 2026.",
+  sourceFileName: "Canary Prostate Program July 2026_updated.pdf",
+  sourcePdfDownloadApproved: false,
 };
 
 // Only public-use-approved records belong in the browser application. Private
 // shells live under internal/ so their identifiers never enter the public
 // JavaScript bundle.
 export const publishedTeamUpdates: readonly PublishedTeamUpdate[] = [
+  prostateJuly2026Update,
   ovarianJune2026Update,
 ];

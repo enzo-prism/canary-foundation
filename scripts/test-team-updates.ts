@@ -18,8 +18,8 @@ const seoRoutes = JSON.parse(
 
 assert.deepEqual(
   publishedTeamUpdates.map((update) => update.id),
-  ["ovarian-june-2026"],
-  "Only the approved ovarian report may be public right now.",
+  ["prostate-july-2026", "ovarian-june-2026"],
+  "Only the approved prostate and ovarian reports may be public right now.",
 );
 
 assert.equal(
@@ -36,9 +36,41 @@ for (const update of publishedTeamUpdates) {
     seoRoutes.routes.includes(update.route),
     `${update.route} needs a sitemap route.`,
   );
-  assert.ok(
-    existsSync(path.join(repositoryRoot, "client/public", update.evidence.image.src)),
-    `${update.evidence.image.src} must exist.`,
+  if (update.evidence) {
+    assert.ok(
+      existsSync(path.join(repositoryRoot, "client/public", update.evidence.image.src)),
+      `${update.evidence.image.src} must exist.`,
+    );
+  }
+  assert.equal(
+    update.sourcePdfDownloadApproved,
+    false,
+    "Source PDFs must remain private until download permission is explicit.",
+  );
+}
+
+const prostateUpdate = publishedTeamUpdates.find(
+  (update) => update.id === "prostate-july-2026",
+);
+assert.ok(prostateUpdate, "The approved July 2026 prostate update must exist.");
+assert.equal(
+  prostateUpdate.sourceFileName,
+  "Canary Prostate Program July 2026_updated.pdf",
+);
+const prostateSource = JSON.stringify(prostateUpdate);
+for (const approvedReportFact of [
+  "2,500+",
+  "65+",
+  "$28M+",
+  "500+",
+  "1,000",
+  "100-participant",
+  "fall 2026",
+]) {
+  assert.equal(
+    prostateSource.includes(approvedReportFact),
+    true,
+    `The prostate update must preserve approved report fact ${approvedReportFact}.`,
   );
 }
 

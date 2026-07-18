@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Microscope, Target, Users, Award, Activity, TrendingUp, Heart } from "lucide-react";
+import { Link } from "wouter";
 
 export default function ProstateCancer() {
   useEffect(() => {
@@ -38,10 +39,31 @@ export default function ProstateCancer() {
                 for genetic risk assessment. Our research directly influences national screening guidelines and clinical practice.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                With over 2,400 participants in PASS and milestone enrollment of 2,000 men achieved in 2021, our studies provide 
+                With over 2,500 participants in PASS and milestone enrollment of 2,000 men achieved in 2021, our studies provide
                 critical data that helps doctors and patients make informed decisions about prostate cancer screening and treatment.
               </p>
             </div>
+
+            <Card className="mb-12 border-2 border-primary/30 bg-primary/5">
+              <CardContent className="p-6 md:p-8 md:flex md:items-center md:justify-between md:gap-8">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary mb-2">
+                    Latest Team Update
+                  </p>
+                  <h2 className="text-2xl font-semibold text-dark mb-3">
+                    Prostate Cancer Team, July 2026
+                  </h2>
+                  <p className="text-gray-600 leading-relaxed mb-5 md:mb-0">
+                    Read the latest approved progress report on PASS, PATROL, imaging innovation, and patient tools.
+                  </p>
+                </div>
+                <Button asChild className="shrink-0 bg-primary text-white hover:bg-primary-dark">
+                  <Link href="/science/programs/team-updates/prostate-july-2026">
+                    Read the Update
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
 
             {/* Key Studies */}
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -55,7 +77,7 @@ export default function ProstateCancer() {
                     Prostate Active Surveillance Study monitoring low-risk prostate cancer patients to determine when 
                     intervention is necessary, helping avoid unnecessary treatment.
                   </p>
-                  <div className="text-primary font-semibold">2,400+ Participants</div>
+                  <div className="text-primary font-semibold">2,500+ Participants</div>
                 </CardContent>
               </Card>
 
@@ -78,7 +100,7 @@ export default function ProstateCancer() {
             <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8 mb-12">
               <h3 className="text-2xl font-semibold text-dark mb-6">PASS Study Impact</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
-                "The PASS study's findings with over 2,400 participants have directly influenced national screening guidelines 
+                "The PASS study's findings with over 2,500 participants have directly influenced national screening guidelines
                 and risk assessment protocols. Our research is helping doctors make better decisions about prostate cancer 
                 screening, ultimately saving lives through earlier detection."
               </p>
