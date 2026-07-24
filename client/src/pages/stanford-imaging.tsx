@@ -33,7 +33,7 @@ export default function StanfordImaging() {
             <div className="mb-12">
               <h2 className="text-3xl font-bold text-dark mb-6">Advanced Imaging at Stanford</h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                The Canary Center at Stanford, established through the vision of Dr. Sanjiv "Sam" Gambhir, is a world leader in 
+                The Canary Center at Stanford, established through the vision of Sanjiv Sam Gambhir, is a world leader in
                 molecular imaging for early cancer detection. Our pioneering work includes FDA-approved microbubble ultrasound 
                 technology, photoacoustic imaging, and advanced PET scanning techniques that can visualize cancer at its earliest stages.
               </p>
@@ -50,7 +50,7 @@ export default function StanfordImaging() {
                   <Camera className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-dark mb-2">Dr. Sanjiv Sam Gambhir's Vision</h3>
+                  <h3 className="text-xl font-semibold text-dark mb-2">Sanjiv Sam Gambhir's Vision</h3>
                   <p className="text-gray-600 mb-4">
                     World-renowned expert in molecular imaging and founding director of the Canary Center, Dr. Gambhir 
                     revolutionized cancer detection through his pioneering work in PET scanning and molecular imaging technologies.

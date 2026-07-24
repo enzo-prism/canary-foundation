@@ -44,7 +44,7 @@ export default function StanfordOverview() {
                 enough to cure it.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Founded under the visionary leadership of Dr. Sanjiv "Sam" Gambhir, the center has become a global 
+                Founded under the visionary leadership of Sanjiv Sam Gambhir, the center has become a global
                 leader in molecular imaging, biomarker discovery, and translational research. Our multidisciplinary 
                 teams work across the spectrum from basic science to clinical implementation, ensuring discoveries 
                 rapidly benefit patients.
@@ -58,7 +58,7 @@ export default function StanfordOverview() {
                   <Camera className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-dark mb-2">Dr. Sanjiv Sam Gambhir's Vision</h3>
+                  <h3 className="text-xl font-semibold text-dark mb-2">Sanjiv Sam Gambhir's Vision</h3>
                   <p className="text-gray-600 mb-4">
                     As founding director, Dr. Gambhir established the Canary Center as a hub for innovation in 
                     molecular imaging and early detection. His pioneering work in PET scanning and molecular 

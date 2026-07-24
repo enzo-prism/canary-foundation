@@ -8,7 +8,6 @@ build_production_bundle() {
   (
     cd "$PROJECT_ROOT"
     npm run build
-    node postbuild.js
   )
 }
 

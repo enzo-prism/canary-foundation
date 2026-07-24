@@ -82,8 +82,8 @@ export default function Donate() {
                         We really need to shift away from late-stage disease to early detection—and that’s where we have the choice, as a society, to make a very big difference.
                       </blockquote>
                       <div className="mt-4 text-sm text-gray-600">
-                        <div className="font-semibold text-dark">Dr. Sanjiv (Sam) Gambhir, MD</div>
-                        <div>Stanford Chair of Radiology, Director of the Canary Center at Stanford</div>
+                        <div className="font-semibold text-dark">Sanjiv Sam Gambhir, MD, PhD</div>
+                        <div>Founding Director of the Canary Center at Stanford; former Chair of Stanford Radiology</div>
                       </div>
                     </div>
                   </div>

@@ -130,7 +130,7 @@ export default function Imaging() {
                   Imaging
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-2">
-                  Imaging plays a critical role in early cancer detection. It allows us to see the unseen and visualize tumor parameters such as imaging depth, spatial resolution, contrast and more. Our imaging projects are led by a world-renowned expert in molecular imaging—Dr. Sanjiv Sam Gambhir. He is Chair of the Radiology department and Virginia and D.K. Ludwig Professor of Cancer Research at the Stanford School of Medicine. Along with teams of scientists—each with their own labs—Sam is guiding the future of early cancer detection imaging.
+                  Imaging plays a critical role in early cancer detection. It allows us to see the unseen and visualize tumor parameters such as imaging depth, spatial resolution, contrast and more. Canary's imaging work was shaped by Sanjiv Sam Gambhir, a world-renowned expert in molecular imaging and founding director of the Canary Center at Stanford. His legacy continues through teams advancing early cancer detection imaging.
                 </p>
               </div>
               
@@ -143,9 +143,9 @@ export default function Imaging() {
                       <Eye className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-dark mb-2">Dr. Sanjiv 'Sam' Gambhir</h2>
+                      <h2 className="text-xl sm:text-2xl font-bold text-dark mb-2">Sanjiv Sam Gambhir</h2>
                       <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-3 font-medium">
-                        World-renowned expert in molecular imaging, leading the science initiatives for Canary Foundation
+                        Founding scientific leader whose molecular imaging work helped shape Canary Foundation
                       </p>
                       <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                         Imaging plays a critical role in early cancer detection. Beyond just taking a snapshot, molecular imaging allows us to see biological processes happening in the context of disease, 

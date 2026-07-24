@@ -13,6 +13,10 @@ const server = read("server/index.ts");
 const leadership = read("client/src/pages/scientific-leadership.tsx");
 const programs = read("client/src/pages/programs.tsx");
 const tumors = read("client/src/pages/tumors-overview.tsx");
+const donate = read("client/src/pages/donate.tsx");
+const hiddenImaging = read("client/src/pages/imaging.tsx");
+const stanfordOverview = read("client/src/pages/stanford-overview.tsx");
+const stanfordImaging = read("client/src/pages/stanford-imaging.tsx");
 const publicSurfaces = [app, header, footer, routes].join("\n");
 
 const removedRoutes = [
@@ -76,5 +80,14 @@ assert.doesNotMatch(programs, /Dr\. Sanjiv|Sanjiv \(Sam\) Gambhir/);
 assert.doesNotMatch(tumors, /Dr\. Sanjiv|Sanjiv \(Sam\) Gambhir/);
 assert.match(programs, /Sanjiv Sam Gambhir/);
 assert.match(tumors, /Sanjiv Sam Gambhir/);
+assert.doesNotMatch(
+  [donate, hiddenImaging].join("\n"),
+  /Our imaging projects are led by a world-renowned expert|He is Chair|Sam is guiding|leading the science initiatives/,
+);
+assert.match(donate, /Founding Director.*former Chair/);
+assert.doesNotMatch(
+  [donate, stanfordOverview, stanfordImaging].join("\n"),
+  /Dr\. Sanjiv|Sanjiv \(Sam\) Gambhir|Sanjiv ["']Sam["'] Gambhir/,
+);
 
 console.log("Web cleanse route and leadership checks passed.");
