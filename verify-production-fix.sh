@@ -23,15 +23,15 @@ echo -e "\n3. Testing www.canaryfoundation.org/robots.txt:"
 echo "================================================"
 response="$(curl -H "Host: www.canaryfoundation.org" -fsS "${BASE_URL}/robots.txt")"
 
-if echo "${response}" | grep -q "<!DOCTYPE"; then
+if grep -q "<!DOCTYPE" <<< "${response}"; then
   echo "❌ CRITICAL ERROR: HTML found in robots.txt!"
   echo "First 5 lines of response:"
-  echo "${response}" | head -5
+  sed -n '1,5p' <<< "${response}"
   EXIT_CODE=1
 else
   echo "✅ SUCCESS: No HTML found - returning plain text robots.txt"
   echo "First 5 lines of response:"
-  echo "${response}" | head -5
+  sed -n '1,5p' <<< "${response}"
 fi
 
 echo -e "\n4. Checking Content-Type header:"

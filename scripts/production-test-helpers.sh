@@ -53,7 +53,7 @@ extract_header_value() {
   local headers="$1"
   local header_name="$2"
 
-  echo "${headers}" | sed -n "s/^${header_name}:[[:space:]]*//Ip" | head -n 1
+  sed -n "s/^${header_name}:[[:space:]]*//Ip" <<< "${headers}" | sed -n '1p'
 }
 
 start_production_server() {

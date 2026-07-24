@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heart, Target, Users, TrendingUp, Award, Shield, ArrowRight, Activity } from "lucide-react";
+import { Target, Users, TrendingUp, Award, Shield, ArrowRight, Activity } from "lucide-react";
 
 export default function TumorsOverview() {
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function TumorsOverview() {
                 comprehensive detection strategies.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Led by Dr. Sanjiv Gambhir and other world-renowned researchers, our programs have made significant 
-                advances in detecting cancer at its earliest, most treatable stages. From the PASS study in prostate 
+                Built on Sanjiv Sam Gambhir's early-detection vision, our current scientific teams are making significant
+                advances in detecting cancer at its earliest, most treatable stages. From the PASS study in prostate
                 cancer to microbubble technology for pancreatic cancer, our research is transforming cancer detection.
               </p>
             </div>
@@ -52,24 +52,6 @@ export default function TumorsOverview() {
               <h3 className="text-2xl font-semibold text-dark mb-6">Our Cancer Research Programs</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <Card className="bg-white hover:shadow-lg transition-shadow duration-300 border-2 border-primary/20">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Heart className="w-6 h-6 text-white" />
-                    </div>
-                    <h4 className="text-xl font-semibold text-dark mb-3">Breast Cancer</h4>
-                    <p className="text-gray-600 mb-4">
-                      Developing AI-enhanced imaging and blood-based biomarkers for early detection in diverse populations.
-                    </p>
-                    <Link 
-                      href="/science/programs/tumors/breast"
-                      className="text-primary hover:text-primary-dark font-semibold flex items-center"
-                    >
-                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
-                    </Link>
-                  </CardContent>
-                </Card>
-
                 <Card className="bg-white hover:shadow-lg transition-shadow duration-300 border-2 border-primary/20">
                   <CardContent className="p-6">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
@@ -218,7 +200,7 @@ export default function TumorsOverview() {
               <div className="bg-white rounded-lg p-6 border border-gray-200">
                 <p className="text-gray-600 leading-relaxed mb-4">
                   Our tumor research programs are led by internationally recognized experts in cancer biology, 
-                  molecular imaging, and clinical research. Dr. Sanjiv Gambhir's vision of detecting cancer 
+                  molecular imaging, and clinical research. Sanjiv Sam Gambhir's vision of detecting cancer
                   at the cellular level continues to guide our work.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
@@ -233,7 +215,7 @@ export default function TumorsOverview() {
             <div className="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8">
               <h3 className="text-2xl font-semibold text-dark mb-4">Support Cancer Research</h3>
               <p className="text-gray-600 mb-6">
-                Your support helps advance early detection research across all five cancer types, bringing us closer to a world where cancer is detected and treated before symptoms appear.
+                Your support helps advance early detection research across Canary's active cancer programs, bringing us closer to a world where cancer is detected and treated before symptoms appear.
               </p>
               <Button 
                 className="bg-primary text-white hover:bg-primary-dark"

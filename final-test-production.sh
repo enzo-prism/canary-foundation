@@ -32,9 +32,9 @@ for host in "www.canaryfoundation.org" "canaryfoundation.org"; do
   echo -e "\n${host}/robots.txt:"
   response="$(curl -H "Host: ${host}" -fsS "${BASE_URL}/robots.txt")"
   status="$(curl -H "Host: ${host}" -s -o /dev/null -w "%{http_code}" "${BASE_URL}/robots.txt")"
-  if [[ "${status}" == "200" ]] && echo "${response}" | grep -qi "user-agent"; then
+  if [[ "${status}" == "200" ]] && grep -qi "user-agent" <<< "${response}"; then
     echo "   ✅ Status: ${status} - Returns plain text robots.txt"
-    echo "${response}" | head -3 | sed 's/^/   /'
+    sed -n '1,3s/^/   /p' <<< "${response}"
   else
     echo "   ❌ Status: ${status} - Error"
     FAILURES=$((FAILURES + 1))
@@ -43,7 +43,7 @@ done
 
 echo -e "\nHTML Content Check:"
 response="$(curl -H "Host: www.canaryfoundation.org" -fsS "${BASE_URL}/robots.txt")"
-if echo "${response}" | grep -q "<!DOCTYPE"; then
+if grep -q "<!DOCTYPE" <<< "${response}"; then
   echo "   ❌ HTML found in robots.txt"
   FAILURES=$((FAILURES + 1))
 else

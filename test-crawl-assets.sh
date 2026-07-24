@@ -37,7 +37,7 @@ for asset in "${assets[@]}"; do
 
   headers="$(curl -sSI "${BASE_URL}/${path}" | tr -d '\r')"
   body="$(curl -fsS "${BASE_URL}/${path}")"
-  status="$(echo "${headers}" | awk 'NR==1 {print $2}')"
+  status="$(awk 'NR==1 {print $2}' <<< "${headers}")"
   type_header="$(extract_header_value "${headers}" "content-type")"
 
   echo "/${path}: ${status} ${type_header}"
@@ -52,7 +52,7 @@ for asset in "${assets[@]}"; do
     FAILURES=$((FAILURES + 1))
   fi
 
-  if ! echo "${body}" | grep -q "${expected_snippet}"; then
+  if ! grep -q "${expected_snippet}" <<< "${body}"; then
     echo "❌ Body for /${path} is missing the expected content snippet"
     FAILURES=$((FAILURES + 1))
   fi
@@ -72,7 +72,7 @@ done
 echo -e "\n3. Testing cache validators:"
 echo "----------------------------"
 headers="$(curl -sSI "${BASE_URL}/robots.txt" | tr -d '\r')"
-if echo "${headers}" | grep -Eq "Cache-Control|ETag"; then
+if grep -Eq "Cache-Control|ETag" <<< "${headers}"; then
   echo "✅ Cache validators present on robots.txt"
 else
   echo "❌ No Cache-Control or ETag header found on robots.txt"

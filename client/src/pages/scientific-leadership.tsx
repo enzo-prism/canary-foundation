@@ -1,214 +1,211 @@
 import { useEffect } from "react";
+import { ExternalLink } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
+
+interface ScientificLeader {
+  name: string;
+  credentials: string;
+  role: string;
+  institution: string;
+  profileUrl: string;
+}
+
+interface ScientificProgram {
+  name: string;
+  description: string;
+  leaders: ScientificLeader[];
+}
+
+const scientificPrograms: ScientificProgram[] = [
+  {
+    name: "Canary Center at Stanford for Cancer Early Detection",
+    description:
+      "Translational research connecting engineering, imaging, and early disease detection.",
+    leaders: [
+      {
+        name: "Joseph DeSimone",
+        credentials: "PhD",
+        role: "Co-Director, Canary Center; Sanjiv Sam Gambhir Professor of Translational Medicine and Professor of Chemical Engineering",
+        institution: "Stanford University",
+        profileUrl: "https://cheme.stanford.edu/people/joseph-desimone",
+      },
+      {
+        name: "Garry Gold",
+        credentials: "MD, MS",
+        role: "Co-Director, Canary Center; Professor of Radiology",
+        institution: "Stanford University",
+        profileUrl: "https://med.stanford.edu/profiles/garry-gold",
+      },
+    ],
+  },
+  {
+    name: "Canary Pancreas Team",
+    description:
+      "Clinical research focused on pancreatic disorders, biomarkers, and earlier diagnosis.",
+    leaders: [
+      {
+        name: "Walter Park",
+        credentials: "MD",
+        role: "Professor of Medicine, Gastroenterology and Hepatology",
+        institution: "Stanford University",
+        profileUrl: "https://med.stanford.edu/profiles/walter-park",
+      },
+    ],
+  },
+  {
+    name: "Canary Ovary Team",
+    description:
+      "Research into the origins, prevention, and earlier detection of ovarian cancer.",
+    leaders: [
+      {
+        name: "Ronny Drapkin",
+        credentials: "MD, PhD",
+        role: "Franklin Payne Professor of Pathology in Obstetrics and Gynecology",
+        institution: "University of Pennsylvania",
+        profileUrl: "https://www.med.upenn.edu/apps/faculty/index.php/g275/p8790102",
+      },
+      {
+        name: "Charles Drescher",
+        credentials: "MD",
+        role: "Gynecologic Oncologist and Medical Director, Gynecologic Cancer Research",
+        institution: "Swedish Cancer Institute; Affiliate Investigator, Fred Hutch",
+        profileUrl: "https://www.swedish.org/doctors/gynecologic-oncology/wa/seattle/charles-drescher-1710939855",
+      },
+    ],
+  },
+  {
+    name: "Canary Prostate Team",
+    description:
+      "Patient-centered research in prostate cancer screening, surveillance, and precision care.",
+    leaders: [
+      {
+        name: "Daniel Lin",
+        credentials: "MD",
+        role: "Chair of Urology; Director, Institute for Prostate Cancer Research",
+        institution: "Fred Hutch and University of Washington",
+        profileUrl: "https://urology.uw.edu/people/faculty/daniel-lin",
+      },
+      {
+        name: "Peter Nelson",
+        credentials: "MD",
+        role: "Vice President, Precision Oncology; Professor and Physician",
+        institution: "Fred Hutch and University of Washington",
+        profileUrl: "https://www.fredhutch.org/en/people/n/peter-nelson.html",
+      },
+    ],
+  },
+  {
+    name: "Canary Translational Ultrasound Center",
+    description:
+      "AI-driven and molecular ultrasound research for accessible cancer detection and care.",
+    leaders: [
+      {
+        name: "Ahmed El Kaffas",
+        credentials: "PhD",
+        role: "Associate Professor of Radiology; Principal Investigator, Translational Ultrasound Lab",
+        institution: "University of California San Diego",
+        profileUrl: "https://profiles.ucsd.edu/admed.elkaffas",
+      },
+    ],
+  },
+];
 
 export default function ScientificLeadership() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="py-16 md:py-20 bg-light">
+        <section className="bg-light py-16 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-primary">
+                The people guiding our science
+              </p>
+              <h1 className="mb-6 text-4xl font-bold text-dark md:text-5xl">
                 Scientific Leadership
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                World-renowned scientists and researchers driving breakthrough discoveries 
-                in early cancer detection and precision medicine.
+              <p className="text-xl leading-relaxed text-gray-600">
+                Canary Foundation works with scientific leaders across research centers and
+                disease-focused teams to move early detection discoveries toward patient care.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Scientific Advisory Board */}
-        <section className="py-16 md:py-20 bg-white">
+        <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Scientific Advisory Board</h2>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">LH</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Lee Hartwell</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Nobel Laureate, Scientific Advisor</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Nobel Prize winner and former President of Fred Hutchinson Cancer Center. 
-                      Pioneer in cancer biomarker research and early detection technologies.
+            <div className="mx-auto max-w-6xl space-y-14">
+              {scientificPrograms.map((program) => (
+                <section
+                  key={program.name}
+                  aria-labelledby={program.name.replaceAll(" ", "-").toLowerCase()}
+                >
+                  <div className="mb-7 max-w-3xl">
+                    <h2
+                      id={program.name.replaceAll(" ", "-").toLowerCase()}
+                      className="mb-3 text-2xl font-bold text-dark md:text-3xl"
+                    >
+                      {program.name}
+                    </h2>
+                    <p className="text-lg leading-relaxed text-gray-600">
+                      {program.description}
                     </p>
-                  </CardContent>
-                </Card>
+                  </div>
 
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">NU</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Nicole Urban</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Ovarian Cancer Research Director</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Leading researcher in ovarian cancer biomarkers and early detection. 
-                      Principal investigator on multiple breakthrough studies funded by Canary Foundation.
-                    </p>
-                  </CardContent>
-                </Card>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {program.leaders.map((leader) => (
+                      <Card
+                        key={leader.name}
+                        className="border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
+                      >
+                        <CardContent className="p-7">
+                          <div className="flex items-start gap-5">
+                            <div
+                              aria-hidden="true"
+                              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary"
+                            >
+                              {leader.name
+                                .split(" ")
+                                .map((part) => part[0])
+                                .join("")}
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-bold text-dark">
+                                {leader.name}, {leader.credentials}
+                              </h3>
+                              <p className="mt-2 leading-relaxed text-gray-700">{leader.role}</p>
+                              <p className="mt-2 text-sm font-medium text-gray-500">
+                                {leader.institution}
+                              </p>
+                              <a
+                                href={leader.profileUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-5 inline-flex items-center gap-2 font-semibold text-primary hover:text-primary-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+                              >
+                                View institutional profile
+                                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                              </a>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              ))}
 
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">SS</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Sam Seiden</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Molecular Imaging Pioneer</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Expert in photoacoustic imaging and contrast agent development. 
-                      Leading innovations in molecular imaging for early cancer detection.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">MT</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Mary Thompson</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Liquid Biopsy Expert</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Pioneering researcher in circulating tumor DNA and liquid biopsy technologies. 
-                      Advancing non-invasive cancer detection methods.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">JC</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. James Chen</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Radiochemistry Director</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Leading expert in radiotracer development and cyclotron technology. 
-                      Advancing PET imaging for early cancer detection and staging.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white shadow-lg border-t-4 border-primary">
-                  <CardContent className="p-8">
-                    <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <span className="text-2xl font-bold text-primary">AR</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 text-center">Dr. Anna Rodriguez</h3>
-                    <p className="text-primary font-semibold text-center mb-4">Computational Biology Lead</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Expert in machine learning and AI applications for cancer biomarker discovery. 
-                      Developing predictive models for early detection algorithms.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Research Excellence */}
-        <section className="py-16 md:py-20 bg-light">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Research Excellence</h2>
-              
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-dark mb-6">Leading Scientific Innovation</h3>
-                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    Our scientific leadership represents the pinnacle of cancer research expertise, 
-                    with Nobel laureates, pioneering researchers, and innovative technology developers 
-                    working together to advance early detection science.
-                  </p>
-                  <p className="text-lg text-gray-600 leading-relaxed">
-                    Their collective experience spans decades of breakthrough discoveries, 
-                    translating fundamental research into life-saving clinical applications.
-                  </p>
-                </div>
-                <div>
-                  <Card className="bg-white">
-                    <CardContent className="p-8">
-                      <h4 className="text-xl font-bold text-dark mb-4">Research Impact</h4>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600">Publications in Top Journals</span>
-                          <span className="text-2xl font-bold text-primary">500+</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600">Patents Filed</span>
-                          <span className="text-2xl font-bold text-primary">150+</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600">Clinical Trials Led</span>
-                          <span className="text-2xl font-bold text-primary">75+</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600">Research Awards</span>
-                          <span className="text-2xl font-bold text-primary">200+</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Scientific Priorities */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-16">Current Research Priorities</h2>
-              
-              <div className="grid md:grid-cols-3 gap-8">
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Multi-Cancer Detection</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Developing comprehensive screening platforms that can detect multiple cancer types 
-                      from a single blood draw or biological sample.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Precision Medicine</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Advancing personalized approaches to cancer detection based on individual 
-                      genetic profiles, biomarkers, and risk factors.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">AI-Driven Discovery</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Leveraging artificial intelligence and machine learning to identify novel 
-                      biomarkers and improve detection accuracy and speed.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+              <p className="border-t border-gray-200 pt-8 text-sm leading-relaxed text-gray-500">
+                Leadership affiliations and profile links reflect current institutional
+                information. Select a profile to learn more about each leader's work.
+              </p>
             </div>
           </div>
         </section>

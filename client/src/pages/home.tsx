@@ -453,7 +453,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Early Detection Focus</h3>
                 <p className="text-gray-600 mb-4">We develop breakthrough technologies and biomarkers for detecting cancer at its earliest, most treatable stages.</p>
-                <Link href="/science/science">
+                <Link href="/science/overview">
                   <Button 
                     variant="ghost" 
                     size="sm"
@@ -472,7 +472,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-dark mb-4">Global Collaborations</h3>
                 <p className="text-gray-600 mb-4">We foster partnerships with leading institutions worldwide to accelerate discoveries in cancer detection and treatment.</p>
-                <Link href="/approach/collaborations">
+                <Link href="/approach/overview">
                   <Button 
                     variant="ghost" 
                     size="sm"
@@ -739,7 +739,7 @@ export default function Home() {
                   </div>
                   <h4 className="font-semibold text-dark mb-2">Annual Conference</h4>
                   <p className="text-sm text-gray-600 mb-3">Early Detection of Cancer meeting</p>
-                  <Link href="/approach/symposium">
+                  <Link href="/blog/edx25-conference-portland-early-detection">
                     <Button 
                       variant="ghost" 
                       size="sm"
@@ -1344,16 +1344,16 @@ export default function Home() {
                     <Users className="text-dark text-2xl" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-dark mb-2">Canary Symposium</h3>
+                    <h3 className="text-xl font-semibold text-dark mb-2">Early Detection Conference</h3>
                     <p className="text-gray-600 mb-4">
-                      Learn about Canary's collaborative scientific symposium and its role in advancing early detection.
+                      Read the latest update from the international Early Detection of Cancer conference.
                     </p>
                     <Button
                       asChild
                       variant="link"
                       className="text-primary hover:text-primary-dark font-semibold p-0"
                     >
-                      <Link href="/approach/symposium">Explore the Symposium →</Link>
+                      <Link href="/blog/edx25-conference-portland-early-detection">Read the Conference Update →</Link>
                     </Button>
                   </div>
                 </div>

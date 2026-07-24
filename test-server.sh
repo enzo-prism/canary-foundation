@@ -29,8 +29,8 @@ echo "---------------------------------------"
 for host in "www.canaryfoundation.org" "canaryfoundation.org"; do
   response="$(curl -H "Host: ${host}" -fsS "${BASE_URL}/robots.txt")"
   echo "${host}:"
-  echo "${response}" | head -3
-  if echo "${response}" | grep -qi "user-agent"; then
+  printf '%s\n' "${response}" | sed -n '1,3p'
+  if grep -qi "user-agent" <<< "${response}"; then
     echo "✅ Content looks correct"
   else
     echo "❌ robots.txt did not return crawler directives"
@@ -41,7 +41,7 @@ done
 echo -e "\n4. Checking for HTML in robots.txt:"
 echo "------------------------------------"
 response="$(curl -H "Host: www.canaryfoundation.org" -fsS "${BASE_URL}/robots.txt")"
-if echo "${response}" | grep -q "<!DOCTYPE"; then
+if grep -q "<!DOCTYPE" <<< "${response}"; then
   echo "❌ HTML found in robots.txt on www domain"
   FAILURES=$((FAILURES + 1))
 else
@@ -53,8 +53,8 @@ echo "---------------------------------"
 for host in "www.canaryfoundation.org" "canaryfoundation.org"; do
   headers="$(curl -H "Host: ${host}" -sSI "${BASE_URL}/robots.txt" | tr -d '\r')"
   echo "${host}:"
-  echo "${headers}" | grep -i "^content-type:" || true
-  if echo "${headers}" | grep -qi "^content-type: text/plain"; then
+  grep -i "^content-type:" <<< "${headers}" || true
+  if grep -qi "^content-type: text/plain" <<< "${headers}"; then
     echo "✅ Correct Content-Type"
   else
     echo "❌ Wrong Content-Type"

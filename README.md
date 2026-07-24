@@ -1,6 +1,6 @@
 # Canary Foundation Website
 
-The marketing and content website for the [Canary Foundation](https://canaryfoundation.org), a nonprofit dedicated solely to the **early detection of cancer**. The site presents the foundation's mission, research programs (ovarian, prostate, pancreatic, lung, breast), scientific approach, leadership, blog/oral histories, and ways to give.
+The marketing and content website for the [Canary Foundation](https://canaryfoundation.org), a nonprofit dedicated solely to the **early detection of cancer**. The site presents the foundation's mission, active research programs (ovarian, prostate, pancreatic, and lung), scientific approach, leadership, blog/oral histories, and ways to give.
 
 It is a content-first single-page app (SPA) served by an Express server, deployed on Replit.
 

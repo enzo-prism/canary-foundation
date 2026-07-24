@@ -33,10 +33,7 @@ const LeadershipCouncil = lazy(() => import("@/pages/leadership-council"));
 const ScientificLeadership = lazy(() => import("@/pages/scientific-leadership"));
 const Financials = lazy(() => import("@/pages/financials"));
 const ApproachOverview = lazy(() => import("@/pages/approach-overview"));
-const Collaborations = lazy(() => import("@/pages/collaborations"));
-const Symposium = lazy(() => import("@/pages/symposium"));
 const CanaryScience = lazy(() => import("@/pages/canary-science"));
-const Science = lazy(() => import("@/pages/science"));
 const Programs = lazy(() => import("@/pages/programs"));
 const TeamUpdates = lazy(() => import("@/pages/team-updates"));
 const OvarianJune2026TeamUpdate = lazy(
@@ -46,12 +43,8 @@ const ProstateJuly2026TeamUpdate = lazy(
   () => import("@/pages/team-updates/prostate-july-2026"),
 );
 const Centers = lazy(() => import("@/pages/centers"));
-const Publications = lazy(() => import("@/pages/publications"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
-const Imaging = lazy(() => import("@/pages/imaging"));
-const Biomarkers = lazy(() => import("@/pages/biomarkers"));
 const TumorsOverview = lazy(() => import("@/pages/tumors-overview"));
-const BreastCancer = lazy(() => import("@/pages/breast-cancer"));
 const LungCancer = lazy(() => import("@/pages/lung-cancer"));
 const OvarianCancer = lazy(() => import("@/pages/ovarian-cancer"));
 const PancreaticCancer = lazy(() => import("@/pages/pancreatic-cancer"));
@@ -63,8 +56,6 @@ const StanfordForScientists = lazy(() => import("@/pages/stanford-for-scientists
 const StanfordBiomarkers = lazy(() => import("@/pages/stanford-biomarkers"));
 const StanfordImaging = lazy(() => import("@/pages/stanford-imaging"));
 const FHCC = lazy(() => import("@/pages/fhcc"));
-const Fellowships = lazy(() => import("@/pages/fellowships"));
-const SeedGrants = lazy(() => import("@/pages/seed-grants"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function setMetaDescription(content: string) {
@@ -222,12 +213,9 @@ function Router() {
 
         {/* Canary Approach pages */}
         <Route path="/approach/overview" component={ApproachOverview} />
-        <Route path="/approach/collaborations" component={Collaborations} />
-        <Route path="/approach/symposium" component={Symposium} />
 
         {/* Canary Science pages */}
         <Route path="/science/overview" component={CanaryScience} />
-        <Route path="/science/science" component={Science} />
         <Route path="/science/programs" component={Programs} />
         <Route path="/science/programs/team-updates" component={TeamUpdates} />
         <Route
@@ -239,17 +227,13 @@ function Router() {
           component={ProstateJuly2026TeamUpdate}
         />
         <Route path="/science/centers" component={Centers} />
-        <Route path="/science/publications" component={Publications} />
         <Route
           path="/science/funding-by-invitation"
           component={FundingByInvitation}
         />
-        <Route path="/science/science/imaging" component={Imaging} />
-        <Route path="/science/science/biomarkers" component={Biomarkers} />
 
         {/* Tumor-specific pages under Programs */}
         <Route path="/science/programs/tumors" component={TumorsOverview} />
-        <Route path="/science/programs/tumors/breast" component={BreastCancer} />
         <Route path="/science/programs/tumors/lung" component={LungCancer} />
         <Route
           path="/science/programs/tumors/ovarian"
@@ -291,13 +275,6 @@ function Router() {
 
         {/* FHCC page */}
         <Route path="/science/centers/fhcc" component={FHCC} />
-
-        {/* Publications sub-pages */}
-        <Route
-          path="/science/publications/fellowships"
-          component={Fellowships}
-        />
-        <Route path="/science/publications/seed-grants" component={SeedGrants} />
 
         <Route component={NotFound} />
       </Switch>

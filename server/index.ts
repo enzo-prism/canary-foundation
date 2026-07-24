@@ -16,6 +16,27 @@ const CRAWLER_ENDPOINTS = new Set([
   "/ai.txt",
 ]);
 
+const REMOVED_ROUTES = new Set([
+  "/science/publications",
+  "/science/publications/fellowships",
+  "/science/publications/seed-grants",
+  "/approach/symposium",
+  "/science/programs/tumors/breast",
+  "/approach/collaborations",
+  "/science/science",
+  "/science/science/imaging",
+  "/science/science/biomarkers",
+  "/canary-science/publications",
+  "/canary-science/publications/fellowships",
+  "/canary-science/publications/seed-grants",
+  "/canary-approach/canary-symposium",
+  "/canary-science/programs/tumors/breast",
+  "/canary-approach/collaborations",
+  "/canary-science/science",
+  "/canary-science/science/imaging",
+  "/canary-science/science/biomarkers",
+]);
+
 const PRECOMPRESSED_CONTENT_TYPES: Record<string, string> = {
   ".css": "text/css; charset=utf-8",
   ".js": "application/javascript; charset=utf-8",
@@ -71,8 +92,6 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   '/canary-science/programs/': '/science/programs',
   '/canary-science/centers': '/science/centers',
   '/canary-science/centers/': '/science/centers',
-  '/canary-science/publications': '/science/publications',
-  '/canary-science/publications/': '/science/publications',
   '/canary-science/funding-by-invitation': '/science/funding-by-invitation',
   '/canary-science/funding-by-invitation/': '/science/funding-by-invitation',
   '/canary-science/programs/tumors': '/science/programs/tumors',
@@ -85,22 +104,10 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   '/canary-science/programs/tumors/pancreatic/': '/science/programs/tumors/pancreatic',
   '/canary-science/programs/tumors/lung': '/science/programs/tumors/lung',
   '/canary-science/programs/tumors/lung/': '/science/programs/tumors/lung',
-  '/canary-science/programs/tumors/breast': '/science/programs/tumors/breast',
-  '/canary-science/programs/tumors/breast/': '/science/programs/tumors/breast',
-  '/canary-science/science': '/science/science',
-  '/canary-science/science/': '/science/science',
-  '/canary-science/science/imaging': '/science/science/imaging',
-  '/canary-science/science/imaging/': '/science/science/imaging',
-  '/canary-science/science/biomarkers': '/science/science/biomarkers',
-  '/canary-science/science/biomarkers/': '/science/science/biomarkers',
   '/canary-approach': '/approach/overview',
   '/canary-approach/': '/approach/overview',
   '/canary-approach/overview': '/approach/overview',
   '/canary-approach/overview/': '/approach/overview',
-  '/canary-approach/collaborations': '/approach/collaborations',
-  '/canary-approach/collaborations/': '/approach/collaborations',
-  '/canary-approach/canary-symposium': '/approach/symposium',
-  '/canary-approach/canary-symposium/': '/approach/symposium',
   '/news-blog': '/blog',
   '/news-blog/': '/blog',
   '/take-action-2': '/donate',
@@ -150,6 +157,17 @@ app.use(
   express.urlencoded({ extended: false, limit: "32kb", parameterLimit: 20 }),
 );
 
+// Removed content must skip host redirects so the SPA can serve its 404 page
+// directly on every public host.
+app.use((req, res, next) => {
+  const normalizedPath = req.path.toLowerCase().replace(/\/+$/, "") || "/";
+  if (REMOVED_ROUTES.has(normalizedPath)) {
+    res.locals.removedRoute = true;
+  }
+
+  next();
+});
+
 // Canonicalize the public host while allowing crawler files on both domains.
 app.use((req, res, next) => {
   const hostHeader = `${req.headers["x-forwarded-host"] || req.headers.host || ""}`
@@ -158,7 +176,11 @@ app.use((req, res, next) => {
     .toLowerCase();
   const normalizedPath = req.path.toLowerCase();
 
-  if (hostHeader === "www.canaryfoundation.org" && !CRAWLER_ENDPOINTS.has(req.path)) {
+  if (
+    hostHeader === "www.canaryfoundation.org" &&
+    !CRAWLER_ENDPOINTS.has(req.path) &&
+    !res.locals.removedRoute
+  ) {
     const canonicalPath = LEGACY_REDIRECTS[normalizedPath] ?? req.path;
     const queryString = req.originalUrl.includes("?")
       ? `?${req.originalUrl.split("?")[1]}`

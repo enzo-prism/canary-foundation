@@ -50,7 +50,7 @@ fi
 echo -e "\n3. Verifying no HTML in robots.txt:"
 echo "------------------------------------"
 content="$(curl -H "Host: www.canaryfoundation.org" -fsS "${BASE_URL}/robots.txt")"
-if echo "${content}" | grep -q "<!DOCTYPE"; then
+if grep -q "<!DOCTYPE" <<< "${content}"; then
   echo "❌ HTML found in robots.txt"
   FAILURES=$((FAILURES + 1))
 else

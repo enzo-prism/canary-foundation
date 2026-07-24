@@ -100,11 +100,6 @@ export default function Footer() {
                   Lung Cancer
                 </Link>
               </li>
-              <li>
-                <Link href="/science/programs/tumors/breast" className="text-gray-300 hover:text-primary transition-colors duration-300">
-                  Breast Cancer
-                </Link>
-              </li>
             </ul>
           </div>
           
@@ -124,11 +119,6 @@ export default function Footer() {
               <li>
                 <Link href="/science/centers" className="text-gray-300 hover:text-primary transition-colors duration-300">
                   Research Centers
-                </Link>
-              </li>
-              <li>
-                <Link href="/science/publications" className="text-gray-300 hover:text-primary transition-colors duration-300">
-                  Publications
                 </Link>
               </li>
               <li>

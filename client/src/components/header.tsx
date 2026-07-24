@@ -30,21 +30,11 @@ const navigationStructure: Record<string, NavSection> = {
   "Canary Approach": {
     items: [
       { name: "Overview", path: "/approach/overview" },
-      { name: "Collaborations & Partnership", path: "/approach/collaborations" },
-      { name: "Canary Symposium", path: "/approach/symposium" },
     ],
   },
   "Canary Science": {
     items: [
       { name: "Overview", path: "/science/overview" },
-      {
-        name: "Science",
-        path: "/science/science",
-        subItems: [
-          { name: "Imaging", path: "/science/science/imaging" },
-          { name: "Biomarkers", path: "/science/science/biomarkers" },
-        ],
-      },
       {
         name: "Programs",
         path: "/science/programs",
@@ -53,7 +43,6 @@ const navigationStructure: Record<string, NavSection> = {
             name: "Tumors",
             path: "/science/programs/tumors",
             subItems: [
-              { name: "Breast", path: "/science/programs/tumors/breast" },
               { name: "Lung", path: "/science/programs/tumors/lung" },
               { name: "Ovarian", path: "/science/programs/tumors/ovarian" },
               { name: "Pancreatic", path: "/science/programs/tumors/pancreatic" },
@@ -84,14 +73,6 @@ const navigationStructure: Record<string, NavSection> = {
             ],
           },
           { name: "FHCC", path: "/science/centers/fhcc" },
-        ],
-      },
-      {
-        name: "Publications",
-        path: "/science/publications",
-        subItems: [
-          { name: "Canary-ACS Postdoctoral Fellowships", path: "/science/publications/fellowships" },
-          { name: "Technology Seed Grants", path: "/science/publications/seed-grants" },
         ],
       },
     ],

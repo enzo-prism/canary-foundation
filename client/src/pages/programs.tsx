@@ -36,10 +36,10 @@ export default function Programs() {
                 </p>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8">
-                Our Focus: 5 Cancer Types—How Many Lives Saved?
+                Our Focus: 4 Cancer Types—How Many Lives Saved?
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-6">
-                What if we could improve lung cancer screening for all people, regardless of smoking status? Or what if we found a way to identify ovarian cancer long before it became lethal? And why can't benign breast cancer tissue be more easily identified from cancerous tissue, resulting in less worry and trauma for the patient? This is the program work done at the Canary Foundation.
+                What if we could improve lung cancer screening for all people, regardless of smoking status? Or identify ovarian, pancreatic, or prostate cancer early enough to change a patient's options? This is the program work done at the Canary Foundation.
               </p>
             </div>
           </div>
@@ -54,9 +54,9 @@ export default function Programs() {
                   <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
                       <h3 className="text-2xl font-bold text-dark mb-4">Research Leadership</h3>
-                      <h4 className="text-xl font-bold text-primary mb-3">Dr. Sanjiv (Sam) Gambhir</h4>
+                      <h4 className="text-xl font-bold text-primary mb-3">Sanjiv Sam Gambhir</h4>
                       <p className="text-gray-600 leading-relaxed mb-6">
-                        Dr. Sanjiv (Sam) Gambhir discusses next-generation technologies being developed at Canary Center at Stanford. His pioneering work in molecular imaging and cancer detection has revolutionized early diagnosis approaches.
+                        Sanjiv Sam Gambhir discussed next-generation technologies developed at Canary Center at Stanford. His pioneering work in molecular imaging and cancer detection revolutionized early diagnosis approaches.
                       </p>
                       <div className="bg-primary/5 p-6 rounded-lg">
                         <h5 className="font-bold text-dark mb-2">Research Focus</h5>
@@ -99,23 +99,10 @@ export default function Programs() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-8">Clinical Programs</h2>
               <p className="text-lg text-gray-600 text-center mb-16 max-w-4xl mx-auto">
-                Today, our clinical programs cover tumors across five cancer types: breast, lung, ovarian, pancreatic, and prostate. As part of our approach, we pull together multidisciplinary teams that approach cancer problems in new ways. Each team works with a practicing oncologist, focusing on a specific clinical problem, and many of these teams now have ongoing clinical trials underway. They know, and we know, that identifying early stage cancers saves lives.
+                Today, our active clinical program pages cover lung, ovarian, pancreatic, and prostate cancer. We bring together multidisciplinary teams that approach cancer problems in new ways. Each team works with practicing clinicians on specific clinical questions, and many of these teams have ongoing clinical studies. Identifying early-stage cancers saves lives.
               </p>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Breast Cancer</h3>
-                    <p className="text-gray-600 mb-4">
-                      Why can't benign breast cancer tissue be more easily identified from cancerous tissue, resulting in less worry and trauma for the patient?
-                    </p>
-                    <div className="space-y-2">
-                      <div className="text-sm text-primary font-semibold">Research Focus:</div>
-                      <div className="text-sm text-gray-600">Distinguishing benign from malignant tissue</div>
-                    </div>
-                  </CardContent>
-                </Card>
-
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Lung Cancer</h3>
@@ -172,7 +159,7 @@ export default function Programs() {
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Multidisciplinary Approach</h3>
                     <p className="text-gray-600 mb-4">
-                      Cross-cancer insights and technologies that benefit all five cancer types through shared innovation.
+                      Cross-cancer insights and technologies that benefit Canary's active programs through shared innovation.
                     </p>
                     <div className="space-y-2">
                       <div className="text-sm text-gray-600 font-semibold">Research Focus:</div>
@@ -234,16 +221,16 @@ export default function Programs() {
                 Identifying Early Stage Cancers Saves Lives
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-12">
-                They know, and we know, that identifying early stage cancers saves lives. Our multidisciplinary approach across five cancer types creates new possibilities for early detection and better patient outcomes.
+                They know, and we know, that identifying early-stage cancers saves lives. Our multidisciplinary approach across active cancer programs creates new possibilities for early detection and better patient outcomes.
               </p>
               
               <div className="grid md:grid-cols-2 gap-8">
                 <Card className="bg-white shadow-lg">
                   <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold text-primary mb-4">5</h3>
+                    <h3 className="text-2xl font-bold text-primary mb-4">4</h3>
                     <h4 className="text-lg font-bold text-dark mb-2">Cancer Types</h4>
                     <p className="text-gray-600">
-                      Comprehensive programs covering breast, lung, ovarian, pancreatic, and prostate cancers.
+                      Active program pages covering lung, ovarian, pancreatic, and prostate cancers.
                     </p>
                   </CardContent>
                 </Card>

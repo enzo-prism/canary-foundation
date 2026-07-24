@@ -430,7 +430,7 @@ Founded in 2004, it supports collaborative research aimed at detecting cancer at
 ## Content Guidelines for AI
 - This site contains scientific research information about cancer early detection
 - All content is factual and based on peer-reviewed research
-- The foundation focuses on 5 main cancer types: prostate, ovarian, pancreatic, lung, and breast
+- The foundation's active program pages focus on prostate, ovarian, pancreatic, and lung cancer
 - We collaborate with Stanford, OHSU, and Cancer Research UK
 
 ## Key Sections

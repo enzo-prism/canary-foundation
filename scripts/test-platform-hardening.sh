@@ -45,12 +45,12 @@ fi
 
 headers="$(curl -sSI "${TEST_BASE_URL}/contact" | tr -d '\r')"
 for header in permissions-policy content-security-policy-report-only x-content-type-options referrer-policy; do
-  if ! echo "$headers" | grep -qi "^${header}:"; then
+  if ! grep -qi "^${header}:" <<< "$headers"; then
     echo "FAIL: /contact is missing ${header}"
     FAILURES=$((FAILURES + 1))
   fi
 done
-if ! echo "$headers" | grep -qi '^cache-control:.*no-cache.*no-store'; then
+if ! grep -qi '^cache-control:.*no-cache.*no-store' <<< "$headers"; then
   echo "FAIL: HTML is not marked fresh/no-store"
   FAILURES=$((FAILURES + 1))
 fi
@@ -63,10 +63,10 @@ if ! grep -q 'property="og:image" content="https://canaryfoundation.org/opengrap
   FAILURES=$((FAILURES + 1))
 fi
 
-asset="$(find dist/public/assets -maxdepth 1 -type f \( -name '*.js' -o -name '*.css' \) | head -n 1)"
+asset="$(find dist/public/assets -maxdepth 1 -type f \( -name '*.js' -o -name '*.css' \) -print -quit)"
 if [[ -n "$asset" ]]; then
   asset_headers="$(curl -sSI "${TEST_BASE_URL}/assets/$(basename "$asset")" | tr -d '\r')"
-  if ! echo "$asset_headers" | grep -qi '^cache-control:.*max-age=31536000.*immutable'; then
+  if ! grep -qi '^cache-control:.*max-age=31536000.*immutable' <<< "$asset_headers"; then
     echo "FAIL: hashed asset is missing immutable caching"
     FAILURES=$((FAILURES + 1))
   fi

@@ -15,8 +15,8 @@ echo "================================"
 echo "Building project..."
 build_production_bundle > /dev/null
 
-JS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.js' | head -1)")"
-CSS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.css' | head -1)")"
+JS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.js' -print -quit)")"
+CSS_FILE="$(basename "$(find dist/public/assets -maxdepth 1 -name 'index-*.css' -print -quit)")"
 
 if [[ -z "${JS_FILE}" || -z "${CSS_FILE}" ]]; then
   echo "❌ Could not locate built JS/CSS assets."

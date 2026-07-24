@@ -61,7 +61,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "5 min read",
     wordCount: 420,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2024/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2024-goes-to-professor-antonis-antoniou/"
+    originalUrl: "https://canaryfoundation.org/blog/don-listwin-award-2024-antonis-antoniou"
   },
   {
     id: 2,
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "4 min read",
     wordCount: 320,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2024/11/01/early-detection-of-cancer-annual-conference-edx24/"
+    originalUrl: "https://canaryfoundation.org/blog/edx24-conference-stanford-cancer-research"
   },
   {
     id: 3,
@@ -143,7 +143,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "4 min read",
     wordCount: 280,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2023/11/01/early-detection-of-cancer-annual-conference-edx23-hosted-by-cancer-research-uk-canary-center-at-stanford-ohsu-knight-cancer-institute-and-bringing-together-great-minds-to-collaborate-i/"
+    originalUrl: "https://canaryfoundation.org/blog/edx23-conference-london-cancer-research"
   },
   {
     id: 4,
@@ -180,7 +180,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     wordCount: 450,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2023/11/01/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2023-goes-to-professor-peter-sasieni/",
+    originalUrl: "https://canaryfoundation.org/blog/don-listwin-award-2023-peter-sasieni",
     references: [
       {
         title: "The effects of the national HPV vaccination programme in England, UK",
@@ -233,7 +233,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "4 min read",
     wordCount: 350,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2023/11/01/canary-ovary-team-is-approaching-a-milestone-of-completing-its-first-study-of-fallopian-tubes/"
+    originalUrl: "https://canaryfoundation.org/blog/canary-ovary-team-fallopian-tubes-study"
   },
   {
     id: 6,
@@ -292,7 +292,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "5 min read",
     wordCount: 420,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2022/11/17/early-detection-of-cancer-annual-conference-edx22-hosted-by-ohsu-knight-cancer-institute-the-canary-center-at-stanford-and-cancer-research-uk-brought-together-great-minds-to-collaborate-i/"
+    originalUrl: "https://canaryfoundation.org/blog/edx22-conference-sold-out-ohsu-stanford"
   },
   {
     id: 7,
@@ -358,7 +358,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     wordCount: 580,
     featured: false,
-    originalUrl: "https://www.canaryfoundation.org/2022/11/16/don-listwin-award-for-outstanding-contribution-to-cancer-early-detection-2022-goes-to-sudhir-srivastava-ph-d-mph-ms/"
+    originalUrl: "https://canaryfoundation.org/blog/don-listwin-award-2022-sudhir-srivastava"
   },
   {
     id: 8,

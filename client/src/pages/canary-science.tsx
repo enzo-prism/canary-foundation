@@ -36,7 +36,7 @@ export default function CanaryScience() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-dark text-center mb-8">Clinical Programs</h2>
               <p className="text-lg text-gray-600 text-center mb-16 max-w-4xl mx-auto">
-                Our clinical programs cover tumors across five cancer types: breast, lung, ovarian, pancreas, and prostate.
+                Our active clinical program pages cover lung, ovarian, pancreatic, and prostate cancer.
               </p>
               
               <div className="text-center mb-12">
@@ -44,16 +44,6 @@ export default function CanaryScience() {
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-bold text-dark mb-4">Breast Cancer</h3>
-                    <p className="text-gray-600 mb-4">
-                      Advanced imaging technologies and biomarker research focused on early detection and improving screening sensitivity.
-                    </p>
-                    <div className="text-sm text-primary font-semibold">Research Focus: Imaging & Biomarkers</div>
-                  </CardContent>
-                </Card>
-
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Lung Cancer</h3>

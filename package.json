@@ -10,6 +10,7 @@
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
     "check:links": "node scripts/check-outbound-links.mjs",
+    "test:web-cleanse": "tsx scripts/test-web-cleanse.ts",
     "test:team-updates": "tsx scripts/test-team-updates.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
     "db:push": "drizzle-kit push"

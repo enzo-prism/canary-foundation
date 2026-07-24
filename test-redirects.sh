@@ -64,6 +64,45 @@ test_redirect() {
     echo ""
 }
 
+test_removed() {
+    local REMOVED_PATH=$1
+    local DESCRIPTION=$2
+
+    echo -e "${BLUE}Testing removed route: $DESCRIPTION${NC}"
+    echo "  URL: $REMOVED_PATH"
+
+    HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" "${BASE_URL}${REMOVED_PATH}")
+    if [ "$HTTP_CODE" = "404" ]; then
+        echo -e "  ${GREEN}✅ PASS: HTTP 404${NC}"
+        ((PASSED++))
+    else
+        echo -e "  ${RED}❌ FAIL: HTTP $HTTP_CODE (expected 404)${NC}"
+        ((FAILED++))
+    fi
+    echo ""
+}
+
+test_removed_www() {
+    local REMOVED_PATH=$1
+    local DESCRIPTION=$2
+
+    echo -e "${BLUE}Testing removed www route: $DESCRIPTION${NC}"
+    echo "  URL: $REMOVED_PATH"
+
+    HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" \
+        -H "Host: www.canaryfoundation.org" \
+        -H "X-Forwarded-Host: www.canaryfoundation.org" \
+        "${BASE_URL}${REMOVED_PATH}")
+    if [ "$HTTP_CODE" = "404" ]; then
+        echo -e "  ${GREEN}✅ PASS: Direct HTTP 404${NC}"
+        ((PASSED++))
+    else
+        echo -e "  ${RED}❌ FAIL: HTTP $HTTP_CODE (expected direct 404)${NC}"
+        ((FAILED++))
+    fi
+    echo ""
+}
+
 echo -e "${BLUE}📋 Testing Critical Legacy URLs from User Request:${NC}"
 echo "================================================="
 
@@ -92,7 +131,17 @@ test_redirect "/take-action-2" "/donate" "Take Action Page"
 
 # Test deep nested URLs
 test_redirect "/canary-science/programs/tumors/prostate/" "/science/programs/tumors/prostate" "Prostate Cancer Page"
-test_redirect "/canary-science/science/imaging/" "/science/science/imaging" "Imaging Science Page"
+
+echo -e "${BLUE}📋 Testing Intentionally Removed Legacy URLs:${NC}"
+echo "================================================="
+test_removed "/canary-science/science/imaging/" "Imaging Science Page"
+test_removed "/canary-science/science/biomarkers/" "Biomarkers Science Page"
+test_removed "/canary-science/publications/" "Publications Page"
+test_removed "/canary-science/programs/tumors/breast/" "Breast Cancer Program"
+test_removed "/canary-approach/collaborations/" "Collaborations Page"
+test_removed "/canary-approach/canary-symposium/" "Canary Symposium Page"
+test_removed_www "/canary-science/publications/" "Publications Page"
+test_removed_www "/science/science/imaging/" "Imaging Science Page"
 
 echo -e "${BLUE}📋 Testing Query String Preservation:${NC}"
 echo "================================================="

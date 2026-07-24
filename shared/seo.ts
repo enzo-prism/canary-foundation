@@ -87,25 +87,10 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Learn how Canary Foundation approaches early cancer detection through collaborative science, biomarkers, and imaging.",
   },
-  "/approach/collaborations": {
-    title: "Collaborations | Canary Foundation",
-    description:
-      "Explore the collaborations and partnerships that help Canary Foundation accelerate early detection research.",
-  },
-  "/approach/symposium": {
-    title: "Canary Symposium | Canary Foundation",
-    description:
-      "Learn about the Canary Symposium and how it brings researchers together around early cancer detection.",
-  },
   "/science/overview": {
     title: "Canary Science | Canary Foundation",
     description:
       "Explore the science behind Canary Foundation's work in early cancer detection.",
-  },
-  "/science/science": {
-    title: "Scientific Focus Areas | Canary Foundation",
-    description:
-      "Explore the scientific foundations behind Canary Foundation's early detection strategy.",
   },
   "/science/programs": {
     title: "Research Programs | Canary Foundation",
@@ -136,11 +121,6 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     title: "Research Centers | Canary Foundation",
     description:
       "Learn about the research centers and institutions advancing Canary Foundation's mission.",
-  },
-  "/science/publications": {
-    title: "Publications | Canary Foundation",
-    description:
-      "Read publications and research outputs supported by Canary Foundation.",
   },
   "/science/funding-by-invitation": {
     title: "Funding By Invitation | Canary Foundation",
@@ -190,10 +170,6 @@ export const PREFIX_ROUTE_METADATA: PrefixRouteMetadata[] = [
   {
     prefix: "/science/centers/",
     metadata: EXACT_ROUTE_METADATA["/science/centers"],
-  },
-  {
-    prefix: "/science/publications/",
-    metadata: EXACT_ROUTE_METADATA["/science/publications"],
   },
   {
     prefix: "/science/",
