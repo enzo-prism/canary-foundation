@@ -106,7 +106,7 @@ const scientificPrograms: ScientificProgram[] = [
         credentials: "PhD",
         role: "Associate Professor of Radiology; Principal Investigator, Translational Ultrasound Lab",
         institution: "University of California San Diego",
-        profileUrl: "https://profiles.ucsd.edu/admed.elkaffas",
+        profileUrl: "https://tul.ucsd.edu/team/1",
       },
     ],
   },
