@@ -47,6 +47,11 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Read the latest research updates, oral histories, and stories from Canary Foundation.",
   },
+  "/blog/april-2026-science-meetings-stanford-ucsd": {
+    title: "April 2026 Science Meetings | Canary Foundation",
+    description:
+      "Canary Foundation researchers and institutional leaders gathered at Stanford and UC San Diego to advance early detection, imaging, and translational ultrasound.",
+  },
   "/about/overview": {
     title: "About Canary Foundation | Canary Foundation",
     description:

@@ -557,4 +557,51 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     originalUrl: "https://www.listwinventures.com/oral-history-caltech"
   },
+  {
+    id: 12,
+    slug: "april-2026-science-meetings-stanford-ucsd",
+    title: "April 2026 Science Meetings Bring Early Detection Researchers Together",
+    excerpt: "Canary Foundation convened scientists at Stanford and met with UC San Diego leaders in April 2026 to advance collaboration in early detection, imaging, and translational ultrasound.",
+    fullContent: `
+      <p>In April 2026, Canary Foundation brought researchers and institutional leaders together in two settings to exchange ideas and strengthen collaboration around earlier cancer detection.</p>
+
+      <p>At Stanford, more than 200 scientists gathered for team meetings, a scientific reception, and the Canary Center Symposium. At UC San Diego, Canary Foundation joined university leaders to explore how translational ultrasound research could be developed through a new center.</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">A scientific gathering at Stanford</h2>
+
+      <p>The April gathering at Stanford included meetings of the Canary Ovarian and Prostate Teams, followed by a scientific reception with local researchers and members of the Canary Center at Stanford. These sessions led into the <em>Canary Center Symposium: The Science of Seeing Disease Earlier</em>.</p>
+
+      <p>The symposium highlighted the Canary Center's broad approach to early detection. Joseph DeSimone, the Sanjiv Sam Gambhir Professor of Translational Medicine and Chemical Engineering at Stanford University and Co-Director of the Canary Center, described a vision that connects molecular diagnostics, imaging, artificial intelligence, and collaborative teams.</p>
+
+      <p>Research discussed at the symposium included an at-home cervical cancer test in clinical study, liquid biopsy approaches that examine interstitial fluid, skin cancer screening, theranostics that combine detection and treatment, and the use of artificial intelligence to help interpret complex diagnostic information.</p>
+
+      <p>Visit the <a href="https://radweb.su.domains/canary/symposium/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Canary Center Symposium website</a> to explore the program and available presentation videos.</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Exploring a translational ultrasound center at UC San Diego</h2>
+
+      <p>Also in April, Canary Foundation met with leadership at the University of California San Diego. Guided by Ahmed El Kaffas, PhD, the discussion explored the potential establishment of a Canary Translational Ultrasound Center.</p>
+
+      <p>Canary Foundation has supported research into enhanced ultrasound since 2006. The proposed center would create a collaborative setting to further develop and test ultrasound for cancer diagnosis, prognosis, and treatment response. Because ultrasound can be relatively affordable and accessible, this work may also help expand earlier disease detection in more communities.</p>
+
+      <p>The UC San Diego meeting brought together leaders in health sciences, medicine, radiology, cancer research, imaging, and university administration. The conversation remains exploratory, with a focus on how shared expertise and resources could accelerate translational research.</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Collaboration as a catalyst</h2>
+
+      <p>These April meetings reflect Canary Foundation's role in connecting researchers across disciplines and institutions. By creating space for scientists to share work, test ideas, and build teams, Canary helps move promising early detection approaches toward real-world use.</p>
+    `,
+    author: "Therese Quinlan",
+    authorBio: "Therese Quinlan is Chief Development Officer at Canary Foundation.",
+    date: "2026-07-27",
+    category: "Research",
+    tags: ["Research", "Canary Center at Stanford", "UC San Diego", "Translational Ultrasound", "Scientific Collaboration", "Early Detection", "Artificial Intelligence", "Theranostics"],
+    readTime: "4 min read",
+    wordCount: 386,
+    featured: true,
+    references: [
+      {
+        title: "Canary Center Symposium: The Science of Seeing Disease Earlier",
+        url: "https://radweb.su.domains/canary/symposium/"
+      }
+    ]
+  },
 ];

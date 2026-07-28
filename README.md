@@ -67,6 +67,7 @@ The dev server starts on **http://localhost:5000**, or the next free port if 500
 | `npm run start` | Production: serves the bundled app from `dist/index.js` (`NODE_ENV=production`). |
 | `npm run check` | Project-wide TypeScript type-check (`tsc`). |
 | `npm run check:links -- --network` | Check first-party references and verify public outbound links. |
+| `npm run test:web-cleanse` | Protect retired routes, current and founding scientific leadership, and the April 2026 meetings article. |
 | `npm run test:team-updates` | Enforce approval gates for public reports and content-free private shells. |
 | `npm run test:platform` | Verify 404, headers, caching, contact-form defenses, and crawler behavior. |
 | `npm run db:push` | Push the Drizzle schema to the configured Postgres database (requires `DATABASE_URL`). |
@@ -107,6 +108,8 @@ Page content is data-driven and lives in `client/src/data/`:
 
 The ovarian report mirrors Heidi's final donor-friendly PDF (`Canary Ovary Team Progress_June2026_final.pdf`). Do not reintroduce superseded terms such as `CRABp2`, `ORF1p`, or `165 cases`, and do not add report details until Heidi or Don sends an approved public version. `npm run test:team-updates` enforces the current public/private boundary.
 
+The July 2026 website cleanse is enforced by `client/src/pages/scientific-leadership.tsx` and `scripts/test-web-cleanse.ts`. Retired or inaccurate pages must remain unrouted and unindexed until Heidi or Don provides approved replacement copy. GitHub changes are not live until a separate Replit publication and production verification are completed.
+
 ## Platform protections
 
 - Unknown page routes return real `404` HTML with `noindex`; unknown API routes return JSON `404` responses.
@@ -137,6 +140,7 @@ There is no unit-test runner; verification is done with the repo's shell scripts
 ./test-seo-fix.sh           # SEO metadata
 ./scripts/test-platform-hardening.sh # headers, 404, caching, form defenses
 npm run test:team-updates   # approval-safe report publishing
+npm run test:web-cleanse    # retired routes, leadership, and April meetings content
 ./final-test-production.sh  # end-to-end production checks
 ```
 
@@ -145,5 +149,6 @@ npm run test:team-updates   # approval-safe report publishing
 - **[AGENTS.md](./AGENTS.md)** — repository guidelines (structure, conventions, commands).
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** — production deployment guide, env vars, smoke checks.
 - **[Team Update publication workflow](./docs/team-update-publication-workflow.md)** — required approval and content-safety process.
+- **[July 2026 web-cleanse content note](./docs/web-cleanse-content-note.md)** — email instructions, source provenance, review boundary, and release status.
 - **[Release and rollback checklist](./docs/release-and-rollback-checklist.md)** — review, release, production proof, and rollback steps.
 - **[replit.md](./replit.md)** — architecture overview, design decisions, dependencies.

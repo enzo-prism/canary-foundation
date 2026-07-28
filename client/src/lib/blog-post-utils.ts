@@ -1,7 +1,10 @@
 import type { BlogPost } from "@/data/blog-posts";
 
+const parseDate = (date: string) =>
+  /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(`${date}T12:00:00`) : new Date(date);
+
 const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString("en-US", {
+  parseDate(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -9,7 +12,7 @@ const formatDate = (date: string) =>
 
 export const getPostSortTimestamp = (post: BlogPost) => {
   const sortDate = post.publishedDate ?? post.date;
-  return new Date(sortDate).getTime();
+  return parseDate(sortDate).getTime();
 };
 
 export const getPostDateMeta = (post: BlogPost) => {

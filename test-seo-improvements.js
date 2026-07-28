@@ -87,12 +87,12 @@ if (fs.existsSync(files.newsSitemap)) {
     fail('News sitemap missing proper namespace');
   }
   
-  // Check for news entries
+  // Google News sitemaps should include only articles from the last two days.
   const newsEntries = newsContent.match(/<news:news>/g);
-  if (newsEntries && newsEntries.length >= 5) {
-    pass(`News entries found: ${newsEntries.length} articles`);
+  if (newsEntries && newsEntries.length >= 1) {
+    pass(`Recent news entries found: ${newsEntries.length} article(s)`);
   } else {
-    fail(`Insufficient news entries: ${newsEntries ? newsEntries.length : 0}`);
+    fail(`No recent news entries found: ${newsEntries ? newsEntries.length : 0}`);
   }
 }
 

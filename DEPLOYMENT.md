@@ -60,6 +60,7 @@ PORT=3000 npm run start
 ./test-redirects.sh
 ./scripts/test-platform-hardening.sh
 npm run test:team-updates
+npm run test:web-cleanse
 npm run check:links -- --network
 ./final-test-production.sh
 ```
@@ -79,6 +80,8 @@ npm run check:links -- --network
 ```bash
 curl -I https://canaryfoundation.org/
 curl -I https://www.canaryfoundation.org/about
+curl -I https://canaryfoundation.org/about/scientific-leadership
+curl -I https://canaryfoundation.org/science/publications
 curl -I https://canaryfoundation.org/robots.txt
 curl -I https://canaryfoundation.org/sitemap.xml
 curl -I https://canaryfoundation.org/sitemap-index.xml
@@ -86,3 +89,5 @@ curl -I https://canaryfoundation.org/news-sitemap.xml
 curl -I https://canaryfoundation.org/llm.xml
 curl -I https://canaryfoundation.org/ai.txt
 ```
+
+The Scientific Leadership route should return `200`. Retired canonical routes such as `/science/publications` should return a direct `404`, without redirecting to replacement content.

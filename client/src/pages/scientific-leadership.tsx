@@ -18,6 +18,11 @@ interface ScientificProgram {
   leaders: ScientificLeader[];
 }
 
+interface FoundingScientificAdvisor {
+  name: string;
+  profileUrl: string;
+}
+
 const scientificPrograms: ScientificProgram[] = [
   {
     name: "Canary Center at Stanford for Cancer Early Detection",
@@ -112,6 +117,48 @@ const scientificPrograms: ScientificProgram[] = [
   },
 ];
 
+const foundingScientificAdvisors: FoundingScientificAdvisor[] = [
+  {
+    name: "Leland H. (Lee) Hartwell",
+    profileUrl: "https://search.asu.edu/profile/1474639",
+  },
+  {
+    name: "Sanjiv (Sam) Gambhir",
+    profileUrl: "https://med.stanford.edu/nuclearmedicine/in-memoriam.html",
+  },
+  {
+    name: "Samir Hanash",
+    profileUrl: "https://faculty.mdanderson.org/profiles/samir_hanash.html",
+  },
+  {
+    name: "Frank McCormick",
+    profileUrl: "https://cancer.ucsf.edu/people/mccormick.frank",
+  },
+  {
+    name: "Nicole Urban",
+    profileUrl:
+      "https://www.fredhutch.org/en/news/center-news/2010/08/Arnold-Canary-Foundation.html",
+  },
+  {
+    name: "Patrick Brown",
+    profileUrl: "https://profiles.stanford.edu/patrick-brown",
+  },
+  {
+    name: "Peter Laird",
+    profileUrl: "https://lairdlab.vai.org/",
+  },
+  {
+    name: "Andrew Berlin",
+    profileUrl:
+      "https://www.draper.com/media-center/news-releases/detail/23157/canary-foundation-awards-gift-to-draper-to-improve-cancer-detection-hasten-treatment",
+  },
+  {
+    name: "Martin McIntosh",
+    profileUrl:
+      "https://www.fredhutch.org/en/news/center-news/2010/06/McIntosh-computational-biology.html",
+  },
+];
+
 export default function ScientificLeadership() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -202,9 +249,36 @@ export default function ScientificLeadership() {
                 </section>
               ))}
 
+              <section aria-labelledby="founding-scientific-advisors">
+                <div className="mb-7 max-w-3xl">
+                  <h2
+                    id="founding-scientific-advisors"
+                    className="mb-3 text-2xl font-bold text-dark md:text-3xl"
+                  >
+                    Founding Scientific Advisors
+                  </h2>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {foundingScientificAdvisors.map((advisor) => (
+                    <a
+                      key={advisor.name}
+                      href={advisor.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white p-5 text-lg font-bold text-dark shadow-sm transition hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+                    >
+                      <span>{advisor.name}</span>
+                      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
+              </section>
+
               <p className="border-t border-gray-200 pt-8 text-sm leading-relaxed text-gray-500">
-                Leadership affiliations and profile links reflect current institutional
-                information. Select a profile to learn more about each leader's work.
+                Current leadership affiliations reflect current institutional information.
+                Founding Scientific Advisor links provide institutional, memorial, or
+                historical context.
               </p>
             </div>
           </div>

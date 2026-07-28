@@ -16,6 +16,7 @@ const GOOGLE_NEWS_MAX_AGE_MS = 2 * 24 * 60 * 60 * 1000;
 // Blog post SEO metadata for individual /blog/:slug pages.
 // IMPORTANT: keep in sync with client/src/data/blog-posts.ts (slug, date, category).
 const blogPosts = [
+  { slug: 'april-2026-science-meetings-stanford-ucsd', date: '2026-07-27', category: 'Research' },
   { slug: 'canary-foundation-program-report-2025', date: '2025-11-16', category: 'Report' },
   { slug: 'don-listwin-award-2025-ruth-etzioni', date: '2025-11-01', category: 'Awards' },
   { slug: 'edx25-conference-portland-early-detection', date: '2025-11-01', category: 'Conference' },

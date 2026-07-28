@@ -1267,11 +1267,11 @@ export default function Home() {
                 <div className="w-full h-48 bg-gradient-to-tr from-yellow-400 via-yellow-100 to-gray-800"></div>
               </div>
               <CardContent className="p-6">
-                <div className="text-primary text-sm font-semibold mb-2">AWARD • 2024</div>
-                <h3 className="text-xl font-semibold text-dark mb-3">Don Listwin Award Recognition</h3>
-                <p className="text-gray-600 mb-4">The Canary Foundation receives prestigious recognition for advancing early cancer detection research.</p>
-                <Button variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
-                  Read More →
+                <div className="text-primary text-sm font-semibold mb-2">RESEARCH • 2026</div>
+                <h3 className="text-xl font-semibold text-dark mb-3">April Science Meetings</h3>
+                <p className="text-gray-600 mb-4">Scientists and institutional leaders gathered at Stanford and UC San Diego to advance early detection, imaging, and translational ultrasound.</p>
+                <Button asChild variant="link" className="text-primary hover:text-primary-dark font-semibold p-0">
+                  <Link href="/blog/april-2026-science-meetings-stanford-ucsd">Read More →</Link>
                 </Button>
               </CardContent>
             </Card>
