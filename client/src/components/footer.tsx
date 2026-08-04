@@ -25,7 +25,7 @@ export default function Footer() {
             
             {/* Social Media Links */}
             <div>
-              <h4 className="text-md font-semibold mb-3">Follow Us</h4>
+              <h3 className="text-md font-semibold mb-3">Follow Us</h3>
               <div className="flex space-x-4">
                 <a 
                   href="https://www.youtube.com/@canaryfoundation/videos"
