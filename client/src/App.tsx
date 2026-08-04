@@ -42,6 +42,9 @@ const OvarianJune2026TeamUpdate = lazy(
 const ProstateJuly2026TeamUpdate = lazy(
   () => import("@/pages/team-updates/prostate-july-2026"),
 );
+const PancreasJuly2026TeamUpdate = lazy(
+  () => import("@/pages/team-updates/pancreas-july-2026"),
+);
 const Centers = lazy(() => import("@/pages/centers"));
 const FundingByInvitation = lazy(() => import("@/pages/funding-by-invitation"));
 const TumorsOverview = lazy(() => import("@/pages/tumors-overview"));
@@ -225,6 +228,10 @@ function Router() {
         <Route
           path="/science/programs/team-updates/prostate-july-2026"
           component={ProstateJuly2026TeamUpdate}
+        />
+        <Route
+          path="/science/programs/team-updates/pancreas-july-2026"
+          component={PancreasJuly2026TeamUpdate}
         />
         <Route path="/science/centers" component={Centers} />
         <Route

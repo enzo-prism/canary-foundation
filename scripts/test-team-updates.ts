@@ -18,8 +18,8 @@ const seoRoutes = JSON.parse(
 
 assert.deepEqual(
   publishedTeamUpdates.map((update) => update.id),
-  ["prostate-july-2026", "ovarian-june-2026"],
-  "Only the approved prostate and ovarian reports may be public right now.",
+  ["pancreas-july-2026", "prostate-july-2026", "ovarian-june-2026"],
+  "Only the approved pancreas, prostate, and ovarian reports may be public right now.",
 );
 
 assert.equal(
@@ -71,6 +71,30 @@ for (const approvedReportFact of [
     prostateSource.includes(approvedReportFact),
     true,
     `The prostate update must preserve approved report fact ${approvedReportFact}.`,
+  );
+}
+
+const pancreasUpdate = publishedTeamUpdates.find(
+  (update) => update.id === "pancreas-july-2026",
+);
+assert.ok(pancreasUpdate, "The approved July 2026 pancreas update must exist.");
+assert.equal(
+  pancreasUpdate.sourceFileName,
+  "Canary-Pancreas-Program-Report-July-2026.pdf",
+);
+const pancreasSource = JSON.stringify(pancreasUpdate);
+for (const approvedReportFact of [
+  "12%",
+  "70-80%",
+  "800+",
+  "Stanford High-Risk Cohort",
+  "glycoproteomics",
+  "point-of-care ultrasound",
+]) {
+  assert.equal(
+    pancreasSource.includes(approvedReportFact),
+    true,
+    `The pancreas update must preserve approved report fact ${approvedReportFact}.`,
   );
 }
 

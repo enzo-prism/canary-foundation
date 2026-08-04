@@ -117,6 +117,11 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Read the approved July 2026 Canary Foundation Prostate Cancer Team update on active surveillance, inherited-risk screening, imaging, and patient tools.",
   },
+  "/science/programs/team-updates/pancreas-july-2026": {
+    title: "Pancreas Cancer Team Update, July 2026 | Canary Foundation",
+    description:
+      "Read the approved July 2026 Canary Foundation Pancreas Cancer Team update on high-risk cohorts, portable ultrasound screening, cyst biomarkers, and blood-test evaluation.",
+  },
   "/science/programs/tumors/prostate": {
     title: "Prostate Cancer Research | Canary Foundation",
     description:

@@ -49,7 +49,7 @@ Every public report must record:
 | --- | --- | --- |
 | Ovarian Team Progress, June 2026 | Approved and published | Preserve the final donor-friendly facts. |
 | Prostate Program, July 2026 | Approved for public HTML publication by Don Listwin on July 17, 2026 | Publish the donor-friendly web report. Keep the source PDF private because download permission was not explicit. |
-| Pancreatic update | Not supplied | Keep a content-free placeholder only. |
+| Pancreas Program Report, July 2026 | Approved for public HTML publication | Publish the donor-friendly web report. Keep the source PDF private because download permission was not explicit. |
 | Q4 general overview | Not supplied | Keep a content-free placeholder only. |
 | UCSD CTUC launch | Not supplied | Keep a content-free placeholder only. |
 
@@ -71,3 +71,13 @@ Every public report must record:
 - Download permission: not explicit. Do not place the source PDF in `client/public/` or offer a download.
 - Claim source: every metric and medical statement on the web report must trace directly to the final 10-page PDF.
 - Figures: no prostate PDF figures are published in this release, so no new figure alt text or caption is required.
+
+## Pancreas Program, July 2026 publication evidence
+
+- Final source: `Canary Pancreas Program Report_July2026_dist.pdf` (7 pages).
+- Program and period: Canary Foundation Pancreas Cancer Team, July 2026.
+- Donor-friendly coordination: Heidi Auman supplied the latest program overview on August 3, 2026 and requested the same web treatment as the ovarian and prostate reports.
+- Public-use approval: Heidi's email records Don Listwin's direction to add this content to the website.
+- Download permission: not explicit. Do not place the source PDF in `client/public/` or offer a download.
+- Claim source: every metric and medical statement on the web report must trace directly to the final 7-page PDF.
+- Figures: no pancreas PDF figures are published in this release, so no new figure alt text or caption is required.

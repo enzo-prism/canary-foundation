@@ -48,7 +48,7 @@ The application features a modern, responsive design built with React 18 and Typ
 - **Archive route**: `/science/programs/team-updates` lists only records with `status: "published"` and `approvedForPublicUse: true`.
 - **Approved detail routes**: `/science/programs/team-updates/ovarian-june-2026` and `/science/programs/team-updates/prostate-july-2026` present the June 2026 ovarian and July 2026 prostate updates in a reusable report layout.
 - **Content model**: `client/src/data/team-updates.ts` holds only approved public records. `client/src/components/team-updates/` owns shared archive/detail presentation. Public routes must also be added to `shared/seo.ts` and `seo/routes.json`.
-- **Private preparation**: Pancreas, Q4, and CTUC are content-free pending shells in `internal/team-update-shells.ts`, a module that must never be imported by `client/`. They contain no report facts, routes, metadata, or assets and do not enter the public browser bundle.
+- **Private preparation**: Q4 and CTUC are content-free pending shells in `internal/team-update-shells.ts`, a module that must never be imported by `client/`. They contain no report facts, routes, metadata, or assets and do not enter the public browser bundle.
 - **Source and safety**: The ovarian copy mirrors Heidi's final donor-friendly PDF. Never reintroduce the confidential draft terms `CRABp2`, `ORF1p`, or `165 cases`. Run `npm run test:team-updates` and follow `docs/team-update-publication-workflow.md` before publication.
 
 ### Blog Content Model (2026 Update)

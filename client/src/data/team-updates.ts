@@ -171,6 +171,95 @@ export const ovarianJune2026Update: PublishedTeamUpdate = {
   sourcePdfDownloadApproved: false,
 };
 
+export const pancreasJuly2026Update: PublishedTeamUpdate = {
+  id: "pancreas-july-2026",
+  status: "published",
+  approvedForPublicUse: true,
+  slug: "pancreas-july-2026",
+  route: "/science/programs/team-updates/pancreas-july-2026",
+  teamName: "Pancreas Cancer Team",
+  dateLabel: "July 2026",
+  title: "Advancing Earlier Detection of Pancreatic Cancer",
+  summary:
+    "The Canary Foundation Pancreas Cancer Team is building a high-risk cohort, portable ultrasound screening, cyst biomarker infrastructure, and comparative blood-test evaluation to detect pancreatic cancer earlier.",
+  introduction: [
+    "Most pancreatic cancers are discovered too late for curative treatment. Today, five-year survival is 12%, and 70-80% of patients are diagnosed at a late stage. Late diagnosis is the greatest barrier to improving survival.",
+    "When pancreatic cancer is found at Stage 1, five-year survival reaches 70-80%. Early detection offers the best chance of cure. The team's goal is to detect pancreatic cancer before symptoms appear, when treatment is most effective and lives can be saved.",
+  ],
+  highlightsTitle: "Why Early Detection Matters",
+  highlights: [
+    {
+      label: "12%",
+      title: "five-year survival today",
+      text: "Most pancreatic cancers are discovered too late for curative treatment.",
+    },
+    {
+      label: "70-80%",
+      title: "patients diagnosed at late stage",
+      text: "Late diagnosis is the greatest barrier to improving survival.",
+    },
+    {
+      label: "70-80%",
+      title: "five-year survival when found at Stage 1",
+      text: "Early detection offers the best chance of cure.",
+    },
+    {
+      label: "800+",
+      title: "high-risk cohort participants",
+      text: "The Stanford High-Risk Cohort has enrolled more than 800 individuals and continues to grow.",
+    },
+  ],
+  strategySectionTitle: "Four-Part Pancreas Research Strategy",
+  strategySectionSummary:
+    "The team is bringing together high-risk patient cohorts, innovative imaging technologies, biospecimen resources, and biomarker validation to create the foundation for earlier detection.",
+  strategies: [
+    {
+      icon: "users",
+      title: "Build a cohort of high-risk individuals for pancreatic cancer",
+      purpose:
+        "Identify who will develop pancreatic cancer and who can safely avoid intervention.",
+      progress:
+        "People at high risk — those with pancreatic cysts, or a hereditary mutation or family history — are enrolled in the Stanford High-Risk Cohort, which now includes more than 800 individuals and continues to grow. Annual follow-up spans blood collection, clinical data, imaging, biospecimens, and risk factor tracking, feeding biomarker discovery and validation.",
+    },
+    {
+      icon: "stethoscope",
+      title:
+        "Develop a simple, portable, point-of-care ultrasound protocol to expand screening",
+      purpose:
+        "Make serial pancreatic screening more accessible for people at high risk through a low-cost, handheld ultrasound approach.",
+      progress:
+        "Wireless handheld point-of-care ultrasound (POCUS) connects to a mobile device for rapid bedside pancreas imaging. Clinical trials are evaluating pancreatic imaging compared to the gold-standard endoscopic ultrasound, testing contrast enhancement with microbubbles, and analyzing radio-frequency data. Contrast-enhanced ultrasound improves visualization of the pancreas using microbubble contrast agents, and quantitative ultrasound uses radio-frequency data to reveal tissue characteristics beyond what the eye can see. Academic, clinical, industry, and foundation partnerships enable this approach to early cancer detection.",
+    },
+    {
+      icon: "microscope",
+      title:
+        "Establish a translational infrastructure for pancreatic cyst biomarker discovery and validation",
+      purpose:
+        "Determine which cysts are precancerous, distinguishing harmless cysts from those most likely to become pancreatic cancer.",
+      progress:
+        "Cyst fluid collected from high-risk patients feeds advanced biomarker discovery through glycoproteomics: moving from traditional, less sensitive protein quantification to detailed fingerprinting of the sugars (glycans) that attach to those proteins. Glycans are known to change dramatically during cancer formation. The team will validate the most promising biomarkers to create the foundation for future clinical tests.",
+    },
+    {
+      icon: "dna",
+      title:
+        "Compare the diagnostic performance of commercially available blood tests",
+      purpose:
+        "Give physicians and patients independent evidence about which test performs best and how these tests should complement MRI and endoscopic ultrasound for people at high risk.",
+      progress:
+        "The team is launching a comparative diagnostic study of these tests among high-risk patients undergoing surgery for suspected pancreatic cancer. The study will conduct the first head-to-head comparison of leading commercially available blood tests in high-risk patients, determine which tests most accurately detect pancreatic cancer and distinguish cancer from benign disease, and generate the evidence needed to inform future screening recommendations and help patients and physicians make confident decisions.",
+    },
+  ],
+  lookingAheadTitle: "Pancreas Team: Looking Ahead",
+  lookingAhead:
+    "The team will expand cohort enrollment and follow-up, advance clinical trials and optimize imaging technologies, discover and validate biomarkers that identify cancer earlier, and define evidence-based screening strategies for high-risk patients.",
+  programRoute: "/science/programs/tumors/pancreatic",
+  programLinkLabel: "Explore Pancreatic Research",
+  sourceLabel:
+    "Canary Foundation Pancreas Cancer Team Program Report, July 2026.",
+  sourceFileName: "Canary-Pancreas-Program-Report-July-2026.pdf",
+  sourcePdfDownloadApproved: false,
+};
+
 export const prostateJuly2026Update: PublishedTeamUpdate = {
   id: "prostate-july-2026",
   status: "published",
@@ -277,6 +366,7 @@ export const prostateJuly2026Update: PublishedTeamUpdate = {
 // shells live under internal/ so their identifiers never enter the public
 // JavaScript bundle.
 export const publishedTeamUpdates: readonly PublishedTeamUpdate[] = [
+  pancreasJuly2026Update,
   prostateJuly2026Update,
   ovarianJune2026Update,
 ];
