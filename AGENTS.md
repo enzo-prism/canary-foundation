@@ -24,3 +24,11 @@ Testing relies on repo scripts instead of Jest. Run `./test-server.sh` for API s
 
 ## Commit & Pull Request Guidelines
 History shows short, imperative commits (e.g., “Update donation links across the website to the new campaign”). Reference the feature surface (“client/pages/about”) to aid reviewers. PRs should explain user impact, list commands/tests executed, attach screenshots for UI changes, call out redirect or sitemap updates, and link related docs (e.g., `DEPLOYMENT.md`).
+
+## Cursor Cloud specific instructions
+- This is a single monolithic full-stack service (Express host + Vite React SPA); there is no separate backend/frontend to start. Standard commands live in the "Build, Test, and Development Commands" section above and `README.md`.
+- `npm run dev` is the only service to run for local development. It auto-picks the next free port in the range 5000–5024 if 5000 is taken and prints the chosen URL as `[dev] Preview: http://localhost:<port>`; read that line rather than assuming 5000.
+- The app runs with no environment variables. Without `DATABASE_URL` it uses in-memory storage, so `POST /api/contact` returns `202` with `"persisted":false` (not `201`). This is expected in the cloud dev environment and is not a failure — do not treat it as a bug or add a database just to make it `201`.
+- The `test-*.sh` scripts and `npm run test:platform` each run their own `npm run build` and boot their own production server on an auto-picked free port (see `scripts/production-test-helpers.sh`), so they do not conflict with a running `npm run dev`. They are safe to run while dev is up.
+- Known quirk: `./test-seo-fix.sh` uses BSD `stat -f%z` and errors on Linux with `stat: invalid option -- '%'`. This is a pre-existing script portability issue, not an environment problem; the underlying SEO/compression behavior is still covered by `./test-server.sh` and `npm run test:platform`.
+- The Replit config pins `nodejs-20`, but the environment's Node 22 runs dev, build, type-check, and all test scripts without issue.
