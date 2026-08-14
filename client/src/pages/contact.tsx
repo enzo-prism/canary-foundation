@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { apiRequest } from "@/lib/queryClient";
 import { trackFormSubmission } from "@/lib/analytics";
+import { trackContactFormLead } from "@/lib/ga4";
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name."),
@@ -64,6 +65,7 @@ export default function Contact() {
     },
     onSuccess: (response) => {
       trackFormSubmission("contact_form");
+      trackContactFormLead();
       setSubmissionMessage({
         type: "success",
         text: response.message,

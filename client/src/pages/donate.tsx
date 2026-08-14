@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Mail, HeartHandshake, Landmark, PiggyBank, Car, Gift, ShieldCheck, Quote } from "lucide-react";
 import { trackClick, trackOutboundLink } from "@/lib/analytics";
+import { trackDonorboxLead } from "@/lib/ga4";
 import { Link } from "wouter";
 
 const DONORBOX_URL = "https://donorbox.org/canary-campaign";
@@ -43,6 +44,7 @@ export default function Donate() {
                     onClick={() => {
                       trackClick("donate_donorbox_primary", "cta");
                       trackOutboundLink(DONORBOX_URL);
+                      trackDonorboxLead("donate_primary");
                     }}
                   >
                     Donate Online
@@ -118,6 +120,7 @@ export default function Donate() {
                               onClick={() => {
                                 trackClick("donate_donorbox_secondary", "cta");
                                 trackOutboundLink(DONORBOX_URL);
+                                trackDonorboxLead("donate_secondary");
                               }}
                             >
                               Donate Online
