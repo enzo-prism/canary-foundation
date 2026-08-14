@@ -36,20 +36,23 @@ export default function Donate() {
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-                <Button asChild className="bg-primary text-white hover:bg-primary-dark h-12 px-8">
-                  <a
-                    href={DONORBOX_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => {
-                      trackClick("donate_donorbox_primary", "cta");
-                      trackOutboundLink(DONORBOX_URL);
-                      trackDonorboxLead("donate_primary");
-                    }}
-                  >
-                    Donate Online
-                  </a>
-                </Button>
+                <div className="flex flex-col items-center gap-1">
+                  <Button asChild className="bg-primary text-white hover:bg-primary-dark h-12 px-8">
+                    <a
+                      href={DONORBOX_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        trackClick("donate_donorbox_primary", "cta");
+                        trackOutboundLink(DONORBOX_URL);
+                        trackDonorboxLead("donate_primary");
+                      }}
+                    >
+                      Donate Online
+                    </a>
+                  </Button>
+                  <p className="text-sm text-gray-600">(opens Donorbox, secure)</p>
+                </div>
                 <Button asChild variant="outline" className="h-12 px-8">
                   <a href="#other-ways">
                     Other ways to give
@@ -112,20 +115,23 @@ export default function Donate() {
                           The earlier we find cancer, the better. Your gift supports early detection research and the work needed to bring breakthroughs to patients.
                         </p>
                         <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                          <Button asChild className="bg-primary text-white hover:bg-primary-dark">
-                            <a
-                              href={DONORBOX_URL}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => {
-                                trackClick("donate_donorbox_secondary", "cta");
-                                trackOutboundLink(DONORBOX_URL);
-                                trackDonorboxLead("donate_secondary");
-                              }}
-                            >
-                              Donate Online
-                            </a>
-                          </Button>
+                          <div className="flex flex-col items-start gap-1">
+                            <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                              <a
+                                href={DONORBOX_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => {
+                                  trackClick("donate_donorbox_secondary", "cta");
+                                  trackOutboundLink(DONORBOX_URL);
+                                  trackDonorboxLead("donate_secondary");
+                                }}
+                              >
+                                Donate Online
+                              </a>
+                            </Button>
+                            <p className="text-sm text-gray-600">(opens Donorbox, secure)</p>
+                          </div>
                           <Button asChild variant="outline">
                             <a href={`mailto:${DONATE_EMAIL}`}>
                               <Mail className="h-4 w-4" />

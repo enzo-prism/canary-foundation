@@ -203,11 +203,6 @@ export const pancreasJuly2026Update: PublishedTeamUpdate = {
       title: "five-year survival when found at Stage 1",
       text: "Early detection offers the best chance of cure.",
     },
-    {
-      label: "800+",
-      title: "high-risk cohort participants",
-      text: "The Stanford High-Risk Cohort has enrolled more than 800 individuals and continues to grow.",
-    },
   ],
   strategySectionTitle: "Four-Part Pancreas Research Strategy",
   strategySectionSummary:
@@ -219,7 +214,7 @@ export const pancreasJuly2026Update: PublishedTeamUpdate = {
       purpose:
         "Identify who will develop pancreatic cancer and who can safely avoid intervention.",
       progress:
-        "People at high risk — those with pancreatic cysts, or a hereditary mutation or family history — are enrolled in the Stanford High-Risk Cohort, which now includes more than 800 individuals and continues to grow. Annual follow-up spans blood collection, clinical data, imaging, biospecimens, and risk factor tracking, feeding biomarker discovery and validation.",
+        "People at high risk — those with pancreatic cysts, or a hereditary mutation or family history — are enrolled in the Stanford High-Risk Cohort. Annual follow-up spans blood collection, clinical data, imaging, biospecimens, and risk factor tracking, feeding biomarker discovery and validation.",
     },
     {
       icon: "stethoscope",

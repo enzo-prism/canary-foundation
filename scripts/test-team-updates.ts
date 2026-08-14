@@ -86,7 +86,6 @@ const pancreasSource = JSON.stringify(pancreasUpdate);
 for (const approvedReportFact of [
   "12%",
   "70-80%",
-  "800+",
   "Stanford High-Risk Cohort",
   "glycoproteomics",
   "point-of-care ultrasound",
@@ -97,6 +96,11 @@ for (const approvedReportFact of [
     `The pancreas update must preserve approved report fact ${approvedReportFact}.`,
   );
 }
+assert.equal(
+  pancreasSource.includes("800+"),
+  false,
+  "The leftover 800+ high-risk cohort enrollment stat must stay deleted.",
+);
 
 for (const update of privateTeamUpdateShells) {
   assert.equal(update.approvedForPublicUse, false);
