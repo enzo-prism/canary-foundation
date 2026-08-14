@@ -102,9 +102,9 @@ export function PublishedTeamUpdateReport({
                 <p className="mb-3 text-4xl font-bold text-slate-950">
                   {highlight.label}
                 </p>
-                <h3 className="mb-3 text-lg font-bold leading-snug text-slate-950">
+                <p className="mb-3 text-lg font-bold leading-snug text-slate-950">
                   {highlight.title}
-                </h3>
+                </p>
                 <p className="text-sm leading-6 text-slate-700">
                   {highlight.text}
                 </p>
