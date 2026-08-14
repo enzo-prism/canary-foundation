@@ -30,8 +30,8 @@ assert.equal(
   "initGA / page views must keep the existing gtag config",
 );
 assert.doesNotMatch(
-  ga4,
-  /gtag\(['"]config['"]/,
+  ga4.replace(/\/\/.*$/gm, ""),
+  /gtag\(\s*['"]config['"]/,
   "The generate_lead helper must not add a second gtag config",
 );
 assert.doesNotMatch(

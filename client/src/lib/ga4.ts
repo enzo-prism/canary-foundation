@@ -1,6 +1,6 @@
 // Allowlisted GA4 generate_lead helper.
 // Uses the existing measurement ID initialized by initGA() in analytics.ts.
-// Do not add a second gtag('config', ...) call here.
+// Do not add a second gtag config call here.
 
 export const generateLeadMethods = {
   form: "form",
@@ -22,14 +22,14 @@ export type GenerateLeadParams = {
 export const CONTACT_FORM_ID = "contact_form";
 export const DONORBOX_FORM_ID = "donorbox_canary_campaign";
 
-const ALLOWED_GENERATE_LEAD_KEYS = new Set<keyof GenerateLeadParams>([
+const ALLOWED_GENERATE_LEAD_KEYS = [
   "form_id",
   "form_name",
   "lead_source",
   "location",
   "method",
   "contact_method",
-]);
+] as const;
 
 const SAFE_PARAM_VALUE = /^[A-Za-z0-9._-]{1,80}$/;
 
