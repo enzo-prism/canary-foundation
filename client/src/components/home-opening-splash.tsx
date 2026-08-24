@@ -24,19 +24,32 @@ function wasDocumentReloaded(): boolean {
   return navigation?.type === "reload";
 }
 
+// Survives wouter remounts on `/`, resets on a full document load.
+let playedDuringThisDocument = false;
+
 export function shouldPlayHomeOpeningSplash(): boolean {
   if (typeof window === "undefined") {
     return false;
   }
 
+  if (playedDuringThisDocument) {
+    return false;
+  }
+
   try {
-    // Hard refresh replays the splash; in-app wouter navigation does not.
-    if (wasDocumentReloaded()) {
-      return true;
+    const alreadyShownThisSession =
+      sessionStorage.getItem(HOME_OPENING_SPLASH_STORAGE_KEY) === "1";
+
+    // Hard refresh replays once for this document. In-app navigation remounts
+    // the overlay but must not replay after it has already run.
+    if (alreadyShownThisSession && !wasDocumentReloaded()) {
+      return false;
     }
 
-    return sessionStorage.getItem(HOME_OPENING_SPLASH_STORAGE_KEY) !== "1";
+    playedDuringThisDocument = true;
+    return true;
   } catch {
+    playedDuringThisDocument = true;
     return true;
   }
 }

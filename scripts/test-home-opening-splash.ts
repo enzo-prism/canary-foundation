@@ -22,6 +22,8 @@ assert.equal(
 assert.match(splash, /THE BEGINNING\./, "Splash title must match Don's wording");
 assert.match(splash, /canary-long-beach-april-2005\.jpg/);
 assert.match(splash, /sessionStorage/);
+assert.match(splash, /playedDuringThisDocument/);
+assert.match(splash, /wasDocumentReloaded/);
 assert.match(splash, /HOME_OPENING_SPLASH_HOLD_MS = 6000/);
 assert.match(splash, /HOME_OPENING_SPLASH_FADE_MS = 500/);
 assert.match(splash, /Escape/);
