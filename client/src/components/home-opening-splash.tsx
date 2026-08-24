@@ -66,7 +66,15 @@ export default function HomeOpeningSplash() {
   const [phase, setPhase] = useState<SplashPhase>(() =>
     shouldPlayHomeOpeningSplash() ? "visible" : "hidden",
   );
+  const [photoReady, setPhotoReady] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (photoRef.current?.complete) {
+      setPhotoReady(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (phase === "hidden") {
@@ -91,9 +99,13 @@ export default function HomeOpeningSplash() {
       return;
     }
 
+    if (!photoReady) {
+      return;
+    }
+
     const timer = window.setTimeout(dismiss, HOME_OPENING_SPLASH_HOLD_MS);
     return () => window.clearTimeout(timer);
-  }, [dismiss, phase]);
+  }, [dismiss, phase, photoReady]);
 
   useEffect(() => {
     if (phase !== "fading") {
@@ -157,13 +169,27 @@ export default function HomeOpeningSplash() {
       <img
         src={splashPhoto}
         alt="Canary Foundation gathering in Long Beach, April 2005"
-        className="absolute inset-0 h-full w-full object-cover"
+        onLoad={() => setPhotoReady(true)}
+        onError={() => setPhotoReady(true)}
+        ref={photoRef}
+        className={cn(
+          "absolute inset-0 h-full w-full object-cover",
+          photoReady ? "opacity-100" : "opacity-0",
+        )}
       />
       <div
-        className="absolute inset-0 bg-black/50"
+        className={cn(
+          "absolute inset-0 bg-black/50",
+          photoReady ? "opacity-100" : "opacity-0",
+        )}
         aria-hidden="true"
       />
-      <div className="relative z-10 px-6 text-center">
+      <div
+        className={cn(
+          "relative z-10 px-6 text-center",
+          photoReady ? "opacity-100" : "opacity-0",
+        )}
+      >
         <p className="sr-only">Press Escape or click to skip.</p>
         <h1 className="font-sans text-4xl font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)] sm:text-5xl md:text-6xl lg:text-7xl">
           {HOME_OPENING_SPLASH_TITLE}
