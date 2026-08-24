@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Suspense, lazy, useEffect } from "react";
+import HomeOpeningSplash from "@/components/home-opening-splash";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import {
@@ -196,7 +197,9 @@ function Router() {
   }, [location]);
 
   return (
-    <Suspense fallback={<RouteLoadingFallback />}>
+    <>
+      {normalizeRoutePath(location) === "/" ? <HomeOpeningSplash /> : null}
+      <Suspense fallback={<RouteLoadingFallback />}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/contact" component={Contact} />
@@ -285,7 +288,8 @@ function Router() {
 
         <Route component={NotFound} />
       </Switch>
-    </Suspense>
+      </Suspense>
+    </>
   );
 }
 
