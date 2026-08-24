@@ -11,6 +11,7 @@
     "check": "tsc",
     "check:links": "node scripts/check-outbound-links.mjs",
     "test:web-cleanse": "tsx scripts/test-web-cleanse.ts",
+    "test:home-splash": "tsx scripts/test-home-opening-splash.ts",
     "test:ga4-lead": "tsx scripts/test-ga4-lead-events.ts",
     "test:team-updates": "tsx scripts/test-team-updates.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
