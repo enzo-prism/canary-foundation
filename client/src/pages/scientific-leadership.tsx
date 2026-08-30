@@ -168,7 +168,7 @@ export default function ScientificLeadership() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         <section className="bg-light py-16 md:py-20">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
