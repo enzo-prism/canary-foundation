@@ -22,7 +22,7 @@ export default function Donate() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         {/* Hero */}
         <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
           <div className="container mx-auto px-4">
@@ -37,7 +37,7 @@ export default function Donate() {
 
               <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
                 <div className="flex flex-col items-center gap-1">
-                  <Button asChild className="bg-primary text-white hover:bg-primary-dark h-12 px-8">
+                  <Button asChild className="h-12 bg-primary px-8 text-dark hover:bg-primary-dark">
                     <a
                       href={DONORBOX_URL}
                       target="_blank"
@@ -78,7 +78,7 @@ export default function Donate() {
               <Card className="bg-light border border-gray-200">
                 <CardContent className="p-8 md:p-10">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-white">
+                    <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-dark">
                       <Quote className="h-5 w-5" />
                     </div>
                     <div>
@@ -106,7 +106,7 @@ export default function Donate() {
                 <Card className="bg-white border border-gray-200 lg:col-span-2">
                   <CardContent className="p-8">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-white">
+                      <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-dark">
                         <HeartHandshake className="h-5 w-5" />
                       </div>
                       <div className="min-w-0">
@@ -116,7 +116,7 @@ export default function Donate() {
                         </p>
                         <div className="mt-6 flex flex-col sm:flex-row gap-3">
                           <div className="flex flex-col items-start gap-1">
-                            <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                            <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
                               <a
                                 href={DONORBOX_URL}
                                 target="_blank"
@@ -147,7 +147,7 @@ export default function Donate() {
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-8">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-white">
+                      <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-dark">
                         <ShieldCheck className="h-5 w-5" />
                       </div>
                       <div>
@@ -383,7 +383,7 @@ export default function Donate() {
 
               <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-white">
+                  <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary text-dark">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
