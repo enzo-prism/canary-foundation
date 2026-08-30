@@ -12,7 +12,7 @@ export default function FundingByInvitation() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         {/* Hero Section */}
         <section className="py-16 md:py-20 bg-light">
           <div className="container mx-auto px-4">
@@ -130,7 +130,7 @@ export default function FundingByInvitation() {
                 <Card className="bg-white shadow-lg border-l-4 border-primary">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-4">
-                      <span className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">1</span>
+                      <span className="w-8 h-8 bg-primary text-dark rounded-full flex items-center justify-center font-bold mr-4">1</span>
                       <h3 className="text-xl font-bold text-dark">Invitation Extended</h3>
                     </div>
                     <p className="text-gray-600 leading-relaxed">
