@@ -1,1 +1,1 @@
-PLACEHOLDER_WILL_REPLACE
+SEE_DISK_/tmp/canary-foundation/client/src/pages/home.tsx
