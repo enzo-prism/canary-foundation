@@ -14,6 +14,7 @@ export default function ProstateCancer() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      <main id="main-content" tabIndex={-1}>
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
@@ -57,7 +58,7 @@ export default function ProstateCancer() {
                     Read the latest approved progress report on PASS, PATROL, imaging innovation, and patient tools.
                   </p>
                 </div>
-                <Button asChild className="shrink-0 bg-primary text-white hover:bg-primary-dark">
+                <Button asChild className="shrink-0 bg-primary text-dark hover:bg-primary-dark">
                   <Link href="/science/programs/team-updates/prostate-july-2026">
                     Read the Update
                   </Link>
@@ -230,7 +231,7 @@ export default function ProstateCancer() {
                 Help us continue groundbreaking studies that improve outcomes for men with prostate cancer worldwide.
               </p>
               <Button 
-                className="bg-primary text-white hover:bg-primary-dark"
+                className="bg-primary text-dark hover:bg-primary-dark"
                 onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
               >
                 Donate Now
@@ -240,6 +241,7 @@ export default function ProstateCancer() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
