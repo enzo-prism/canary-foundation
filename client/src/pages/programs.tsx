@@ -15,7 +15,7 @@ export default function Programs() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         {/* Hero Section */}
         <section className="py-16 md:py-20 bg-light">
           <div className="container mx-auto px-4">
