@@ -1,22 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { Heart, Handshake, GraduationCap, Stethoscope, Users, Droplets, Shield, HandHeart, Users2, Share2, MapPin, Microscope, Building, Award, Lightbulb, Star, Target, TrendingUp, ArrowLeft, ArrowRight } from "lucide-react";
-import { Link } from "wouter";
-import BiomarkerGrid from "@/components/BiomarkerGrid";
-import { trackClick, trackVideo } from "@/lib/analytics";
-import { DON_LISTWIN_TITLE } from "@/data/leadership";
+import { Heart, Handshake, GraduationCap, Stethoscope, Users, Droplets, Shield, Microscope, Building, Award, Lightbulb, Star, Target } from "lucide-react";
+import { HomeUpper } from "@/components/home/home-upper";
+import { HomeMiddle } from "@/components/home/home-middle";
+import { HomeLower } from "@/components/home/home-lower";
 import canaryChallengeLogo from "@assets/canary challenge logo big_1752514995292.webp";
 import canaryFinishLine from "@assets/Canary Challenge Finish Line_1752514185862.webp";
 import canaryVolunteers from "@assets/Canary Challenge Volunteers_1752514185862.webp";
 import canaryBooth from "@assets/Canary Challenge Booth_1752514185862.webp";
 import canaryBiker from "@assets/Canary Challenge Biker_1752514185863.webp";
-import canaryAnimatedVideo from "@assets/canary foundation animated video_1753284730466.mp4";
-
-const FEATURED_REPORT_PATH = "/blog/canary-foundation-program-report-2025";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -56,3 +49,214 @@ export default function Home() {
     { year: 2023, title: "PATROL Launch", description: "Launch of PATROL: Prostate Cancer Screening for People at Genetic Risk for Aggressive Disease", icon: Shield, category: "research" },
     { year: 2024, title: "Future Goals", description: "Continuing research in multiomic analysis, point of care ultrasound, and microbubble technology", icon: Target, category: "future" }
   ];
+  
+  // Scroll to top on component mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+      if (mediaQuery.matches) {
+        setIsCarouselPlaying(false);
+        setIsVideoPlaying(false);
+        videoRef.current?.pause();
+      }
+    };
+
+    updateMotionPreference();
+    mediaQuery.addEventListener("change", updateMotionPreference);
+    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
+  }, []);
+
+  // Scroll-triggered animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '50px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleElements(prev => new Set(Array.from(prev).concat(entry.target.id)));
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with animate-on-scroll class
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Apply visibility classes when elements become visible
+  useEffect(() => {
+    const visibleElementsArray = Array.from(visibleElements);
+    visibleElementsArray.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.classList.add('animate-visible');
+      }
+    });
+  }, [visibleElements]);
+  
+  const heroImages = [
+    {
+      src: canaryChallengeLogo,
+      alt: "Historic Canary Challenge logo from past cycling fundraiser events featuring stylized cyclist figures with yellow canary bird",
+      title: "Past Fundraising Events"
+    },
+    {
+      src: canaryFinishLine,
+      alt: "Historic photo from Canary Challenge finish line showing volunteers celebrating community involvement in past fundraising events",
+      title: "Historic Challenge Events"
+    },
+    {
+      src: canaryVolunteers,
+      alt: "Historic photo of Canary Challenge volunteers in signature yellow shirts from past community fundraising events",
+      title: "Dedicated Volunteers"
+    },
+    {
+      src: canaryBooth,
+      alt: "Historic photo of Canary Foundation booth with volunteers supporting participants during past challenge events",
+      title: "Community Support"
+    },
+    {
+      src: canaryBiker,
+      alt: "Historic photo of Canary Challenge cyclist in yellow jersey from past fundraising cycling events",
+      title: "Community Participants"
+    }
+  ];
+  
+  // Auto-advance only while the visitor has left the gallery playing.
+  useEffect(() => {
+    if (!isCarouselPlaying || prefersReducedMotion) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroImages.length, isCarouselPlaying, prefersReducedMotion]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!isVideoPlaying || prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    video.play().catch(() => setIsVideoPlaying(false));
+  }, [isVideoPlaying, prefersReducedMotion]);
+  
+  const programCards = [
+    {
+      title: "Prostate Cancer Program",
+      description: "Finding potentially lethal prostate cancer early while reducing unnecessary treatments. Two multicenter studies: PATROL (genetic risk cohort) and PASS (active surveillance study).",
+      href: "/science/programs/tumors/prostate",
+      icon: Stethoscope,
+    },
+    {
+      title: "Ovarian Cancer Program",
+      description: "Focused on high-grade serous carcinoma origins in fallopian tubes. BRCA pre-cancer atlas with multi-omics data and STIC registry for early detection breakthroughs.",
+      href: "/science/programs/tumors/ovarian",
+      icon: Heart,
+    },
+    {
+      title: "Ultrasound Imaging Program",
+      description: "Point-of-care ultrasound (POCUS) technology for pancreatic cancer screening. Developing contrast-enhanced imaging with microbubbles and molecular imaging solutions.",
+      href: "/science/centers/stanford/imaging",
+      icon: Target,
+    },
+    {
+      title: "Liquid Biopsy Center",
+      description: "Breakthrough research in urine, interstitial fluid, and exosome analysis with microneedle patch technology.",
+      href: "/science/centers/stanford/biomarkers",
+      icon: Droplets,
+    },
+    {
+      title: "Molecular Imaging",
+      description: "Cutting-edge imaging technologies including photoacoustic imaging and microbubble contrast agents.",
+      href: "/science/centers/stanford/imaging",
+      icon: Lightbulb,
+    },
+    {
+      title: "Education & Training",
+      description: "NCI R25 CREST program, Phillips Postdoc Fellowship, and cancer research education initiatives.",
+      href: "/science/centers/stanford/for-scientists",
+      icon: GraduationCap,
+    },
+    {
+      title: "Cyclotron & Radiochemistry",
+      description: "Generates clinically approved radiotracers (36+ under FDA) supporting preclinical research and radiation safety education.",
+      href: "/science/centers/stanford",
+      icon: Microscope,
+    },
+    {
+      title: "Interventional Radiology",
+      description: "IRIS center projects including endovascular neuromodulation, stem cell implantation, and pediatric biodegradable stents.",
+      href: "/science/centers/stanford",
+      icon: Shield,
+    },
+    {
+      title: "Lung Cancer Program",
+      description: "Biomarkers for high-risk never-smokers, national screening trials with MD Anderson, and community outreach programs.",
+      href: "/science/programs/tumors/lung",
+      icon: Users,
+    },
+  ];
+
+  const nextSlide = () => {
+    setIsCarouselPlaying(false);
+    setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+  };
+  
+  const prevSlide = () => {
+    setIsCarouselPlaying(false);
+    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
+
+  const scrollTimeline = (direction: -1 | 1) => {
+    timelineRef.current?.scrollBy({
+      left: direction * 304,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
+
+  const interactiveProps = {
+    timelineEvents,
+    selectedTimelineItem,
+    setSelectedTimelineItem,
+    timelineRef,
+    scrollTimeline,
+    prefersReducedMotion,
+    videoRef,
+    isVideoPlaying,
+    setIsVideoPlaying,
+    programCards,
+    heroImages,
+    currentSlide,
+    setCurrentSlide,
+    nextSlide,
+    prevSlide,
+    isCarouselPlaying,
+    setIsCarouselPlaying,
+  };
+
+  return (
+    <div className="min-h-screen bg-light">
+      <Header />
+      <main id="main-content" tabIndex={-1}>
+        <HomeUpper {...interactiveProps} />
+        <HomeMiddle {...interactiveProps} />
+        <HomeLower {...interactiveProps} />
+      </main>
+      <Footer />
+    </div>
+  );
+}
