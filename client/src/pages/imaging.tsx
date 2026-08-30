@@ -119,7 +119,7 @@ export default function Imaging() {
     <div className="min-h-screen bg-light">
       <Header />
       
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         {/* Hero Section */}
         <section className="py-12 md:py-16 lg:py-20 bg-white">
           <div className="container mx-auto px-4">
