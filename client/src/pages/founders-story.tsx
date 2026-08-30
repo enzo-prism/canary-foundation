@@ -44,7 +44,7 @@ export default function FoundersStory() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         <section className="bg-gradient-to-b from-primary/10 via-white to-light py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.85fr)] lg:items-start">
@@ -78,7 +78,7 @@ export default function FoundersStory() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                  <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
                     <a href="#oral-history-2025">
                       Listen to the 2025 Oral History
                       <AudioLines className="w-4 h-4 ml-2" />
@@ -244,7 +244,7 @@ export default function FoundersStory() {
               </div>
 
               <div className="flex flex-wrap gap-3 mb-10">
-                <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
                   <a href={caltechTranscriptPdfUrl} target="_blank" rel="noopener noreferrer">
                     Full transcript (PDF)
                     <FileText className="w-4 h-4 ml-2" />
@@ -354,7 +354,7 @@ export default function FoundersStory() {
                 </ul>
 
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                  <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
                     <a
                       href={computerHistoryMuseumInterview.watchUrl}
                       target="_blank"
@@ -391,7 +391,7 @@ export default function FoundersStory() {
                 story shaped Canary's mission, research approach, and the work still ahead.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button asChild className="bg-primary text-white hover:bg-primary-dark">
+                <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
                   <Link href="/about/overview">
                     About Canary
                     <ArrowRight className="w-4 h-4 ml-2" />
