@@ -13,6 +13,7 @@ export default function OvarianCancer() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      <main id="main-content" tabIndex={-1}>
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
@@ -180,7 +181,7 @@ export default function OvarianCancer() {
                 Support ovarian cancer research to ensure no family experiences the loss the Listwin family endured.
               </p>
               <Button 
-                className="bg-primary text-white hover:bg-primary-dark"
+                className="bg-primary text-dark hover:bg-primary-dark"
                 onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
               >
                 Donate Now
@@ -190,6 +191,7 @@ export default function OvarianCancer() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

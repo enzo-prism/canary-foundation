@@ -14,6 +14,7 @@ export default function TumorsOverview() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      <main id="main-content" tabIndex={-1}>
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
@@ -218,7 +219,7 @@ export default function TumorsOverview() {
                 Your support helps advance early detection research across Canary's active cancer programs, bringing us closer to a world where cancer is detected and treated before symptoms appear.
               </p>
               <Button 
-                className="bg-primary text-white hover:bg-primary-dark"
+                className="bg-primary text-dark hover:bg-primary-dark"
                 onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
               >
                 Donate Now
@@ -228,6 +229,7 @@ export default function TumorsOverview() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
