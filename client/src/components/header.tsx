@@ -207,12 +207,12 @@ export default function Header() {
           onKeyDown={handleNavKeyDown}
         >
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3 rounded-md">
-              <img src={canaryLogo} alt="" className="h-10 w-10 object-contain" />
-              <span className="text-xl font-bold text-dark">Canary Foundation</span>
+            <Link href="/" className="flex min-w-0 items-center space-x-2 rounded-md sm:space-x-3">
+              <img src={canaryLogo} alt="" className="h-9 w-10 shrink-0 object-contain sm:h-10" />
+              <span className="truncate text-lg font-bold text-dark sm:text-xl">Canary Foundation</span>
             </Link>
 
-            <div className="hidden items-center gap-5 lg:flex">
+            <div className="hidden items-center gap-4 xl:flex 2xl:gap-5">
               <Link
                 href="/"
                 className="rounded-md font-medium text-dark transition-colors hover:text-primary"
@@ -293,7 +293,7 @@ export default function Header() {
             <button
               ref={mobileToggleRef}
               type="button"
-              className="rounded-md p-2 text-dark lg:hidden"
+              className="rounded-md p-2 text-dark xl:hidden"
               aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-main-menu"
@@ -307,7 +307,7 @@ export default function Header() {
             <div
               ref={mobileMenuRef}
               id="mobile-main-menu"
-              className="mt-5 max-h-[calc(100vh-7rem)] overflow-y-auto border-t border-gray-200 pt-5 lg:hidden"
+              className="mt-5 max-h-[calc(100vh-7rem)] overflow-y-auto border-t border-gray-200 pt-5 xl:hidden"
             >
               <ul className="space-y-2">
                 <li>

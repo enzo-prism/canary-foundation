@@ -41,7 +41,8 @@
   .bg-primary.text-white,
   .bg-primary .text-white,
   .bg-primary .text-white\/90,
-  .hover\:bg-primary:hover {
+  .hover\:bg-primary:hover,
+  .hover\:bg-primary:hover.text-white {
     color: var(--dark);
   }
 }
@@ -412,10 +413,17 @@ main[tabindex="-1"]:focus {
   
   /* Scroll-triggered animations */
   .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    will-change: opacity, transform;
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
   }
   
   .animate-on-scroll.animate-visible {
