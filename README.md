@@ -118,6 +118,15 @@ The July 2026 website cleanse is enforced by `client/src/pages/scientific-leader
 - Contact requests are size-limited, schema-validated, honeypot-protected, and rate-limited. The response states whether the message was durably stored or accepted only in temporary memory.
 - Production dependencies currently have no known audit findings. Remaining development-only advisories require separate major-version migration work and are intentionally not force-upgraded.
 
+## Local preview (this repo)
+
+```bash
+npm ci
+PORT=43123 npm run dev
+```
+
+Then open `http://127.0.0.1:43123`. The Express + Vite dev server must be used; do not open `client/index.html` as a static file.
+
 ## Deployment
 
 Deployed on **Replit** (autoscale). Build and run commands are defined in `.replit`:
@@ -146,6 +155,7 @@ npm run test:web-cleanse    # retired routes, leadership, and April meetings con
 
 ## Further documentation
 
+- **[Design audit — 30 August 2026](./docs/design-audit-2026-08-30.md)** — layout, contrast, and interaction bugs found on the live site and fixed in this pass.
 - **[AGENTS.md](./AGENTS.md)** — repository guidelines (structure, conventions, commands).
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** — production deployment guide, env vars, smoke checks.
 - **[Team Update publication workflow](./docs/team-update-publication-workflow.md)** — required approval and content-safety process.

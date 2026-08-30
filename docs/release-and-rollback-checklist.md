@@ -25,7 +25,7 @@ The 30 August 2026 design-audit pass (layout, contrast, and interaction) is docu
 
 ## Production verification
 
-- Confirm the public domain serves the reviewed commit and public asset hashes.
+- Confirm the public domain serves the reviewed commit and asset hashes.
 - Verify the homepage, contact page, Team Updates hub, approved report details, financials, donation routes, and public crawler assets.
 - Verify canonical host redirects and representative legacy redirects.
 - Submit a non-sensitive contact-form test only when a safe test destination and production approval are available.
