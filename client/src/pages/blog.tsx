@@ -45,8 +45,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-light">
       <Header />
-      
-      {/* Blog Header */}
+      <main id="main-content" tabIndex={-1}>
       <section className="bg-white py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto" id="blog-header">
@@ -70,7 +69,7 @@ export default function Blog() {
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category)}
-                  className={`animate-shimmer ${selectedCategory === category ? 'bg-primary text-white' : ''}`}
+                  className={`animate-shimmer ${selectedCategory === category ? "bg-primary text-dark" : ""}`}
                 >
                   {category}
                 </Button>
@@ -100,7 +99,7 @@ export default function Blog() {
                           {post.category}
                         </Badge>
                         {post.featured && (
-                          <Badge className="bg-primary text-white">Featured</Badge>
+                          <Badge className="bg-primary text-dark">Featured</Badge>
                         )}
                         <span className="text-sm text-gray-500">{post.readTime}</span>
                       </div>
@@ -158,6 +157,7 @@ export default function Blog() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>
