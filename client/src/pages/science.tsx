@@ -15,7 +15,7 @@ export default function Science() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="pt-20">
+      <main id="main-content" tabIndex={-1}>
         {/* Hero Section */}
         <section className="py-16 md:py-20 bg-light">
           <div className="container mx-auto px-4">
@@ -101,7 +101,7 @@ export default function Science() {
                     <Link href="/science/science/imaging">
                       <Button 
                         variant="outline" 
-                        className="border-primary text-primary hover:bg-primary hover:text-white font-semibold w-full"
+                        className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold w-full"
                       >
                         Explore Imaging Research
                         <ExternalLink className="w-4 h-4 ml-2" />
@@ -125,7 +125,7 @@ export default function Science() {
                     <Link href="/science/science/biomarkers">
                       <Button 
                         variant="outline" 
-                        className="border-primary text-primary hover:bg-primary hover:text-white font-semibold w-full"
+                        className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold w-full"
                       >
                         Explore Biomarker Research
                         <ExternalLink className="w-4 h-4 ml-2" />
