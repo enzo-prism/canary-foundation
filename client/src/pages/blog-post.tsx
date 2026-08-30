@@ -137,30 +137,29 @@ export default function BlogPost() {
       <Header />
       
       {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+      <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-gray-200">
         <div 
           className="h-full bg-primary transition-all duration-300"
           style={{ width: `${readingProgress}%` }}
         />
       </div>
       
-      <main>
-        {/* Hero Section */}
-        <section className="pt-24 pb-8 bg-gradient-to-b from-primary/10 to-transparent">
+      <main id="main-content" tabIndex={-1}>
+        <section className="bg-gradient-to-b from-primary/10 to-transparent py-10 pb-8">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Breadcrumbs */}
-              <nav className="flex items-center text-sm text-gray-600 mb-6">
+              <nav className="mb-6 flex min-w-0 items-center text-sm text-gray-600">
                 <Link href="/" className="hover:text-primary transition-colors">
                   Home
                 </Link>
-                <ChevronRight className="w-4 h-4 mx-2" />
+                <ChevronRight className="mx-2 h-4 w-4 shrink-0" />
                 <Link href="/blog" className="hover:text-primary transition-colors">
                   Blog
                 </Link>
-                <ChevronRight className="w-4 h-4 mx-2" />
-                <span className="text-gray-900 font-medium truncate">
-                  {post.title.substring(0, 50)}...
+                <ChevronRight className="mx-2 h-4 w-4 shrink-0" />
+                <span className="truncate font-medium text-gray-900">
+                  {post.title}
                 </span>
               </nav>
               
@@ -227,7 +226,7 @@ export default function BlogPost() {
                     <div className="flex flex-wrap gap-2">
                       <span className="text-sm font-semibold text-gray-600 mr-2">Tags:</span>
                       {post.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                        <Badge key={tag} variant="secondary" className="cursor-pointer hover:bg-primary hover:text-dark transition-colors">
                           {tag}
                         </Badge>
                       ))}
@@ -263,7 +262,7 @@ export default function BlogPost() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleShare('twitter')}
-                          className="hover:bg-primary hover:text-white"
+                          className="hover:bg-primary hover:text-dark"
                         >
                           <Twitter className="w-4 h-4 mr-2" />
                           Twitter
@@ -272,7 +271,7 @@ export default function BlogPost() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleShare('linkedin')}
-                          className="hover:bg-primary hover:text-white"
+                          className="hover:bg-primary hover:text-dark"
                         >
                           <Linkedin className="w-4 h-4 mr-2" />
                           LinkedIn
@@ -281,7 +280,7 @@ export default function BlogPost() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleShare('facebook')}
-                          className="hover:bg-primary hover:text-white"
+                          className="hover:bg-primary hover:text-dark"
                         >
                           <Facebook className="w-4 h-4 mr-2" />
                           Facebook
@@ -290,7 +289,7 @@ export default function BlogPost() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleShare('email')}
-                          className="hover:bg-primary hover:text-white"
+                          className="hover:bg-primary hover:text-dark"
                         >
                           <Mail className="w-4 h-4 mr-2" />
                           Email
@@ -299,7 +298,7 @@ export default function BlogPost() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleShare('copy')}
-                          className="hover:bg-primary hover:text-white col-span-2"
+                          className="hover:bg-primary hover:text-dark col-span-2"
                         >
                           <LinkIcon className="w-4 h-4 mr-2" />
                           Copy Link
@@ -414,7 +413,7 @@ export default function BlogPost() {
               {/* Back to Blog */}
               <div className="mt-12 text-center">
                 <Link href="/blog">
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-dark">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to All Articles
                   </Button>
@@ -429,7 +428,7 @@ export default function BlogPost() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40"
+          className="fixed bottom-8 right-8 z-40 rounded-full bg-primary p-3 text-dark shadow-lg transition-all duration-300 hover:bg-primary-dark"
           aria-label="Scroll to top"
         >
           <ChevronLeft className="w-6 h-6 rotate-90" />
