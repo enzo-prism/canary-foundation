@@ -26,7 +26,7 @@ client/            Vite React SPA
   index.html       HTML template (OG/Twitter tags, Organization JSON-LD, noscript fallback)
   src/
     pages/         Route surfaces (~50 pages, lazy-loaded)
-    components/    Reusable UI (ui/ = shadcn components)
+    components/    Reusable UI (ui/ = shadcn components; home/ = homepage sections)
     data/          Data-driven content (blog-posts.ts, leadership.ts, oral history)
     hooks/         Shared hooks (analytics, mobile, toast)
     lib/           Helpers (analytics, queryClient, blog-post-utils, cn)
@@ -137,6 +137,8 @@ run   = npm run start
 ```
 
 The production runtime is the bundled Express server (`dist/index.js`) — not a static host — which is why server-side metadata injection, legacy 301 redirects, `www`→apex canonicalization, crawler-asset serving, and security headers all work. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for the full deployment guide and smoke checks.
+
+A GitHub `main` push updates source only. **canaryfoundation.org stays on the previous Replit deployment until that app is published again.** The 30 August 2026 design-audit pass is on GitHub `main` and still needs that Replit publish.
 
 ## Testing
 

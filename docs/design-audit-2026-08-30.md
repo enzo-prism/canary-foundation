@@ -38,6 +38,8 @@ Visual QA of [canaryfoundation.org](https://canaryfoundation.org) against the cu
 | Header wordmark could wrap against the hamburger | Mobile header | Truncate + nowrap wordmark |
 | Twelve program/center pages had no `<main>`, so skip-to-content had nothing to target | Tumor, Stanford, FHCC, and clinical pages | Wrapped page content in `<main id="main-content">` |
 | Remaining yellow CTAs and numbered chips still declared `text-white` | Donate, program, founder, and science pages | Dark text on Canary yellow |
+| The 96KB homepage could not be pushed to GitHub as a single file | Homepage | Split into `pages/home.tsx` plus `components/home/home-{upper,middle,lower}.tsx` |
+| `/financial-chart-2020.webp` 404ed in local preview | Homepage financials | Import the 2020 expenses chart from `attached_assets` |
 
 ## Left unchanged on purpose
 
@@ -49,18 +51,23 @@ Visual QA of [canaryfoundation.org](https://canaryfoundation.org) against the cu
 
 ## Verification
 
-- `npm run check` (TypeScript)
-- Local preview of homepage, donate, about, blog, and a blog post at desktop and mobile widths
+- `npm run check` (TypeScript) after the homepage split
+- Local preview at `http://127.0.0.1:43123` (skip splash with click or Escape): homepage, donate, about, blog, a blog post, desktop and ~390px mobile
+- Confirmed: no double header gap, video Pause/Play below the circle, PATROL and Gambhir news links, carousel arrows on the image, timeline prev/next, dark text on yellow CTAs, mobile hamburger
 - Keyboard skip-link still targets `#main-content`
 
-## Shipping
+## Shipping (30 August 2026)
 
-Source of truth is GitHub `enzo-prism/canary-foundation` on `main`. Production at [canaryfoundation.org](https://canaryfoundation.org) is a separate Replit autoscale deployment. Pushing `main` does **not** republish the live site.
+| Surface | Status |
+| --- | --- |
+| GitHub `enzo-prism/canary-foundation` `main` | Design-audit source is on `main` (homepage restore through `290af644`, plus later doc commits) |
+| This workspace `main` | Same design-audit source |
+| Production [canaryfoundation.org](https://canaryfoundation.org) | **Not updated.** Replit autoscale is a separate publish. A GitHub push does not go live. |
 
-To put these design fixes on production:
+To put these fixes on production:
 
-1. Confirm the reviewed commit is on GitHub `main`.
-2. Open the Replit app (`replit.com/@enzo78/CanaryWebsite`) and **Publish** so the new build is what the domain serves.
-3. Smoke-check the homepage (skip splash), Donate, About, Blog, and a Team Updates page on the public domain.
+1. Confirm GitHub `main` includes `client/src/components/home/home-upper.tsx`, `home-middle.tsx`, and `home-lower.tsx`.
+2. Open the Replit app (`replit.com/@enzo78/CanaryWebsite`) and **Publish**.
+3. Smoke-check the public domain: skip splash, Donate, About, Blog, and a Team Updates page.
 
 Rollback: restore the previous Replit deployment, or revert the GitHub `main` commit and republish.

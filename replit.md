@@ -43,6 +43,7 @@ The application features a modern, responsive design built with React 18 and Typ
 - **Platform**: Replit autoscale deployment. Build and run commands live in `.replit` (`build = npm run build`, `run = npm run start`).
 - **Production runtime**: the bundled Express server at `dist/index.js` (not a static host). It serves the SPA and performs server-side per-route metadata/JSON-LD injection, legacy 301 redirects, `www`→apex canonicalization, crawler-asset serving, and security headers.
 - **SEO/meta source of truth**: route metadata and JSON-LD builders live in `shared/seo.ts`, consumed by both the Express server (`server/vite.ts`) and the client router (`client/src/App.tsx`) so server-rendered HTML and client navigation stay in sync.
+- **Homepage**: `client/src/pages/home.tsx` holds state and data; visual sections live in `client/src/components/home/` (`home-upper.tsx`, `home-middle.tsx`, `home-lower.tsx`). That split is required so the page can be committed through GitHub's file API.
 
 ### Team Updates / Program Progress
 - **Archive route**: `/science/programs/team-updates` lists only records with `status: "published"` and `approvedForPublicUse: true`.

@@ -2,7 +2,13 @@
 
 GitHub `main` and the Replit production deployment are separate release states. A push does not publish the live site.
 
-The 30 August 2026 design-audit pass (layout, contrast, and interaction) is documented in [design-audit-2026-08-30.md](./design-audit-2026-08-30.md). It is a visual-only release: no science copy, Team Update facts, or Donorbox destinations changed. After `main` is updated, production still requires a Replit publish.
+The 30 August 2026 design-audit pass (layout, contrast, and interaction) is documented in [design-audit-2026-08-30.md](./design-audit-2026-08-30.md). It is a visual-only release: no science copy, Team Update facts, or Donorbox destinations changed.
+
+**Release state on 30 August 2026**
+
+- GitHub `enzo-prism/canary-foundation` `main` holds the design-audit source (homepage split at `290af644` and later).
+- Local preview was verified on that source (homepage, donate, about, blog, mobile hamburger).
+- Production at canaryfoundation.org is **not** this commit until Replit Publish runs on `replit.com/@enzo78/CanaryWebsite`.
 
 ## Before review
 

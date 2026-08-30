@@ -75,6 +75,8 @@ npm run check:links -- --network
 6. Deploy from Replit's Publishing tool. A GitHub push updates `main`, but production remains on the previous Replit deployment until the Replit app is published again.
 7. Verify the public domain and crawler endpoints after deploy
 
+**Current release (30 August 2026):** the design-audit layout/contrast/interaction pass is on GitHub `enzo-prism/canary-foundation` `main`. It is **not** live on canaryfoundation.org until Replit Publish. See [docs/design-audit-2026-08-30.md](./docs/design-audit-2026-08-30.md).
+
 ## Public Smoke Checks
 
 ```bash
