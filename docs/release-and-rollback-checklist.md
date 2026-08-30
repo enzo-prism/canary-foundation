@@ -2,6 +2,8 @@
 
 GitHub `main` and the Replit production deployment are separate release states. A push does not publish the live site.
 
+The 30 August 2026 design-audit pass (layout, contrast, and interaction) is documented in [design-audit-2026-08-30.md](./design-audit-2026-08-30.md). It is a visual-only release: no science copy, Team Update facts, or Donorbox destinations changed. After `main` is updated, production still requires a Replit publish.
+
 ## Before review
 
 - Confirm the working tree contains only intended Canary Foundation changes.
@@ -23,7 +25,7 @@ GitHub `main` and the Replit production deployment are separate release states. 
 
 ## Production verification
 
-- Confirm the public domain serves the reviewed commit and asset hashes.
+- Confirm the public domain serves the reviewed commit and public asset hashes.
 - Verify the homepage, contact page, Team Updates hub, approved report details, financials, donation routes, and public crawler assets.
 - Verify canonical host redirects and representative legacy redirects.
 - Submit a non-sensitive contact-form test only when a safe test destination and production approval are available.
