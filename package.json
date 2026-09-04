@@ -14,6 +14,7 @@
     "test:home-splash": "tsx scripts/test-home-opening-splash.ts",
     "test:ga4-lead": "tsx scripts/test-ga4-lead-events.ts",
     "test:team-updates": "tsx scripts/test-team-updates.ts",
+    "test:awards": "tsx scripts/test-awards.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
     "db:push": "drizzle-kit push"
   },

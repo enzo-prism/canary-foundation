@@ -33,6 +33,9 @@ const BoardDirectors = lazy(() => import("@/pages/board-directors"));
 const LeadershipCouncil = lazy(() => import("@/pages/leadership-council"));
 const ScientificLeadership = lazy(() => import("@/pages/scientific-leadership"));
 const Financials = lazy(() => import("@/pages/financials"));
+const Awards = lazy(() => import("@/pages/awards"));
+const AwardsListwin = lazy(() => import("@/pages/awards-listwin"));
+const AwardsGambhir = lazy(() => import("@/pages/awards-gambhir"));
 const ApproachOverview = lazy(() => import("@/pages/approach-overview"));
 const CanaryScience = lazy(() => import("@/pages/canary-science"));
 const Programs = lazy(() => import("@/pages/programs"));
@@ -216,6 +219,9 @@ function Router() {
         <Route path="/about/leadership-council" component={LeadershipCouncil} />
         <Route path="/about/scientific-leadership" component={ScientificLeadership} />
         <Route path="/about/financials" component={Financials} />
+        <Route path="/about/awards" component={Awards} />
+        <Route path="/about/awards/listwin" component={AwardsListwin} />
+        <Route path="/about/awards/gambhir" component={AwardsGambhir} />
 
         {/* Canary Approach pages */}
         <Route path="/approach/overview" component={ApproachOverview} />

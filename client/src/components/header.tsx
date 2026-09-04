@@ -24,6 +24,17 @@ const navigationStructure: Record<string, NavSection> = {
       { name: "Board of Directors", path: "/about/board-directors" },
       { name: "Leadership Council", path: "/about/leadership-council" },
       { name: "Scientific Leadership", path: "/about/scientific-leadership" },
+      {
+        name: "Awards",
+        path: "/about/awards",
+        subItems: [
+          { name: "Don Listwin Award", path: "/about/awards/listwin" },
+          {
+            name: "Sanjiv “Sam” Gambhir Memorial Award",
+            path: "/about/awards/gambhir",
+          },
+        ],
+      },
       { name: "Financials", path: "/about/financials" },
     ],
   },
