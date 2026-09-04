@@ -87,6 +87,21 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Review Canary Foundation financial information and organizational stewardship.",
   },
+  "/about/awards": {
+    title: "Awards | Canary Foundation",
+    description:
+      "Canary Foundation presents two annual awards recognizing outstanding service/support and scientific research in cancer early detection. Nominations are open for future years.",
+  },
+  "/about/awards/listwin": {
+    title: "Don Listwin Award | Canary Foundation",
+    description:
+      "The Don Listwin Award for Outstanding Service/Support for Cancer Early Detection recognizes sustained or singular contributions to the field. Lisa Newcomb, PhD, is the inaugural recipient.",
+  },
+  "/about/awards/gambhir": {
+    title: "Sanjiv “Sam” Gambhir Memorial Award | Canary Foundation",
+    description:
+      "The Sanjiv “Sam” Gambhir Memorial Award for Cancer Early Detection recognizes outstanding sustained commitment or a singular scientific research achievement. Nominations are open for future years.",
+  },
   "/approach/overview": {
     title: "Canary Approach | Canary Foundation",
     description:
