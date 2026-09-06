@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ResearchNextSteps } from "@/components/research-next-steps";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -173,6 +174,8 @@ export default function OvarianCancer() {
                 </div>
               </div>
             </div>
+
+            <ResearchNextSteps update={{ href: "/science/programs/team-updates/ovarian-june-2026", label: "Ovarian research update: June 2026" }} />
 
             {/* Call to Action */}
             <div className="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8">

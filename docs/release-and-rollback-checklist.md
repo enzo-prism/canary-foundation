@@ -10,6 +10,8 @@ The 30 August 2026 design-audit pass (layout, contrast, and interaction) is docu
 - Local preview was verified on that source (homepage, donate, about, blog, mobile hamburger).
 - Production at canaryfoundation.org is **not** this commit until Replit Publish runs on `replit.com/@enzo78/CanaryWebsite`.
 
+The September 2026 SEO/AEO source update, complete-page rendering changes, test evidence, and outstanding release checks are recorded in [seo-aeo-audit-2026-09-06.md](./seo-aeo-audit-2026-09-06.md).
+
 ## Before review
 
 - Confirm the working tree contains only intended Canary Foundation changes.

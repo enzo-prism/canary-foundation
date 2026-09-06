@@ -360,11 +360,11 @@ export function HomeLower(_props: HomeInteractiveProps) {
                   <div className="space-y-3 text-gray-600">
                     <div className="flex items-center space-x-2">
                       <TrendingUp className="w-4 h-4 text-primary" />
-                      <span>91% goes to scientific programs</span>
+                      <span>91% of 2020 expenses supported scientific programs</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp className="w-4 h-4 text-primary" />
-                      <span>Only 12.6¢ cost per $1 raised</span>
+                      <span>2020 cost per $1 raised: 12.6¢</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp className="w-4 h-4 text-primary" />
@@ -429,7 +429,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
                 <div className="bg-primary bg-opacity-5 rounded-lg p-8 text-center">
                   <div className="text-3xl font-bold text-dark mb-4">Total 2020 Expenses: $3,963,900</div>
                   <p className="text-gray-600 text-xl mb-6">
-                    91% of every dollar donated goes directly to cancer research programs
+                    In 2020, 91% of total expenses supported scientific programs
                   </p>
                   <div className="grid md:grid-cols-2 gap-6 mt-8">
                     <div className="bg-white rounded-lg p-6 border border-gray-200">

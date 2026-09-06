@@ -33,7 +33,7 @@ export function HomeUpper({
                 Advancing <span className="text-primary animate-text-glow">Early Cancer Detection</span> Through Innovation
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-10 leading-relaxed animate-slideUp animate-stagger-1 max-w-3xl mx-auto">
-                The Canary Foundation is dedicated to developing breakthrough technologies and biomarkers for early cancer detection, precision treatment, and improving outcomes for patients worldwide.
+                Canary Foundation is a nonprofit founded in 2004 that funds research into early cancer detection. We support scientists developing biomarkers and imaging technologies, with research programs in prostate, ovarian, pancreatic, and lung cancer.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center animate-bounceIn animate-stagger-2">
                 <Button
@@ -320,7 +320,7 @@ export function HomeUpper({
                     size="sm"
                     className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
                   >
-                    Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                    Explore Early Detection Research <ArrowRight className="w-3 h-3 ml-1" />
                   </Button>
                 </Link>
               </CardContent>
@@ -339,7 +339,7 @@ export function HomeUpper({
                     size="sm"
                     className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
                   >
-                    Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                    Explore Our Collaborative Approach <ArrowRight className="w-3 h-3 ml-1" />
                   </Button>
                 </Link>
               </CardContent>
@@ -358,7 +358,7 @@ export function HomeUpper({
                     size="sm"
                     className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0"
                   >
-                    Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                    Explore Our Research Centers <ArrowRight className="w-3 h-3 ml-1" />
                   </Button>
                 </Link>
               </CardContent>
@@ -403,9 +403,9 @@ export function HomeUpper({
                   </div>
                   <CardContent className="flex flex-1 flex-col p-6">
                     <p className="mb-4 flex-1 text-gray-600">{program.description}</p>
-                    <Button asChild variant="ghost" size="sm" className="h-auto p-0 font-medium text-primary hover:bg-transparent hover:text-primary-dark">
+                    <Button asChild variant="ghost" size="sm" className="h-auto justify-start whitespace-normal p-0 text-left font-medium text-primary hover:bg-transparent hover:text-primary-dark">
                       <Link href={program.href}>
-                        Learn More <ArrowRight className="ml-1 h-3 w-3" />
+                        Explore {program.title} <ArrowRight aria-hidden="true" className="ml-1 h-3 w-3" />
                       </Link>
                     </Button>
                   </CardContent>
@@ -529,7 +529,7 @@ export function HomeUpper({
                       size="sm"
                       className="text-primary hover:text-primary-dark hover:bg-primary/10 font-medium p-0 text-xs"
                     >
-                      Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                      Read the EDX25 Conference Report <ArrowRight className="w-3 h-3 ml-1" />
                     </Button>
                   </Link>
                 </div>

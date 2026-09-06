@@ -5,18 +5,20 @@
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir ../dist/ssr && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "postbuild": "node postbuild.js",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
     "check:links": "node scripts/check-outbound-links.mjs",
+    "test:ssr": "tsx scripts/test-server-rendering.ts",
     "test:web-cleanse": "tsx scripts/test-web-cleanse.ts",
     "test:home-splash": "tsx scripts/test-home-opening-splash.ts",
     "test:ga4-lead": "tsx scripts/test-ga4-lead-events.ts",
     "test:team-updates": "tsx scripts/test-team-updates.ts",
     "test:awards": "tsx scripts/test-awards.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "test:seo": "tsx scripts/test-seo-metadata.ts && node scripts/test-crawl-generation.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

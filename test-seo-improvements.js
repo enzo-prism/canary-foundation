@@ -1,173 +1,95 @@
 #!/usr/bin/env node
-// Test script to verify SEO improvements
-
+// Validate existing production crawl assets. Run npm run build first.
+import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
 
-console.log('\n🔍 SEO Improvements Verification');
-console.log('=====================================\n');
-
-// Test files
-const files = {
-  sitemap: 'dist/public/sitemap.xml',
-  newsSitemap: 'dist/public/news-sitemap.xml',
-  llmSitemap: 'dist/public/llm.xml',
-  sitemapIndex: 'dist/public/sitemap-index.xml',
-  robots: 'dist/public/robots.txt',
-  aiTxt: 'dist/public/ai.txt'
-};
-
-let testsPassed = 0;
-let testsFailed = 0;
-
-function pass(message) {
-  console.log(`✅ ${message}`);
-  testsPassed++;
+const root = path.dirname(fileURLToPath(import.meta.url));
+const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
+const origin = "https://canaryfoundation.org";
+const manifest = JSON.parse(read("seo/routes.json"));
+const bundle = await build({
+  absWorkingDir: root, entryPoints: ["client/src/data/blog-posts.ts"],
+  bundle: true, platform: "node", format: "esm", write: false, tsconfig: "tsconfig.json",
+});
+const { blogPosts } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
+const xmlEscape = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;",
+})[character]);
+const locations = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const files = Object.fromEntries([
+  "sitemap.xml", "news-sitemap.xml", "llm.xml", "sitemap-index.xml", "robots.txt", "ai.txt",
+].map((file) => [file, read(`dist/public/${file}`)]));
+let failures = 0;
+function check(name, verify) {
+  try { verify(); console.log(`PASS: ${name}`); }
+  catch (error) { failures++; console.error(`FAIL: ${name}\n${error.message}`); }
 }
 
-function fail(message) {
-  console.log(`❌ ${message}`);
-  testsFailed++;
-}
-
-// Test 1: Check all files exist
-console.log('📁 File Existence Tests:');
-for (const [name, filepath] of Object.entries(files)) {
-  if (fs.existsSync(filepath)) {
-    pass(`${name} exists at ${filepath}`);
-  } else {
-    fail(`${name} missing at ${filepath}`);
+check("Main sitemap discovers every canonical route and article, without duplicates", () => {
+  const expected = [...new Set([...manifest.routes, ...blogPosts.map((post) => `/blog/${post.slug}`)])]
+    .map((route) => origin + route).sort();
+  assert.deepEqual(locations(files["sitemap.xml"]).sort(), expected);
+  assert.match(files["sitemap.xml"], /xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9"/);
+  assert.ok(expected.length <= 50000);
+});
+check("Only documented substantive update dates appear as lastmod", () => {
+  for (const [, entry] of files["sitemap.xml"].matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+    const route = locations(entry)[0].slice(origin.length);
+    const lastmod = entry.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+    assert.equal(lastmod, manifest.lastModified?.[route], route);
   }
-}
-
-// Test 2: Parse and validate main sitemap
-console.log('\n📋 Main Sitemap Analysis:');
-if (fs.existsSync(files.sitemap)) {
-  const sitemapContent = fs.readFileSync(files.sitemap, 'utf8');
-  
-  // Check for priority variety
-  const priorities = sitemapContent.match(/<priority>([\d.]+)<\/priority>/g);
-  if (priorities) {
-    const uniquePriorities = [...new Set(priorities)];
-    if (uniquePriorities.length > 3) {
-      pass(`Priority hierarchy found: ${uniquePriorities.length} different priority levels`);
-    } else {
-      fail(`Insufficient priority variety: only ${uniquePriorities.length} levels`);
-    }
+  assert.doesNotMatch(files["sitemap-index.xml"], /<lastmod>/);
+});
+check("News sitemap contains only actual articles published in the last two days", () => {
+  const xml = files["news-sitemap.xml"];
+  assert.match(xml, /xmlns:news="http:\/\/www.google.com\/schemas\/sitemap-news\/0.9"/);
+  const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)];
+  assert.ok(entries.length <= 1000);
+  assert.equal(new Set(locations(xml)).size, entries.length);
+  for (const [, entry] of entries) {
+    const url = locations(entry)[0];
+    const post = blogPosts.find((item) => origin + `/blog/${item.slug}` === url);
+    assert.ok(post, `Unknown news article: ${url}`);
+    const published = entry.match(/<news:publication_date>([^<]+)<\/news:publication_date>/)?.[1];
+    assert.equal(published, post.publishedDate ?? post.date);
+    const age = Date.now() - Date.parse(`${published}T00:00:00Z`);
+    assert.ok(age >= 0 && age <= 2 * 24 * 60 * 60 * 1000, `Stale or future news article: ${url}`);
+    assert.ok(entry.includes(`<news:title>${xmlEscape(post.title)}</news:title>`));
   }
-  
-  // Check for changefreq variety
-  const changefreqs = sitemapContent.match(/<changefreq>([^<]+)<\/changefreq>/g);
-  if (changefreqs) {
-    const uniqueFreqs = [...new Set(changefreqs)];
-    if (uniqueFreqs.length > 2) {
-      pass(`Change frequency variety: ${uniqueFreqs.length} different frequencies`);
-    } else {
-      fail(`Insufficient changefreq variety: only ${uniqueFreqs.length} frequencies`);
-    }
+  // An empty sitemap is valid when there have been no recent publications.
+});
+check("Robots rules allow public content and apply exclusions equally to all crawlers", () => {
+  const robots = files["robots.txt"];
+  const agents = [...robots.matchAll(/^User-agent:\s*(.+)$/gm)].map((match) => match[1]);
+  assert.deepEqual(agents, ["*"]);
+  assert.match(robots, /^Allow: \/$/m);
+  for (const excluded of ["/api/", "/admin/", "/server/"]) {
+    assert.ok(robots.includes(`Disallow: ${excluded}`));
   }
-  
-  // Check for blog posts
-  const blogUrls = sitemapContent.match(/\/blog\/[^<]+/g);
-  if (blogUrls && blogUrls.length > 5) {
-    pass(`Blog posts included: ${blogUrls.length} individual blog URLs`);
-  } else {
-    fail(`Missing blog posts: only ${blogUrls ? blogUrls.length : 0} found`);
-  }
-}
-
-// Test 3: Validate news sitemap
-console.log('\n📰 News Sitemap Validation:');
-if (fs.existsSync(files.newsSitemap)) {
-  const newsContent = fs.readFileSync(files.newsSitemap, 'utf8');
-  
-  // Check for news namespace
-  if (newsContent.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) {
-    pass('News sitemap has correct namespace');
-  } else {
-    fail('News sitemap missing proper namespace');
-  }
-  
-  // Google News sitemaps should include only articles from the last two days.
-  const newsEntries = newsContent.match(/<news:news>/g);
-  if (newsEntries && newsEntries.length >= 1) {
-    pass(`Recent news entries found: ${newsEntries.length} article(s)`);
-  } else {
-    fail(`No recent news entries found: ${newsEntries ? newsEntries.length : 0}`);
-  }
-}
-
-// Test 4: Check robots.txt enhancements
-console.log('\n🤖 Robots.txt Enhancements:');
-if (fs.existsSync(files.robots)) {
-  const robotsContent = fs.readFileSync(files.robots, 'utf8');
-  
-  // Check for AI crawlers
-  const aiCrawlers = ['GPTBot', 'ChatGPT-User', 'anthropic-ai', 'Claude-Web'];
-  let aiCrawlerCount = 0;
-  aiCrawlers.forEach(crawler => {
-    if (robotsContent.includes(`User-agent: ${crawler}`)) {
-      aiCrawlerCount++;
-    }
-  });
-  
-  if (aiCrawlerCount >= 3) {
-    pass(`AI crawler rules: ${aiCrawlerCount} AI crawlers configured`);
-  } else {
-    fail(`Missing AI crawler rules: only ${aiCrawlerCount} found`);
-  }
-  
-  // Check for multiple sitemaps
-  const sitemapRefs = robotsContent.match(/Sitemap:/g);
-  if (sitemapRefs && sitemapRefs.length >= 3) {
-    pass(`Multiple sitemaps referenced: ${sitemapRefs.length} sitemaps`);
-  } else {
-    fail(`Insufficient sitemap references: ${sitemapRefs ? sitemapRefs.length : 0}`);
-  }
-}
-
-// Test 5: Validate AI instructions
-console.log('\n🤖 AI Instructions (ai.txt):');
-if (fs.existsSync(files.aiTxt)) {
-  const aiContent = fs.readFileSync(files.aiTxt, 'utf8');
-  
-  if (aiContent.includes('Canary Foundation') && aiContent.includes('early detection')) {
-    pass('AI instructions contain organization context');
-  } else {
-    fail('AI instructions missing context');
-  }
-  
-  if (aiContent.includes('## About This Site') && aiContent.includes('## Key Sections')) {
-    pass('AI instructions properly structured');
-  } else {
-    fail('AI instructions lack structure');
-  }
-}
-
-// Test 6: Check sitemap index
-console.log('\n📚 Sitemap Index:');
-if (fs.existsSync(files.sitemapIndex)) {
-  const indexContent = fs.readFileSync(files.sitemapIndex, 'utf8');
-  
-  const sitemapEntries = indexContent.match(/<sitemap>/g);
-  if (sitemapEntries && sitemapEntries.length >= 3) {
-    pass(`Sitemap index contains ${sitemapEntries.length} sitemaps`);
-  } else {
-    fail(`Sitemap index incomplete: ${sitemapEntries ? sitemapEntries.length : 0} entries`);
-  }
-}
-
-// Summary
-console.log('\n' + '='.repeat(50));
-console.log('📊 TEST SUMMARY:');
-console.log(`   Passed: ${testsPassed}`);
-console.log(`   Failed: ${testsFailed}`);
-console.log(`   Total:  ${testsPassed + testsFailed}`);
-console.log('='.repeat(50));
-
-if (testsFailed === 0) {
-  console.log('\n🎉 All SEO improvements verified successfully!');
-  process.exit(0);
-} else {
-  console.log('\n⚠️  Some tests failed. Please review the output above.');
-  process.exit(1);
-}
+  assert.match(robots, /^Sitemap: https:\/\/canaryfoundation.org\/sitemap-index.xml$/m);
+  assert.doesNotMatch(robots, /Crawl-delay:|Host:/);
+});
+check("Sitemap index advertises main sitemap and only nonempty news", () => {
+  const expected = [origin + "/sitemap.xml"];
+  if (files["news-sitemap.xml"].includes("<news:news>")) expected.push(origin + "/news-sitemap.xml");
+  assert.deepEqual(locations(files["sitemap-index.xml"]), expected);
+  assert.match(files["sitemap-index.xml"], /<sitemapindex\s/);
+  for (const url of expected) assert.ok(fs.existsSync(path.join(root, "dist/public", new URL(url).pathname)));
+});
+check("Legacy discovery resources preserve usable canonical links", () => {
+  assert.equal(files["llm.xml"], files["sitemap.xml"]);
+  const guide = files["ai.txt"];
+  assert.match(guide, /Canary Foundation/);
+  assert.match(guide, /early (?:cancer )?detection/i);
+  assert.match(guide, /\/robots\.txt/);
+  const known = new Set([...locations(files["sitemap.xml"]), origin + "/sitemap.xml"]);
+  const linked = [...guide.matchAll(/https:\/\/canaryfoundation\.org\/[^\s]+/g)].map((match) => match[0]);
+  assert.ok(linked.length > 0);
+  for (const url of linked) assert.ok(known.has(url), `Guide links to a noncanonical page: ${url}`);
+  assert.doesNotMatch(guide, /All content is factual and based on peer-reviewed research|Preferred-crawl-rate/);
+});
+console.log(`${6 - failures}/6 production crawl checks passed.`);
+process.exitCode = failures ? 1 : 0;

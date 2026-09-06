@@ -230,10 +230,9 @@ export default function AboutOverview() {
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Magneto-Nano Sensor</h3>
                     <p className="text-gray-600 mb-4">
-                      Breakthrough device developed to measure blood biomarkers for prostate cancer. 
-                      This innovative sensor is 10,000 times more sensitive than existing tests.
+                      Device developed to investigate blood biomarkers for prostate cancer.
                     </p>
-                    <div className="text-sm text-primary font-semibold">10,000x more sensitive</div>
+                    <div className="text-sm text-primary font-semibold">Biomarker research</div>
                   </CardContent>
                 </Card>
 
@@ -241,10 +240,9 @@ export default function AboutOverview() {
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Microbubble Project</h3>
                     <p className="text-gray-600 mb-4">
-                      Novel enhanced ultrasound-based imaging technique that has recently received 
-                      FDA approval for clinical use.
+                      Research into microbubble contrast enhancement for ultrasound imaging.
                     </p>
-                    <div className="text-sm text-primary font-semibold">FDA Approved</div>
+                    <div className="text-sm text-primary font-semibold">Imaging research</div>
                   </CardContent>
                 </Card>
               </div>
@@ -258,6 +256,16 @@ export default function AboutOverview() {
                 </blockquote>
               </div>
             </div>
+          </div>
+        </section>
+        <section className="bg-light py-12 md:py-16">
+          <div className="container mx-auto max-w-5xl px-4">
+            <h2 className="mb-4 text-3xl font-bold text-dark">People behind Canary</h2>
+            <p className="mb-6 leading-relaxed text-gray-600">Meet the people guiding the foundation and supporting its mission.</p>
+            <ul className="flex flex-wrap gap-4">
+              <li><Link href="/about/leadership-council" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Meet the Leadership Council</Link></li>
+              <li><Link href="/about/scientific-leadership" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Meet our scientific leadership</Link></li>
+            </ul>
           </div>
         </section>
       </main>

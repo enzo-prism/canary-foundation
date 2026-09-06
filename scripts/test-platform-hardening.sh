@@ -70,6 +70,21 @@ if [[ -n "$asset" ]]; then
     echo "FAIL: hashed asset is missing immutable caching"
     FAILURES=$((FAILURES + 1))
   fi
+  compressed_headers="$(curl -sSI -H 'Accept-Encoding: gzip' "${TEST_BASE_URL}/assets/$(basename "$asset")" | tr -d '\r')"
+  if ! grep -qi '^content-encoding: gzip' <<< "$compressed_headers"; then
+    echo "FAIL: legitimate precompressed asset is not served with gzip"
+    FAILURES=$((FAILURES + 1))
+  fi
+fi
+
+# Encoded slash prevents URL normalization from hiding a traversal attempt.
+fixture_name="canary-traversal-test-$$.js"
+printf 'outside-public-sentinel' > "dist/${fixture_name}.gz"
+traversal_status="$(curl --path-as-is -sS -o /tmp/canary-traversal-response -w '%{http_code}' -H 'Accept-Encoding: gzip' "${TEST_BASE_URL}/%2e%2e%2f${fixture_name}")"
+rm -f "dist/${fixture_name}.gz"
+if [[ "$traversal_status" != "404" ]] || grep -q 'outside-public-sentinel' /tmp/canary-traversal-response; then
+  echo "FAIL: compressed asset traversal escaped the public directory"
+  FAILURES=$((FAILURES + 1))
 fi
 
 valid_payload='{"name":"Website Test","email":"test@example.com","subject":"Website question","message":"This is a valid website test message."}'

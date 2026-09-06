@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { ResearchAnswers } from "@/components/home/research-answers";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Heart, Handshake, GraduationCap, Stethoscope, Users, Droplets, Shield, Microscope, Building, Award, Lightbulb, Star, Target } from "lucide-react";
@@ -32,13 +33,13 @@ export default function Home() {
     { year: 2008, title: "PASS Study Begins", description: "Prostate Active Surveillance Study (PASS) enrolls first patients for low-risk prostate cancer monitoring", icon: Stethoscope, category: "research" },
     { year: 2008, title: "HE4 Ovarian Biomarker", description: "HE4 biomarker for ovarian cancer validated, improving early detection capabilities", icon: Target, category: "breakthrough" },
     { year: 2009, title: "Canary Center at Stanford", description: "Founded Canary Center at Stanford with Stanford School of Medicine and Stanford Cancer Institute, co-led by Sanjiv Sam Gambhir", icon: Building, category: "milestone" },
-    { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to detect biomarkers—10,000 times more sensitive than existing tests", icon: Lightbulb, category: "breakthrough" },
+    { year: 2009, title: "Magneto-nano Sensor", description: "Magneto-nano sensor developed to investigate biomarkers", icon: Lightbulb, category: "breakthrough" },
     { year: 2009, title: "Don Listwin NCI Board", description: "Don Listwin named to National Cancer Institute Board of Scientific Advisors", icon: Award, category: "milestone" },
     { year: 2011, title: "Gene Fusion Discovery", description: "Gene fusion discovered for ovarian cancer, advancing understanding of tumor biology", icon: Lightbulb, category: "breakthrough" },
-    { year: 2011, title: "Microbubble Imaging", description: "Microbubble imaging technology developed for pancreatic cancer detection below 1mm", icon: Microscope, category: "breakthrough" },
+    { year: 2011, title: "Microbubble Imaging", description: "Microbubble imaging research advances pancreatic cancer detection approaches", icon: Microscope, category: "breakthrough" },
     { year: 2012, title: "Spirit of Hope Award", description: "Stanford Cancer Institute awards Spirit of Hope Award recognizing outstanding contributions", icon: Award, category: "milestone" },
     { year: 2013, title: "Stanford Technology Park", description: "Canary Center moves to Stanford Technology and Innovation Park, doubling laboratory space", icon: Building, category: "milestone" },
-    { year: 2014, title: "FDA Approves Ultrasound", description: "FDA approves ultrasound using microbubble for prostate cancer trials at Stanford", icon: Award, category: "milestone" },
+    { year: 2014, title: "Ultrasound Research", description: "Microbubble ultrasound research advances toward prostate cancer trials at Stanford", icon: Award, category: "milestone" },
     { year: 2014, title: "NCI Award for PASS", description: "National Cancer Institute recognizes PASS study with significant funding award", icon: Award, category: "milestone" },
     { year: 2015, title: "Canary Quantum Cloud", description: "Launch of Canary Quantum Cloud for machine learning applications in cancer detection", icon: Lightbulb, category: "breakthrough" },
     { year: 2017, title: "Lung Cancer Biomarker", description: "Discovery of lung cancer biomarker attracts licensing interest from industry partners", icon: Target, category: "breakthrough" },
@@ -193,7 +194,7 @@ export default function Home() {
     },
     {
       title: "Cyclotron & Radiochemistry",
-      description: "Generates clinically approved radiotracers (36+ under FDA) supporting preclinical research and radiation safety education.",
+      description: "Supports radiotracer research, preclinical studies, and radiation safety education.",
       href: "/science/centers/stanford",
       icon: Microscope,
     },
@@ -255,6 +256,7 @@ export default function Home() {
         <HomeUpper {...interactiveProps} />
         <HomeMiddle {...interactiveProps} />
         <HomeLower {...interactiveProps} />
+        <ResearchAnswers />
       </main>
       <Footer />
     </div>

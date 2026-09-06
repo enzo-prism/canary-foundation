@@ -10,7 +10,7 @@ The Express server — not a static host — is what serves the app in productio
 
 ### Build
 ```bash
-npm ci && npm run build && node postbuild.js
+npm ci && npm run build
 ```
 
 ### Start
@@ -30,7 +30,8 @@ npm run start
 - Real `404` HTML with `noindex` for unknown page routes, plus JSON `404` responses for unknown API routes
 - Immutable one-year caching for hashed assets and `no-store` for HTML documents
 - Size-limited, honeypot-protected, rate-limited contact submissions
-- Per-route `<head>` metadata + JSON-LD injection and removal of the dev-only Replit banner
+- Complete React page HTML with per-route metadata and linked JSON-LD, followed by browser hydration; removal of the dev-only Replit banner
+- Canonical page aliases/trailing slashes normalized before static file serving
 
 ## Environment Variables
 
@@ -67,10 +68,10 @@ npm run check:links -- --network
 
 ## Deployment Checklist
 
-1. Build with `npm ci && npm run build && node postbuild.js`
+1. Build with `npm ci && npm run build`
 2. Start with `npm run start`
 3. Confirm the crawl assets exist in `dist/public/`
-4. Run the local verification scripts above and confirm `npm audit --omit=dev` reports no findings
+4. Run the local verification scripts above and review current `npm audit --omit=dev` findings (see the September SEO/AEO audit for the baseline)
 5. Confirm pending Team Updates have no public route, metadata, sitemap entry, or built content
 6. Deploy from Replit's Publishing tool. A GitHub push updates `main`, but production remains on the previous Replit deployment until the Replit app is published again.
 7. Verify the public domain and crawler endpoints after deploy
@@ -93,3 +94,9 @@ curl -I https://canaryfoundation.org/ai.txt
 ```
 
 The Scientific Leadership route should return `200`. Retired canonical routes such as `/science/publications` should return a direct `404`, without redirecting to replacement content.
+
+## September 2026 SEO/AEO source update
+
+See [the audit and validation record](docs/seo-aeo-audit-2026-09-06.md). `npm run build` now creates the browser bundle, `dist/ssr/entry-server.js` and its chunks, and the Express server; npm invokes `postbuild` automatically. Publish the complete `dist` tree with runtime dependencies, not just `dist/public`. A GitHub push is not a Replit publication.
+
+After one successful fresh build, use `SKIP_BUILD=1` when running multiple shell smoke scripts to reuse that exact artifact. Run `npm run test:seo`, `node scripts/test-crawl-generation.mjs`, and `BASE_URL=http://localhost:5000 npm run test:ssr` against the running server. Verify browser hydration, reduced-motion and script-blocked content before release.

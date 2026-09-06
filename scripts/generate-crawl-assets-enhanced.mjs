@@ -1,558 +1,169 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.join(__dirname, '..');
-
-// Configuration
-const SITE_ORIGIN = 'https://canaryfoundation.org';
-const BUILD_DIR = process.env.BUILD_DIR || 'dist/public';
-const SEO_ROUTES_FILE = path.join(rootDir, 'seo', 'routes.json');
-const MAX_URLS_PER_SITEMAP = 50000;
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const SITE_ORIGIN = "https://canaryfoundation.org";
 const GOOGLE_NEWS_MAX_AGE_MS = 2 * 24 * 60 * 60 * 1000;
 
-// Blog post SEO metadata for individual /blog/:slug pages.
-// IMPORTANT: keep in sync with client/src/data/blog-posts.ts (slug, date, category).
-const blogPosts = [
-  { slug: 'april-2026-science-meetings-stanford-ucsd', date: '2026-07-27', category: 'Research' },
-  { slug: 'canary-foundation-program-report-2025', date: '2025-11-16', category: 'Report' },
-  { slug: 'don-listwin-award-2025-ruth-etzioni', date: '2025-11-01', category: 'Awards' },
-  { slug: 'edx25-conference-portland-early-detection', date: '2025-11-01', category: 'Conference' },
-  { slug: 'oral-history-caltech', date: '2025-04-28', category: 'Interview' },
-  { slug: 'don-listwin-award-2024-antonis-antoniou', date: '2024-11-01', category: 'Awards' },
-  { slug: 'edx24-conference-stanford-cancer-research', date: '2024-11-01', category: 'Conference' },
-  { slug: 'edx23-conference-london-cancer-research', date: '2023-11-01', category: 'Conference' },
-  { slug: 'don-listwin-award-2023-peter-sasieni', date: '2023-11-01', category: 'Awards' },
-  { slug: 'canary-ovary-team-fallopian-tubes-study', date: '2023-11-01', category: 'Research' },
-  { slug: 'edx22-conference-sold-out-ohsu-stanford', date: '2022-11-17', category: 'Conference' },
-  { slug: 'don-listwin-award-2022-sudhir-srivastava', date: '2022-11-16', category: 'Awards' }
-];
-
-// Priority mapping for different page types
-const PRIORITY_MAP = {
-  home: 1.0,
-  mainSection: 0.9,  // /about, /science, /approach, /blog
-  importantSubpage: 0.8,  // /about/our-mission, /science/programs
-  detailPage: 0.7,  // /science/programs/tumors/prostate
-  deepSubpage: 0.6,  // /science/centers/stanford/cyclotron
-  blogPost: 0.5,  // Individual blog posts
-  utility: 0.3  // Contact, privacy, etc.
-};
-
-// Change frequency mapping
-const CHANGEFREQ_MAP = {
-  home: 'daily',
-  blog: 'weekly',
-  blogPost: 'monthly',
-  news: 'weekly',
-  monthly: 'monthly',
-  program: 'monthly',
-  about: 'yearly',
-  static: 'yearly',
-  contact: 'yearly'
-};
-
-/**
- * Determine priority based on URL path
- */
-function getPriority(path) {
-  if (path === '/' || path === '') return PRIORITY_MAP.home;
-  
-  const segments = path.split('/').filter(Boolean);
-  const firstSegment = segments[0];
-  
-  // Main sections
-  if (segments.length === 1) {
-    if (['about', 'science', 'approach', 'blog'].includes(firstSegment)) {
-      return PRIORITY_MAP.mainSection;
-    }
-    return PRIORITY_MAP.importantSubpage;
-  }
-  
-  // Blog posts
-  if (firstSegment === 'blog' && segments.length === 2) {
-    return PRIORITY_MAP.blogPost;
-  }
-  
-  // Important subpages
-  if (segments.length === 2) {
-    if (firstSegment === 'about' && ['our-mission', 'founders-story', 'board-of-directors'].includes(segments[1])) {
-      return PRIORITY_MAP.importantSubpage;
-    }
-    if (firstSegment === 'science' && ['programs', 'overview', 'centers'].includes(segments[1])) {
-      return PRIORITY_MAP.importantSubpage;
-    }
-    return PRIORITY_MAP.detailPage;
-  }
-  
-  // Deep pages
-  if (segments.length >= 3) {
-    return segments.length > 3 ? PRIORITY_MAP.deepSubpage : PRIORITY_MAP.detailPage;
-  }
-  
-  return PRIORITY_MAP.utility;
+function escapeXml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;",
+  })[character]);
 }
 
-/**
- * Determine change frequency based on URL path
- */
-function getChangeFreq(path) {
-  if (path === '/' || path === '') return CHANGEFREQ_MAP.home;
-  
-  const segments = path.split('/').filter(Boolean);
-  const firstSegment = segments[0];
-  
-  if (firstSegment === 'blog') {
-    return segments.length === 1 ? CHANGEFREQ_MAP.blog : CHANGEFREQ_MAP.blogPost;
-  }
-  
-  if (firstSegment === 'about') return CHANGEFREQ_MAP.about;
-  if (firstSegment === 'contact') return CHANGEFREQ_MAP.contact;
-  if (firstSegment === 'science') {
-    if (segments.includes('programs')) return CHANGEFREQ_MAP.program;
-    return CHANGEFREQ_MAP.monthly;
-  }
-  
-  return CHANGEFREQ_MAP.static;
+// Read the same typed content consumed by the website, including publication
+// dates that differ from an event/recording date. Do not maintain a second catalog.
+async function loadBlogPosts() {
+  const result = await build({
+    absWorkingDir: rootDir,
+    entryPoints: ["client/src/data/blog-posts.ts"],
+    bundle: true,
+    platform: "node",
+    format: "esm",
+    write: false,
+    tsconfig: "tsconfig.json",
+  });
+  const module = await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].text).toString("base64")}`);
+  return module.blogPosts;
 }
 
-/**
- * Scan build directory for HTML files and convert to URLs
- */
-function scanBuildDirectory() {
-  const buildPath = path.join(rootDir, BUILD_DIR);
-  const urls = [];
-  
-  if (!fs.existsSync(buildPath)) {
-    console.warn(`Build directory ${buildPath} not found`);
-    return urls;
+export function collectCrawlUrls(manifest, posts) {
+  if (!Array.isArray(manifest.routes) || !manifest.routes.length) {
+    throw new Error("seo/routes.json must contain a nonempty routes array");
   }
-
-  function scanDir(dir, basePath = '') {
-    const items = fs.readdirSync(dir);
-    
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      const stat = fs.statSync(fullPath);
-      
-      if (stat.isDirectory() && !item.startsWith('.') && item !== 'assets') {
-        scanDir(fullPath, path.join(basePath, item));
-      } else if (stat.isFile() && item.endsWith('.html')) {
-        // Skip service worker, 404, and other special pages
-        if (item === '404.html' || item === 'sw.html' || item === 'offline.html') {
-          continue;
-        }
-        
-        // Convert file path to URL path
-        let urlPath = basePath;
-        if (item === 'index.html') {
-          urlPath = basePath || '/';
-        } else {
-          urlPath = path.join(basePath, item.replace('.html', ''));
-        }
-        
-        // Ensure path starts with /
-        if (!urlPath.startsWith('/')) {
-          urlPath = '/' + urlPath;
-        }
-        
-        urls.push({
-          path: urlPath,
-          lastmod: stat.mtime.toISOString().split('T')[0],
-          priority: getPriority(urlPath),
-          changefreq: getChangeFreq(urlPath)
-        });
-      }
+  const seen = new Set();
+  const postByPath = new Map(posts.map((post) => [`/blog/${post.slug}`, post]));
+  for (const route of manifest.routes) {
+    if (typeof route !== "string" || !/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/.test(route)) {
+      throw new Error(`Invalid canonical sitemap route: ${route}`);
     }
-  }
-  
-  scanDir(buildPath);
-  return urls;
-}
-
-/**
- * Load routes from seo/routes.json with enhanced metadata
- */
-function loadSeoRoutes() {
-  const urls = [];
-  
-  if (fs.existsSync(SEO_ROUTES_FILE)) {
-    try {
-      const data = JSON.parse(fs.readFileSync(SEO_ROUTES_FILE, 'utf8'));
-      const today = new Date().toISOString().split('T')[0];
-      
-      for (const route of data.routes || []) {
-        if (route && route.startsWith('/')) {
-          urls.push({
-            path: route,
-            lastmod: today,
-            priority: getPriority(route),
-            changefreq: getChangeFreq(route)
-          });
-        }
-      }
-    } catch (err) {
-      console.error('Error reading seo/routes.json:', err.message);
+    if (seen.has(route)) throw new Error(`Duplicate sitemap route: ${route}`);
+    if (route.startsWith("/blog/") && !postByPath.has(route)) {
+      throw new Error(`Sitemap blog route has no article: ${route}`);
     }
+    seen.add(route);
   }
-  
-  // Add individual blog post pages
-  for (const post of blogPosts) {
-    urls.push({
-      path: `/blog/${post.slug}`,
-      lastmod: post.date,
-      priority: PRIORITY_MAP.blogPost,
-      changefreq: CHANGEFREQ_MAP.blogPost,
-      isNews: true,
-      category: post.category
-    });
-  }
-  
-  return urls;
-}
-
-/**
- * Merge and deduplicate URLs
- */
-function mergeUrls(scanUrls, seoUrls) {
-  const urlMap = new Map();
-  
-  // Add scanned URLs first
-  for (const url of scanUrls) {
-    urlMap.set(url.path, url);
-  }
-  
-  // Add/override with SEO routes
-  for (const url of seoUrls) {
-    urlMap.set(url.path, url);
-  }
-  
-  // Sort by priority (highest first), then by path
-  return Array.from(urlMap.values()).sort((a, b) => {
-    if (b.priority !== a.priority) {
-      return b.priority - a.priority;
+  // Content additions are discovered automatically, even before the static route
+  // manifest changes. Unknown built HTML files are deliberately not crawl targets.
+  for (const route of postByPath.keys()) seen.add(route);
+  return [...seen].sort().map((route) => {
+    const post = postByPath.get(route);
+    const lastmod = manifest.lastModified?.[route];
+    // No file mtimes, deploy dates, or guessed publication dates as lastmod.
+    // Editors may supply the date of a substantive content update in the manifest.
+    if (lastmod && (!/^\d{4}-\d{2}-\d{2}$/.test(lastmod) ||
+        !Number.isFinite(Date.parse(lastmod)) || new Date(lastmod).toISOString().slice(0, 10) !== lastmod)) {
+      throw new Error(`Invalid content lastModified date for ${route}: ${lastmod}`);
     }
-    return a.path.localeCompare(b.path);
+    return {
+      path: route,
+      ...(lastmod ? { lastmod } : {}),
+      ...(post ? { title: post.title, publishedDate: post.publishedDate ?? post.date } : {}),
+    };
   });
 }
 
-/**
- * Generate enhanced sitemap XML
- */
-function generateSitemapXml(urls) {
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
-  xml += '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n';
-  xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
-  
-  for (const url of urls) {
-    xml += '  <url>\n';
-    xml += `    <loc>${SITE_ORIGIN}${url.path}</loc>\n`;
-    xml += `    <lastmod>${url.lastmod}</lastmod>\n`;
-    xml += `    <changefreq>${url.changefreq}</changefreq>\n`;
-    xml += `    <priority>${url.priority.toFixed(1)}</priority>\n`;
-    xml += '  </url>\n';
-  }
-  
-  xml += '</urlset>';
-  return xml;
+export function generateSitemapXml(urls) {
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls.map((url) => `  <url>\n    <loc>${escapeXml(SITE_ORIGIN + url.path)}</loc>\n` +
+      (url.lastmod ? `    <lastmod>${escapeXml(url.lastmod)}</lastmod>\n` : "") +
+      "  </url>\n").join("") + "</urlset>\n";
 }
 
-/**
- * Generate news sitemap for blog posts
- */
-function generateNewsSitemapXml(urls) {
-  const now = Date.now();
-  const newsUrls = urls.filter(url => {
-    if (!url.isNews) return false;
-    const publishedAt = Date.parse(`${url.lastmod}T00:00:00Z`);
+export function generateNewsSitemapXml(urls, now = Date.now()) {
+  const newsUrls = urls.filter((url) => {
+    if (!url.publishedDate) return false;
+    const publishedAt = Date.parse(`${url.publishedDate}T00:00:00Z`);
     const age = now - publishedAt;
     return Number.isFinite(publishedAt) && age >= 0 && age <= GOOGLE_NEWS_MAX_AGE_MS;
   });
-  
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
-  xml += '        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n';
-  
-  for (const url of newsUrls) {
-    xml += '  <url>\n';
-    xml += `    <loc>${SITE_ORIGIN}${url.path}</loc>\n`;
-    xml += '    <news:news>\n';
-    xml += '      <news:publication>\n';
-    xml += '        <news:name>Canary Foundation</news:name>\n';
-    xml += '        <news:language>en</news:language>\n';
-    xml += '      </news:publication>\n';
-    xml += `      <news:publication_date>${url.lastmod}</news:publication_date>\n`;
-    xml += `      <news:title>${url.path.split('/').pop().replace(/-/g, ' ')}</news:title>\n`;
-    if (url.category) {
-      xml += `      <news:keywords>${url.category}, cancer research, early detection</news:keywords>\n`;
-    }
-    xml += '    </news:news>\n';
-    xml += '  </url>\n';
-  }
-  
-  xml += '</urlset>';
-  return xml;
+  if (newsUrls.length > 1000) throw new Error("News sitemap exceeds the 1,000 article limit");
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' +
+    newsUrls.map((url) => `  <url>\n    <loc>${escapeXml(SITE_ORIGIN + url.path)}</loc>\n` +
+      "    <news:news>\n      <news:publication>\n" +
+      "        <news:name>Canary Foundation</news:name>\n        <news:language>en</news:language>\n" +
+      "      </news:publication>\n" +
+      `      <news:publication_date>${escapeXml(url.publishedDate)}</news:publication_date>\n` +
+      `      <news:title>${escapeXml(url.title)}</news:title>\n` +
+      "    </news:news>\n  </url>\n").join("") + "</urlset>\n";
 }
 
-/**
- * Generate sitemap index XML
- */
-function generateSitemapIndexXml(sitemaps) {
-  const today = new Date().toISOString().split('T')[0];
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  
-  for (const sitemap of sitemaps) {
-    xml += '  <sitemap>\n';
-    xml += `    <loc>${SITE_ORIGIN}/${sitemap}</loc>\n`;
-    xml += `    <lastmod>${today}</lastmod>\n`;
-    xml += '  </sitemap>\n';
-  }
-  
-  xml += '</sitemapindex>';
-  return xml;
-}
-
-/**
- * Generate enhanced LLM/AI sitemap with additional context
- */
-function generateLLMSitemapXml(urls) {
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<!-- Enhanced sitemap for AI/LLM crawlers with semantic metadata -->\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
-  xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
-  
-  // Only include important pages for AI understanding
-  const aiUrls = urls.filter(url => url.priority >= 0.6);
-  
-  for (const url of aiUrls) {
-    xml += '  <url>\n';
-    xml += `    <loc>${SITE_ORIGIN}${url.path}</loc>\n`;
-    xml += `    <lastmod>${url.lastmod}</lastmod>\n`;
-    xml += `    <priority>${url.priority.toFixed(1)}</priority>\n`;
-    
-    // Add semantic hints based on path
-    const segments = url.path.split('/').filter(Boolean);
-    if (segments[0]) {
-      xml += `    <!-- Section: ${segments[0]} -->\n`;
-    }
-    if (url.path.includes('program')) {
-      xml += '    <!-- Type: Research Program -->\n';
-    }
-    if (url.path.includes('tumor')) {
-      xml += '    <!-- Type: Cancer Research -->\n';
-    }
-    if (url.path.includes('blog')) {
-      xml += '    <!-- Type: News/Updates -->\n';
-    }
-    
-    xml += '  </url>\n';
-  }
-  
-  xml += '</urlset>';
-  return xml;
-}
-
-/**
- * Generate enhanced robots.txt
- */
-function generateRobotsTxt() {
+export function generateRobotsTxt() {
+  // A single group applies the same rules to search and AI crawlers. Specific
+  // user-agent groups would supersede these exclusions, not inherit them.
   return `# Canary Foundation Robots.txt
-# Last updated: ${new Date().toISOString().split('T')[0]}
-
-# Default - Allow all crawlers
 User-agent: *
 Allow: /
-Crawl-delay: 1
-
-# Search Engine Crawlers - No delay
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 0
-
-# AI/LLM Crawlers
-User-agent: GPTBot
-Allow: /
-Crawl-delay: 2
-
-User-agent: ChatGPT-User
-Allow: /
-Crawl-delay: 2
-
-User-agent: CCBot
-Allow: /
-Crawl-delay: 2
-
-User-agent: anthropic-ai
-Allow: /
-Crawl-delay: 2
-
-User-agent: Claude-Web
-Allow: /
-Crawl-delay: 2
-
-# Disallow sensitive areas
-User-agent: *
 Disallow: /api/
 Disallow: /admin/
-Disallow: /*.json$
 Disallow: /server/
 
-# Sitemaps
 Sitemap: ${SITE_ORIGIN}/sitemap-index.xml
-Sitemap: ${SITE_ORIGIN}/sitemap.xml
-Sitemap: ${SITE_ORIGIN}/news-sitemap.xml
-Sitemap: ${SITE_ORIGIN}/llm.xml
-
-# Host preference (for supporting crawlers)
-Host: ${SITE_ORIGIN}`;
+`;
 }
 
-/**
- * Generate enhanced ai.txt for AI crawlers
- */
 function generateAiTxt() {
-  return `# AI/LLM Crawler Instructions for Canary Foundation
-# Organization: Canary Foundation - Early Cancer Detection Research
-# Domain: ${SITE_ORIGIN}
-# Last Updated: ${new Date().toISOString()}
+  // Legacy informational resource, not a supported indexing or permission protocol.
+  return `# Canary Foundation
 
-## About This Site
-Canary Foundation is a nonprofit organization dedicated to the early detection of cancer.
-Founded in 2004, it supports collaborative research aimed at detecting cancer at its earliest, most treatable stages.
+Canary Foundation is a nonprofit organization supporting research into early cancer detection.
+This file is a guide to public website content. Crawl access is described in /robots.txt.
 
-## Content Guidelines for AI
-- This site contains scientific research information about cancer early detection
-- All content is factual and based on peer-reviewed research
-- The foundation's active program pages focus on prostate, ovarian, pancreatic, and lung cancer
-- We collaborate with Stanford, OHSU, and Cancer Research UK
+## Foundation
+- Mission and history: ${SITE_ORIGIN}/about/overview
+- Leadership: ${SITE_ORIGIN}/about/scientific-leadership
+- Financial information: ${SITE_ORIGIN}/about/financials
 
-## Key Sections
-1. /science - Research programs and scientific breakthroughs
-2. /about - Foundation history, mission, and leadership
-3. /blog - Latest news and research updates
-4. /approach - Our collaborative research methodology
+## Research and updates
+- Research approach: ${SITE_ORIGIN}/approach/overview
+- Cancer research programs: ${SITE_ORIGIN}/science/programs
+- Research team updates: ${SITE_ORIGIN}/science/programs/team-updates
+- Foundation news and articles: ${SITE_ORIGIN}/blog
 
-## Crawling Instructions
-User-agent: *
-Allow: /
-Preferred-crawl-rate: 2 pages per second
-Sitemap: ${SITE_ORIGIN}/llm.xml
+Use linked pages and their cited sources for context and dates. Research updates do not establish that a test is available for routine screening.
 
-## Data Usage
-- Content may be used for educational and informational purposes
-- Please attribute information to "Canary Foundation"
-- Medical information should not be used for diagnosis or treatment advice
-
-## Contact
-For questions about AI/LLM access: info@canaryfoundation.org`;
+Sitemap: ${SITE_ORIGIN}/sitemap.xml
+Contact: ${SITE_ORIGIN}/contact
+`;
 }
 
-/**
- * Build all crawl assets and write to disk
- */
-export function buildCrawlAssets() {
-  const scanUrls = scanBuildDirectory();
-  const seoUrls = loadSeoRoutes();
-  const allUrls = mergeUrls(scanUrls, seoUrls);
-  
-  console.log(`\n🔍 Enhanced SEO Crawl Asset Generation`);
-  console.log(`=======================================`);
-  console.log(`  BUILD_DIR: ${BUILD_DIR}`);
-  console.log(`  URLs from build scan: ${scanUrls.length}`);
-  console.log(`  URLs from seo/routes.json: ${seoUrls.length}`);
-  console.log(`  Total unique URLs: ${allUrls.length}`);
-  console.log(`  Blog post pages added: ${blogPosts.length}`);
-  
-  // Analyze priority distribution
-  const priorityGroups = {
-    '1.0': allUrls.filter(u => u.priority === 1.0).length,
-    '0.9': allUrls.filter(u => u.priority === 0.9).length,
-    '0.8': allUrls.filter(u => u.priority === 0.8).length,
-    '0.7': allUrls.filter(u => u.priority === 0.7).length,
-    '0.6': allUrls.filter(u => u.priority === 0.6).length,
-    '0.5': allUrls.filter(u => u.priority === 0.5).length,
-    '< 0.5': allUrls.filter(u => u.priority < 0.5).length
-  };
-  
-  console.log(`\n📊 Priority Distribution:`);
-  Object.entries(priorityGroups).forEach(([priority, count]) => {
-    if (count > 0) {
-      console.log(`  Priority ${priority}: ${count} pages`);
-    }
-  });
-  
+export async function buildCrawlAssets({ buildDir = process.env.BUILD_DIR || "dist/public", now = Date.now() } = {}) {
+  const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, "seo/routes.json"), "utf8"));
+  const urls = collectCrawlUrls(manifest, await loadBlogPosts());
+  if (urls.length > 50000) throw new Error("Sitemap exceeds 50,000 URLs; split it before publishing");
+  const sitemapXml = generateSitemapXml(urls);
+  const newsSitemapXml = generateNewsSitemapXml(urls, now);
+  const sitemaps = ["sitemap.xml"];
+  // Retain the legacy endpoint, but do not advertise an empty news sitemap.
+  if (newsSitemapXml.includes("<news:news>")) sitemaps.push("news-sitemap.xml");
+  const sitemapIndexXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    sitemaps.map((file) => `  <sitemap><loc>${SITE_ORIGIN}/${file}</loc></sitemap>\n`).join("") +
+    "</sitemapindex>\n";
   const result = {
-    robotsTxt: generateRobotsTxt(),
-    aiTxt: generateAiTxt(),
-    urls: allUrls,
-    scanCount: scanUrls.length,
-    seoCount: seoUrls.length,
-    totalCount: allUrls.length
+    urls, totalCount: urls.length, sitemapXml, newsSitemapXml, sitemapIndexXml,
+    robotsTxt: generateRobotsTxt(), aiTxt: generateAiTxt(),
+    // Keep existing inbound links working; this is an ordinary sitemap alias.
+    llmXml: sitemapXml,
   };
-  
-  // Build directory path
-  const buildPath = path.join(rootDir, BUILD_DIR);
-  
-  // Ensure build directory exists
-  if (!fs.existsSync(buildPath)) {
-    fs.mkdirSync(buildPath, { recursive: true });
-  }
-  
-  // Write robots.txt
-  fs.writeFileSync(path.join(buildPath, 'robots.txt'), result.robotsTxt);
-  console.log(`\n✅ Enhanced robots.txt written`);
-  
-  // Write ai.txt
-  fs.writeFileSync(path.join(buildPath, 'ai.txt'), result.aiTxt);
-  console.log(`✅ Enhanced ai.txt written`);
-  
-  // Generate main sitemap
-  result.sitemapXml = generateSitemapXml(allUrls);
-  fs.writeFileSync(path.join(buildPath, 'sitemap.xml'), result.sitemapXml);
-  console.log(`✅ Main sitemap.xml written (${allUrls.length} URLs)`);
-  
-  // Generate news sitemap
-  result.newsSitemapXml = generateNewsSitemapXml(allUrls);
-  fs.writeFileSync(path.join(buildPath, 'news-sitemap.xml'), result.newsSitemapXml);
-  const newsCount = (
-    result.newsSitemapXml.match(/<news:news>/g) || []
-  ).length;
-  console.log(`✅ News sitemap written (${newsCount} articles)`);
-  
-  // Generate LLM sitemap
-  result.llmXml = generateLLMSitemapXml(allUrls);
-  fs.writeFileSync(path.join(buildPath, 'llm.xml'), result.llmXml);
-  const aiCount = allUrls.filter(u => u.priority >= 0.6).length;
-  console.log(`✅ LLM/AI sitemap written (${aiCount} important URLs)`);
-  
-  // Generate sitemap index
-  const sitemaps = ['sitemap.xml', 'news-sitemap.xml', 'llm.xml'];
-  result.sitemapIndexXml = generateSitemapIndexXml(sitemaps);
-  fs.writeFileSync(path.join(buildPath, 'sitemap-index.xml'), result.sitemapIndexXml);
-  console.log(`✅ Sitemap index written`);
-  
-  console.log(`\n🎉 All enhanced SEO assets generated successfully!`);
-  console.log(`\n📈 SEO Improvements Applied:`);
-  console.log(`  • Dynamic priority based on page importance`);
-  console.log(`  • Realistic change frequencies per page type`);
-  console.log(`  • Individual blog post pages included`);
-  console.log(`  • News sitemap for better blog indexing`);
-  console.log(`  • Enhanced LLM/AI sitemap with semantic hints`);
-  console.log(`  • Comprehensive robots.txt with crawler instructions`);
-  console.log(`  • AI-specific instructions in ai.txt`);
-  
+  const buildPath = path.resolve(rootDir, buildDir);
+  fs.mkdirSync(buildPath, { recursive: true });
+  for (const [file, contents] of Object.entries({
+    "robots.txt": result.robotsTxt,
+    "ai.txt": result.aiTxt,
+    "sitemap.xml": sitemapXml,
+    "news-sitemap.xml": newsSitemapXml,
+    "sitemap-index.xml": sitemapIndexXml,
+    "llm.xml": result.llmXml,
+  })) fs.writeFileSync(path.join(buildPath, file), contents);
+  console.log(`Generated crawl assets for ${urls.length} canonical routes.`);
   return result;
 }
 
-// If run directly (not imported)
-if (import.meta.url === `file://${process.argv[1]}`) {
-  buildCrawlAssets();
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  await buildCrawlAssets();
 }

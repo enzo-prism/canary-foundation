@@ -13,7 +13,7 @@ const routeMetadata = read("shared/seo.ts");
 const server = read("server/index.ts");
 const leadership = read("client/src/pages/scientific-leadership.tsx");
 const blogPosts = read("client/src/data/blog-posts.ts");
-const home = read("client/src/pages/home.tsx");
+const home = read("client/src/pages/home.tsx") + read("client/src/components/home/home-lower.tsx");
 const crawlGenerator = read("scripts/generate-crawl-assets-enhanced.mjs");
 const programs = read("client/src/pages/programs.tsx");
 const tumors = read("client/src/pages/tumors-overview.tsx");
@@ -144,13 +144,15 @@ assert.doesNotMatch(
 );
 
 const aprilMeetingsSlug = "april-2026-science-meetings-stanford-ucsd";
-for (const surface of [blogPosts, home, routes, routeMetadata, crawlGenerator]) {
+for (const surface of [blogPosts, home, routes, routeMetadata]) {
   assert.equal(
     surface.includes(aprilMeetingsSlug),
     true,
     `${aprilMeetingsSlug} must remain connected across content, homepage, SEO, and crawl discovery`,
   );
 }
+
+assert.match(crawlGenerator, /client\/src\/data\/blog-posts\.ts/, "Crawl discovery must consume the shared blog catalog");
 
 const aprilMeetingsPost = blogPosts.slice(
   blogPosts.indexOf(`slug: "${aprilMeetingsSlug}"`),

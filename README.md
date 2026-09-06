@@ -87,15 +87,17 @@ The app runs without any environment variables (with reduced functionality). Set
 
 ## SEO architecture
 
-SEO is a primary concern for this site, and the design is deliberate:
+The site sends complete React page content in the first HTTP response, then hydrates that same app in the browser. All visitors receive the same content; no crawler user-agent branch is used.
 
-- **`shared/seo.ts` is the single source of truth** for per-route metadata (title/description) and JSON-LD builders (Organization, WebPage, Article). It is consumed by **both** the server and the client so crawlers and users see identical metadata.
-- **Server-side `<head>` injection** (`server/vite.ts`): because production runs the Express server, it rewrites `<title>`, description, canonical, OpenGraph/Twitter tags, and injects per-page JSON-LD into the served HTML for every route — including post-specific Article schema for `/blog/:slug`. This is what fixes "every page has the same title" for non-JS crawlers.
-- **Client-side sync** (`client/src/App.tsx`): on SPA navigation, the same metadata + JSON-LD is applied so it stays correct as users move between routes.
-- **Sitewide Organization JSON-LD** is embedded statically in `client/index.html`, plus a `<noscript>` content/navigation fallback for non-JS crawlers.
-- **Crawler assets** (`sitemap.xml`, `sitemap-index.xml`, `news-sitemap.xml`, `llm.xml`, `ai.txt`, `robots.txt`) are generated at build time by `scripts/generate-crawl-assets-enhanced.mjs` (run via `postbuild.js`) from `seo/routes.json` + the blog post list, and served by the Express server.
+- **`client/src/entry-server.tsx`** renders the real routed app with a request-scoped QueryClient and waits for lazy page modules. Vite produces `dist/ssr/` alongside the browser build. Both directories and `dist/index.js` are required in production.
+- **`shared/seo.ts`** holds unique route metadata and linked NGO, WebSite, WebPage, and Article schema builders. **`shared/page-seo.ts`** resolves the same metadata, canonical, article type, and JSON-LD for server responses and browser navigation.
+- **`server/vite.ts`** injects metadata, shared organization/site schema, and the rendered body. `client/src/main.tsx` hydrates it. Homepage animation never hides content from visitors without JavaScript.
+- **Canonical redirects** consolidate `/index.html`, `/take-action`, case variants, and trailing slashes for known pages; unknown/retired pages retain real 404s with noindex.
+- **Crawler assets** are generated from `seo/routes.json` and the actual blog data. Unknown modification dates are omitted, never replaced with build dates. Optional `lastModified` entries require verified substantive content-update dates. News dates use publication dates, with a two-day eligibility window. The legacy `llm.xml` and `ai.txt` endpoints remain compatibility resources, not special ranking mechanisms.
 
-**Adding a route?** Add its metadata to `shared/seo.ts` and its path to `seo/routes.json` (and, for blog posts, keep the slug list in `scripts/generate-crawl-assets-enhanced.mjs` in sync with `client/src/data/blog-posts.ts`).
+**Adding a route?** Wire its React route, add unique metadata to `shared/seo.ts`, add its canonical path to `seo/routes.json`, and link it from a relevant visible page. Blog details derive automatically from `client/src/data/blog-posts.ts`; do not maintain a second slug catalog. Run `npm run test:seo`, `node scripts/test-crawl-generation.mjs`, and `BASE_URL=http://localhost:5000 npm run test:ssr` against a fresh build. The HTTP test checks initial content, metadata, schema, true 404s, canonical redirects, and internal discovery.
+
+See [the September 2026 SEO/AEO audit](docs/seo-aeo-audit-2026-09-06.md) for findings, validation, editorial decisions, and deployment status.
 
 ## Content model
 
@@ -116,7 +118,7 @@ The July 2026 website cleanse is enforced by `client/src/pages/scientific-leader
 - Hashed production assets use long-lived immutable caching, while HTML is served with `no-store` so content changes are not hidden by stale caches.
 - The server sets restrictive baseline security headers, including a report-only Content Security Policy and Permissions Policy.
 - Contact requests are size-limited, schema-validated, honeypot-protected, and rate-limited. The response states whether the message was durably stored or accepted only in temporary memory.
-- Production dependencies currently have no known audit findings. Remaining development-only advisories require separate major-version migration work and are intentionally not force-upgraded.
+- Dependency audit results are time-sensitive. Run `npm audit --omit=dev` before release; the September 2026 audit documents existing findings that require separate dependency remediation.
 
 ## Local preview (this repo)
 

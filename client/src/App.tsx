@@ -1,25 +1,14 @@
 import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import HomeOpeningSplash from "@/components/home-opening-splash";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
-import {
-  resolveRouteMetadata,
-  NOT_FOUND_METADATA,
-  normalizeRoutePath,
-  buildCanonicalUrl,
-  buildWebPageJsonLd,
-  buildArticleJsonLd,
-  PAGE_JSONLD_ELEMENT_ID,
-} from "@shared/seo";
-import { blogPosts } from "@/data/blog-posts";
-import seoRoutes from "../../seo/routes.json";
-
-const KNOWN_CLIENT_STATIC_ROUTES = new Set([...seoRoutes.routes, "/take-action"]);
+import { normalizeRoutePath, PAGE_JSONLD_ELEMENT_ID } from "@shared/seo";
+import { resolvePageSeo } from "@shared/page-seo";
 
 const Home = lazy(() => import("@/pages/home"));
 const Contact = lazy(() => import("@/pages/contact"));
@@ -125,53 +114,6 @@ function setRobotsDirective(isKnownRoute: boolean) {
   setMetaTag("name", "robots", "noindex, nofollow");
 }
 
-// Mirrors resolvePageSeo() in server/vite.ts so SPA navigation produces the
-// same title/description/canonical/JSON-LD that the server rendered into the
-// initial HTML. Route metadata and JSON-LD builders are shared via @shared/seo.
-function resolveClientPageSeo(location: string) {
-  const routePath = normalizeRoutePath(location);
-  const canonicalUrl = buildCanonicalUrl(routePath);
-
-  if (routePath.startsWith("/blog/")) {
-    const slug = routePath.slice("/blog/".length);
-    const post = blogPosts.find((entry) => entry.slug === slug);
-    if (post) {
-      return {
-        metadata: {
-          title: `${post.title} | Canary Foundation`,
-          description: post.excerpt,
-        },
-        canonicalUrl,
-        jsonLd: buildArticleJsonLd({
-          headline: post.title,
-          description: post.excerpt,
-          url: canonicalUrl,
-          datePublished: post.publishedDate ?? post.date,
-          dateModified: post.date,
-          author: post.author,
-          keywords: post.tags,
-        }),
-        isKnownRoute: true,
-      };
-    }
-  }
-
-  const isKnownRoute = KNOWN_CLIENT_STATIC_ROUTES.has(routePath);
-  const metadata = isKnownRoute
-    ? resolveRouteMetadata(routePath)
-    : NOT_FOUND_METADATA;
-  return {
-    metadata,
-    canonicalUrl,
-    jsonLd: buildWebPageJsonLd({
-      title: metadata.title,
-      description: metadata.description,
-      url: canonicalUrl,
-    }),
-    isKnownRoute,
-  };
-}
-
 function RouteLoadingFallback() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-6 text-center text-sm font-medium text-slate-700">
@@ -181,14 +123,17 @@ function RouteLoadingFallback() {
 }
 
 function Router() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   // Track page views when routes change
   const [location] = useLocation();
   useAnalytics();
 
   useEffect(() => {
-    const { metadata, canonicalUrl, jsonLd, isKnownRoute } =
-      resolveClientPageSeo(location);
+    const { metadata, canonicalUrl, jsonLd, ogType, isKnownRoute } =
+      resolvePageSeo(location);
     document.title = metadata.title;
+    setMetaTag("property", "og:type", ogType);
     setMetaDescription(metadata.description);
     setMetaTag("property", "og:title", metadata.title);
     setMetaTag("property", "og:description", metadata.description);
@@ -201,7 +146,7 @@ function Router() {
 
   return (
     <>
-      {normalizeRoutePath(location) === "/" ? <HomeOpeningSplash /> : null}
+      {mounted && normalizeRoutePath(location) === "/" ? <HomeOpeningSplash /> : null}
       <Suspense fallback={<RouteLoadingFallback />}>
       <Switch>
         <Route path="/" component={Home} />
@@ -299,14 +244,14 @@ function Router() {
   );
 }
 
-function App() {
+function App({ queryClientInstance = queryClient }: { queryClientInstance?: QueryClient }) {
   // Initialize Google Analytics when app loads
   useEffect(() => {
     initGA();
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClientInstance}>
       <TooltipProvider>
         <Toaster />
         <Router />

@@ -1,5 +1,5 @@
 {
-  "_comment": "Add your SPA routes here. Each route should start with /. These will be included in sitemap generation.",
+  "_comment": "Canonical public routes only; redirects and retired pages must be excluded. Blog posts are also discovered from client/src/data/blog-posts.ts. Optional lastModified maps a route to a verified substantive content-update date (YYYY-MM-DD); omit unknown dates.",
   "routes": [
     "/",
     "/about/overview",

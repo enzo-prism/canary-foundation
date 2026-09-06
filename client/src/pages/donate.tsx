@@ -15,7 +15,6 @@ const DONATE_EMAIL = "donate@canaryfoundation.org";
 export default function Donate() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Donate | Canary Foundation";
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ResearchNextSteps } from "@/components/research-next-steps";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -129,7 +130,7 @@ export default function ProstateCancer() {
                 <Card className="bg-white text-center">
                   <CardContent className="p-6">
                     <div className="text-3xl font-bold text-primary mb-2">2014</div>
-                    <div className="text-gray-600 text-sm">FDA Approves Microbubble Ultrasound</div>
+                    <div className="text-gray-600 text-sm">Microbubble Ultrasound Research</div>
                   </CardContent>
                 </Card>
                 <Card className="bg-white text-center">
@@ -189,8 +190,7 @@ export default function ProstateCancer() {
                   <div>
                     <h4 className="font-semibold text-dark mb-2">Imaging Innovation</h4>
                     <p className="text-gray-600">
-                      Advancing FDA-approved microbubble ultrasound technology for more accurate tumor visualization 
-                      and targeted biopsies.
+                      Investigating ultrasound technology for tumor visualization and targeted biopsy approaches.
                     </p>
                   </div>
                 </div>
@@ -223,6 +223,8 @@ export default function ProstateCancer() {
                 </div>
               </div>
             </div>
+
+            <ResearchNextSteps update={{ href: "/science/programs/team-updates/prostate-july-2026", label: "Prostate research update: July 2026" }} />
 
             {/* Call to Action */}
             <div className="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8">

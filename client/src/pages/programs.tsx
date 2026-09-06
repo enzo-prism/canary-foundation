@@ -248,6 +248,17 @@ export default function Programs() {
             </div>
           </div>
         </section>
+        <section className="bg-light py-12 md:py-16">
+          <div className="container mx-auto max-w-5xl px-4">
+            <h2 className="mb-4 text-3xl font-bold text-dark">Follow the research into clinical studies</h2>
+            <p className="mb-6 leading-relaxed text-gray-600">Read about the studies and explore dated reports from the research teams.</p>
+            <ul className="flex flex-wrap gap-4">
+              <li><Link href="/science/programs/clinical-studies" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Explore clinical studies</Link></li>
+              <li><Link href="/science/programs/clinical-progress" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Read about clinical progress</Link></li>
+              <li><Link href="/science/funding-by-invitation" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Learn about research funding by invitation</Link></li>
+            </ul>
+          </div>
+        </section>
       </main>
 
       <Footer />

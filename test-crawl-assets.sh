@@ -24,7 +24,7 @@ declare -a assets=(
   "sitemap-index.xml:application/xml:<sitemapindex"
   "news-sitemap.xml:application/xml:<urlset"
   "llm.xml:application/xml:<urlset"
-  "ai.txt:text/plain:Sitemap: https://canaryfoundation.org/llm.xml"
+  "ai.txt:text/plain:Sitemap: https://canaryfoundation.org/sitemap.xml"
 )
 
 echo -e "\n1. Validating crawl asset responses:"

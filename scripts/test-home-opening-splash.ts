@@ -45,8 +45,8 @@ assert.doesNotMatch(
 assert.match(app, /import HomeOpeningSplash from "@\/components\/home-opening-splash"/);
 assert.match(
   app,
-  /normalizeRoutePath\(location\) === "\/" \? <HomeOpeningSplash \/>/,
-  "Splash must mount only on the homepage route",
+  /mounted && normalizeRoutePath\(location\) === "\/" \? <HomeOpeningSplash \/>/,
+  "Splash must mount only on the homepage after hydration",
 );
 assert.doesNotMatch(home, /HomeOpeningSplash/, "Keep splash wiring in App.tsx, not Home");
 assert.doesNotMatch(

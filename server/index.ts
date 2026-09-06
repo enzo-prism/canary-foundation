@@ -6,6 +6,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import type { ListenOptions } from "net";
 import type { Server } from "http";
+import { resolvePageSeo } from "../shared/page-seo";
 
 const CRAWLER_ENDPOINTS = new Set([
   "/robots.txt",
@@ -44,6 +45,9 @@ const PRECOMPRESSED_CONTENT_TYPES: Record<string, string> = {
 
 // Legacy URL redirect mappings - MUST be defined early
 const LEGACY_REDIRECTS: Record<string, string> = {
+  '/index.html': '/',
+  '/take-action': '/donate',
+  '/take-action/': '/donate',
   '/about': '/about/overview',
   '/about/': '/about/overview',
   '/approach': '/approach/overview',
@@ -174,20 +178,26 @@ app.use((req, res, next) => {
     .split(",")[0]
     .trim()
     .toLowerCase();
-  const normalizedPath = req.path.toLowerCase();
+  const normalizedPath = req.path.toLowerCase().replace(/\/+$/, "") || "/";
+  const canonicalPath = LEGACY_REDIRECTS[normalizedPath] ??
+    (resolvePageSeo(normalizedPath).isKnownRoute ? normalizedPath : req.path);
+  const queryIndex = req.originalUrl.indexOf("?");
+  const queryString = queryIndex >= 0 ? req.originalUrl.slice(queryIndex) : "";
 
   if (
     hostHeader === "www.canaryfoundation.org" &&
     !CRAWLER_ENDPOINTS.has(req.path) &&
     !res.locals.removedRoute
   ) {
-    const canonicalPath = LEGACY_REDIRECTS[normalizedPath] ?? req.path;
-    const queryString = req.originalUrl.includes("?")
-      ? `?${req.originalUrl.split("?")[1]}`
-      : "";
     const canonicalUrl = `https://canaryfoundation.org${canonicalPath}${queryString}`;
     log(`[CANONICAL] ${hostHeader}${req.originalUrl} → ${canonicalUrl}`);
     return res.redirect(301, canonicalUrl);
+  }
+
+  // Normalize public page aliases in one hop before static files or React.
+  // Unknown and explicitly retired routes retain their true 404 response.
+  if (!res.locals.removedRoute && canonicalPath !== req.path) {
+    return res.redirect(301, `${canonicalPath}${queryString}`);
   }
 
   next();
@@ -209,7 +219,12 @@ app.get(/\.(css|js)$/, (req, res, next) => {
     return;
   }
 
-  const assetPath = path.resolve(import.meta.dirname, "public", requestedPath);
+  const publicPath = path.resolve(import.meta.dirname, "public");
+  const assetPath = path.resolve(publicPath, requestedPath);
+  if (!assetPath.startsWith(`${publicPath}${path.sep}`)) {
+    next();
+    return;
+  }
   const acceptEncoding = `${req.headers["accept-encoding"] || ""}`.toLowerCase();
 
   const sendCompressedAsset = (filePath: string, encoding: "br" | "gzip") => {

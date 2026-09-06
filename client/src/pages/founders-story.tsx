@@ -37,7 +37,6 @@ const pillarIcons = {
 export default function FoundersStory() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Don Listwin | Founder's Story & Oral History | Canary Foundation";
   }, []);
 
   return (

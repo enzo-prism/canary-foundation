@@ -13,7 +13,7 @@ export default function StanfordImaging() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
         <div className="container mx-auto px-4">
@@ -34,12 +34,11 @@ export default function StanfordImaging() {
               <h2 className="text-3xl font-bold text-dark mb-6">Advanced Imaging at Stanford</h2>
               <p className="text-gray-600 leading-relaxed mb-6">
                 The Canary Center at Stanford, established through the vision of Sanjiv Sam Gambhir, is a world leader in
-                molecular imaging for early cancer detection. Our pioneering work includes FDA-approved microbubble ultrasound 
-                technology, photoacoustic imaging, and advanced PET scanning techniques that can visualize cancer at its earliest stages.
+                molecular imaging for early cancer detection. Research includes microbubble ultrasound, photoacoustic imaging, and PET scanning techniques.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Building on Dr. Gambhir's legacy, our imaging research combines physics, engineering, chemistry, and medicine to 
-                create technologies that can detect tumors smaller than 1mm and visualize molecular processes in real-time.
+                Building on Dr. Gambhir's legacy, our imaging research combines physics, engineering, chemistry, and medicine to
+                investigate technologies for early detection and visualization of molecular processes.
               </p>
             </div>
 
@@ -52,11 +51,11 @@ export default function StanfordImaging() {
                 <div>
                   <h3 className="text-xl font-semibold text-dark mb-2">Sanjiv Sam Gambhir's Vision</h3>
                   <p className="text-gray-600 mb-4">
-                    World-renowned expert in molecular imaging and founding director of the Canary Center, Dr. Gambhir 
+                    World-renowned expert in molecular imaging and founding director of the Canary Center, Dr. Gambhir
                     revolutionized cancer detection through his pioneering work in PET scanning and molecular imaging technologies.
                   </p>
                   <p className="text-gray-600 italic">
-                    "We must detect cancer early enough to intervene and cure. Molecular imaging gives us eyes to see 
+                    "We must detect cancer early enough to intervene and cure. Molecular imaging gives us eyes to see
                     cancer at the cellular level, long before traditional methods can detect it."
                   </p>
                 </div>
@@ -74,10 +73,9 @@ export default function StanfordImaging() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">Microbubble Ultrasound</h4>
                     <p className="text-gray-600 mb-4">
-                      FDA-approved technology using microscopic gas bubbles to enhance ultrasound imaging, detecting 
-                      pancreatic tumors smaller than 1mm with 10,000x greater sensitivity.
+                      Research using microbubble contrast agents to enhance ultrasound imaging and investigate pancreatic visualization.
                     </p>
-                    <div className="text-primary font-semibold">FDA Approved 2014</div>
+                    <div className="text-primary font-semibold">Contrast-enhanced ultrasound research</div>
                   </CardContent>
                 </Card>
 
@@ -88,7 +86,7 @@ export default function StanfordImaging() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">Photoacoustic Imaging</h4>
                     <p className="text-gray-600 mb-4">
-                      Combines laser light and ultrasound to create detailed images of blood vessels and tissues, 
+                      Combines laser light and ultrasound to create detailed images of blood vessels and tissues,
                       revealing tumor blood supply and molecular signatures.
                     </p>
                     <div className="text-primary font-semibold">Non-invasive Detection</div>
@@ -102,7 +100,7 @@ export default function StanfordImaging() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">Molecular PET Imaging</h4>
                     <p className="text-gray-600">
-                      Advanced PET scanning with novel radiotracers that target specific cancer molecules, enabling 
+                      Advanced PET scanning with novel radiotracers that target specific cancer molecules, enabling
                       precise tumor identification and characterization.
                     </p>
                   </CardContent>
@@ -115,7 +113,7 @@ export default function StanfordImaging() {
                     </div>
                     <h4 className="text-xl font-semibold text-dark mb-3">AI-Enhanced Imaging</h4>
                     <p className="text-gray-600">
-                      Machine learning algorithms that analyze imaging data to identify subtle patterns invisible 
+                      Machine learning algorithms that analyze imaging data to identify subtle patterns invisible
                       to the human eye, improving detection accuracy.
                     </p>
                   </CardContent>
@@ -127,24 +125,10 @@ export default function StanfordImaging() {
             <div className="bg-gray-50 rounded-lg p-8 mb-12">
               <h3 className="text-2xl font-semibold text-dark mb-6">Cyclotron & Radiochemistry Facility</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Our on-site cyclotron facility produces over 36 FDA-approved radiotracers for molecular imaging research. 
-                This unique resource enables rapid development and testing of new imaging agents that can target specific 
+                The cyclotron facility supports radiotracer production for molecular imaging research.
+                This unique resource enables rapid development and testing of new imaging agents that can target specific
                 cancer types and molecular pathways.
               </p>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">36+</div>
-                  <div className="text-gray-600 text-sm">FDA-Approved Radiotracers</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                  <div className="text-gray-600 text-sm">Production Capability</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">100+</div>
-                  <div className="text-gray-600 text-sm">Research Studies Supported</div>
-                </div>
-              </div>
             </div>
 
             {/* Research Applications */}
@@ -156,40 +140,39 @@ export default function StanfordImaging() {
                   <div>
                     <h4 className="font-semibold text-dark mb-2">Pancreatic Cancer Detection</h4>
                     <p className="text-gray-600">
-                      Microbubble ultrasound detecting tumors below 1mm, revolutionizing early detection for one of 
-                      the deadliest cancers.
+                      Evaluating microbubble contrast enhancement and quantitative ultrasound for pancreatic imaging.
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-dark mb-2">Breast Cancer Imaging</h4>
                     <p className="text-gray-600">
-                      Molecular breast imaging providing higher sensitivity than mammography for dense breast tissue 
+                      Molecular breast imaging providing higher sensitivity than mammography for dense breast tissue
                       and high-risk patients.
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-dark mb-2">Prostate Cancer Visualization</h4>
                     <p className="text-gray-600">
-                      PSMA PET imaging enabling precise localization of prostate cancer for targeted biopsy and 
+                      PSMA PET imaging enabling precise localization of prostate cancer for targeted biopsy and
                       treatment planning.
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-dark mb-2">Lung Nodule Characterization</h4>
                     <p className="text-gray-600">
-                      Advanced imaging distinguishing benign from malignant lung nodules without invasive biopsy, 
+                      Advanced imaging distinguishing benign from malignant lung nodules without invasive biopsy,
                       reducing unnecessary procedures.
                     </p>
                   </div>
@@ -238,41 +221,13 @@ export default function StanfordImaging() {
               </div>
             </div>
 
-            {/* Research Impact */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold text-dark mb-6">Research Impact</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <Card className="bg-white text-center">
-                  <CardContent className="p-6">
-                    <Award className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <h4 className="font-semibold text-dark mb-2">200+ Publications</h4>
-                    <p className="text-gray-600 text-sm">Peer-reviewed papers advancing the field</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-white text-center">
-                  <CardContent className="p-6">
-                    <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <h4 className="font-semibold text-dark mb-2">15+ Patents</h4>
-                    <p className="text-gray-600 text-sm">Technologies licensed to industry</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-white text-center">
-                  <CardContent className="p-6">
-                    <Heart className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <h4 className="font-semibold text-dark mb-2">10,000+ Patients</h4>
-                    <p className="text-gray-600 text-sm">Benefited from our imaging advances</p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-
             {/* Call to Action */}
             <div className="text-center bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg p-8">
               <h3 className="text-2xl font-semibold text-dark mb-4">Support Imaging Innovation</h3>
               <p className="text-gray-600 mb-6">
                 Help us continue Dr. Gambhir's legacy of developing revolutionary imaging technologies that save lives.
               </p>
-              <Button 
+              <Button
                 className="bg-primary text-white hover:bg-primary-dark"
                 onClick={() => window.open('https://donorbox.org/canary-campaign', '_blank')}
               >

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, Link, useLocation } from 'wouter';
+import { useParams, Link } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import NotFound from '@/pages/not-found';
 import { blogPosts } from '@/data/blog-posts';
 import { trackPageView, trackClick } from '@/lib/analytics';
 import { getPostDateMeta, getPostSortTimestamp } from '@/lib/blog-post-utils';
@@ -25,7 +26,6 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function BlogPost() {
   const params = useParams();
-  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [readingProgress, setReadingProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -58,17 +58,8 @@ export default function BlogPost() {
     .slice(0, 3);
   
   useEffect(() => {
-    if (!post) {
-      setLocation('/blog');
-      return;
-    }
+    if (!post) return;
 
-    document.title = `${post.title} | Canary Foundation`;
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', post.excerpt);
-    }
-    
     // Track page view
     trackPageView(`/blog/${slug}`);
     
@@ -86,10 +77,10 @@ export default function BlogPost() {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [post, slug, setLocation]);
+  }, [post, slug]);
   
   if (!post) {
-    return null;
+    return <NotFound />;
   }
 
   const dateMeta = getPostDateMeta(post);
@@ -176,7 +167,7 @@ export default function BlogPost() {
                   )}
                 </div>
                 
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark leading-tight">
+                <h1 id="article-title" className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark leading-tight">
                   {post.title}
                 </h1>
                 
@@ -191,12 +182,12 @@ export default function BlogPost() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>{`${dateMeta.primaryLabel}: ${dateMeta.primaryDate}`}</span>
+                    <span>{dateMeta.primaryLabel}: <time dateTime={post.publishedDate ?? post.date}>{dateMeta.primaryDate}</time></span>
                   </div>
                   {dateMeta.secondaryLabel && dateMeta.secondaryDate && (
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{`${dateMeta.secondaryLabel}: ${dateMeta.secondaryDate}`}</span>
+                      <span>{dateMeta.secondaryLabel}: <time dateTime={post.date}>{dateMeta.secondaryDate}</time></span>
                     </div>
                   )}
                   <div className="flex items-center gap-2">
@@ -215,10 +206,10 @@ export default function BlogPost() {
             <div className="max-w-4xl mx-auto">
               <div className="grid lg:grid-cols-[1fr,300px] gap-8">
                 {/* Main Content */}
-                <article className="prose prose-lg max-w-none">
+                <article aria-labelledby="article-title" className="prose prose-lg max-w-none">
                   <div 
                     className="text-gray-700 leading-relaxed space-y-6"
-                    dangerouslySetInnerHTML={{ __html: post.fullContent }}
+                    dangerouslySetInnerHTML={{ __html: post.fullContent.replace(/<(\/?)h1(\s[^>]*|>)/gi, "<$1h2$2") }}
                   />
                   
                   {/* Tags */}

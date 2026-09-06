@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -249,6 +250,16 @@ export default function Centers() {
                 </Card>
               </div>
             </div>
+          </div>
+        </section>
+        <section className="bg-light py-12 md:py-16">
+          <div className="container mx-auto max-w-5xl px-4">
+            <h2 className="mb-4 text-3xl font-bold text-dark">Explore our research centers</h2>
+            <p className="mb-6 leading-relaxed text-gray-600">Learn more about the research supported at Stanford and Fred Hutch Cancer Center.</p>
+            <ul className="flex flex-wrap gap-4">
+              <li><Link href="/science/centers/stanford" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Canary Center at Stanford</Link></li>
+              <li><Link href="/science/centers/fhcc" className="inline-flex min-h-11 items-center rounded-lg border border-primary/20 bg-white px-5 py-3 font-semibold text-dark hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Fred Hutch Cancer Center</Link></li>
+            </ul>
           </div>
         </section>
       </main>

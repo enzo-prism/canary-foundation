@@ -5,6 +5,14 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 build_production_bundle() {
+  # Reuse an explicitly verified build when running the full smoke suite.
+  if [[ "${SKIP_BUILD:-0}" == "1" ]]; then
+    [[ -f "$PROJECT_ROOT/dist/index.js" && -f "$PROJECT_ROOT/dist/ssr/entry-server.js" && -f "$PROJECT_ROOT/dist/public/sitemap.xml" ]] || {
+      echo "SKIP_BUILD=1 requires a completed npm run build." >&2
+      return 1
+    }
+    return 0
+  fi
   (
     cd "$PROJECT_ROOT"
     npm run build
