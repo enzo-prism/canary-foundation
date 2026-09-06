@@ -23,19 +23,14 @@ const stanfordOverview = read("client/src/pages/stanford-overview.tsx");
 const stanfordImaging = read("client/src/pages/stanford-imaging.tsx");
 const publicSurfaces = [app, header, footer, routes, routeMetadata].join("\n");
 
-const removedRoutes = [
-  "/science/publications",
-  "/science/publications/fellowships",
-  "/science/publications/seed-grants",
-  "/approach/symposium",
-  "/science/programs/tumors/breast",
+const offlineUntilHeidiCopy = [
   "/approach/collaborations",
   "/science/science",
   "/science/science/imaging",
   "/science/science/biomarkers",
 ];
 
-for (const route of removedRoutes) {
+for (const route of offlineUntilHeidiCopy) {
   assert.equal(
     publicSurfaces.includes(route),
     false,
@@ -45,6 +40,33 @@ for (const route of removedRoutes) {
     server.includes(`"${route}"`),
     true,
     `${route} must be explicitly protected from canonical redirect hops`,
+  );
+}
+
+const permanentlyRemovedRedirects: Array<[string, string]> = [
+  ["/science/publications", "/science/overview"],
+  ["/science/publications/fellowships", "/science/overview"],
+  ["/science/publications/seed-grants", "/science/funding-by-invitation"],
+  ["/approach/symposium", "/approach/overview"],
+  ["/science/programs/tumors/breast", "/science/programs/tumors"],
+  ["/canary-science/publications", "/science/overview"],
+  ["/canary-science/publications/fellowships", "/science/overview"],
+  ["/canary-science/publications/seed-grants", "/science/funding-by-invitation"],
+  ["/canary-approach/canary-symposium", "/approach/overview"],
+  ["/canary-science/programs/tumors/breast", "/science/programs/tumors"],
+  ["/news", "/blog"],
+];
+
+for (const [from, to] of permanentlyRemovedRedirects) {
+  assert.equal(
+    publicSurfaces.includes(from),
+    false,
+    `${from} must not remain routed, linked, or indexed`,
+  );
+  assert.equal(
+    server.includes(`'${from}': '${to}'`),
+    true,
+    `${from} must 301 to ${to}`,
   );
 }
 
