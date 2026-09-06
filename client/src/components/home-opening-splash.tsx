@@ -63,18 +63,33 @@ function markHomeOpeningSplashShown(): void {
 }
 
 export default function HomeOpeningSplash() {
-  const [phase, setPhase] = useState<SplashPhase>(() =>
-    shouldPlayHomeOpeningSplash() ? "visible" : "hidden",
-  );
+  const [phase, setPhase] = useState<SplashPhase>("hidden");
   const [photoReady, setPhotoReady] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const skipRef = useRef<HTMLButtonElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
+  const wasVisibleRef = useRef(false);
+
+  // Claim the once-per-document intro only after React commits this component.
+  // Lazy hydration may abandon a render; render-time mutation would skip it.
+  useEffect(() => {
+    if (shouldPlayHomeOpeningSplash()) setPhase("visible");
+  }, []);
+
+  useEffect(() => {
+    if (phase !== "hidden") {
+      wasVisibleRef.current = true;
+    } else if (wasVisibleRef.current) {
+      document.getElementById("main-content")?.focus({ preventScroll: true });
+      wasVisibleRef.current = false;
+    }
+  }, [phase]);
 
   useEffect(() => {
     if (photoRef.current?.complete) {
       setPhotoReady(true);
     }
-  }, []);
+  }, [phase]);
 
   useEffect(() => {
     if (phase === "hidden") {
@@ -124,6 +139,10 @@ export default function HomeOpeningSplash() {
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Tab") {
+        event.preventDefault();
+        skipRef.current?.focus();
+      }
       if (event.key === "Escape") {
         event.preventDefault();
         dismiss();
@@ -191,10 +210,18 @@ export default function HomeOpeningSplash() {
         )}
       >
         <p className="sr-only">Press Escape or click to skip.</p>
-        <h1 className="font-sans text-4xl font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)] sm:text-5xl md:text-6xl lg:text-7xl">
+        <p className="font-sans text-4xl font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)] sm:text-5xl md:text-6xl lg:text-7xl">
           {HOME_OPENING_SPLASH_TITLE}
-        </h1>
+        </p>
       </div>
+      <button
+        ref={skipRef}
+        type="button"
+        onClick={dismiss}
+        className="absolute bottom-8 right-6 z-20 min-h-11 rounded-full border border-white/40 bg-black/60 px-6 text-sm font-medium text-white transition-colors hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:right-10"
+      >
+        Skip intro
+      </button>
     </div>
   );
 }

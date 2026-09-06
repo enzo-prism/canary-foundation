@@ -66,7 +66,22 @@ for (const paragraph of [
 assert.equal(awardsData.includes(LISTWIN_AWARD_NAME), true);
 assert.equal(awardsData.includes(GAMBHIR_AWARD_NAME), true);
 assert.equal(awardsData.includes(AWARDS_NOMINATIONS_NOTE), true);
-assert.match(read("client/src/components/footer.tsx"), /href="\/about\/awards"/);
+const footer = read("client/src/components/footer.tsx");
+assert.match(
+  footer,
+  /\["Awards",\s*"\/about\/awards"\]/,
+  "Footer navigation must include a labeled Awards destination.",
+);
+assert.match(
+  footer,
+  /footerGroups\.map\(\(group\)\s*=>/,
+  "Footer must render its configured navigation groups.",
+);
+assert.match(
+  footer,
+  /group\.links\.map\(\(\[label,\s*href\]\)\s*=>[\s\S]*?<Link\s+href=\{href\}[\s\S]*?\{label\}/,
+  "Each configured footer destination must render a labeled link.",
+);
 assert.doesNotMatch(
   EXACT_ROUTE_METADATA["/about/awards/listwin"].title,
   /20\d{2}/,

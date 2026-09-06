@@ -14,11 +14,10 @@ import canaryBiker from "@assets/Canary Challenge Biker_1752514185863.webp";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isCarouselPlaying, setIsCarouselPlaying] = useState(true);
+  const [isCarouselPlaying, setIsCarouselPlaying] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [selectedTimelineItem, setSelectedTimelineItem] = useState<number | null>(null);
-  const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
   const videoRef = useRef<HTMLVideoElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   
@@ -72,39 +71,21 @@ export default function Home() {
     return () => mediaQuery.removeEventListener("change", updateMotionPreference);
   }, []);
 
-  // Scroll-triggered animations
+  // Reveal once without causing a full homepage React render on each scroll.
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '50px 0px -50px 0px'
-    };
-
+    if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setVisibleElements(prev => new Set(Array.from(prev).concat(entry.target.id)));
+          entry.target.classList.add("animate-visible");
+          observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
-
-    // Observe all elements with animate-on-scroll class
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".animate-on-scroll").forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
 
-  // Apply visibility classes when elements become visible
-  useEffect(() => {
-    const visibleElementsArray = Array.from(visibleElements);
-    visibleElementsArray.forEach(id => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.classList.add('animate-visible');
-      }
-    });
-  }, [visibleElements]);
-  
   const heroImages = [
     {
       src: canaryChallengeLogo,
@@ -135,7 +116,7 @@ export default function Home() {
   
   // Auto-advance only while the visitor has left the gallery playing.
   useEffect(() => {
-    if (!isCarouselPlaying || prefersReducedMotion) return;
+    if (!isCarouselPlaying) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
@@ -147,7 +128,7 @@ export default function Home() {
     const video = videoRef.current;
     if (!video) return;
 
-    if (!isVideoPlaying || prefersReducedMotion) {
+    if (!isVideoPlaying) {
       video.pause();
       return;
     }
@@ -250,7 +231,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-light">
+    <div className="home-page min-h-screen bg-light">
       <Header />
       <main id="main-content" tabIndex={-1}>
         <HomeUpper {...interactiveProps} />

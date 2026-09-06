@@ -18,7 +18,8 @@
     "test:awards": "tsx scripts/test-awards.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
     "db:push": "drizzle-kit push",
-    "test:seo": "tsx scripts/test-seo-metadata.ts && node scripts/test-crawl-generation.mjs"
+    "test:seo": "tsx scripts/test-seo-metadata.ts && node scripts/test-crawl-generation.mjs",
+    "test:loading": "tsx scripts/test-route-loading.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

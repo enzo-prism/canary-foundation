@@ -99,6 +99,10 @@ The site sends complete React page content in the first HTTP response, then hydr
 
 See [the September 2026 SEO/AEO audit](docs/seo-aeo-audit-2026-09-06.md) for findings, validation, editorial decisions, and deployment status.
 
+## Design and loading
+
+The [September design polish](docs/design-polish-2026-09-06.md) documents the editorial homepage, program chooser, navigation/footer, accessible motion, and measured loading changes. Production uses the Vite manifest to preload the current route; `shared/route-module-ids.ts` must track App routes. Run `BASE_URL=http://localhost:5000 npm run test:loading` against a fresh production build. Optional media starts paused and the logo film downloads only on play.
+
 ## Content model
 
 Page content is data-driven and lives in `client/src/data/`:

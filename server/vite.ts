@@ -9,6 +9,8 @@ import { pathToFileURL } from "node:url";
 import { SITE_ORIGIN, buildOrganizationJsonLd, buildWebSiteJsonLd,
   renderJsonLdScript, PAGE_JSONLD_ELEMENT_ID } from "@shared/seo";
 import { resolvePageSeo } from "@shared/page-seo";
+import { routeModuleId } from "@shared/route-module-ids";
+import { normalizeRoutePath } from "@shared/seo";
 
 const viteLogger = createLogger();
 
@@ -186,13 +188,31 @@ export function serveStatic(app: Express) {
     }),
   );
 
+  const template = stripDevOnlyArtifacts(fs.readFileSync(path.join(distPath, "index.html"), "utf8"));
+  const manifest: Record<string, { file: string; imports?: string[]; css?: string[] }> =
+    JSON.parse(fs.readFileSync(path.join(distPath, ".vite/manifest.json"), "utf8"));
+  function preloadRoute(url: string) {
+    const seen = new Set<string>();
+    const tags: string[] = [];
+    const visit = (id: string) => {
+      if (seen.has(id)) return;
+      seen.add(id);
+      const chunk = manifest[id];
+      if (!chunk) return;
+      if (!template.includes(`"/${chunk.file}"`)) tags.push(`<link rel="modulepreload" crossorigin href="/${escapeHtmlAttribute(chunk.file)}" />`);
+      for (const dependency of chunk.imports ?? []) visit(dependency);
+      for (const css of chunk.css ?? []) {
+        if (!template.includes(`"/${css}"`)) tags.push(`<link rel="stylesheet" href="/${escapeHtmlAttribute(css)}" />`);
+      }
+    };
+    visit(routeModuleId(normalizeRoutePath(url)));
+    return tags.join("\n");
+  }
   const renderer = import(pathToFileURL(path.resolve(import.meta.dirname, "ssr/entry-server.js")).href);
 
   // Render the same React route used by browser navigation.
   app.use("*", async (req, res, next) => {
     try {
-      const indexPath = path.resolve(distPath, "index.html");
-      const template = await fs.promises.readFile(indexPath, "utf-8");
       const { isKnownRoute } = resolvePageSeo(req.originalUrl);
       const { render } = await renderer;
       const body = await render(req.originalUrl);
@@ -202,7 +222,7 @@ export function serveStatic(app: Express) {
           "Content-Type": "text/html; charset=UTF-8",
           "Cache-Control": "no-cache, no-store, must-revalidate",
         })
-        .end(stripDevOnlyArtifacts(injectSpaMetadata(req.originalUrl, template)).replace("<!--ssr-outlet-->", () => body));
+        .end(stripDevOnlyArtifacts(injectSpaMetadata(req.originalUrl, template.replace("</head>", () => `${preloadRoute(req.originalUrl)}\n</head>`))).replace("<!--ssr-outlet-->", () => body));
     } catch (error) {
       next(error);
     }

@@ -20,282 +20,282 @@ export function HomeMiddle({
   return (
     <>
       {/* Leadership Section */}
-      <section id="leadership" className="py-16 md:py-20 bg-light">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16 animate-on-scroll" id="leadership-header">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6 animate-slideUp">Leadership Team</h2>
-              <p className="text-lg text-gray-600 leading-relaxed animate-fadeIn animate-stagger-1 mb-8">
+      <section id="leadership" className="border-t border-stone-200/70 bg-[#f8f7f2] py-20 md:py-28">
+        <div className="container mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="mx-auto max-w-3xl text-center mb-12 md:mb-16" id="leadership-header">
+              <h2 className="text-3xl font-semibold tracking-tight text-dark mb-5 md:text-5xl">Leadership Team</h2>
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 Our multidisciplinary team brings together world-class researchers, clinicians, and innovators dedicated to advancing early cancer detection.
               </p>
-              
+
               {/* Learn More About Leadership */}
               <div className="text-center">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/about/staff">
-                    <Button 
-                      variant="outline" 
-                      className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold"
+                  <Button asChild
+                      variant="outline"
+                      className="border-stone-300 bg-white text-dark hover:border-stone-400 hover:bg-stone-50 font-semibold"
                     >
+                      <Link href="/about/staff">
                       Meet Our Staff
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-2" />
+                    </Link>
                     </Button>
-                  </Link>
-                  <Link href="/about/founders-story">
-                    <Button 
-                      variant="outline" 
-                      className="border-gray-400 text-gray-600 hover:bg-gray-600 hover:text-white font-semibold"
+                  <Button asChild
+                      variant="outline"
+                      className="border-stone-300 bg-white text-dark hover:border-stone-400 hover:bg-stone-50 font-semibold"
                     >
+                      <Link href="/about/founders-story">
                       Founder & Oral History
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-2" />
+                    </Link>
                     </Button>
-                  </Link>
                 </div>
               </div>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-1" id="leadership-card-1">
+              <Card className="rounded-2xl border-stone-200 bg-white shadow-none" id="leadership-card-1">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
-                    <Star className="w-10 h-10 text-white animate-icon-spin" />
+                  <div className="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Star aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Don Listwin</h3>
-                  <p className="text-primary font-medium mb-3 text-center">{DON_LISTWIN_TITLE}</p>
-                  <p className="text-gray-600 text-sm mb-3 italic">
+                  <p className="text-stone-700 font-medium mb-3 text-center">{DON_LISTWIN_TITLE}</p>
+                  <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                     "After 30 years in the technology industry, I launched Canary Foundation in 2004. I was motivated by a personal experience with cancer."
                   </p>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-stone-600 text-sm leading-relaxed">
                     Former CEO of Sana Security, Openwave, and #2 executive at Cisco Systems. Serves on NCI Board of Scientific Advisors and multiple company boards.
                   </p>
                   <div className="mt-4 text-center">
-                    <Link href="/about/founders-story">
-                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary-dark">
+                    <Button asChild variant="ghost" size="sm" className="text-dark hover:text-stone-600">
+                      <Link href="/about/founders-story">
                         Founder & Oral History
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </Link>
+                        <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-1" />
+                      </Link>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
-              
-              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-2" id="leadership-card-2">
+
+              <Card className="rounded-2xl border-stone-200 bg-white shadow-none" id="leadership-card-2">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
-                    <Users className="w-10 h-10 text-white animate-icon-spin" />
+                  <div className="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Users aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Joseph M. DeSimone, PhD</h3>
-                  <p className="text-primary font-medium mb-3 text-center">Current Director</p>
-                  <p className="text-gray-600 text-sm">
-                    Departments of Radiology, Chemical Engineering, Materials Science, Chemistry, and Business. 
+                  <p className="text-stone-700 font-medium mb-3 text-center">Current Director</p>
+                  <p className="text-stone-600 text-sm leading-relaxed">
+                    Departments of Radiology, Chemical Engineering, Materials Science, Chemistry, and Business.
                     Leading innovative research and strategic direction at Stanford.
                   </p>
                 </CardContent>
               </Card>
-              
-              <Card className="bg-white animate-card-hover animate-on-scroll animate-stagger-3" id="leadership-card-3">
+
+              <Card className="rounded-2xl border-stone-200 bg-white shadow-none" id="leadership-card-3">
                 <CardContent className="p-6">
-                  <div className="w-20 h-20 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
-                    <Heart className="w-10 h-10 text-white" />
+                  <div className="w-14 h-14 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Heart aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h3 className="text-xl font-semibold text-dark mb-2 text-center">Sanjiv Sam Gambhir</h3>
                   <p className="text-gray-600 font-medium mb-3 text-center">Co-Founder (1962-2020)</p>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-stone-600 text-sm leading-relaxed">
                     Pioneer in early detection strategies, co-led Canary Center at Stanford. His legacy continues to inspire our mission.
                   </p>
                 </CardContent>
               </Card>
             </div>
-            
+
             {/* Core Staff Section */}
-            <div className="bg-white rounded-lg p-8 mb-16 animate-on-scroll" id="core-staff">
-              <h3 className="text-2xl font-semibold text-dark mb-8 text-center animate-slideUp">Core Staff</h3>
+            <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8 mb-16" id="core-staff">
+              <h3 className="text-2xl font-semibold text-dark mb-8 text-center">Core Staff</h3>
               <div className="grid md:grid-cols-2 gap-8">
-                <Card className="bg-gray-50 animate-card-hover animate-on-scroll animate-stagger-1" id="staff-card-1">
+                <Card className="rounded-2xl border-stone-200 bg-[#faf9f6] shadow-none" id="staff-card-1">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 animate-float">
-                      <Microscope className="w-8 h-8 text-white animate-icon-spin" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Microscope aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Heidi Auman</h4>
-                    <p className="text-primary font-medium mb-3">Scientific Program Manager</p>
-                    <p className="text-gray-600 text-sm mb-3 italic">
+                    <p className="text-stone-700 font-medium mb-3">Scientific Program Manager</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                       "I want to help the Canary Foundation succeed at the challenge of aligning different disciplines toward the common goal of early cancer detection."
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       Former Postdoctoral Research Fellow at NYU School of Medicine. Manages strategic plans, group connectivity, and progress tracking.
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-[#faf9f6] shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <HandHeart className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <HandHeart aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Therese Quinlan</h4>
-                    <p className="text-primary font-medium mb-3">Chief Development Officer</p>
-                    <p className="text-gray-600 text-sm mb-3 italic">
+                    <p className="text-stone-700 font-medium mb-3">Chief Development Officer</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                       "I joined Canary Foundation to match my deep interest and training in high-impact philanthropy with an organization positioned to create a leap in science and technology."
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       Manages major gift programs and transformational giving efforts. Mills College graduate with extensive philanthropic experience.
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-[#faf9f6] shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Users2 className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Users2 aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Renata Barnes</h4>
-                    <p className="text-primary font-medium mb-3">Donor and Development Services Manager</p>
-                    <p className="text-gray-600 text-sm mb-3 italic">
+                    <p className="text-stone-700 font-medium mb-3">Donor and Development Services Manager</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                       "I joined the Canary Foundation because I believe that the idea of early detection is the logical approach to solving the problem of cancer that touches all of us."
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       University of Utah graduate specializing in database systems, event management, and donor relations.
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-gray-50 hover:shadow-md transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-[#faf9f6] shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Shield className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Shield aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Candy Gularte</h4>
-                    <p className="text-primary font-medium mb-3">Finance and Administrative Manager</p>
-                    <p className="text-gray-600 text-sm mb-3 italic">
+                    <p className="text-stone-700 font-medium mb-3">Finance and Administrative Manager</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                       "The Mission of Canary is close to my heart after having lost my Dad to lung cancer at an early age."
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       Ensures effective financial and operational processes. Responsible for fund management and key operational functions.
                     </p>
                   </CardContent>
                 </Card>
               </div>
             </div>
-            
+
             {/* Board of Directors Section */}
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-8 mb-16">
+            <div className="bg-[#f1f0eb] rounded-2xl border border-stone-200 p-6 sm:p-8 mb-16">
               <h3 className="text-2xl font-semibold text-dark mb-4 text-center">Board of Directors</h3>
               <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
                 Our Board of Directors is integral to the success of our team. They represent a distinguished group of leaders who provide strategic decision-making and thoughtful guidance to ensure that our vision stays on track.
               </p>
-              
+
               {/* Learn More About Board */}
               <div className="text-center mb-8">
-                <Link href="/about/board-directors">
-                  <Button 
-                    variant="outline" 
-                    className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold"
+                <Button asChild
+                    variant="outline"
+                    className="border-stone-300 bg-white text-dark hover:border-stone-400 hover:bg-stone-50 font-semibold"
                   >
+                      <Link href="/about/board-directors">
                     Meet Full Board of Directors
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
+                    <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-2" />
+                  </Link>
+                    </Button>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-8">
-                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+                <Card className="rounded-2xl border-stone-200 bg-white shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <TrendingUp className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Michael Ball</h4>
-                    <p className="text-primary font-medium mb-3">CEO, Contextual Genomics</p>
-                    <p className="text-gray-600 text-sm mb-3 font-medium">Canary Audit Committee</p>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-stone-700 font-medium mb-3">CEO, Contextual Genomics</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 font-medium">Canary Audit Committee</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3">
                       Accomplished B2B software executive with 25+ years international experience. Former CEO of GenoLogics, leading LIMS provider for life sciences organizations.
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       <strong>Specialties:</strong> Healthcare, Genomics, B2B Software, SaaS, Life Sciences, Precision Medicine
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-white shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Award className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Award aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Kevin Kennedy</h4>
-                    <p className="text-primary font-medium mb-3">President, Senior Managing Director, Blue Ridge Partners</p>
-                    <p className="text-gray-600 text-sm mb-3 font-medium">Canary Audit Committee, Chair</p>
-                    <p className="text-gray-600 text-sm mb-3 italic">
+                    <p className="text-stone-700 font-medium mb-3">President, Senior Managing Director, Blue Ridge Partners</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 font-medium">Canary Audit Committee, Chair</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3 italic">
                       "I'm proud to serve as a board member for the Canary Foundation, where I've been able to see firsthand the innovation that the Foundation and Canary Center at Stanford have brought to the field of early cancer detection."
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       30+ years executive experience. Former CEO of Avaya, JDS Uniphase, SVP of Cisco Systems. Currently on boards of KLA-Tencor and Digital Realty.
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-white shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Users className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Users aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Dale Jantzen</h4>
-                    <p className="text-primary font-medium mb-3">Board Member</p>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-stone-700 font-medium mb-3">Board Member</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3">
                       20+ years product management and marketing experience in telecommunications. Former President of San Jose Grand Prix. BSEE from University of Saskatchewan.
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       Former Marketing Director at Develcon Electronics, Alberta Microelectronics Center, and Sci-Tec Instruments. Extensive experience managing large technical teams and multi-million dollar projects.
                     </p>
                   </CardContent>
                 </Card>
-                
-                <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
+
+                <Card className="rounded-2xl border-stone-200 bg-white shadow-none">
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-                      <Heart className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                      <Heart aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                     </div>
                     <h4 className="text-lg font-semibold text-dark mb-2">Hilary Valentine</h4>
-                    <p className="text-primary font-medium mb-3">Board Member</p>
-                    <p className="text-gray-600 text-sm mb-3">
+                    <p className="text-stone-700 font-medium mb-3">Board Member</p>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-3">
                       Partner at Black & White Design. Board of Directors of Valentine Family Foundation. Co-Founder of Belize Kids improving lives for children in Belize.
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-stone-600 text-sm leading-relaxed">
                       Chair of Room to Read Emeritus Board after serving 2003-2012. Helped lead the Board of Directors from 2005 to 2008. B.S. in Psychology from St. Lawrence University.
                     </p>
                   </CardContent>
                 </Card>
               </div>
             </div>
-            
-            <div className="bg-white rounded-lg p-8">
+
+            <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-8">
               <h3 className="text-2xl font-semibold text-dark mb-6 text-center">Scientific Advisory Board</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Microscope className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Microscope aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h4 className="font-semibold text-dark mb-1">Zhenan Bao</h4>
                   <p className="text-sm text-gray-600">Chemical Engineering</p>
                 </div>
-                
+
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Stethoscope className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Stethoscope aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h4 className="font-semibold text-dark mb-1">James Brooks</h4>
                   <p className="text-sm text-gray-600">Medicine, Oncology</p>
                 </div>
-                
+
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Target aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h4 className="font-semibold text-dark mb-1">Sylvia Plevritis</h4>
                   <p className="text-sm text-gray-600">Biomedical Data Science</p>
                 </div>
-                
+
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Shield className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Shield aria-hidden="true" strokeWidth={1.7} className="w-6 h-6 text-dark" />
                   </div>
                   <h4 className="font-semibold text-dark mb-1">Stephen Quake</h4>
                   <p className="text-sm text-gray-600">Stanford Radiology</p>
@@ -307,16 +307,16 @@ export function HomeMiddle({
       </section>
 
       {/* Features Photos of Canary Foundation Supporters */}
-      <section className="py-16 md:py-20 bg-light">
-        <div className="container mx-auto px-4">
+      <section className="border-t border-stone-200/70 bg-[#f8f7f2] py-20 md:py-28">
+        <div className="container mx-auto max-w-7xl px-5 sm:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Our Community Legacy</h2>
+            <div className="mx-auto max-w-3xl text-center mb-12 md:mb-16">
+              <h2 className="text-3xl font-semibold tracking-tight text-dark mb-5 md:text-5xl">Our Community Legacy</h2>
               <p className="text-lg text-gray-600 leading-relaxed">
                 Celebrating the dedicated supporters and volunteers who have made breakthrough cancer research possible through years of community engagement and philanthropy.
               </p>
             </div>
-            
+
             {/* Interactive Photo Gallery */}
             <div
               className="relative"
@@ -324,10 +324,10 @@ export function HomeMiddle({
               aria-roledescription="carousel"
               aria-label="Canary Foundation community history"
             >
-              <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
+              <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
                 <div className="relative">
                   <div
-                    className="flex transition-transform duration-500 ease-out"
+                    className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                   >
                     {heroImages.map((image, index) => (
@@ -339,6 +339,8 @@ export function HomeMiddle({
                         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                           <img
                             src={image.src}
+                            loading="lazy"
+                            decoding="async"
                             alt={image.alt}
                             className="absolute inset-0 h-full w-full bg-gray-50 object-contain"
                           />
@@ -351,14 +353,14 @@ export function HomeMiddle({
                     className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/95 p-3 shadow-lg transition hover:bg-white sm:left-4"
                     aria-label="Previous photo"
                   >
-                    <ChevronLeft className="h-5 w-5 text-gray-700" />
+                    <ChevronLeft aria-hidden="true" strokeWidth={1.7} className="h-5 w-5 text-gray-700" />
                   </button>
                   <button
                     onClick={nextSlide}
                     className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/95 p-3 shadow-lg transition hover:bg-white sm:right-4"
                     aria-label="Next photo"
                   >
-                    <ChevronRight className="h-5 w-5 text-gray-700" />
+                    <ChevronRight aria-hidden="true" strokeWidth={1.7} className="h-5 w-5 text-gray-700" />
                   </button>
                 </div>
                 <div
@@ -389,15 +391,15 @@ export function HomeMiddle({
                       setIsCarouselPlaying(false);
                       setCurrentSlide(index);
                     }}
-                    className={`h-3 w-3 rounded-full transition ${
-                      index === currentSlide ? "scale-125 bg-primary" : "bg-gray-300 hover:bg-gray-400"
+                    className={`h-6 w-6 rounded-full border-[7px] border-[#f8f7f2] transition-colors ${
+                      index === currentSlide ? "bg-stone-900" : "bg-gray-300 hover:bg-gray-400"
                     }`}
                     aria-label={`View ${image.title}`}
                     aria-current={index === currentSlide}
                   />
                 ))}
               </div>
-              
+
               {/* Photo count indicator */}
               <div className="text-center mt-4">
                 <span className="text-sm text-gray-500">
@@ -405,7 +407,7 @@ export function HomeMiddle({
                 </span>
                 <button
                   type="button"
-                  className="ml-4 inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm font-semibold text-primary hover:bg-primary/10"
+                  className="ml-4 inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm font-semibold text-stone-600 hover:bg-primary/10"
                   aria-label={isCarouselPlaying ? "Pause photo gallery" : "Play photo gallery"}
                   onClick={() => setIsCarouselPlaying((isPlaying) => !isPlaying)}
                 >
@@ -418,23 +420,20 @@ export function HomeMiddle({
                 </button>
               </div>
             </div>
-            
+
             {/* Call to Action */}
             <div className="text-center mt-12">
               <p className="text-gray-600 mb-6">
                 Continue the legacy of community support that makes a difference in cancer research
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  className="bg-primary text-dark hover:bg-primary-dark font-semibold"
-                  onClick={() => {
-                    trackClick('support_mission_hero', 'cta');
-                    window.open('https://donorbox.org/canary-campaign', '_blank');
-                  }}
-                >
-                  Support Our Mission
+                <Button asChild className="bg-primary text-dark hover:bg-yellow-300 font-semibold">
+                  <a href="https://donorbox.org/canary-campaign" target="_blank" rel="noopener noreferrer"
+                    onClick={() => trackClick('support_mission_hero', 'cta')}>
+                    Support Our Mission <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
+                  </a>
                 </Button>
-                <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-dark font-semibold">
+                <Button asChild variant="outline" className="border-stone-300 bg-white text-dark hover:border-stone-400 hover:bg-stone-50 font-semibold">
                   <Link href="/contact">Get Involved</Link>
                 </Button>
               </div>
@@ -444,66 +443,74 @@ export function HomeMiddle({
       </section>
 
       {/* Impact Stories */}
-      <section id="impact" className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">Research Impact</h2>
+      <section id="impact" className="border-t border-stone-200/70 bg-white py-20 md:py-28">
+        <div className="container mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <h2 className="text-3xl font-semibold tracking-tight text-dark mb-5 md:text-5xl">Research Impact</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               Our breakthrough discoveries are transforming cancer detection and improving patient outcomes worldwide.
             </p>
           </div>
-          
+
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
               <img
                 src={canaryFinishLine}
+                loading="lazy"
+                decoding="async"
+                width={500}
+                height={277}
                 alt="Canary Challenge finish line celebrating community support for early detection research"
-                className="h-80 w-full rounded-2xl object-cover shadow-xl"
+                className="aspect-[4/3] w-full rounded-2xl border border-stone-200 object-cover"
               />
             </div>
             <div>
-              <div className="text-primary text-lg font-semibold mb-4">Research Breakthrough</div>
+              <div className="text-stone-600 text-xs uppercase tracking-[0.16em] font-semibold mb-4">Research Breakthrough</div>
               <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">PASS Study Shapes National Guidelines</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                "The PASS study's findings with over 2,400 participants have directly influenced national screening guidelines 
-                and risk assessment protocols. Our research is helping doctors make better decisions about prostate cancer 
+                "The PASS study's findings with over 2,400 participants have directly influenced national screening guidelines
+                and risk assessment protocols. Our research is helping doctors make better decisions about prostate cancer
                 screening, ultimately saving lives through earlier detection."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
-                  <GraduationCap className="text-white" />
+                <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mr-4">
+                  <GraduationCap aria-hidden="true" strokeWidth={1.7} className="h-5 w-5 text-dark" />
                 </div>
                 <div>
                   <div className="font-semibold text-dark">Dr. Daniel Lin</div>
-                  <div className="text-gray-600 text-sm">PASS Study Lead</div>
+                  <div className="text-stone-600 text-sm leading-relaxed">PASS Study Lead</div>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <div className="mt-16 grid items-center gap-12 md:grid-cols-2">
             <div className="md:order-2">
               <img
                 src={canaryVolunteers}
+                loading="lazy"
+                decoding="async"
+                width={2048}
+                height={1536}
                 alt="Canary Challenge volunteers in yellow shirts supporting cancer research fundraising"
-                className="h-80 w-full rounded-2xl object-cover shadow-xl"
+                className="aspect-[4/3] w-full rounded-2xl border border-stone-200 object-cover"
               />
             </div>
             <div className="md:order-1">
-              <div className="text-primary text-lg font-semibold mb-4">Innovation Achievement</div>
+              <div className="text-stone-600 text-xs uppercase tracking-[0.16em] font-semibold mb-4">Innovation Achievement</div>
               <h3 className="text-2xl md:text-3xl font-bold text-dark mb-6">Liquid Biopsy Breakthrough</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                "Our liquid biopsy center has identified 149 proteins in normal urine samples and developed revolutionary 
-                microneedle patch technology for interstitial fluid analysis. This non-invasive approach could 
+                "Our liquid biopsy center has identified 149 proteins in normal urine samples and developed revolutionary
+                microneedle patch technology for interstitial fluid analysis. This non-invasive approach could
                 revolutionize how we detect cancer in its earliest stages."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
-                  <Droplets className="text-white" />
+                <div className="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mr-4">
+                  <Droplets aria-hidden="true" strokeWidth={1.7} className="h-5 w-5 text-dark" />
                 </div>
                 <div>
                   <div className="font-semibold text-dark">Research Team</div>
-                  <div className="text-gray-600 text-sm">Liquid Biopsy Center</div>
+                  <div className="text-stone-600 text-sm leading-relaxed">Liquid Biopsy Center</div>
                 </div>
               </div>
             </div>

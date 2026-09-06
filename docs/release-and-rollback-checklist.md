@@ -12,6 +12,8 @@ The 30 August 2026 design-audit pass (layout, contrast, and interaction) is docu
 
 The September 2026 SEO/AEO source update, complete-page rendering changes, test evidence, and outstanding release checks are recorded in [seo-aeo-audit-2026-09-06.md](./seo-aeo-audit-2026-09-06.md).
 
+The subsequent [design and loading polish](./design-polish-2026-09-06.md) includes new navigation, responsive screenshot evidence, and route preload checks.
+
 ## Before review
 
 - Confirm the working tree contains only intended Canary Foundation changes.

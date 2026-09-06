@@ -4,7 +4,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Dna, ScanLine, Waves, ShieldCheck } from "lucide-react";
 
 export default function Programs() {
   useEffect(() => {
@@ -16,13 +16,31 @@ export default function Programs() {
       <Header />
       
       <main id="main-content" tabIndex={-1}>
-        {/* Hero Section */}
+        <section className="border-b border-[#e4e6dc] bg-[#f8f7f2] py-12 md:py-20">
+          <div className="container mx-auto max-w-6xl px-5 md:px-8">
+            <p className="eyebrow mb-5">Our science / Research programs</p>
+            <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.1] text-dark md:text-6xl">Research with a shared purpose.</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#64695a]">Explore our work in prostate, ovarian, pancreatic, and lung cancer, and the science connecting earlier detection with better decisions.</p>
+            <nav aria-label="Choose a cancer research program" className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { name: "Prostate cancer", path: "prostate", icon: ShieldCheck },
+                { name: "Ovarian cancer", path: "ovarian", icon: Dna },
+                { name: "Pancreatic cancer", path: "pancreatic", icon: Waves },
+                { name: "Lung cancer", path: "lung", icon: ScanLine },
+              ].map(({ name, path, icon: Icon }) => (
+                <Link key={path} href={`/science/programs/tumors/${path}`} className="group flex min-h-24 items-center gap-3 rounded-xl border border-[#e0e3d7] bg-white p-4 transition-colors hover:border-[#b7c29f] hover:bg-[#fcfdf8]">
+                  <span className="science-icon"><Icon aria-hidden="true" strokeWidth={1.6} /></span>
+                  <span className="text-sm font-semibold text-dark">{name}</span><ArrowUpRight aria-hidden="true" className="ml-auto h-4 w-4 shrink-0 text-[#69754b]" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+        {/* Research context */}
         <section className="py-16 md:py-20 bg-light">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-dark mb-8">
-                Programs
-              </h1>
+              <h2 className="mb-8 text-3xl font-medium text-dark">Why earlier matters</h2>
               <div className="text-lg text-gray-700 leading-relaxed mb-8 space-y-4">
                 <p className="font-semibold text-xl">
                   10 more years… Imagine the gift of 10 more years after hearing the big, ugly C word. Unfortunately, today that gift is rare—a vast majority of patients live a few months past their diagnosis. Early detection can change that.
@@ -49,7 +67,7 @@ export default function Programs() {
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <Card className="bg-white shadow-lg border-l-4 border-primary">
+              <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                 <CardContent className="p-8 md:p-12">
                   <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
@@ -103,7 +121,7 @@ export default function Programs() {
               </p>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
+                <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Lung Cancer</h3>
                     <p className="text-gray-600 mb-4">
@@ -116,7 +134,7 @@ export default function Programs() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
+                <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Ovarian Cancer</h3>
                     <p className="text-gray-600 mb-4">
@@ -129,7 +147,7 @@ export default function Programs() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
+                <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Pancreatic Cancer</h3>
                     <p className="text-gray-600 mb-4">
@@ -142,7 +160,7 @@ export default function Programs() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white shadow-lg border-l-4 border-primary">
+                <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Prostate Cancer</h3>
                     <p className="text-gray-600 mb-4">
@@ -155,7 +173,7 @@ export default function Programs() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white shadow-lg border-l-4 border-gray-300">
+                <Card className="bg-white shadow-none border border-[#e0e3d7] rounded-2xl">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-bold text-dark mb-4">Multidisciplinary Approach</h3>
                     <p className="text-gray-600 mb-4">
