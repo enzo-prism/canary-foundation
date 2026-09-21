@@ -45,6 +45,9 @@ const PRECOMPRESSED_CONTENT_TYPES: Record<string, string> = {
 
 // Legacy URL redirect mappings - MUST be defined early
 const LEGACY_REDIRECTS: Record<string, string> = {
+  '/blog/oral-history-caltech': '/oral-history',
+  '/about/founders-story': '/oral-history',
+
   '/index.html': '/',
   '/take-action': '/donate',
   '/take-action/': '/donate',
@@ -74,8 +77,8 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   '/science/centers/fhcrc/': '/science/centers/fhcc',
   '/about-canary': '/about/overview',
   '/about-canary/': '/about/overview',
-  '/about-canary/founders-story': '/about/founders-story',
-  '/about-canary/founders-story/': '/about/founders-story',
+  '/about-canary/founders-story': '/oral-history',
+  '/about-canary/founders-story/': '/oral-history',
   '/about-canary/staff': '/about/staff',
   '/about-canary/staff/': '/about/staff',
   '/about-canary/board-of-directors': '/about/board-directors',

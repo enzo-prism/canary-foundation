@@ -1,5 +1,4 @@
 import { DON_LISTWIN_TITLE_WITH_ORG } from "@/data/leadership";
-import { buildDonListwinOralHistoryBlogContent } from "@/data/don-listwin-oral-history";
 
 // Blog post data with full content from Canary Foundation
 export interface BlogPost {
@@ -539,23 +538,6 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     wordCount: 520,
     featured: false
-  },
-  {
-    id: 11,
-    slug: "oral-history-caltech",
-    title: "Caltech Heritage Project Oral History (2025) — Don Listwin",
-    excerpt: "A four-part 2025 Caltech Heritage Project interview with Don Listwin about building early-stage cancer detection systems. Visit our Founder & Oral History page to explore the full story and listen to every episode.",
-    fullContent: buildDonListwinOralHistoryBlogContent(),
-    author: "Don Listwin",
-    date: "2025-04-28",
-    dateLabel: "Recorded",
-    publishedDate: "2026-02-19",
-    category: "Interview",
-    tags: ["Don Listwin", "Oral History", "Caltech Heritage Project", "Canary Foundation", "Interview", "Interview Series"],
-    readTime: "30 min read",
-    wordCount: 1900,
-    featured: true,
-    originalUrl: "https://www.listwinventures.com/oral-history-caltech"
   },
   {
     id: 12,

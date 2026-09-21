@@ -45,7 +45,7 @@ export function HomeMiddle({
                       variant="outline"
                       className="border-stone-300 bg-white text-dark hover:border-stone-400 hover:bg-stone-50 font-semibold"
                     >
-                      <Link href="/about/founders-story">
+                      <Link href="/oral-history">
                       Founder & Oral History
                       <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-2" />
                     </Link>
@@ -70,7 +70,7 @@ export function HomeMiddle({
                   </p>
                   <div className="mt-4 text-center">
                     <Button asChild variant="ghost" size="sm" className="text-dark hover:text-stone-600">
-                      <Link href="/about/founders-story">
+                      <Link href="/oral-history">
                         Founder & Oral History
                         <ArrowRight aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 ml-1" />
                       </Link>

@@ -6,6 +6,7 @@ import { z } from "zod";
 import fs from "fs";
 import path from "path";
 import { isDatabaseConfigured } from "./db";
+import { createOralHistoryDownloadHandler } from "./oral-history-downloads";
 
 const CONTACT_WINDOW_MS = 15 * 60 * 1000;
 const CONTACT_REQUEST_LIMIT = 5;
@@ -56,6 +57,7 @@ function consumeContactRateLimit(req: Request) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.get("/api/oral-history/episodes/:episode/download", createOralHistoryDownloadHandler());
   // NOTE: Legacy redirects are now handled in server/index.ts BEFORE Vite middleware
   // This ensures they work properly in development mode.
   const distPublicPath = path.join(process.cwd(), "dist", "public");

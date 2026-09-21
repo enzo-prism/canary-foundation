@@ -49,7 +49,7 @@ export default function AboutOverview() {
                     at its earliest, most curable stage.
                   </p>
                   <Link
-                    href="/about/founders-story"
+                    href="/oral-history"
                     className="inline-flex items-center gap-2 mt-6 text-primary font-semibold hover:text-primary-dark transition-colors"
                   >
                     Read the Founder & Oral History page

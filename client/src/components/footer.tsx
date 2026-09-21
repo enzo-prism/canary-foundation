@@ -8,7 +8,7 @@ const footerGroups = [
     links: [
       ["Our mission", "/about/overview"],
       ["Canary Approach", "/approach/overview"],
-      ["Founder & Oral History", "/about/founders-story"],
+      ["Founder & Oral History", "/oral-history"],
       ["Our team", "/about/staff"],
       ["Board of Directors", "/about/board-directors"],
       ["Awards", "/about/awards"],

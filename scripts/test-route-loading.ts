@@ -16,7 +16,7 @@ const initial = readFileSync(`dist/public/${entry.file}`, "utf8");
 assert.ok(!initial.includes("Announced on October 23rd"), "Article body must not be embedded in the critical app entry");
 console.log(`Initial entry: ${statSync(`dist/public/${entry.file}`).size} bytes; gzip: ${statSync(`dist/public/${entry.file}.gz`).size} bytes.`);
 if (process.env.BASE_URL) {
-  for (const route of ["/", "/contact", "/blog/oral-history-caltech", "/missing"]) {
+  for (const route of ["/", "/contact", "/oral-history", "/missing"]) {
     const html = await (await fetch(new URL(route, process.env.BASE_URL))).text();
     const file = manifest[routeModuleId(route)].file;
     assert.ok(html.includes(`<link rel="modulepreload" crossorigin href="/${file}"`), `${route}: matching hydration preload`);

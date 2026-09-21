@@ -7,7 +7,7 @@ export const routeModuleIds: Record<string, string> = {
   "/blog": "src/pages/blog.tsx",
   "/blog/:slug": "src/pages/blog-post.tsx",
   "/about/overview": "src/pages/about-overview.tsx",
-  "/about/founders-story": "src/pages/founders-story.tsx",
+  "/oral-history": "src/pages/founders-story.tsx",
   "/about/staff": "src/pages/staff.tsx",
   "/about/board-directors": "src/pages/board-directors.tsx",
   "/about/leadership-council": "src/pages/leadership-council.tsx",

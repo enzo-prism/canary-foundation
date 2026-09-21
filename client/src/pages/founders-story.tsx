@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   ArrowRight,
   AudioLines,
+  Download,
   ExternalLink,
   FileText,
   HeartPulse,
@@ -70,7 +71,7 @@ export default function FoundersStory() {
                   the internet.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                  This page is the canonical Canary Foundation home for Don's background, the oral
+                  Explore Don's background, the oral
                   history of his journey from Cisco and Openwave to {DON_LISTWIN_TITLE_WITH_ORG}, and
                   the ideas that still shape Canary's model today: team science, catalytic funding,
                   and a biomarker-plus-imaging path to action.
@@ -258,7 +259,7 @@ export default function FoundersStory() {
               </div>
 
               <div className="grid gap-6">
-                {oralHistoryEpisodes.map((episode) => (
+                {oralHistoryEpisodes.map((episode, index) => (
                   <Card key={episode.title} className="border-primary/10 bg-white shadow-md">
                     <CardContent className="p-6 space-y-5">
                       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -274,16 +275,16 @@ export default function FoundersStory() {
                         </Badge>
                       </div>
 
-                      <audio className="w-full" controls preload="metadata">
+                      <audio className="w-full" aria-label={`Listen to ${episode.title}`} controls preload="none">
                         <source src={episode.audioUrl} type="audio/mpeg" />
                         Your browser does not support the audio element.
                       </audio>
 
                       <div className="flex flex-wrap gap-3">
                         <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                          <a href={episode.audioUrl} target="_blank" rel="noopener noreferrer">
-                            Open audio
-                            <PlayCircle className="w-4 h-4 ml-2" />
+                          <a href={`/api/oral-history/episodes/${index + 1}/download`} download>
+                            Download MP3
+                            <Download className="w-4 h-4 ml-2" aria-hidden="true" />
                           </a>
                         </Button>
                         <Button asChild variant="ghost" className="text-primary hover:bg-primary/5">

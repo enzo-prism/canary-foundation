@@ -245,7 +245,7 @@ function Router() {
 
         {/* About Canary pages */}
         <Route path="/about/overview" component={AboutOverview} />
-        <Route path="/about/founders-story" component={FoundersStory} />
+        <Route path="/oral-history" component={FoundersStory} />
         <Route path="/about/staff" component={Staff} />
         <Route path="/about/board-directors" component={BoardDirectors} />
         <Route path="/about/leadership-council" component={LeadershipCouncil} />

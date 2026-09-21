@@ -19,7 +19,7 @@ const navigationStructure: Record<string, NavSection> = {
   "About Canary": {
     items: [
       { name: "Our Mission", path: "/about/overview" },
-      { name: "Founder & Oral History", path: "/about/founders-story" },
+      { name: "Founder & Oral History", path: "/oral-history" },
       { name: "Staff", path: "/about/staff" },
       { name: "Board of Directors", path: "/about/board-directors" },
       { name: "Leadership Council", path: "/about/leadership-council" },
@@ -240,6 +240,7 @@ export default function Header() {
                   </div>
                 );
               })}
+              <Link href="/oral-history" className={topLink} aria-current={location === "/oral-history" ? "page" : undefined}>Oral History</Link>
               <Link href="/blog" className={`${topLink} ${pathIsActive(location, "/blog") ? "bg-black/[0.04]" : ""}`} aria-current={location === "/blog" ? "page" : undefined}>Blog</Link>
               <Link href="/contact" className={topLink} aria-current={location === "/contact" ? "page" : undefined}>Contact</Link>
               <Button asChild className="ml-3 min-h-11 rounded-lg bg-[#ffc400] px-5 font-semibold text-[#242722] shadow-none hover:bg-[#efd000]">
@@ -268,6 +269,7 @@ export default function Header() {
                 </div>;
               })}
               <div className="grid grid-cols-2 gap-2 border-t border-black/[0.06] pt-2">
+                <Link href="/oral-history" onClick={closeMenus} className={topLink} aria-current={location === "/oral-history" ? "page" : undefined}>Oral History</Link>
                 <Link href="/blog" onClick={closeMenus} className={topLink} aria-current={location === "/blog" ? "page" : undefined}>Blog</Link>
                 <Link href="/contact" onClick={closeMenus} className={topLink} aria-current={location === "/contact" ? "page" : undefined}>Contact</Link>
               </div>

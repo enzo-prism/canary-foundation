@@ -1,4 +1,4 @@
-export const DON_LISTWIN_STORY_PATH = "/about/founders-story";
+export const DON_LISTWIN_STORY_PATH = "/oral-history";
 
 export const caltechTranscriptPdfUrl =
   "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1771359675/Don_Listwin_xojqyi.pdf";

@@ -2,7 +2,7 @@
 
 The marketing and content website for the [Canary Foundation](https://canaryfoundation.org), a nonprofit dedicated solely to the **early detection of cancer**. The site presents the foundation's mission, active research programs (ovarian, prostate, pancreatic, and lung), scientific approach, leadership, blog/oral histories, and ways to give.
 
-It is a content-first single-page app (SPA) served by an Express server, deployed on Replit.
+It is a server-rendered React site served by Express on Replit, with browser hydration and client-side navigation.
 
 ---
 
@@ -63,7 +63,7 @@ The dev server starts on **http://localhost:5000**, or the next free port if 500
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Dev server: Express + Vite middleware with HMR (`scripts/dev.mjs`). |
-| `npm run build` | Vite client build → `dist/public`, esbuild server bundle → `dist/index.js`. Runs `postbuild` automatically. |
+| `npm run build` | Vite browser build → `dist/public`, server-rendering build → `dist/ssr`, and esbuild server → `dist/index.js`. Runs `postbuild` automatically. |
 | `npm run start` | Production: serves the bundled app from `dist/index.js` (`NODE_ENV=production`). |
 | `npm run check` | Project-wide TypeScript type-check (`tsc`). |
 | `npm run check:links -- --network` | Check first-party references and verify public outbound links. |
@@ -102,6 +102,14 @@ See [the September 2026 SEO/AEO audit](docs/seo-aeo-audit-2026-09-06.md) for fin
 ## Design and loading
 
 The [September design polish](docs/design-polish-2026-09-06.md) documents the editorial homepage, program chooser, navigation/footer, accessible motion, and measured loading changes. Production uses the Vite manifest to preload the current route; `shared/route-module-ids.ts` must track App routes. Run `BASE_URL=http://localhost:5000 npm run test:loading` against a fresh production build. Optional media starts paused and the logo film downloads only on play.
+
+## September 20 punch-list implementation
+
+See [the item-by-item verification and release status](docs/punch-list-2026-09-20.md). `/oral-history` is the canonical founder/oral-history page and is linked directly from desktop/mobile navigation. The former `/blog/oral-history-caltech` and `/about/founders-story` URLs permanently redirect there, preserving query strings. The migrated article is no longer a duplicate blog/sitemap record.
+
+All four recordings have labeled players and explicit MP3 downloads through `/api/oral-history/episodes/:episode/download`. Downloads stream from the fixed public Listwin Ventures recordings, with attachment headers, range support, and bounded failure handling. No recording is uploaded or duplicated by this change. Run `npm run test:oral-history-downloads` and `BASE_URL=http://localhost:5000 npm run test:ssr` after changes.
+
+Q4 and CTUC remain private preparation until approved public copy arrives. The contact form already exists; the ambiguous “both websites” inquiry request does not authorize changing its fields. The existing live splash still needs documented review before a further production release under the current punch list.
 
 ## Content model
 

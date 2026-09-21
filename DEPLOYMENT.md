@@ -100,3 +100,9 @@ The Scientific Leadership route should return `200`. Retired canonical routes su
 See [the audit and validation record](docs/seo-aeo-audit-2026-09-06.md). `npm run build` now creates the browser bundle, `dist/ssr/entry-server.js` and its chunks, and the Express server; npm invokes `postbuild` automatically. Publish the complete `dist` tree with runtime dependencies, not just `dist/public`. A GitHub push is not a Replit publication.
 
 After one successful fresh build, use `SKIP_BUILD=1` when running multiple shell smoke scripts to reuse that exact artifact. Run `npm run test:seo`, `node scripts/test-crawl-generation.mjs`, and `BASE_URL=http://localhost:5000 npm run test:ssr` against the running server. Verify browser hydration, reduced-motion and script-blocked content before release.
+
+## September 20 punch-list release
+
+See [the verified item ledger](docs/punch-list-2026-09-20.md). The oral-history canonical route is now `/oral-history`; the previous founder and blog addresses redirect there. Verify all four `/api/oral-history/episodes/:episode/download` endpoints with HEAD and a small range before release. They depend on the existing public Listwin Ventures recordings.
+
+Main publication does not complete Replit publication. Preserve the current request's splash-approval boundary, and keep Q4/CTUC content private until approved. The September 20 production dependency audit still reports five pre-existing findings; do not describe that check as clean.

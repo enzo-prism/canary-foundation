@@ -3,7 +3,7 @@
   "routes": [
     "/",
     "/about/overview",
-    "/about/founders-story",
+    "/oral-history",
     "/about/staff",
     "/about/board-directors",
     "/about/leadership-council",
@@ -35,7 +35,6 @@
     "/science/funding-by-invitation",
     "/blog",
     "/blog/april-2026-science-meetings-stanford-ucsd",
-    "/blog/oral-history-caltech",
     "/blog/don-listwin-award-2025-ruth-etzioni",
     "/blog/edx25-conference-portland-early-detection",
     "/blog/canary-foundation-program-report-2025",

@@ -53,6 +53,8 @@ Every public report must record:
 | Q4 general overview | Not supplied | Keep a content-free placeholder only. |
 | UCSD CTUC launch | Not supplied | Keep a content-free placeholder only. |
 
+Q4 and CTUC preparation has an [internal intake and release checklist](./q4-ctuc-readiness-2026-09-20.md). Complete that checklist before promoting either shell; its planning dates are not confirmed public launch dates.
+
 ## Known safety rules
 
 - Never restore facts from the earlier confidential ovarian draft.

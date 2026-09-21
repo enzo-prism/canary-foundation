@@ -59,7 +59,7 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Learn about Canary Foundation's mission, history, and commitment to earlier cancer detection.",
   },
-  "/about/founders-story": {
+  "/oral-history": {
     title: "Don Listwin | Founder's Story & Oral History | Canary Foundation",
     description:
       "Explore Don Listwin's founder story, oral history, and the personal journey that shaped Canary Foundation.",
@@ -308,7 +308,7 @@ export function buildOrganizationJsonLd(): Record<string, unknown> {
     founder: {
       "@type": "Person",
       name: "Don Listwin",
-      url: `${SITE_ORIGIN}/about/founders-story`,
+      url: `${SITE_ORIGIN}/oral-history`,
     },
     email: "info@canaryfoundation.org",
     address: {
@@ -437,7 +437,7 @@ export function buildArticleJsonLd({
       "@type": isOrganization ? "Organization" : "Person",
       name: author,
       ...(author === SITE_NAME ? { "@id": ORGANIZATION_ID, url: `${SITE_ORIGIN}/` } : {}),
-      ...(author === "Don Listwin" ? { url: `${SITE_ORIGIN}/about/founders-story` } : {}),
+      ...(author === "Don Listwin" ? { url: `${SITE_ORIGIN}/oral-history` } : {}),
     };
   }
   if (keywords && keywords.length > 0) jsonLd.keywords = keywords.join(", ");

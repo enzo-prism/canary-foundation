@@ -34,9 +34,17 @@ for (const route of [...routes.routes, "/missing-ssr-test", "/blog/missing-ssr-t
   }
   if (!expected.isKnownRoute) assert.ok(html.includes('content="noindex, nofollow"'), `${route}: noindex`);
 }
+const oralHistoryHtml = await (await fetch(new URL("/oral-history", base))).text();
+assert.equal((oralHistoryHtml.match(/<audio\b/g) || []).length, 4, "Four oral-history players must be rendered without JavaScript");
+for (const episode of [1, 2, 3, 4]) {
+  assert.ok(oralHistoryHtml.includes(`/api/oral-history/episodes/${episode}/download`), `Episode ${episode}: download link`);
+}
+const sitemap = await (await fetch(new URL("/sitemap.xml", base))).text();
+assert.ok(sitemap.includes("https://canaryfoundation.org/oral-history</loc>"));
+assert.ok(!sitemap.includes("/about/founders-story") && !sitemap.includes("/blog/oral-history-caltech"), "Migrated URLs must not remain canonical sitemap entries");
 console.log(`Verified full initial HTML, metadata and schema for ${routes.routes.length} public routes plus two 404s.`);
 
-for (const [route, destination] of [["/index.html", "/"], ["/take-action", "/donate"], ["/contact/", "/contact"]]) {
+for (const [route, destination] of [["/blog/oral-history-caltech", "/oral-history"], ["/about/founders-story/", "/oral-history"], ["/about-canary/founders-story", "/oral-history"], ["/ORAL-HISTORY/", "/oral-history"], ["/index.html", "/"], ["/take-action", "/donate"], ["/contact/", "/contact"]]) {
   const response = await fetch(new URL(`${route}?utm_source=ssr-test`, base), { redirect: "manual" });
   assert.equal(response.status, 301, `${route}: permanent canonical redirect`);
   assert.equal(response.headers.get("location"), `${destination}?utm_source=ssr-test`);
