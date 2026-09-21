@@ -49,8 +49,11 @@ for (const [route, destination] of [["/blog/oral-history-caltech", "/oral-histor
   assert.equal(response.status, 301, `${route}: permanent canonical redirect`);
   assert.equal(response.headers.get("location"), `${destination}?utm_source=ssr-test`);
 }
-const www = await fetch(new URL("/take-action/?utm_source=ssr-test", base), {
-  redirect: "manual", headers: { "x-forwarded-host": "www.canaryfoundation.org" },
+// Production proxies overwrite forwarded host headers; exercise the real www host there.
+const isPublicProduction = new URL(base).hostname === "canaryfoundation.org";
+const www = await fetch(new URL("/take-action/?utm_source=ssr-test", isPublicProduction ? "https://www.canaryfoundation.org" : base), {
+  redirect: "manual",
+  ...(isPublicProduction ? {} : { headers: { "x-forwarded-host": "www.canaryfoundation.org" } }),
 });
 assert.equal(www.status, 301);
 assert.equal(www.headers.get("location"), "https://canaryfoundation.org/donate?utm_source=ssr-test", "host, alias and trailing slash canonicalize in one hop");

@@ -106,3 +106,7 @@ After one successful fresh build, use `SKIP_BUILD=1` when running multiple shell
 See [the verified item ledger](docs/punch-list-2026-09-20.md). The oral-history canonical route is now `/oral-history`; the previous founder and blog addresses redirect there. Verify all four `/api/oral-history/episodes/:episode/download` endpoints with HEAD and a small range before release. They depend on the existing public Listwin Ventures recordings.
 
 Main publication does not complete Replit publication. Preserve the current request's splash-approval boundary, and keep Q4/CTUC content private until approved. The September 20 production dependency audit still reports five pre-existing findings; do not describe that check as clean.
+
+## September 20 production publication verified
+
+Published GitHub application source `5666ff4` through [Canary Foundation in Replit](https://replit.com/@enzo78/Canary-Foundation). Replit reported Live; public readback passed all 46 canonical pages, migrated oral-history redirects, all four MP3 downloads, awards pages and mobile/audio checks. See the [item ledger](docs/punch-list-2026-09-20.md) for remaining content approvals and full evidence. This supersedes earlier source-only release status above.
