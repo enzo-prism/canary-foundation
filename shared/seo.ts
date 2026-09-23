@@ -54,6 +54,11 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
     description:
       "Canary Foundation researchers and institutional leaders gathered at Stanford and UC San Diego to advance early detection, imaging, and translational ultrasound.",
   },
+  "/blog/cinelli-family-foundation-canary-foundation-expand-pancreatic-cancer-early-detection": {
+    title: "Canary and Cinelli Family Foundations Expand Pancreatic Cancer Early Detection | Canary Foundation",
+    description:
+      "Canary Foundation and the Cinelli Family Foundation expand their partnership to advance early detection of pancreatic cancer through next-generation imaging and blood tests.",
+  },
   "/about/overview": {
     title: "About Canary Foundation | Early Cancer Detection Nonprofit",
     description:

@@ -25,6 +25,11 @@ const contactFormSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name."),
   email: z.string().trim().email("Enter a valid email address."),
   subject: z.string().trim().min(5, "Enter a subject with at least 5 characters."),
+  inquiryType: z
+    .string()
+    .trim()
+    .min(2, "Briefly describe the nature of your inquiry.")
+    .max(120),
   message: z.string().trim().min(10, "Enter a message with at least 10 characters."),
   website: z.string().max(0, "Unable to submit this form."),
 });
@@ -53,6 +58,7 @@ export default function Contact() {
       name: "",
       email: "",
       subject: "",
+      inquiryType: "",
       message: "",
       website: "",
     },
@@ -220,6 +226,24 @@ export default function Contact() {
                           <FormLabel>Subject</FormLabel>
                           <FormControl>
                             <Input autoComplete="off" placeholder="How can we help?" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="inquiryType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nature of inquiry</FormLabel>
+                          <FormControl>
+                            <Input
+                              autoComplete="off"
+                              placeholder="e.g. Research collaboration, donation question, press inquiry"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>

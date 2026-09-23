@@ -44,6 +44,14 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages)
 // automated submissions that populate it are accepted without being stored.
 export const contactRequestSchema = insertContactMessageSchema.extend({
   website: z.string().max(200).optional().default(""),
+  // Don Listwin (Sept 18, 2026): every inquiry should carry a line or two
+  // about its nature. It is folded into the top of the stored message so no
+  // database migration is required.
+  inquiryType: z
+    .string()
+    .trim()
+    .min(2, "Briefly describe the nature of your inquiry.")
+    .max(120),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

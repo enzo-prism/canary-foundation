@@ -22,6 +22,17 @@ export function HomeLower(_props: HomeInteractiveProps) {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <Card className="group flex h-full flex-col rounded-2xl border-stone-200 bg-white shadow-none transition-colors duration-200 hover:border-stone-400">
               <CardContent className="flex flex-1 flex-col p-6">
+                <div className="mb-2 text-sm font-semibold text-stone-600">PRESS RELEASE • 2026</div>
+                <h3 className="mb-3 text-xl font-semibold text-dark">Canary and Cinelli Family Foundations Expand Pancreatic Cancer Early Detection Efforts</h3>
+                <p className="mb-4 flex-1 text-gray-600">Expanded partnership will support next-generation imaging, blood tests, and monitoring strategies to find pancreatic cancer earlier.</p>
+                <Button asChild variant="link" className="h-auto justify-start p-0 font-semibold text-dark hover:text-stone-600">
+                  <Link href="/blog/cinelli-family-foundation-canary-foundation-expand-pancreatic-cancer-early-detection" aria-label="Read the press release about the expanded Canary and Cinelli Family Foundation partnership">Read More <ArrowRight aria-hidden="true" strokeWidth={1.7} className="ml-1 h-4 w-4" /></Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="group flex h-full flex-col rounded-2xl border-stone-200 bg-white shadow-none transition-colors duration-200 hover:border-stone-400">
+              <CardContent className="flex flex-1 flex-col p-6">
                 <div className="mb-2 text-sm font-semibold text-stone-600">RESEARCH • 2026</div>
                 <h3 className="mb-3 text-xl font-semibold text-dark">April Science Meetings</h3>
                 <p className="mb-4 flex-1 text-gray-600">Scientists and institutional leaders gathered at Stanford and UC San Diego to advance early detection, imaging, and translational ultrasound.</p>

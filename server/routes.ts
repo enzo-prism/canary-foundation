@@ -113,7 +113,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     try {
-      const { website, ...validatedData } = contactRequestSchema.parse(req.body);
+      const { website, inquiryType, ...validatedData } =
+        contactRequestSchema.parse(req.body);
 
       // Return a normal success response to bots so the honeypot cannot be
       // discovered by comparing status codes, but do not retain their input.
@@ -125,7 +126,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      await storage.createContactMessage(validatedData);
+      await storage.createContactMessage({
+        ...validatedData,
+        message: `Nature of inquiry: ${inquiryType}\n\n${validatedData.message}`,
+      });
 
       if (isDatabaseConfigured) {
         return res.status(201).json({

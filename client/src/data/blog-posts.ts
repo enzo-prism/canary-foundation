@@ -586,4 +586,56 @@ export const blogPosts: BlogPost[] = [
       }
     ]
   },
+  {
+    id: 13,
+    slug: "cinelli-family-foundation-canary-foundation-expand-pancreatic-cancer-early-detection",
+    title: "The Cinelli Family Foundation and Canary Foundation Expand Joint Efforts to Find Pancreatic Cancer Earlier",
+    excerpt: "Canary Foundation and the Cinelli Family Foundation announced an expanded partnership to advance the early detection of pancreatic cancer, supporting next-generation imaging, blood tests, and monitoring strategies for people at elevated risk.",
+    fullContent: `
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">For immediate release</p>
+
+      <p class="mt-4 text-lg text-gray-600"><em>Strengthened commitment will support research into next-generation imaging, blood tests and other tools aimed at detecting pancreatic cancer before it becomes deadly</em></p>
+
+      <p class="mt-6">Palo Alto, CA, September 17, 2026 – For cancer patients, timing can mean the difference between a treatable diagnosis and one that is already life-threatening. Yet pancreatic cancer is notoriously difficult to detect early, with most patients diagnosed only after the disease has significantly progressed. Pancreatic cancer is currently the third leading cause of cancer deaths in the United States.</p>
+
+      <p>After two years of initial work together, the Cinelli Family Foundation and Canary Foundation are further combining efforts to change that delicate equation. The two philanthropic organizations today announced an expanded partnership focused on advancing the early detection of pancreatic cancer, supporting research into innovative imaging technologies, emerging blood-based tests and strategies for monitoring people at elevated risk for the disease.</p>
+
+      <p>The ongoing collaboration brings together the Cinelli Family Foundation's deep commitment to addressing pancreatic cancer with Canary Foundation's more than two decades of leadership in early cancer detection. Together, the organizations aim to accelerate research that could make it possible to identify pancreatic cancer sooner—when treatment is more likely to be successful and long-term survival is substantially better. Currently only about 14% of pancreatic cancer patients are diagnosed when the cancer remains localized. Yet among patients diagnosed with Stage 1A disease, five-year survival can reach approximately 80%.</p>
+
+      <p>"Everyone that has been touched by pancreatic cancer knows how little time there often is between diagnosis and loss," said Don Listwin, Founder of Canary Foundation. "We started Canary because we believed science could change that story by finding cancer before it has a chance to take hold, as it did in our family. Expanding our efforts with the Cinelli Family Foundation combines the resources and our shared urgency to move tools like point-of-care ultrasound and next-generation blood tests out of research settings and to doctors who are seeing high-risk patients every day."</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">Bringing Early Detection Closer to the Patient</h2>
+
+      <p>One promising area of research supported by the partnership is point-of-care ultrasound (POCUS), which could potentially make pancreatic imaging more accessible by allowing physicians to perform relatively low-cost, noninvasive examinations in the doctor's office.</p>
+
+      <p>The Canary-Cinelli collaboration looks to build on research led by Walter Park, M.D., Professor of Medicine in Gastroenterology and Hepatology at Stanford University School of Medicine, and Ahmed El Kaffas, Ph.D., at the University of California San Diego, exploring the potential of POCUS for pancreatic imaging. Dr. Park's research focuses on pancreatic disorders and early detection of pancreatic cancer. He is a principal investigator in national pancreatic cancer detection and early detection research programs.</p>
+
+      <p>"Pancreatic cancer is challenging to detect at an early stage, which is why we need to explore approaches that can make pancreatic imaging more accessible and practical," said Walter Park, M.D., Professor of Medicine at Stanford University School of Medicine. "Point-of-care ultrasound is an intriguing technology because it has the potential to bring pancreatic imaging closer to the patient."</p>
+
+      <p>Recent research involving Dr. Park and Stanford colleagues has specifically examined the feasibility of using handheld POCUS to visualize the pancreas. Canary's pancreatic cancer program is also focused on deploying POCUS alongside high-risk patient identification and biomarker research.</p>
+
+      <p>More generally, the partnership will support research involving people at elevated risk for pancreatic cancer, including individuals with precancerous cystic lesions, known hereditary genetic mutations or a strong family history of the disease. Researchers will evaluate emerging blood tests that have not yet been incorporated into U.S. guidelines for pancreatic cancer screening, helping determine which technologies show the greatest promise for further development and validation.</p>
+
+      <p>"Our family has seen the devastating impact of pancreatic cancer on a family member, and that experience has motivated us to invest in solutions that give patients and their families more hope," said Eric Ryan, Co-Executive Director & Board Secretary of the Cinelli Family Foundation. "Those solutions can come from research at all stages of the process, but prevention and early detection are by far the best ways to improve survival rates. The recently F.D.A. approved pancreatic cancer drug daraxonrasib was aimed at treatment and should provide hope to many. While our foundation is helping to fund the next stage of research involving daraxonrasib, our expanded partnership with Canary allows us to combine our commitment to pancreatic cancer research with one of the world's leading efforts in early detection. Our goal is to help create a future in which a diagnosis of pancreatic cancer does not carry the same prognosis it does today."</p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">About the Canary Foundation</h2>
+
+      <p>Founded by Don Listwin in 2004, the Canary Foundation is dedicated to the early detection of cancer. Canary funds research focused on the discovery, validation and implementation of tests and technologies designed to identify lethal cancers at their earliest stages, when they are more treatable and patients have a greater chance of survival. Its multidisciplinary research programs have focused on ovarian, lung, pancreatic and prostate cancers, as well as molecular imaging and diagnostics applicable to other tumor types. Canary helped establish the Canary Center at Stanford in partnership with Stanford University School of Medicine and the Stanford Cancer Institute. <a href="https://canaryfoundation.org" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">www.canaryfoundation.org</a></p>
+
+      <h2 class="text-2xl font-bold text-dark mt-8 mb-4">About the Cinelli Family Foundation</h2>
+
+      <p>The Cinelli Family Foundation (CFF) was established in 2021 to honor the dreams of Al and Sharon Cinelli. Inspired by the transformative power of education and shaped by cancers that impacted the Cinelli family, the Foundation invests in two areas where progress is both urgent and possible: accelerating breakthroughs in blood, breast, and pancreatic cancer prevention and treatment, and supporting education research, innovative programs, and technologies to help reimagine educational ecosystems and radically improve learning outcomes. Based in Lawrence, Kansas, CFF is a national funder driven by the belief that science and learning are among the most powerful forces for human progress. <a href="https://www.cinellifamilyfoundation.org" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">www.cinellifamilyfoundation.org</a></p>
+
+      <p class="mt-8 text-sm text-gray-600"><strong>Media contact:</strong> Peter Evers, Natron Communications, (415) 322-8150, <a href="mailto:peter@natroncomm.com" class="text-primary hover:underline">peter@natroncomm.com</a></p>
+    `,
+    author: "Canary Foundation",
+    date: "2026-09-17",
+    dateLabel: "Released",
+    publishedDate: "2026-09-23",
+    category: "Research",
+    tags: ["Pancreatic Cancer", "Early Detection", "Partnership", "Press Release", "POCUS", "Blood Tests"],
+    readTime: "5 min read",
+    wordCount: 994,
+    featured: true,
+  },
 ];
