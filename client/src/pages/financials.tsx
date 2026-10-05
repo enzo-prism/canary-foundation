@@ -39,9 +39,8 @@ export default function Financials() {
                 Current filings
               </h2>
               <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600">
-                Slots for the 2025 Form 990 and 2025 financial statements are ready.
-                Downloads appear only after the approved files are posted. Until then,
-                each slot stays in a coming-soon state so visitors never see a broken link.
+                The 2025 Form 990 and 2025 financial statements will appear here after
+                they are approved for publication.
               </p>
               <FinancialDocumentSlots />
             </div>

@@ -384,7 +384,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
               <div className="bg-[#252923] p-6 text-white sm:p-8">
                 <h3 className="mb-3 text-3xl font-bold">Current financial documents</h3>
                 <p className="text-lg text-stone-200">
-                  2025 Form 990 and financial statements will be posted here when approved. Until then, each slot stays coming soon.
+                  2025 Form 990 and financial statements will be posted here when approved for publication.
                 </p>
               </div>
               <div className="p-6 sm:p-8">
