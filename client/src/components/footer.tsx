@@ -29,7 +29,7 @@ const footerGroups = [
     heading: "Stay connected",
     links: [
       ["Research team updates", "/science/programs/team-updates"],
-      ["Blog", "/blog"],
+      ["News", "/blog"],
       ["Financials", "/about/financials"],
       ["Contact Canary", "/contact"],
       ["Donate", "/donate"],

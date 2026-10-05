@@ -50,7 +50,7 @@ export default function Blog() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto" id="blog-header">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 animate-slideUp">
-              Canary Foundation <span className="text-primary animate-text-glow">Blog</span>
+              Canary Foundation <span className="text-primary animate-text-glow">News</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed animate-fadeIn animate-stagger-1">
               Stay updated with the latest breakthroughs in cancer research, early detection technologies, and inspiring patient stories from the Canary Foundation community.

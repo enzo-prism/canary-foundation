@@ -197,6 +197,7 @@ export default function Header() {
             </Link>
             <div className="hidden items-center gap-1 xl:flex">
               <Link href="/" className={`${topLink} ${location === "/" ? "bg-black/[0.04]" : ""}`} aria-current={location === "/" ? "page" : undefined}>Home</Link>
+              <Link href="/blog" className={`${topLink} ${pathIsActive(location, "/blog") ? "bg-black/[0.04]" : ""}`} aria-current={location === "/blog" ? "page" : undefined}>News</Link>
               {Object.entries(navigationStructure).map(([name, section]) => {
                 const id = `desktop-${name.toLowerCase().replace(/\s+/g, "-")}`;
                 const isOpen = openDropdown === name;
@@ -241,7 +242,6 @@ export default function Header() {
                 );
               })}
               <Link href="/oral-history" className={topLink} aria-current={location === "/oral-history" ? "page" : undefined}>Oral History</Link>
-              <Link href="/blog" className={`${topLink} ${pathIsActive(location, "/blog") ? "bg-black/[0.04]" : ""}`} aria-current={location === "/blog" ? "page" : undefined}>Blog</Link>
               <Link href="/contact" className={topLink} aria-current={location === "/contact" ? "page" : undefined}>Contact</Link>
               <Button asChild className="ml-3 min-h-11 rounded-lg bg-[#ffc400] px-5 font-semibold text-[#242722] shadow-none hover:bg-[#efd000]">
                 <Link href="/donate" onClick={() => trackClick("take_action_header", "cta")}><Heart aria-hidden="true" className="mr-2 h-4 w-4" strokeWidth={1.7} />Take Action</Link>
@@ -256,6 +256,7 @@ export default function Header() {
           {isMenuOpen && (
             <div ref={mobileMenuRef} id="mobile-main-menu" className="mt-3 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain border-t border-black/10 pb-3 pt-3 xl:hidden">
               <Link href="/" onClick={closeMenus} className={`flex min-h-12 items-center rounded-lg px-3 font-medium text-[#242722] ${focusStyle}`} aria-current={location === "/" ? "page" : undefined}>Home</Link>
+              <Link href="/blog" onClick={closeMenus} className={`flex min-h-12 items-center rounded-lg px-3 font-medium text-[#242722] ${focusStyle}`} aria-current={location === "/blog" ? "page" : undefined}>News</Link>
               {Object.entries(navigationStructure).map(([name, section]) => {
                 const id = `mobile-${name.toLowerCase().replace(/\s+/g, "-")}`;
                 const isOpen = Boolean(mobileOpenSections[name]);
@@ -270,7 +271,6 @@ export default function Header() {
               })}
               <div className="grid grid-cols-2 gap-2 border-t border-black/[0.06] pt-2">
                 <Link href="/oral-history" onClick={closeMenus} className={topLink} aria-current={location === "/oral-history" ? "page" : undefined}>Oral History</Link>
-                <Link href="/blog" onClick={closeMenus} className={topLink} aria-current={location === "/blog" ? "page" : undefined}>Blog</Link>
                 <Link href="/contact" onClick={closeMenus} className={topLink} aria-current={location === "/contact" ? "page" : undefined}>Contact</Link>
               </div>
               <Button asChild className="mt-3 min-h-12 w-full rounded-lg bg-[#ffc400] font-semibold text-[#242722] shadow-none hover:bg-[#efd000]">
