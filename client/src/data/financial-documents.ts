@@ -1,8 +1,11 @@
-// Public financial filings shown on /about/financials and the homepage.
+// Public 2025 financials package shown on /about/financials and the homepage.
+// Structure matches Don Listwin's four-part set (6 Oct 2026): Narrative,
+// Overview slides, Form 990, and QuickBooks summary. Real files are still inbound.
 //
-// To publish a document after Candy approves it:
-// 1. Place the PDF in the matching dropPath (under client/public/).
-// 2. Set href to the matching publicPath (one-line change).
+// To publish a document after Candy or Don approves it:
+// 1. Convert Word/PowerPoint sources to PDF if needed.
+// 2. Place the PDF in the matching dropPath (under client/public/).
+// 3. Set href to the matching publicPath (one-line change).
 // A null href never renders a download link.
 
 export type FinancialDocumentStatus = "available" | "coming_soon";
@@ -25,6 +28,28 @@ export const FINANCIAL_DOCUMENTS_DIRECTORY = "client/public/docs/financials";
 
 export const financialDocuments: FinancialDocument[] = [
   {
+    id: "narrative-2025",
+    title: "2025 Narrative",
+    description:
+      "2025 narrative (Word source, published as PDF). The download will appear here after the approved PDF is posted.",
+    year: 2025,
+    formatLabel: "PDF",
+    href: null,
+    publicPath: "/docs/financials/2025-narrative.pdf",
+    dropPath: "client/public/docs/financials/2025-narrative.pdf",
+  },
+  {
+    id: "overview-2025",
+    title: "2025 Overview",
+    description:
+      "Overview slides converted from PowerPoint (about four slides). The download will appear here after the approved PDF is posted.",
+    year: 2025,
+    formatLabel: "PDF",
+    href: null,
+    publicPath: "/docs/financials/2025-overview.pdf",
+    dropPath: "client/public/docs/financials/2025-overview.pdf",
+  },
+  {
     id: "form-990-2025",
     title: "2025 Form 990",
     description:
@@ -36,15 +61,15 @@ export const financialDocuments: FinancialDocument[] = [
     dropPath: "client/public/docs/financials/2025-form-990.pdf",
   },
   {
-    id: "statements-2025",
-    title: "2025 Financial Statements",
+    id: "quickbooks-summary-2025",
+    title: "2025 QuickBooks summary",
     description:
-      "2025 financial statements (Word source, published as PDF). The download will appear here after the approved PDF is posted.",
+      "2025 QuickBooks summary. The download will appear here after the approved PDF is posted.",
     year: 2025,
     formatLabel: "PDF",
     href: null,
-    publicPath: "/docs/financials/2025-financial-statements.pdf",
-    dropPath: "client/public/docs/financials/2025-financial-statements.pdf",
+    publicPath: "/docs/financials/2025-quickbooks-summary.pdf",
+    dropPath: "client/public/docs/financials/2025-quickbooks-summary.pdf",
   },
 ];
 

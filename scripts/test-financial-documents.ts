@@ -34,14 +34,21 @@ assert.match(
   "Mobile News must sit immediately after Home",
 );
 
-assert.equal(financialDocuments.length, 2);
-assert.equal(
-  financialDocuments.some((document) => document.id === "form-990-2025"),
-  true,
+const expectedIds = [
+  "narrative-2025",
+  "overview-2025",
+  "form-990-2025",
+  "quickbooks-summary-2025",
+];
+assert.equal(financialDocuments.length, 4);
+assert.deepEqual(
+  financialDocuments.map((document) => document.id),
+  expectedIds,
 );
 assert.equal(
   financialDocuments.some((document) => document.id === "statements-2025"),
-  true,
+  false,
+  "The old single Financial Statements slot must not remain",
 );
 
 for (const document of financialDocuments) {
@@ -56,7 +63,16 @@ assert.match(financialsPage, /FinancialDocumentSlots/);
 assert.match(homeLower, /FinancialDocumentSlots/);
 assert.doesNotMatch(financialsPage, /\$3,963,900|12\.6¢|\$3,621,840/);
 assert.doesNotMatch(homeLower, /\$3,963,900|12\.6¢|\$3,621,840|financialChart2020|AmazonSmile/);
+assert.match(readme, /2025-narrative\.pdf/);
+assert.match(readme, /2025-overview\.pdf/);
 assert.match(readme, /2025-form-990\.pdf/);
-assert.match(readme, /2025-financial-statements\.pdf/);
+assert.match(readme, /2025-quickbooks-summary\.pdf/);
+assert.doesNotMatch(readme, /2025-financial-statements\.pdf/);
+assert.doesNotMatch(financialsPage, /2025 financial statements/);
+assert.doesNotMatch(homeLower, /2025 financial statements/);
+assert.match(
+  financialDocuments.find((document) => document.id === "overview-2025")?.description ?? "",
+  /PowerPoint/,
+);
 
 console.log("Financial document slots, News nav, and retired 2020/AmazonSmile checks passed.");

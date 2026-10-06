@@ -67,11 +67,13 @@ A full live HEAD/GET crawl of every outbound URL was not treated as a merge gate
 
 ## Financials file drop (for later)
 
-Approved files go in `client/public/docs/financials/`. Then set `href` in `client/src/data/financial-documents.ts`:
+Approved files go in `client/public/docs/financials/`. Then set `href` in `client/src/data/financial-documents.ts`. Real files are still inbound from Don (6 Oct 2026); the preview holds four coming-soon slots:
 
 | Document | Drop file | Set `href` to |
 | --- | --- | --- |
+| 2025 Narrative (Word → PDF) | `2025-narrative.pdf` | `/docs/financials/2025-narrative.pdf` |
+| 2025 Overview (PowerPoint ~4 slides → PDF) | `2025-overview.pdf` | `/docs/financials/2025-overview.pdf` |
 | 2025 Form 990 | `2025-form-990.pdf` | `/docs/financials/2025-form-990.pdf` |
-| 2025 financial statements (convert Word → PDF) | `2025-financial-statements.pdf` | `/docs/financials/2025-financial-statements.pdf` |
+| 2025 QuickBooks summary | `2025-quickbooks-summary.pdf` | `/docs/financials/2025-quickbooks-summary.pdf` |
 
-Candy approves public financial documents before they are posted. A `null` `href` renders “Coming soon” and never a broken link.
+Candy or Don approve public financial documents before they are posted. A `null` `href` renders “Coming soon” and never a broken link. The earlier two-item “Form 990 + Financial Statements” list was replaced so the page matches this four-part package.

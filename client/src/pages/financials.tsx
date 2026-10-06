@@ -39,8 +39,9 @@ export default function Financials() {
                 Current filings
               </h2>
               <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600">
-                The 2025 Form 990 and 2025 financial statements will appear here after
-                they are approved for publication.
+                The 2025 financials package has four pieces: a narrative, overview slides,
+                Form 990, and QuickBooks summary. Each download will appear here after
+                Candy or Don approve it for publication.
               </p>
               <FinancialDocumentSlots />
             </div>
