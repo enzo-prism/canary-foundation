@@ -79,7 +79,7 @@ export function HomeIntro() {
             decoding="async"
             onLoad={markImageReady}
             onError={markImageReady}
-            className="absolute inset-0 h-full w-full object-contain object-center md:object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[center_58%]"
           />
         </picture>
         <div
