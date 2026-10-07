@@ -17,21 +17,12 @@ const CRAWLER_ENDPOINTS = new Set([
   "/ai.txt",
 ]);
 
+// Pages awaiting replacement copy remain direct 404s on every public host.
 const REMOVED_ROUTES = new Set([
-  "/science/publications",
-  "/science/publications/fellowships",
-  "/science/publications/seed-grants",
-  "/approach/symposium",
-  "/science/programs/tumors/breast",
   "/approach/collaborations",
   "/science/science",
   "/science/science/imaging",
   "/science/science/biomarkers",
-  "/canary-science/publications",
-  "/canary-science/publications/fellowships",
-  "/canary-science/publications/seed-grants",
-  "/canary-approach/canary-symposium",
-  "/canary-science/programs/tumors/breast",
   "/canary-approach/collaborations",
   "/canary-science/science",
   "/canary-science/science/imaging",
@@ -45,6 +36,19 @@ const PRECOMPRESSED_CONTENT_TYPES: Record<string, string> = {
 
 // Legacy URL redirect mappings - MUST be defined early
 const LEGACY_REDIRECTS: Record<string, string> = {
+  // Permanently retired pages redirect to the closest live section.
+  "/science/publications": "/science/overview",
+  "/science/publications/fellowships": "/science/overview",
+  "/science/publications/seed-grants": "/science/funding-by-invitation",
+  "/approach/symposium": "/approach/overview",
+  "/science/programs/tumors/breast": "/science/programs/tumors",
+  "/canary-science/publications": "/science/overview",
+  "/canary-science/publications/fellowships": "/science/overview",
+  "/canary-science/publications/seed-grants": "/science/funding-by-invitation",
+  "/canary-approach/canary-symposium": "/approach/overview",
+  "/canary-science/programs/tumors/breast": "/science/programs/tumors",
+  "/news": "/blog",
+
   '/blog/oral-history-caltech': '/oral-history',
   '/about/founders-story': '/oral-history',
 

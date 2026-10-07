@@ -93,7 +93,7 @@ curl -I https://canaryfoundation.org/llm.xml
 curl -I https://canaryfoundation.org/ai.txt
 ```
 
-The Scientific Leadership route should return `200`. Retired canonical routes such as `/science/publications` should return a direct `404`, without redirecting to replacement content.
+The Scientific Leadership route should return `200`. Permanently retired URLs such as `/science/publications` return `301` to the closest live section, preserving query strings and canonicalizing www in one hop. Pages awaiting replacement copy (collaborations and the science/science pages, including their canary-prefixed aliases) remain direct `404` responses with `noindex` on both hosts. Run `SKIP_BUILD=1 bash test-redirects.sh` after a fresh build to verify both groups.
 
 ## September 2026 SEO/AEO source update
 
