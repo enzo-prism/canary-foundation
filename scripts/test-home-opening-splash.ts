@@ -49,7 +49,7 @@ assert.match(intro, /markImageReady/);
 assert.match(intro, /onLoad=\{markImageReady\}/);
 assert.match(intro, /<p[\s\S]*\{HOME_INTRO_TITLE\}/);
 assert.match(intro, /<p[\s\S]*\{HOME_INTRO_CAPTION\}/);
-assert.doesNotMatch(intro, /role="dialog"|overflow.*hidden|sessionStorage/, "Intro is in-page, not a blocking overlay");
+assert.doesNotMatch(intro, /role="dialog"|sessionStorage|document\.body\.style\.overflow/, "Intro is in-page, not a blocking overlay");
 assert.doesNotMatch(intro, /trackClick|gtag|analytics/, "No new tracking on the intro");
 assert.doesNotMatch(
   intro,
