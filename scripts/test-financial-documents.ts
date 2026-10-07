@@ -53,8 +53,17 @@ assert.equal(
 );
 
 for (const document of financialDocuments) {
-  assert.equal(document.href, null, `${document.id} must stay coming soon until a file is posted`);
-  assert.equal(financialDocumentStatus(document), "coming_soon");
+  if (document.id === "form-990-2025") {
+    assert.equal(document.href, document.publicPath);
+    assert.equal(financialDocumentStatus(document), "available");
+    assert.match(document.title, /public inspection copy/);
+    const pdf = readFileSync(resolve(root, document.dropPath));
+    assert.equal(pdf.length, 384331, "The complete supplied public-inspection copy must be served");
+    assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+  } else {
+    assert.equal(document.href, null, `${document.id} must stay coming soon until a file is posted`);
+    assert.equal(financialDocumentStatus(document), "coming_soon");
+  }
   assert.equal(document.dropPath.startsWith(`${FINANCIAL_DOCUMENTS_DIRECTORY}/`), true);
   assert.equal(document.formatLabel, "PDF");
 }

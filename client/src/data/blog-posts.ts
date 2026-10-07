@@ -26,6 +26,27 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 14,
+    slug: "don-listwin-moffitt-melanoma-skin-cancer-advisory-board",
+    title: "Don Listwin Joins Moffitt’s Melanoma and Skin Cancer Advisory Board",
+    excerpt: "Moffitt Cancer Center has appointed Canary Foundation founder Don Listwin, alongside Ming Hsieh and Stan Lapidus, to its melanoma and skin cancer advisory board.",
+    fullContent: `
+      <p>Moffitt Cancer Center has appointed Canary Foundation founder Don Listwin, alongside Ming Hsieh and Stan Lapidus, to the Board of Advisers for its Donald A. Adam Melanoma and Skin Cancer Center of Excellence.</p>
+      <p>The advisers will provide strategic guidance as the center expands its work on early cancer detection and treatments delivered earlier in the course of disease.</p>
+      <p><a href="https://www.moffitt.org/newsroom/news-releases/moffitt-names-three-technology-leaders-to-the-melanoma-and-skin-cancer-center-of-excellence-board-of-advisers/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Read Moffitt’s announcement</a></p>
+    `,
+    author: "Canary Foundation",
+    date: "2026-09-15",
+    dateLabel: "Announced",
+    publishedDate: "2026-10-07",
+    category: "Foundation News",
+    tags: ["Don Listwin", "Moffitt Cancer Center", "Early Detection"],
+    readTime: "1 min read",
+    featured: false,
+    originalUrl: "https://www.moffitt.org/newsroom/news-releases/moffitt-names-three-technology-leaders-to-the-melanoma-and-skin-cancer-center-of-excellence-board-of-advisers/",
+  },
+
+  {
     id: 1,
     slug: "don-listwin-award-2024-antonis-antoniou",
     title: "Don Listwin Award For Outstanding Contribution to Cancer Early Detection 2024 goes to: Professor Antonis Antoniou",

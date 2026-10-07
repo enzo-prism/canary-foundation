@@ -322,7 +322,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Shield aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>Over $75 million raised historically</span>
+                      <span>Over $100M directly raised, leading to over $1B in grant support</span>
                     </div>
                   </div>
                 </CardContent>

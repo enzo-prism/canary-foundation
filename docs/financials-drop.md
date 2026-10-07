@@ -2,7 +2,7 @@
 
 Approved public filings belong in `client/public/docs/financials/`. The Financials page reads availability from `client/src/data/financial-documents.ts`. A `null` `href` renders a coming-soon state and never a broken link.
 
-Don Listwin's 2025 package has four pieces. Source files may arrive as Word or PowerPoint; convert to PDF before dropping them in. Real files are still inbound.
+Don Listwin's 2025 package has four pieces. Source files may arrive as Word or PowerPoint; convert to PDF before dropping them in. Candy supplied the approved 2025 Form 990 public inspection copy on 7 October 2026, following Don’s request to post it. That file is available; the other three documents remain pending.
 
 | Document | Source | Drop this file | Then set `href` to |
 | --- | --- | --- | --- |

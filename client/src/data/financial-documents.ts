@@ -1,6 +1,6 @@
 // Public 2025 financials package shown on /about/financials and the homepage.
 // Structure matches Don Listwin's four-part set (6 Oct 2026): Narrative,
-// Overview slides, Form 990, and QuickBooks summary. Real files are still inbound.
+// Overview slides, Form 990, and QuickBooks summary. The public-inspection Form 990 is available; the other files are pending.
 //
 // To publish a document after Candy or Don approves it:
 // 1. Convert Word/PowerPoint sources to PDF if needed.
@@ -49,11 +49,11 @@ export const financialDocuments: FinancialDocument[] = [
   },
   {
     id: "form-990-2025",
-    title: "2025 Form 990",
-    description: "The Foundation's IRS Form 990 for the 2025 tax year.",
+    title: "2025 Form 990 (public inspection copy)",
+    description: "The public inspection copy of the Foundation's IRS Form 990 for the 2025 tax year.",
     year: 2025,
     formatLabel: "PDF",
-    href: null,
+    href: "/docs/financials/2025-form-990.pdf",
     publicPath: "/docs/financials/2025-form-990.pdf",
     dropPath: "client/public/docs/financials/2025-form-990.pdf",
   },
