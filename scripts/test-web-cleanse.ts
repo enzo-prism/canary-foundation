@@ -23,7 +23,7 @@ const stanfordOverview = read("client/src/pages/stanford-overview.tsx");
 const stanfordImaging = read("client/src/pages/stanford-imaging.tsx");
 const publicSurfaces = [app, header, footer, routes, routeMetadata].join("\n");
 
-const removedRoutes = [
+const retiredRoutes = [
   "/science/publications",
   "/science/publications/fellowships",
   "/science/publications/seed-grants",
@@ -35,17 +35,19 @@ const removedRoutes = [
   "/science/science/biomarkers",
 ];
 
-for (const route of removedRoutes) {
-  assert.equal(
-    publicSurfaces.includes(route),
-    false,
-    `${route} must not remain routed, linked, or indexed`,
-  );
-  assert.equal(
-    server.includes(`"${route}"`),
-    true,
-    `${route} must be explicitly protected from canonical redirect hops`,
-  );
+for (const route of retiredRoutes) {
+  assert.equal(publicSurfaces.includes(route), false, `${route} must not remain routed, linked, or indexed`);
+}
+const offlineRoutes = [
+  "/approach/collaborations", "/science/science", "/science/science/imaging", "/science/science/biomarkers",
+  "/canary-approach/collaborations", "/canary-science/science", "/canary-science/science/imaging", "/canary-science/science/biomarkers",
+];
+const protectedRoutes = server.slice(server.indexOf("const REMOVED_ROUTES"), server.indexOf("const PRECOMPRESSED_CONTENT_TYPES"));
+for (const route of offlineRoutes) {
+  assert.ok(protectedRoutes.includes(`"${route}"`), `${route} must remain protected from host redirects`);
+}
+for (const route of retiredRoutes.filter(route => !offlineRoutes.includes(route))) {
+  assert.ok(!protectedRoutes.includes(`"${route}"`), `${route} must allow its permanent redirect`);
 }
 
 const expectedLeaders = [
