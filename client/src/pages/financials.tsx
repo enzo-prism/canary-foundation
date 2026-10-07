@@ -39,9 +39,8 @@ export default function Financials() {
                 Current filings
               </h2>
               <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600">
-                The 2025 financials package has four pieces: a narrative, overview slides,
-                Form 990, and QuickBooks summary. Each download will appear here after
-                Candy or Don approve it for publication.
+                2025 documents will be posted here as they become available. The current
+                set includes a narrative, an overview, Form 990, and a QuickBooks summary.
               </p>
               <FinancialDocumentSlots />
             </div>
@@ -60,7 +59,7 @@ export default function Financials() {
                 effectively to advance early cancer detection research.
               </p>
 
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="mx-auto max-w-xl">
                 <Card className="bg-white">
                   <CardContent className="p-6 text-left">
                     <h3 className="mb-4 text-xl font-bold text-dark">Nonprofit commitment</h3>
@@ -70,21 +69,9 @@ export default function Financials() {
                       independent audits support compliance with nonprofit standards and
                       transparent use of donor funds.
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="mb-4 text-sm text-gray-600">
                       Our Board of Directors provides oversight of financial management
                       and strategic allocation of resources to maximize research impact.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white">
-                  <CardContent className="p-6 text-left">
-                    <h3 className="mb-4 text-xl font-bold text-dark">Historical figures retired</h3>
-                    <p className="mb-4 text-sm text-gray-600">
-                      Prior-year expense ratios and dollar totals from 2020 are no longer
-                      shown as current performance. They will not return to this page
-                      unless the foundation asks to publish them as clearly labeled
-                      historical information.
                     </p>
                     <p className="text-sm text-gray-600">
                       Questions about giving or filings can be sent from the{" "}

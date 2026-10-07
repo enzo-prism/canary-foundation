@@ -1,6 +1,6 @@
 # Content audit — October 2026
 
-Site-wide review of public routes, content files, and navigation before the News / Financials draft. Scope is `enzo-prism/canary-foundation` as of the `main` snapshot this branch started from. This is a preview-only change set: do not merge to production and do not trigger Replit Publish.
+Site-wide review of public routes, content files, and navigation before the News / Financials change set. Scope is `enzo-prism/canary-foundation` as of the `main` snapshot this branch started from. Merge to production and Replit Publish wait on Enzo's approval.
 
 ## Method
 
@@ -15,7 +15,7 @@ Site-wide review of public routes, content files, and navigation before the News
 | Page / route | Item | Why it's stale | Proposed action |
 | --- | --- | --- | --- |
 | `/about/financials` | 2020 performance metrics, expense breakdown, and dollar totals ($3,963,900; 91%; 12.6¢) | Six-year-old figures presented as current stewardship | **remove** — replaced with 2025 document slots in a coming-soon state |
-| `/` homepage `#financials` | 2020 expenses chart (`Canary Foundation 2020 Expenses_*.webp`) and matching totals | Same obsolete 2020 figures repeated above the fold of the homepage financials block | **remove** — chart and totals no longer render; image file remains in `attached_assets` only |
+| `/` homepage `#financials` | 2020 expenses chart (`Canary Foundation 2020 Expenses_*.webp`) and matching totals | Same obsolete 2020 figures repeated above the fold of the homepage financials block | **remove** — chart and totals no longer render; leftover public file `client/public/financial-chart-2020.webp` deleted (nothing linked to it). The original source image remains in `attached_assets` and is not served |
 | `/` homepage Ways to Give | “AmazonSmile contributions” listed as a current giving method | AmazonSmile ended in 2023; donate page already says it is discontinued | **remove** |
 | Header / footer | “Blog” label for `/blog` | News is the public name; Blog sat after Oral History | **update** — labeled **News** and moved higher (after Home on desktop and mobile) |
 
@@ -67,7 +67,7 @@ A full live HEAD/GET crawl of every outbound URL was not treated as a merge gate
 
 ## Financials file drop (for later)
 
-Approved files go in `client/public/docs/financials/`. Then set `href` in `client/src/data/financial-documents.ts`. Real files are still inbound from Don (6 Oct 2026); the preview holds four coming-soon slots:
+Operator drop instructions live in `docs/financials-drop.md` (not under `client/public/`). Approved files go in `client/public/docs/financials/`. Then set `href` in `client/src/data/financial-documents.ts`. Real files are still inbound from Don (6 Oct 2026); the preview holds four coming-soon slots.
 
 | Document | Drop file | Set `href` to |
 | --- | --- | --- |

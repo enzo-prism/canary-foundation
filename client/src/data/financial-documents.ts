@@ -30,8 +30,7 @@ export const financialDocuments: FinancialDocument[] = [
   {
     id: "narrative-2025",
     title: "2025 Narrative",
-    description:
-      "2025 narrative (Word source, published as PDF). The download will appear here after the approved PDF is posted.",
+    description: "A narrative account of the Foundation's 2025 work and finances.",
     year: 2025,
     formatLabel: "PDF",
     href: null,
@@ -41,8 +40,7 @@ export const financialDocuments: FinancialDocument[] = [
   {
     id: "overview-2025",
     title: "2025 Overview",
-    description:
-      "Overview slides converted from PowerPoint (about four slides). The download will appear here after the approved PDF is posted.",
+    description: "A short overview of the Foundation's 2025 finances.",
     year: 2025,
     formatLabel: "PDF",
     href: null,
@@ -52,8 +50,7 @@ export const financialDocuments: FinancialDocument[] = [
   {
     id: "form-990-2025",
     title: "2025 Form 990",
-    description:
-      "IRS Form 990 for the 2025 tax year. The download will appear here after the approved PDF is posted.",
+    description: "The Foundation's IRS Form 990 for the 2025 tax year.",
     year: 2025,
     formatLabel: "PDF",
     href: null,
@@ -63,8 +60,7 @@ export const financialDocuments: FinancialDocument[] = [
   {
     id: "quickbooks-summary-2025",
     title: "2025 QuickBooks summary",
-    description:
-      "2025 QuickBooks summary. The download will appear here after the approved PDF is posted.",
+    description: "A summary of the Foundation's 2025 finances.",
     year: 2025,
     formatLabel: "PDF",
     href: null,
