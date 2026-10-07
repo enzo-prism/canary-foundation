@@ -11,6 +11,11 @@ import { SITE_ORIGIN, buildOrganizationJsonLd, buildWebSiteJsonLd,
 import { resolvePageSeo } from "@shared/page-seo";
 import { routeModuleId } from "@shared/route-module-ids";
 import { normalizeRoutePath } from "@shared/seo";
+import {
+  HOME_INTRO_IMAGE_SIZES,
+  HOME_INTRO_IMAGE_SRCSET,
+  HOME_INTRO_IMAGE_WEBP,
+} from "../client/src/lib/home-intro";
 
 const viteLogger = createLogger();
 
@@ -76,8 +81,14 @@ function injectSpaMetadata(originalUrl: string, html: string) {
         '  <meta name="robots" content="noindex, nofollow" />\n  </head>',
       );
 
-  // Inject the per-page JSON-LD immediately before </head>.
-  return withRobots.replace(/<\/head>/, `  ${renderJsonLdScript(buildOrganizationJsonLd(), "organization-jsonld")}\n  ${renderJsonLdScript(buildWebSiteJsonLd(), "website-jsonld")}\n  ${renderJsonLdScript(jsonLd, PAGE_JSONLD_ELEMENT_ID)}\n  </head>`);
+  const withJsonLd = withRobots.replace(/<\/head>/, `  ${renderJsonLdScript(buildOrganizationJsonLd(), "organization-jsonld")}\n  ${renderJsonLdScript(buildWebSiteJsonLd(), "website-jsonld")}\n  ${renderJsonLdScript(jsonLd, PAGE_JSONLD_ELEMENT_ID)}\n  </head>`);
+
+  if (normalizeRoutePath(originalUrl) !== "/") {
+    return withJsonLd;
+  }
+
+  const preload = `<link rel="preload" as="image" href="${escapeHtmlAttribute(HOME_INTRO_IMAGE_WEBP)}" imagesrcset="${escapeHtmlAttribute(HOME_INTRO_IMAGE_SRCSET)}" imagesizes="${escapeHtmlAttribute(HOME_INTRO_IMAGE_SIZES)}" type="image/webp" />`;
+  return withJsonLd.replace(/<\/head>/, `  ${preload}\n  </head>`);
 }
 
 // Remove dev-only artifacts from production HTML. The Replit dev banner loads an
