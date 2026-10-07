@@ -63,7 +63,7 @@ export default function AboutOverview() {
                       <ul className="space-y-3 text-gray-600">
                         <li className="flex items-start">
                           <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
-                          Over $75 million raised for early detection research
+                          Over $100M directly raised, leading to over $1B in grant support
                         </li>
                         <li className="flex items-start">
                           <span className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></span>
@@ -99,8 +99,8 @@ export default function AboutOverview() {
                     The Canary Foundation has started to do something about that.
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    Since its founding in 2004, the Canary Foundation has raised more than $75 million 
-                    to support early detection research. And we've moved faster than science typically moves, 
+                    Since its founding in 2004, the Canary Foundation has directly raised over $100M,
+                    leading to over $1B in grant support for early detection research. And we've moved faster than science typically moves,
                     from theory to tractable problem to clinical use in many areas, thanks to Canary's 
                     collaborative approach.
                   </p>

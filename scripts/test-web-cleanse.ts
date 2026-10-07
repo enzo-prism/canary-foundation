@@ -152,6 +152,16 @@ for (const surface of [blogPosts, home, routes, routeMetadata]) {
   );
 }
 
+assert.match(header, />News</, "Main navigation must label the /blog destination News");
+assert.doesNotMatch(header, />Blog</, "Blog must not remain as the public nav label");
+assert.match(footer, /\["News", "\/blog"\]/, "Footer must label the blog route News");
+assert.doesNotMatch(
+  [home, read("client/src/pages/financials.tsx")].join("\n"),
+  /\$3,963,900|12\.6¢|financialChart2020/,
+  "2020 financial totals and chart must not remain on public financial surfaces",
+);
+assert.doesNotMatch(home, /AmazonSmile/, "Homepage must not list retired AmazonSmile as a current giving method");
+
 assert.match(crawlGenerator, /client\/src\/data\/blog-posts\.ts/, "Crawl discovery must consume the shared blog catalog");
 
 const aprilMeetingsPost = blogPosts.slice(

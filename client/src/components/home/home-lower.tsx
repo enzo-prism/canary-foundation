@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Microscope, Shield, HandHeart, TrendingUp, Users, GraduationCap, Users2, MapPin, Stethoscope } from "lucide-react";
 import { Link } from "wouter";
 import { trackClick } from "@/lib/analytics";
-import financialChart2020 from "@assets/Canary Foundation 2020 Expenses_1752517425233.webp";
+import { FinancialDocumentSlots } from "@/components/financial-document-slots";
 import type { HomeInteractiveProps } from "./home-types";
 
 export function HomeLower(_props: HomeInteractiveProps) {
@@ -322,7 +322,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Shield aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>Over $75 million raised historically</span>
+                      <span>Over $100M directly raised, leading to over $1B in grant support</span>
                     </div>
                   </div>
                 </CardContent>
@@ -346,7 +346,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
                     </div>
                     <div className="flex items-center space-x-2">
                       <HandHeart aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>AmazonSmile contributions</span>
+                      <span>Other giving options on the donate page</span>
                     </div>
                   </div>
                   <Button asChild className="bg-primary text-dark hover:bg-yellow-300 mt-6 w-full">
@@ -365,97 +365,36 @@ export function HomeLower(_props: HomeInteractiveProps) {
                   <div className="space-y-3 text-gray-600">
                     <div className="flex items-center space-x-2">
                       <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>91% of 2020 expenses supported scientific programs</span>
+                      <span>Current filings posted when approved</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>2020 cost per $1 raised: 12.6¢</span>
+                      <span>Independent audit and board oversight</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>Direct impact on cancer detection</span>
+                      <span>Direct support for early detection research</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
             
-            {/* Detailed Financial Performance */}
-            <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+            <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
               <div className="bg-[#252923] p-6 text-white sm:p-8">
-                <h3 className="font-bold text-3xl mb-3">2020 Financial Performance</h3>
-                <p className="text-stone-200 text-lg">
-                  Transparent stewardship of your donations with detailed expense breakdown
+                <h3 className="mb-3 text-3xl font-bold">Current financial documents</h3>
+                <p className="text-lg text-stone-200">
+                  The 2025 narrative, overview slides, Form 990, and QuickBooks summary will be posted here when approved for publication.
                 </p>
               </div>
-              
-              <div className="p-8">
-                {/* Chart Section */}
-                <div className="mb-12">
-                  <div className="flex justify-center">
-                    <div className="w-full max-w-2xl">
-                      <img 
-                        src={financialChart2020}
-                        loading="lazy"
-                        decoding="async"
-                        width={1200}
-                        height={686}
-                        alt="Canary Foundation 2020 Expenses Pie Chart showing 91% Scientific Programs, 6% Fundraising, 3% Admin/Management" 
-                        className="w-full h-auto object-contain rounded-xl"
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Key Metrics */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-[#f8f4df] rounded-2xl p-6 text-center border border-yellow-200">
-                    <div className="text-dark font-semibold tracking-tight text-4xl lg:text-5xl mb-3">91%</div>
-                    <div className="text-gray-800 font-semibold text-lg mb-2">Scientific Programs</div>
-                    <div className="text-gray-600 font-medium">$3,621,840</div>
-                  </div>
-                  
-                  <div className="bg-stone-50 rounded-2xl p-6 text-center border border-gray-200">
-                    <div className="text-dark font-semibold tracking-tight text-4xl lg:text-5xl mb-3">6%</div>
-                    <div className="text-gray-800 font-semibold text-lg mb-2">Fundraising</div>
-                    <div className="text-gray-600 font-medium">$238,864</div>
-                  </div>
-                  
-                  <div className="bg-stone-50 rounded-2xl p-6 text-center border border-gray-200">
-                    <div className="text-dark font-semibold tracking-tight text-4xl lg:text-5xl mb-3">3%</div>
-                    <div className="text-gray-800 font-semibold text-lg mb-2">Administrative</div>
-                    <div className="text-gray-600 font-medium">$103,196</div>
-                  </div>
-                  
-                  <div className="bg-[#f8f4df] rounded-2xl p-6 text-center border border-yellow-200">
-                    <div className="text-dark font-semibold tracking-tight text-4xl lg:text-5xl mb-3">12.6¢</div>
-                    <div className="text-gray-800 font-semibold text-lg mb-2">Cost per $1 raised</div>
-                    <div className="text-gray-600 font-medium">$3,001,876 total</div>
-                  </div>
-                </div>
-                
-                {/* Summary */}
-                <div className="bg-[#f8f7f2] rounded-2xl p-6 sm:p-8 text-center">
-                  <div className="text-3xl font-bold text-dark mb-4">Total 2020 Expenses: $3,963,900</div>
-                  <p className="text-gray-600 text-xl mb-6">
-                    In 2020, 91% of total expenses supported scientific programs
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-6 mt-8">
-                    <div className="bg-white rounded-lg p-6 border border-gray-200">
-                      <h4 className="font-semibold text-dark mb-3">Research Excellence</h4>
-                      <p className="text-stone-600 text-sm leading-relaxed">
-                        Your donations fund cutting-edge research programs including PASS, PATROL, 
-                        liquid biopsy development, and breakthrough imaging technologies.
-                      </p>
-                    </div>
-                    <div className="bg-white rounded-lg p-6 border border-gray-200">
-                      <h4 className="font-semibold text-dark mb-3">Operational Efficiency</h4>
-                      <p className="text-stone-600 text-sm leading-relaxed">
-                        Our low administrative costs ensure maximum impact from every contribution, 
-                        with minimal overhead and efficient resource allocation.
-                      </p>
-                    </div>
-                  </div>
+              <div className="p-6 sm:p-8">
+                <FinancialDocumentSlots />
+                <div className="mt-8 text-center">
+                  <Button asChild className="bg-primary text-dark hover:bg-yellow-300">
+                    <Link href="/about/financials">
+                      View the Financials page <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
