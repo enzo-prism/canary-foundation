@@ -11,3 +11,5 @@ User authorized applying the Foundation changes and replying to Don after public
 Validation: TypeScript, production build/postbuild, financial and splash checks, web cleanse, SEO/crawl generation, oral-history downloads, GA4 privacy, team-update safety, awards, route loading, production server/crawler checks, full SSR, platform hardening, and 244 redirect checks passed. Existing platform-test payloads were updated to include the inquiryType field already required by the contact endpoint; application contact behavior is unchanged.
 
 Browser review confirmed mobile cards and navigation, title and team-caption phases, automatic dismissal, no replay after reload, and immediate Escape dismissal under reduced motion. GitHub source and Replit production remain separate states until publishing and public readback complete.
+
+Final production browser review caught React hydration error 421 during the router’s initial mounted-state update. Wrap that update in startTransition so the lazy route finishes hydration and retains its server-rendered content while the intro mounts. See https://react.dev/errors/421.

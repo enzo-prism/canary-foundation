@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense, lazy, useEffect, useState, useRef } from "react";
+import { Suspense, lazy, startTransition, useEffect, useState, useRef } from "react";
 import HomeOpeningSplash from "@/components/home-opening-splash";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
@@ -179,7 +179,8 @@ function RouteLoadingFallback() {
 
 function Router() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  // Let the server-rendered route finish hydrating before mounting the intro.
+  useEffect(() => startTransition(() => setMounted(true)), []);
   // Track page views when routes change
   const [location] = useLocation();
   useAnalytics();
