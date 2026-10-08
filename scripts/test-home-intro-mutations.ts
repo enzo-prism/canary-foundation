@@ -159,15 +159,26 @@ const mutations: Mutation[] = [
   {
     name: "drop naturalWidth so a broken decode is treated as ready",
     caseName: "corrupt",
-    apply: (source) => source
-      .replace(
-        "      if (loadMarkRef.current !== null || finalRef.current) return;\n",
-        "      if (loadMarkRef.current !== null) return;\n",
-      )
-      .replace(
-        "      if (image && image.complete && image.naturalWidth > 0) {",
-        "      if (image && image.complete) {",
-      ),
+    apply: (source) => source.replace(
+      `    const timer = window.setTimeout(() => {
+      if (loadMarkRef.current !== null || finalRef.current) return;
+      const image = imageRef.current;
+      if (image && image.complete && image.naturalWidth > 0) {
+        startFromLoad(readHomeIntroImageLoadMark(image, true));
+        return;
+      }
+      showFinalFrame("timeout");
+    }, HOME_INTRO_MAX_WAIT_MS);`,
+      `    const timer = window.setTimeout(() => {
+      const image = imageRef.current;
+      // mutated: treat any complete body as ready, including naturalWidth === 0
+      if (image && image.complete) {
+        startFromLoad(readHomeIntroImageLoadMark(image, true));
+        return;
+      }
+      showFinalFrame("timeout");
+    }, HOME_INTRO_MAX_WAIT_MS);`,
+    ),
   },
 ];
 
@@ -243,6 +254,47 @@ function restoreSource() {
   writeFileSync(introPath, original);
 }
 
+function sourceMarker(from: string, against: string): { includes?: string; excludes?: string } {
+  const againstLines = new Set(against.split("\n"));
+  const added = from.split("\n").find((line) => line.trim().length > 0 && !againstLines.has(line));
+  if (added) return { includes: added };
+  const fromLines = new Set(from.split("\n"));
+  const removed = against.split("\n").find((line) => line.trim().length > 0 && !fromLines.has(line));
+  if (removed) return { excludes: removed };
+  throw new Error("patch must add or remove a unique line");
+}
+
+async function waitForServedSource(
+  url: string,
+  marker: { includes?: string; excludes?: string },
+  label: string,
+) {
+  const candidates = [
+    `${url}/src/components/home/home-intro.tsx`,
+    `${url}/@fs${introPath}`,
+  ];
+  const deadline = Date.now() + 10_000;
+  let last = "";
+  while (Date.now() < deadline) {
+    for (const candidate of candidates) {
+      try {
+        const response = await fetch(candidate);
+        if (!response.ok) continue;
+        last = await response.text();
+        const hasInclude = !marker.includes || last.includes(marker.includes);
+        const missingExclude = !marker.excludes || !last.includes(marker.excludes);
+        if (hasInclude && missingExclude) return;
+      } catch {
+        // Vite may still be transforming.
+      }
+    }
+    await new Promise((resolveWait) => setTimeout(resolveWait, 200));
+  }
+  throw new Error(
+    `${label}: Vite did not serve the expected source (${JSON.stringify(marker)}). Last body length ${last.length}.`,
+  );
+}
+
 async function main() {
   const { url, stop } = await startDevServer();
   const results: string[] = [];
@@ -253,13 +305,15 @@ async function main() {
   };
   process.on("SIGINT", onSignal);
   process.on("SIGTERM", onSignal);
+  process.on("exit", restoreSource);
   try {
     for (const mutation of mutations) {
       try {
         const mutated = mutation.apply(original);
         assert.notEqual(mutated, original, `${mutation.name}: patch must change the source`);
+        const marker = sourceMarker(mutated, original);
         writeFileSync(introPath, mutated);
-        await new Promise((resolveWait) => setTimeout(resolveWait, 400));
+        await waitForServedSource(url, marker, mutation.name);
         const failed = runCase(url, mutation.caseName);
         if (failed.status === 0) {
           throw new Error(
@@ -270,12 +324,20 @@ async function main() {
         console.log(`RED  ${mutation.name}`);
       } finally {
         restoreSource();
-        await new Promise((resolveWait) => setTimeout(resolveWait, 200));
+        await waitForServedSource(
+          url,
+          { includes: "if (loadMarkRef.current !== null || finalRef.current) return;" },
+          "restore",
+        );
       }
     }
 
     restoreSource();
-    await new Promise((resolveWait) => setTimeout(resolveWait, 800));
+    await waitForServedSource(
+      url,
+      { includes: "if (loadMarkRef.current !== null || finalRef.current) return;" },
+      "restore-all",
+    );
     const restored = runCase(url);
     if (restored.status !== 0) {
       throw new Error(`Restored source failed the full browser suite:\n${restored.output}`);
