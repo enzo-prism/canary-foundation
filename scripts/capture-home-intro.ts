@@ -149,7 +149,7 @@ async function main() {
     }, undefined, { timeout: 12_000 });
     const untilNine = 9_000 - (Date.now() - lateStarted);
     if (untilNine > 0) await latePage.waitForTimeout(untilNine);
-    await latePage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_late_load_9s.png`) });
+    await latePage.screenshot({ path: join(OUT_DIR, "home_intro_v4_1280_late_load_9s.png") });
     await lateContext.close();
 
     const noJsContext = await browser.newContext({
@@ -171,6 +171,11 @@ async function main() {
     }, undefined, { timeout: 15_000 });
     await noJsPage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_nojs_final.png`) });
     await noJsContext.close();
+
+    if (process.env.CAPTURE_SKIP_VIDEO === "1") {
+      console.log(`Wrote frames to ${OUT_DIR}`);
+      return;
+    }
 
     const videoContext = await browser.newContext({
       viewport: { width: 1280, height: 800 },

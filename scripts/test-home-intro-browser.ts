@@ -3,7 +3,7 @@
  * (`npm run build`) unless BASE_URL already points at a running server.
  * Uses Playwright against system Chrome.
  *
- * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load|timeout-race|remount
+ * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load|timeout-race|remount|srcset-switch|corrupt
  * runs a single case (used by the mutation proof).
  */
 import assert from "node:assert/strict";
@@ -315,6 +315,15 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         const image = document.querySelector("#home-intro-photo, #home-intro img");
         return Boolean(image) && Number.parseFloat(getComputedStyle(image as Element).opacity) <= 0.05;
       }, undefined, { timeout: 2_000 });
+      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
+      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      const afterMaxWait = await introState(page);
+      assert.equal(afterMaxWait.imageState, "failed", "failed must not flip to timeout at 8s");
+      const hiddenAfterMaxWait = await page.evaluate(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : false;
+      });
+      assert.equal(hiddenAfterMaxWait, true, "failed photo must stay hidden past 8s");
     });
   },
 
@@ -362,6 +371,7 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         await new Promise((resolve) => setTimeout(resolve, 1_200));
         await route.fulfill({ status: 404, body: "missing" });
       });
+      const started = Date.now();
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await waitForHydration(page);
       await page.waitForFunction((expected) => {
@@ -372,6 +382,15 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(state.phase, "hold", "post-hydration 404 must use onError to show the final frame");
       assert.equal(state.imageState, "failed");
       assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
+      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
+      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      const afterMaxWait = await introState(page);
+      assert.equal(afterMaxWait.imageState, "failed", "failed must not flip to timeout at 8s");
+      const hiddenAfterMaxWait = await page.evaluate(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : false;
+      });
+      assert.equal(hiddenAfterMaxWait, true, "failed photo must stay hidden past 8s");
     });
   },
 
@@ -528,6 +547,96 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(afterHold.phase, "hold");
       assert.equal(afterHold.title, HOME_INTRO_TITLE);
       assert.equal(afterHold.caption, HOME_INTRO_CAPTION);
+    });
+  },
+
+  async "srcset-switch"(browser, url) {
+    await withPage(browser, {
+      viewport: { width: 1100, height: 800 },
+      deviceScaleFactor: 1,
+      reducedMotion: "no-preference",
+    }, async (page) => {
+      let largeHeld = 0;
+      await interceptImages(page, async (route) => {
+        const path = new URL(route.request().url()).pathname;
+        const isLarge = path.endsWith("/home-intro/canary-long-beach-april-2005.webp");
+        if (isLarge) {
+          largeHeld += 1;
+          await new Promise((resolveWait) => setTimeout(resolveWait, 9_000));
+        }
+        await route.continue();
+      });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      await page.waitForFunction(() => {
+        const section = document.querySelector("#home-intro");
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return section?.getAttribute("data-image-state") === "ready"
+          && Boolean(image && image.complete && image.naturalWidth > 0);
+      }, undefined, { timeout: 8_000 });
+      const loadMark = await readImageLoadMark(page);
+      const startedAt = Date.now();
+
+      await page.waitForTimeout(Math.max(0, 2_000 - (Date.now() - startedAt)));
+      await page.setViewportSize({ width: 1800, height: 800 });
+
+      await page.waitForFunction(
+        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
+        { mark: loadMark, elapsed: HOME_INTRO_MAX_WAIT_MS + 400 },
+        { timeout: HOME_INTRO_MAX_WAIT_MS + 4_000 },
+      );
+
+      const mid = await introState(page);
+      assert.notEqual(mid.imageState, "timeout", "a srcset switch must not trip the 8s max-wait");
+      assert.equal(mid.imageState, "ready");
+      const photoHidden = await page.evaluate(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : true;
+      });
+      assert.equal(photoHidden, false, "photo must stay visible while a larger srcset candidate is in flight");
+      assert.ok(largeHeld > 0, "the 1920w candidate must be requested after the resize");
+
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
+      }, "hold", { timeout: HOME_INTRO_PHOTO_ALONE_MS + HOME_INTRO_TITLE_MS + HOME_INTRO_CAPTION_MS + 3_000 });
+      await waitForCopyVisibility(page, true, true);
+      const afterHold = await introState(page);
+      assert.equal(afterHold.phase, "hold", "sequence must finish from the first load, not restart");
+      assert.equal(afterHold.imageState, "ready");
+      assert.equal(afterHold.title, HOME_INTRO_TITLE);
+      assert.equal(afterHold.caption, HOME_INTRO_CAPTION);
+    });
+  },
+
+  async corrupt(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      await interceptImages(page, async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "image/jpeg",
+          body: Buffer.from("not-a-jpeg"),
+        });
+      });
+      const started = Date.now();
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      await page.waitForFunction(() => {
+        const section = document.querySelector("#home-intro");
+        const state = section?.getAttribute("data-image-state");
+        return state === "failed" || state === "timeout";
+      }, undefined, { timeout: 4_000 });
+      await waitForCopyVisibility(page, true, true);
+      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
+      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      const later = await introState(page);
+      assert.notEqual(later.imageState, "ready", "a corrupt body must not be treated as a decoded photo");
+      assert.equal(later.imageState, "failed", "failed must not flip to timeout at 8s");
+      const hidden = await page.evaluate(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : false;
+      });
+      assert.equal(hidden, true, "corrupt photo must stay hidden past 8s with no broken icon");
+      assert.equal(later.phase, "hold");
     });
   },
 };

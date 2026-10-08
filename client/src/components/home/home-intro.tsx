@@ -108,6 +108,7 @@ export function HomeIntro() {
   useEffect(() => {
     if (prefersReducedMotion) return;
     const timer = window.setTimeout(() => {
+      if (loadMarkRef.current !== null || finalRef.current) return;
       const image = imageRef.current;
       if (image && image.complete && image.naturalWidth > 0) {
         startFromLoad(readHomeIntroImageLoadMark(image, true));

@@ -86,6 +86,11 @@ assert.doesNotMatch(
 );
 assert.match(
   intro,
+  /if \(loadMarkRef\.current !== null \|\| finalRef\.current\) return;/,
+  "Max-wait must not override a sequence that already started or finished",
+);
+assert.match(
+  intro,
   /if \(image && image\.complete && image\.naturalWidth > 0\) \{\s*startFromLoad/,
   "Timeout must treat a decoded photo as ready",
 );

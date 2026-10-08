@@ -127,6 +127,7 @@ const mutations: Mutation[] = [
     caseName: "timeout-race",
     apply: (source) => source.replace(
       `    const timer = window.setTimeout(() => {
+      if (loadMarkRef.current !== null || finalRef.current) return;
       const image = imageRef.current;
       if (image && image.complete && image.naturalWidth > 0) {
         startFromLoad(readHomeIntroImageLoadMark(image, true));
@@ -146,6 +147,27 @@ const mutations: Mutation[] = [
       "    const mark = ensureGeneration() === 1 ? loadMark : performance.now();",
       "    const mark = loadMark;",
     ),
+  },
+  {
+    name: "drop the load-mark / final-frame max-wait guard",
+    caseName: "srcset-switch",
+    apply: (source) => source.replace(
+      "      if (loadMarkRef.current !== null || finalRef.current) return;\n",
+      "",
+    ),
+  },
+  {
+    name: "drop naturalWidth so a broken decode is treated as ready",
+    caseName: "corrupt",
+    apply: (source) => source
+      .replace(
+        "      if (loadMarkRef.current !== null || finalRef.current) return;\n",
+        "      if (loadMarkRef.current !== null) return;\n",
+      )
+      .replace(
+        "      if (image && image.complete && image.naturalWidth > 0) {",
+        "      if (image && image.complete) {",
+      ),
   },
 ];
 
@@ -217,9 +239,20 @@ function runCase(url: string, caseName?: string): { status: number; output: stri
   };
 }
 
+function restoreSource() {
+  writeFileSync(introPath, original);
+}
+
 async function main() {
   const { url, stop } = await startDevServer();
   const results: string[] = [];
+  const onSignal = (signal: NodeJS.Signals) => {
+    restoreSource();
+    stop();
+    process.exit(signal === "SIGINT" ? 130 : 143);
+  };
+  process.on("SIGINT", onSignal);
+  process.on("SIGTERM", onSignal);
   try {
     for (const mutation of mutations) {
       try {
@@ -236,12 +269,12 @@ async function main() {
         results.push(`RED  ${mutation.name} (${mutation.caseName})`);
         console.log(`RED  ${mutation.name}`);
       } finally {
-        writeFileSync(introPath, original);
+        restoreSource();
         await new Promise((resolveWait) => setTimeout(resolveWait, 200));
       }
     }
 
-    writeFileSync(introPath, original);
+    restoreSource();
     await new Promise((resolveWait) => setTimeout(resolveWait, 800));
     const restored = runCase(url);
     if (restored.status !== 0) {
@@ -251,7 +284,9 @@ async function main() {
     console.log("Homepage intro mutation proof passed.");
     for (const line of results) console.log(`  ${line}`);
   } finally {
-    writeFileSync(introPath, original);
+    restoreSource();
+    process.off("SIGINT", onSignal);
+    process.off("SIGTERM", onSignal);
     stop();
   }
 }
