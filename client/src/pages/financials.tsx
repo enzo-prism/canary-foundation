@@ -40,7 +40,7 @@ export default function Financials() {
               </h2>
               <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600">
                 2025 documents will be posted here as they become available. The current
-                set includes a narrative, an overview, Form 990, and a QuickBooks summary.
+                set includes a narrative, an overview, and Form 990.
               </p>
               <FinancialDocumentSlots />
             </div>
@@ -65,9 +65,8 @@ export default function Financials() {
                     <h3 className="mb-4 text-xl font-bold text-dark">Nonprofit commitment</h3>
                     <p className="mb-4 text-sm text-gray-600">
                       As a 501(c)(3) nonprofit organization (Tax ID: 65-1230251), we are
-                      committed to the highest standards of financial stewardship. Annual
-                      independent audits support compliance with nonprofit standards and
-                      transparent use of donor funds.
+                      committed to responsible financial stewardship and transparent use of
+                      donor funds.
                     </p>
                     <p className="mb-4 text-sm text-gray-600">
                       Our Board of Directors provides oversight of financial management

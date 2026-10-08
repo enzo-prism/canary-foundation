@@ -3,8 +3,11 @@ import splashPhoto from "@assets/canary-long-beach-april-2005.jpg";
 import { cn } from "@/lib/utils";
 
 export const HOME_OPENING_SPLASH_STORAGE_KEY = "canary.homeOpeningSplash.shown";
-export const HOME_OPENING_SPLASH_HOLD_MS = 6000;
+export const HOME_OPENING_SPLASH_HOLD_MS = 11000;
 export const HOME_OPENING_SPLASH_FADE_MS = 500;
+export const HOME_OPENING_SPLASH_PHOTO_MS = 5000;
+export const HOME_OPENING_SPLASH_TITLE_MS = 3000;
+export const HOME_OPENING_SPLASH_CAPTION = "Canary Ovarian Cancer Team 2004";
 export const HOME_OPENING_SPLASH_TITLE = "THE BEGINNING.";
 
 type SplashPhase = "hidden" | "visible" | "fading";
@@ -15,13 +18,6 @@ function prefersReducedMotion(): boolean {
   }
 
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function wasDocumentReloaded(): boolean {
-  const navigation = performance.getEntriesByType("navigation")[0] as
-    | PerformanceNavigationTiming
-    | undefined;
-  return navigation?.type === "reload";
 }
 
 // Survives wouter remounts on `/`, resets on a full document load.
@@ -40,9 +36,8 @@ export function shouldPlayHomeOpeningSplash(): boolean {
     const alreadyShownThisSession =
       sessionStorage.getItem(HOME_OPENING_SPLASH_STORAGE_KEY) === "1";
 
-    // Hard refresh replays once for this document. In-app navigation remounts
-    // the overlay but must not replay after it has already run.
-    if (alreadyShownThisSession && !wasDocumentReloaded()) {
+    // Reloads and in-app navigation must not replay the intro this session.
+    if (alreadyShownThisSession) {
       return false;
     }
 
@@ -65,12 +60,13 @@ function markHomeOpeningSplashShown(): void {
 export default function HomeOpeningSplash() {
   const [phase, setPhase] = useState<SplashPhase>("hidden");
   const [photoReady, setPhotoReady] = useState(false);
+  const [scene, setScene] = useState<"photo" | "title" | "caption">("photo");
   const overlayRef = useRef<HTMLDivElement>(null);
   const skipRef = useRef<HTMLButtonElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const wasVisibleRef = useRef(false);
 
-  // Claim the once-per-document intro only after React commits this component.
+  // Claim the once-per-session intro only after React commits this component.
   // Lazy hydration may abandon a render; render-time mutation would skip it.
   useEffect(() => {
     if (shouldPlayHomeOpeningSplash()) setPhase("visible");
@@ -118,8 +114,14 @@ export default function HomeOpeningSplash() {
       return;
     }
 
+    const titleTimer = window.setTimeout(() => setScene("title"), HOME_OPENING_SPLASH_PHOTO_MS);
+    const captionTimer = window.setTimeout(() => setScene("caption"), HOME_OPENING_SPLASH_PHOTO_MS + HOME_OPENING_SPLASH_TITLE_MS);
     const timer = window.setTimeout(dismiss, HOME_OPENING_SPLASH_HOLD_MS);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(titleTimer);
+      window.clearTimeout(captionTimer);
+      window.clearTimeout(timer);
+    };
   }, [dismiss, phase, photoReady]);
 
   useEffect(() => {
@@ -183,6 +185,7 @@ export default function HomeOpeningSplash() {
         "fixed inset-0 z-[200] flex cursor-pointer items-center justify-center overflow-hidden bg-black outline-none",
         "transition-opacity duration-500 ease-out",
         phase === "fading" ? "opacity-0" : "opacity-100",
+        "motion-reduce:transition-none",
       )}
     >
       <img
@@ -199,21 +202,19 @@ export default function HomeOpeningSplash() {
       <div
         className={cn(
           "absolute inset-0 bg-black/50",
-          photoReady ? "opacity-100" : "opacity-0",
+          photoReady && scene !== "photo" ? "opacity-100" : "opacity-0",
         )}
         aria-hidden="true"
       />
-      <div
-        className={cn(
-          "relative z-10 px-6 text-center",
-          photoReady ? "opacity-100" : "opacity-0",
-        )}
-      >
+      {photoReady && scene !== "photo" && <div className="relative z-10 max-w-5xl px-6 text-center">
         <p className="sr-only">Press Escape or click to skip.</p>
-        <p className="font-sans text-4xl font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)] sm:text-5xl md:text-6xl lg:text-7xl">
-          {HOME_OPENING_SPLASH_TITLE}
+        <p className={cn(
+          "font-sans font-bold uppercase text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)]",
+          scene === "caption" ? "text-2xl tracking-[0.08em] sm:text-3xl md:text-4xl" : "text-4xl tracking-[0.22em] sm:text-5xl md:text-6xl lg:text-7xl",
+        )}>
+          {scene === "caption" ? HOME_OPENING_SPLASH_CAPTION : HOME_OPENING_SPLASH_TITLE}
         </p>
-      </div>
+      </div>}
       <button
         ref={skipRef}
         type="button"

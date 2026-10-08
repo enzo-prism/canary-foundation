@@ -1,3 +1,5 @@
+> 8 October update: Don canceled the QuickBooks summary. Its slot and references have been removed from both public financial surfaces and SEO. Narrative and Overview remain pending; the approved Form 990 remains available. The earlier four-part package below is superseded. The homepage intro now uses Don’s 5-second photo, 3-second title, and 3-second team caption sequence, once per browser-tab session. The requested 2004 caption remains pending date confirmation against the April 2005 photo label.
+
 # Content audit — October 2026
 
 Site-wide review of public routes, content files, and navigation before the News / Financials change set. Scope is `enzo-prism/canary-foundation` as of the `main` snapshot this branch started from. Merge to production and Replit Publish wait on Enzo's approval.

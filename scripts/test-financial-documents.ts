@@ -39,9 +39,8 @@ const expectedIds = [
   "narrative-2025",
   "overview-2025",
   "form-990-2025",
-  "quickbooks-summary-2025",
 ];
-assert.equal(financialDocuments.length, 4);
+assert.equal(financialDocuments.length, 3);
 assert.deepEqual(
   financialDocuments.map((document) => document.id),
   expectedIds,
@@ -76,7 +75,9 @@ assert.doesNotMatch(homeLower, /\$3,963,900|12\.6¢|\$3,621,840|financialChart20
 assert.match(dropNotes, /2025-narrative\.pdf/);
 assert.match(dropNotes, /2025-overview\.pdf/);
 assert.match(dropNotes, /2025-form-990\.pdf/);
-assert.match(dropNotes, /2025-quickbooks-summary\.pdf/);
+assert.doesNotMatch(dropNotes, /2025-quickbooks-summary\.pdf/);
+assert.doesNotMatch(financialsPage, /QuickBooks|Annual\s+independent audits/);
+assert.doesNotMatch(homeLower, /QuickBooks/);
 assert.doesNotMatch(dropNotes, /2025-financial-statements\.pdf/);
 assert.equal(
   exists("client/public/docs/financials/README.md"),

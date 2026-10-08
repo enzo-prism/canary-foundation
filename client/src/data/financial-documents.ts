@@ -1,6 +1,6 @@
 // Public 2025 financials package shown on /about/financials and the homepage.
-// Structure matches Don Listwin's four-part set (6 Oct 2026): Narrative,
-// Overview slides, Form 990, and QuickBooks summary. The public-inspection Form 990 is available; the other files are pending.
+// Don canceled the QuickBooks summary on 8 Oct 2026. The approved public
+// Form 990 remains available; Narrative and Overview stay pending.
 //
 // To publish a document after Candy or Don approves it:
 // 1. Convert Word/PowerPoint sources to PDF if needed.
@@ -57,16 +57,7 @@ export const financialDocuments: FinancialDocument[] = [
     publicPath: "/docs/financials/2025-form-990.pdf",
     dropPath: "client/public/docs/financials/2025-form-990.pdf",
   },
-  {
-    id: "quickbooks-summary-2025",
-    title: "2025 QuickBooks summary",
-    description: "A summary of the Foundation's 2025 finances.",
-    year: 2025,
-    formatLabel: "PDF",
-    href: null,
-    publicPath: "/docs/financials/2025-quickbooks-summary.pdf",
-    dropPath: "client/public/docs/financials/2025-quickbooks-summary.pdf",
-  },
+
 ];
 
 export function financialDocumentStatus(

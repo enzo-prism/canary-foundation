@@ -22,6 +22,17 @@ export function HomeLower(_props: HomeInteractiveProps) {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <Card className="group flex h-full flex-col rounded-2xl border-stone-200 bg-white shadow-none transition-colors duration-200 hover:border-stone-400">
               <CardContent className="flex flex-1 flex-col p-6">
+                <div className="mb-2 text-sm font-semibold text-stone-600">NEWS • 2026</div>
+                <h3 className="mb-3 text-xl font-semibold text-dark">Don Listwin Joins Moffitt’s Melanoma and Skin Cancer Advisory Board</h3>
+                <p className="mb-4 flex-1 text-gray-600">Moffitt Cancer Center has appointed Canary Foundation founder Don Listwin to its melanoma and skin cancer advisory board.</p>
+                <Button asChild variant="link" className="h-auto justify-start p-0 font-semibold text-dark hover:text-stone-600">
+                  <Link href="/blog/don-listwin-moffitt-melanoma-skin-cancer-advisory-board" aria-label="Read about Don Listwin joining Moffitt’s advisory board">Read More <ArrowRight aria-hidden="true" strokeWidth={1.7} className="ml-1 h-4 w-4" /></Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="group flex h-full flex-col rounded-2xl border-stone-200 bg-white shadow-none transition-colors duration-200 hover:border-stone-400">
+              <CardContent className="flex flex-1 flex-col p-6">
                 <div className="mb-2 text-sm font-semibold text-stone-600">PRESS RELEASE • 2026</div>
                 <h3 className="mb-3 text-xl font-semibold text-dark">Canary and Cinelli Family Foundations Expand Pancreatic Cancer Early Detection Efforts</h3>
                 <p className="mb-4 flex-1 text-gray-600">Expanded partnership will support next-generation imaging, blood tests, and monitoring strategies to find pancreatic cancer earlier.</p>
@@ -369,7 +380,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
-                      <span>Independent audit and board oversight</span>
+                      <span>Board oversight of financial stewardship</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp aria-hidden="true" strokeWidth={1.7} className="w-4 h-4 flex-none text-stone-500" />
@@ -384,7 +395,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
               <div className="bg-[#252923] p-6 text-white sm:p-8">
                 <h3 className="mb-3 text-3xl font-bold">Current financial documents</h3>
                 <p className="text-lg text-stone-200">
-                  The 2025 narrative, overview slides, Form 990, and QuickBooks summary will be posted here when approved for publication.
+                  The 2025 Form 990 is available. The narrative and overview will be posted as they become available.
                 </p>
               </div>
               <div className="p-6 sm:p-8">

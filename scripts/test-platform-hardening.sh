@@ -87,7 +87,7 @@ if [[ "$traversal_status" != "404" ]] || grep -q 'outside-public-sentinel' /tmp/
   FAILURES=$((FAILURES + 1))
 fi
 
-valid_payload='{"name":"Website Test","email":"test@example.com","subject":"Website question","message":"This is a valid website test message."}'
+valid_payload='{"name":"Website Test","email":"test@example.com","subject":"Website question","inquiryType":"Website test","message":"This is a valid website test message."}'
 expect_status 202 POST "/api/contact" \
   -H 'Content-Type: application/json' -H 'X-Forwarded-For: 198.51.100.10' \
   --data "$valid_payload"
@@ -96,7 +96,7 @@ if ! grep -q '"persisted":false' /tmp/canary-platform-response; then
   FAILURES=$((FAILURES + 1))
 fi
 
-honeypot_payload='{"name":"Bot","email":"bot@example.com","subject":"Spam message","message":"This should never be retained.","website":"https://spam.example"}'
+honeypot_payload='{"name":"Bot","email":"bot@example.com","subject":"Spam message","inquiryType":"Website test","message":"This should never be retained.","website":"https://spam.example"}'
 expect_status 202 POST "/api/contact" \
   -H 'Content-Type: application/json' -H 'X-Forwarded-For: 198.51.100.11' \
   --data "$honeypot_payload"

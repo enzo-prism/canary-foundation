@@ -92,7 +92,7 @@ export const EXACT_ROUTE_METADATA: Record<string, RouteMetadata> = {
   "/about/financials": {
     title: "Financials | Canary Foundation",
     description:
-      "Review Canary Foundation financial stewardship. The 2025 narrative, overview slides, Form 990, and QuickBooks summary will be posted here when approved for publication.",
+      "Review Canary Foundation financial stewardship. The 2025 Form 990 is available. The narrative and overview will be posted as they become available.",
   },
   "/about/awards": {
     title: "Awards | Canary Foundation",
