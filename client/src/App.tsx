@@ -3,8 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense, lazy, useEffect, useState, useRef } from "react";
-import HomeOpeningSplash from "@/components/home-opening-splash";
+import { Suspense, lazy, useEffect, useRef } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import { normalizeRoutePath, PAGE_JSONLD_ELEMENT_ID } from "@shared/seo";
@@ -178,8 +177,6 @@ function RouteLoadingFallback() {
 }
 
 function Router() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
   // Track page views when routes change
   const [location] = useLocation();
   useAnalytics();
@@ -233,7 +230,6 @@ function Router() {
 
   return (
     <>
-      {mounted && normalizeRoutePath(location) === "/" ? <HomeOpeningSplash /> : null}
       <Suspense fallback={<RouteLoadingFallback />}>
       <Switch>
         <Route path="/" component={Home} />

@@ -588,8 +588,8 @@ main[tabindex="-1"]:focus {
 .canary-impact span { display: block; margin-top: 0.35rem; color: #777b6d; font-size: 0.7rem; }
 .canary-impact > a { display: flex; align-items: center; gap: 0.6rem; color: #515a41; font-size: 0.75rem; font-weight: 600; text-underline-offset: 4px; }
 .canary-impact > a:hover { text-decoration: underline; }
-.home-page main > section:not(#home) { border-top: 1px solid #edeee7; }
-.home-page main > section:not(#home) h2 { font-size: clamp(1.8rem, 3vw, 2.55rem); font-weight: 550; line-height: 1.2; }
+.home-page main > section:not(#home):not(#home-intro) { border-top: 1px solid #edeee7; }
+.home-page main > section:not(#home):not(#home-intro) h2 { font-size: clamp(1.8rem, 3vw, 2.55rem); font-weight: 550; line-height: 1.2; }
 .home-page #programs { background: #fff; }
 .program-card { border: 1px solid #e4e6dd; border-radius: 1rem; box-shadow: none; transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {

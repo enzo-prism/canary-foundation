@@ -3,6 +3,7 @@ import { ResearchAnswers } from "@/components/home/research-answers";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Heart, Handshake, GraduationCap, Stethoscope, Users, Droplets, Shield, Microscope, Building, Award, Lightbulb, Star, Target } from "lucide-react";
+import { HomeIntro } from "@/components/home/home-intro";
 import { HomeUpper } from "@/components/home/home-upper";
 import { HomeMiddle } from "@/components/home/home-middle";
 import { HomeLower } from "@/components/home/home-lower";
@@ -234,6 +235,7 @@ export default function Home() {
     <div className="home-page min-h-screen bg-light">
       <Header />
       <main id="main-content" tabIndex={-1}>
+        <HomeIntro />
         <HomeUpper {...interactiveProps} />
         <HomeMiddle {...interactiveProps} />
         <HomeLower {...interactiveProps} />
