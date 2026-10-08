@@ -7,20 +7,45 @@ import {
   HOME_INTRO_IMAGE_JPG,
   HOME_INTRO_IMAGE_SIZES,
   HOME_INTRO_IMAGE_SRCSET,
+  HOME_INTRO_MAX_WAIT_MS,
   HOME_INTRO_TITLE,
+  type HomeIntroImageState,
   type HomeIntroPhase,
-  homeIntroDelayMs,
+  homeIntroElapsedPhase,
+  homeIntroRemainingMs,
   nextHomeIntroPhase,
+  readHomeIntroImageLoadMark,
 } from "@/lib/home-intro";
+
+function prefersReducedMotionNow(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 export function HomeIntro() {
   const [phase, setPhase] = useState<HomeIntroPhase>("photo");
-  const [imageReady, setImageReady] = useState(false);
+  const [imageState, setImageState] = useState<HomeIntroImageState>("pending");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const loadMarkRef = useRef<number | null>(null);
 
-  const markImageReady = useCallback(() => {
-    setImageReady(true);
+  // Failed / hung images jump to the final frame (not a skip). The copy is
+  // the point of the sequence, the reserved height stays put, and the
+  // destination matches reduced-motion and the successful hold.
+  const showFinalFrame = useCallback((state: HomeIntroImageState) => {
+    loadMarkRef.current = null;
+    setImageState(state);
+    setPhase("hold");
+  }, []);
+
+  const startFromLoad = useCallback((loadMark: number) => {
+    setImageState("ready");
+    if (prefersReducedMotionNow()) {
+      loadMarkRef.current = null;
+      setPhase("hold");
+      return;
+    }
+    loadMarkRef.current = loadMark;
+    setPhase(homeIntroElapsedPhase(performance.now() - loadMark));
   }, []);
 
   useEffect(() => {
@@ -37,20 +62,53 @@ export function HomeIntro() {
 
   useEffect(() => {
     const image = imageRef.current;
-    if (image?.complete && image.naturalWidth > 0) {
-      markImageReady();
+    if (!image) return;
+    if (image.complete && image.naturalWidth === 0) {
+      showFinalFrame("failed");
+      return;
     }
-  }, [markImageReady]);
+    if (image.complete && image.naturalWidth > 0) {
+      startFromLoad(readHomeIntroImageLoadMark(image));
+    }
+  }, [showFinalFrame, startFromLoad]);
 
   useEffect(() => {
-    if (!imageReady || prefersReducedMotion) return;
-    const delay = homeIntroDelayMs(phase);
-    if (delay === null) return;
+    if (imageState !== "pending" || prefersReducedMotion) return;
+    const timer = window.setTimeout(() => {
+      showFinalFrame("timeout");
+    }, HOME_INTRO_MAX_WAIT_MS);
+    return () => window.clearTimeout(timer);
+  }, [imageState, prefersReducedMotion, showFinalFrame]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    if (imageState !== "ready" || loadMarkRef.current === null) return;
+    const elapsed = performance.now() - loadMarkRef.current;
+    const caughtUp = homeIntroElapsedPhase(elapsed);
+    if (caughtUp !== phase) {
+      setPhase(caughtUp);
+      return;
+    }
+    const wait = homeIntroRemainingMs(phase, elapsed);
+    if (wait === null) return;
     const timer = window.setTimeout(() => {
       setPhase((current) => nextHomeIntroPhase(current));
-    }, delay);
+    }, wait);
     return () => window.clearTimeout(timer);
-  }, [imageReady, phase, prefersReducedMotion]);
+  }, [imageState, phase, prefersReducedMotion]);
+
+  const onLoad = useCallback(() => {
+    const image = imageRef.current;
+    if (!image || image.naturalWidth === 0) {
+      showFinalFrame("failed");
+      return;
+    }
+    startFromLoad(readHomeIntroImageLoadMark(image, true));
+  }, [showFinalFrame, startFromLoad]);
+
+  const onError = useCallback(() => {
+    showFinalFrame("failed");
+  }, [showFinalFrame]);
 
   const showTitle = phase !== "photo";
   const showCaption = phase === "caption" || phase === "hold";
@@ -60,8 +118,14 @@ export function HomeIntro() {
       id="home-intro"
       aria-label="The beginning of Canary Foundation"
       data-phase={phase}
+      data-image-state={imageState}
       className="relative isolate w-full overflow-hidden bg-black"
     >
+      <noscript>
+        <style>
+          {`#home-intro .home-intro-overlay,#home-intro .home-intro-title,#home-intro .home-intro-caption{opacity:1!important}`}
+        </style>
+      </noscript>
       <div className="relative min-h-[calc(100svh-4.75rem)] w-full">
         <picture>
           <source
@@ -70,6 +134,7 @@ export function HomeIntro() {
             sizes={HOME_INTRO_IMAGE_SIZES}
           />
           <img
+            id="home-intro-photo"
             ref={imageRef}
             src={HOME_INTRO_IMAGE_JPG}
             alt={HOME_INTRO_IMAGE_ALT}
@@ -77,15 +142,20 @@ export function HomeIntro() {
             height={1280}
             fetchPriority="high"
             decoding="async"
-            onLoad={markImageReady}
-            onError={markImageReady}
+            onLoad={onLoad}
+            onError={onError}
             className="absolute inset-0 h-full w-full object-cover object-[center_58%]"
           />
         </picture>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(){var i=document.getElementById(\"home-intro-photo\");if(!i)return;function mark(){if(!i.dataset.loadedAt){i.dataset.loadedAt=String(performance.now());}if(!window.__homeIntroLoadedAt){window.__homeIntroLoadedAt=performance.now();}}if(i.complete&&i.naturalWidth>0)mark();else i.addEventListener(\"load\",mark,{once:true});})();",
+          }}
+        />
         <div
           aria-hidden="true"
           className={cn(
-            "absolute inset-0 bg-black/55 transition-opacity ease-out motion-reduce:opacity-100",
+            "home-intro-overlay absolute inset-0 bg-black/55 transition-opacity ease-out motion-reduce:opacity-100",
             showTitle ? "opacity-100" : "opacity-0",
           )}
           style={{ transitionDuration: `${HOME_INTRO_FADE_MS}ms` }}
