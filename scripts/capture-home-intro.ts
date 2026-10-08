@@ -116,7 +116,11 @@ async function main() {
     await failPage.route("**/home-intro/**", (route) => route.abort());
     await failPage.goto(url, { waitUntil: "domcontentloaded" });
     await failPage.waitForFunction(() => {
-      return document.querySelector("#home-intro")?.getAttribute("data-phase") === "hold";
+      const section = document.querySelector("#home-intro");
+      const title = document.querySelector(".home-intro-title");
+      return section?.getAttribute("data-phase") === "hold"
+        && title
+        && Number.parseFloat(getComputedStyle(title).opacity) >= 0.95;
     }, undefined, { timeout: 5_000 });
     await failPage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_failure_final.png`) });
     await failContext.close();
@@ -126,7 +130,18 @@ async function main() {
       javaScriptEnabled: false,
     });
     const noJsPage = await noJsContext.newPage();
-    await noJsPage.goto(url, { waitUntil: "domcontentloaded" });
+    await noJsPage.goto(url, { waitUntil: "load" });
+    await noJsPage.waitForFunction(() => {
+      const title = document.querySelector(".home-intro-title");
+      const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+      return Boolean(
+        title
+        && Number.parseFloat(getComputedStyle(title).opacity) >= 0.95
+        && image
+        && image.complete
+        && image.naturalWidth > 0,
+      );
+    }, undefined, { timeout: 15_000 });
     await noJsPage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_nojs_final.png`) });
     await noJsContext.close();
 
