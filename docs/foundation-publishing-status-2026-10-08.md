@@ -25,7 +25,11 @@ The approved ovarian source says **160 blood samples collected from 90 patients 
 
 ## Contact operations
 
-A labeled public test on 8 October returned `500`. A read-only Replit database check found `public.contact_messages` absent. No SMTP, Resend, SendGrid, Postmark or contact notification keys were configured in the workspace. Repair storage with the additive, idempotent `npm run db:contact-setup`; check production with a non-sensitive labeled test, then confirm its reference is durably retained without exposing other inquiries.
+A labeled public test on 8 October returned `500`. A read-only Replit development database check found `public.contact_messages` absent. The additive `npm run db:contact-setup` succeeded twice. Replit generated and applied the matching production migration, which only creates that table. Release `11d835a4` is live with source commit `6a9c0e4`. A labeled non-sensitive public test, `CF-20261008-1136`, then returned `201`; the page showed the success message and reset the form. All 47 production routes plus two 404s passed the initial HTML and metadata checks. The approved ovarian sample/participant wording was verified on the live page.
+
+The test was independently found in the read-only **Production Database**, `contact_messages` row `1`, created at `2026-10-08T18:34:47.858Z`. Its subject contains the labeled test reference. No other inquiry contents were inspected. Production logs also contain an earlier contact `500` on 5 October; failed submissions may have been missed and cannot be reconstructed from this verification record.
+
+The frontend now requires a durable receipt before clearing a form or tracking a lead. Failed, temporary and malformed receipts preserve the visitor's text. Servers without configured durable storage return `503` and the existing email fallback. No SMTP, Resend, SendGrid, Postmark or contact notification keys were configured in the workspace.
 
 Staff notification ownership and delivery remain a separate acceptance check. Storage success alone does not prove that a person will respond. Retain the existing public contact email as a fallback. Do not create a new staff recipient or claim delivery until it is configured and verified.
 
