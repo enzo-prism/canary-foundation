@@ -21,32 +21,50 @@ function prefersReducedMotionNow(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+// First mount in this JS runtime (SSR + hydrate) may catch up from a
+// pre-hydration load. Later mounts are SPA returns to "/" and must start
+// a fresh 5s/3s/3s sequence instead of reusing the first visit's mark.
+let homeIntroMounts = 0;
+
 export function HomeIntro() {
   const [phase, setPhase] = useState<HomeIntroPhase>("photo");
   const [imageState, setImageState] = useState<HomeIntroImageState>("pending");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
   const loadMarkRef = useRef<number | null>(null);
+  const finalRef = useRef(false);
+  const [mountId] = useState(() => {
+    homeIntroMounts += 1;
+    return homeIntroMounts;
+  });
 
   // Failed / hung images jump to the final frame (not a skip). The copy is
   // the point of the sequence, the reserved height stays put, and the
-  // destination matches reduced-motion and the successful hold.
+  // destination matches reduced-motion and the successful hold. Once we
+  // enter failed/timeout, that state is terminal: a late onLoad must not
+  // restart the sequence.
   const showFinalFrame = useCallback((state: HomeIntroImageState) => {
     loadMarkRef.current = null;
+    finalRef.current = true;
     setImageState(state);
     setPhase("hold");
   }, []);
 
   const startFromLoad = useCallback((loadMark: number) => {
+    if (finalRef.current) {
+      setImageState("ready");
+      return;
+    }
     setImageState("ready");
     if (prefersReducedMotionNow()) {
       loadMarkRef.current = null;
       setPhase("hold");
       return;
     }
-    loadMarkRef.current = loadMark;
-    setPhase(homeIntroElapsedPhase(performance.now() - loadMark));
-  }, []);
+    const mark = mountId === 1 ? loadMark : performance.now();
+    loadMarkRef.current = mark;
+    setPhase(homeIntroElapsedPhase(performance.now() - mark));
+  }, [mountId]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -112,6 +130,7 @@ export function HomeIntro() {
 
   const showTitle = phase !== "photo";
   const showCaption = phase === "caption" || phase === "hold";
+  const hideBrokenImage = imageState === "failed" || imageState === "timeout";
 
   return (
     <section
@@ -144,7 +163,11 @@ export function HomeIntro() {
             decoding="async"
             onLoad={onLoad}
             onError={onError}
-            className="absolute inset-0 h-full w-full object-cover object-[center_58%]"
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover object-[center_58%] transition-opacity ease-out",
+              hideBrokenImage ? "opacity-0" : "opacity-100",
+            )}
+            style={{ transitionDuration: `${HOME_INTRO_FADE_MS}ms` }}
           />
         </picture>
         <script

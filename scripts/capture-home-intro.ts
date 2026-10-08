@@ -12,7 +12,7 @@ import { chromium, type Page } from "playwright-core";
 
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome-stable";
 const OUT_DIR = process.env.OUT_DIR ?? "/opt/cursor/artifacts/home-intro";
-const PREFIX = process.env.CAPTURE_PREFIX ?? "home_intro_v2";
+const PREFIX = process.env.CAPTURE_PREFIX ?? "home_intro_v3";
 
 async function freePort(): Promise<number> {
   return await new Promise((resolve, reject) => {

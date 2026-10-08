@@ -3,7 +3,7 @@
  * (`npm run build`) unless BASE_URL already points at a running server.
  * Uses Playwright against system Chrome.
  *
- * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error
+ * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load
  * runs a single case (used by the mutation proof).
  */
 import assert from "node:assert/strict";
@@ -306,6 +306,10 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
       assert.ok(Number.parseFloat(state.captionOpacity ?? "0") >= 0.95);
       assert.equal(state.title, HOME_INTRO_TITLE);
+      await page.waitForFunction(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return Boolean(image) && Number.parseFloat(getComputedStyle(image as Element).opacity) <= 0.05;
+      }, undefined, { timeout: 2_000 });
     });
   },
 
@@ -363,6 +367,47 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(state.phase, "hold", "post-hydration 404 must use onError to show the final frame");
       assert.equal(state.imageState, "failed");
       assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
+    });
+  },
+
+  async "late-load"(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      const releaseAfterMs = 12_000;
+      await interceptImages(page, async (route) => {
+        await new Promise((resolve) => setTimeout(resolve, releaseAfterMs));
+        await route.continue();
+      });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-image-state") === expected;
+      }, "timeout", { timeout: HOME_INTRO_MAX_WAIT_MS + 2_000 });
+      await waitForCopyVisibility(page, true, true);
+      const afterTimeout = await introState(page);
+      assert.equal(afterTimeout.phase, "hold");
+      assert.equal(afterTimeout.imageState, "timeout");
+
+      const deadline = Date.now() + 8_000;
+      while (Date.now() < deadline) {
+        const mid = await introState(page);
+        assert.notEqual(mid.phase, "photo", "late load must not replay the intro");
+        assert.ok(Number.parseFloat(mid.titleOpacity ?? "0") >= 0.95, "title must stay visible after timeout");
+        assert.ok(Number.parseFloat(mid.captionOpacity ?? "0") >= 0.95, "caption must stay visible after timeout");
+        if (mid.imageState === "ready") break;
+        await page.waitForTimeout(250);
+      }
+
+      await page.waitForFunction(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        if (!image || !image.complete || image.naturalWidth === 0) return false;
+        return Number.parseFloat(getComputedStyle(image).opacity) >= 0.95;
+      }, undefined, { timeout: 5_000 });
+      const afterLateLoad = await introState(page);
+      assert.equal(afterLateLoad.phase, "hold", "phase stays hold after a late photo");
+      assert.notEqual(afterLateLoad.phase, "photo");
+      assert.equal(afterLateLoad.imageState, "ready");
+      assert.ok(Number.parseFloat(afterLateLoad.titleOpacity ?? "0") >= 0.95);
+      assert.ok(Number.parseFloat(afterLateLoad.captionOpacity ?? "0") >= 0.95);
     });
   },
 };

@@ -102,6 +102,18 @@ const mutations: Mutation[] = [
     caseName: "error",
     apply: (source) => source.replace(`\n            onError={onError}`, ""),
   },
+  {
+    name: "drop the terminal failed/timeout guard",
+    caseName: "late-load",
+    apply: (source) => source.replace(
+      `    if (finalRef.current) {
+      setImageState("ready");
+      return;
+    }
+    `,
+      "",
+    ),
+  },
 ];
 
 async function freePort(): Promise<number> {
@@ -150,17 +162,19 @@ async function startDevServer(): Promise<{ url: string; stop: () => void }> {
   throw new Error(`Dev server did not start: ${output}`);
 }
 
-function runCase(url: string, caseName: string): { status: number; output: string } {
+function runCase(url: string, caseName?: string): { status: number; output: string } {
+  const env = {
+    ...process.env,
+    BASE_URL: url,
+  };
+  if (caseName) env.HOME_INTRO_CASE = caseName;
+  else delete env.HOME_INTRO_CASE;
   const result = spawnSync(
     process.execPath,
     ["--import", "tsx", "scripts/test-home-intro-browser.ts"],
     {
       cwd: root,
-      env: {
-        ...process.env,
-        BASE_URL: url,
-        HOME_INTRO_CASE: caseName,
-      },
+      env,
       encoding: "utf8",
     },
   );
@@ -191,11 +205,11 @@ async function main() {
       console.log(`RED  ${mutation.name}`);
     }
 
-    const restored = runCase(url, "reduced-motion");
+    const restored = runCase(url);
     if (restored.status !== 0) {
-      throw new Error(`Restored source failed reduced-motion:\n${restored.output}`);
+      throw new Error(`Restored source failed the full browser suite:\n${restored.output}`);
     }
-    results.push("GREEN restored reduced-motion");
+    results.push("GREEN restored all browser cases");
     console.log("Homepage intro mutation proof passed.");
     for (const line of results) console.log(`  ${line}`);
   } finally {
