@@ -269,21 +269,26 @@ async function waitForServedSource(
   marker: { includes?: string; excludes?: string },
   label: string,
 ) {
-  const candidates = [
-    `${url}/src/components/home/home-intro.tsx`,
-    `${url}/@fs${introPath}`,
-  ];
   const deadline = Date.now() + 10_000;
   let last = "";
   while (Date.now() < deadline) {
+    const bust = Date.now();
+    const candidates = [
+      `${url}/src/components/home/home-intro.tsx?t=${bust}`,
+      `${url}/@fs${introPath}?t=${bust}`,
+    ];
     for (const candidate of candidates) {
       try {
-        const response = await fetch(candidate);
+        const response = await fetch(candidate, { cache: "no-store" });
         if (!response.ok) continue;
         last = await response.text();
         const hasInclude = !marker.includes || last.includes(marker.includes);
         const missingExclude = !marker.excludes || !last.includes(marker.excludes);
-        if (hasInclude && missingExclude) return;
+        if (hasInclude && missingExclude) {
+          // File watchers invalidate the module graph after the raw fetch.
+          await new Promise((resolveWait) => setTimeout(resolveWait, 700));
+          return;
+        }
       } catch {
         // Vite may still be transforming.
       }
