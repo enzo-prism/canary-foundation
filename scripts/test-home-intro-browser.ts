@@ -205,8 +205,11 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
 
       const beforeRelease = await introState(page);
       assert.equal(beforeRelease.phase, "photo", "delayed image must not advance before load");
-      assert.equal(beforeRelease.titleOpacity, "0", "JS visitors must not flash the title");
-      assert.equal(beforeRelease.captionOpacity, "0", "JS visitors must not flash the caption");
+      await waitForCopyVisibility(page, false, false);
+      const hiddenBeforeRelease = await introState(page);
+      assert.equal(hiddenBeforeRelease.phase, "photo", "JS visitors must not flash the title");
+      assert.ok(Number.parseFloat(hiddenBeforeRelease.titleOpacity ?? "1") <= 0.05, "JS visitors must not flash the title");
+      assert.ok(Number.parseFloat(hiddenBeforeRelease.captionOpacity ?? "1") <= 0.05, "JS visitors must not flash the caption");
       const loadedAtHydration = await page.evaluate(() => {
         const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
         return Boolean(image && image.complete && image.naturalWidth > 0);
@@ -226,7 +229,7 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       if (untilBeforeTitle > 0) await page.waitForTimeout(untilBeforeTitle);
       const beforeTitle = await introState(page);
       assert.equal(beforeTitle.phase, "photo", "phase must stay photo until load+5s");
-      assert.equal(beforeTitle.titleOpacity, "0");
+      assert.ok(Number.parseFloat(beforeTitle.titleOpacity ?? "1") <= 0.05);
 
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;

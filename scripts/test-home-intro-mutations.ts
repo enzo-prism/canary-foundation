@@ -205,6 +205,8 @@ async function main() {
       console.log(`RED  ${mutation.name}`);
     }
 
+    writeFileSync(introPath, original);
+    await new Promise((resolveWait) => setTimeout(resolveWait, 800));
     const restored = runCase(url);
     if (restored.status !== 0) {
       throw new Error(`Restored source failed the full browser suite:\n${restored.output}`);
