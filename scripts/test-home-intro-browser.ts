@@ -3,7 +3,7 @@
  * (`npm run build`) unless BASE_URL already points at a running server.
  * Uses Playwright against system Chrome.
  *
- * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load|timeout-race|remount|srcset-switch|corrupt
+ * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load|timeout-race|remount|srcset-switch|corrupt|zero-width-complete|timer-ready-branch
  * runs a single case (used by the mutation proof).
  */
 import assert from "node:assert/strict";
@@ -104,10 +104,21 @@ async function introState(page: Page): Promise<IntroState> {
 }
 
 async function waitForHydration(page: Page) {
+  // SSR already paints data-image-state="pending". Wait for the client
+  // effect that arms (or skips) the 8s max-wait so timer-relative cases
+  // do not start from before React mounts.
   await page.waitForFunction(() => {
-    const section = document.querySelector("#home-intro");
-    return Boolean(section?.getAttribute("data-image-state"));
+    const wait = document.querySelector("#home-intro")?.getAttribute("data-max-wait");
+    return wait === "armed" || wait === "skipped";
   }, undefined, { timeout: 15_000 });
+}
+
+async function readMaxWaitArmMark(page: Page): Promise<number> {
+  return page.evaluate(() => {
+    const section = document.querySelector("#home-intro");
+    const at = Number(section?.getAttribute("data-max-wait-at"));
+    return Number.isFinite(at) && at > 0 ? at : performance.now();
+  });
 }
 
 async function readImageLoadMark(page: Page): Promise<number> {
@@ -133,8 +144,18 @@ async function waitUntilElapsed(page: Page, loadMark: number, elapsedMs: number)
 }
 
 async function waitPastMaxWait(page: Page) {
-  const hydrateMark = await page.evaluate(() => performance.now());
-  await waitUntilElapsed(page, hydrateMark, HOME_INTRO_MAX_WAIT_MS + 500);
+  const armMark = await readMaxWaitArmMark(page);
+  await waitUntilElapsed(page, armMark, HOME_INTRO_MAX_WAIT_MS + 500);
+}
+
+function stubImageDecode(page: Page, naturalWidth: number) {
+  return page.evaluate((width) => {
+    const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+    if (!image) throw new Error("intro photo missing");
+    Object.defineProperty(image, "complete", { configurable: true, get: () => true });
+    Object.defineProperty(image, "naturalWidth", { configurable: true, get: () => width });
+    Object.defineProperty(image, "naturalHeight", { configurable: true, get: () => width > 0 ? 1 : 0 });
+  }, naturalWidth);
 }
 
 async function waitForCopyVisibility(page: Page, titleVisible: boolean, captionVisible: boolean) {
@@ -338,16 +359,16 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
           void route;
         });
       });
-      const started = Date.now();
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await waitForHydration(page);
-      await page.waitForTimeout(6_000);
+      const armMark = await readMaxWaitArmMark(page);
+      await waitUntilElapsed(page, armMark, 6_000);
       const mid = await introState(page);
       assert.equal(mid.phase, "photo", "never-loading image must still be photo before max-wait");
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-image-state") === expected;
       }, "timeout", { timeout: HOME_INTRO_MAX_WAIT_MS });
-      const elapsed = Date.now() - started;
+      const elapsed = await page.evaluate((mark) => performance.now() - mark, armMark);
       await waitForCopyVisibility(page, true, true);
       const state = await introState(page);
       assert.ok(elapsed >= 7_000 && elapsed < 11_000, `max-wait should fire near 8s (was ${elapsed}ms)`);
@@ -454,20 +475,12 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       });
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await waitForHydration(page);
-      const hydrateMark = await page.evaluate(() => performance.now());
+      const armMark = await readMaxWaitArmMark(page);
 
-      await page.waitForFunction(
-        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
-        { mark: hydrateMark, elapsed: HOME_INTRO_MAX_WAIT_MS - 500 },
-        { timeout: HOME_INTRO_MAX_WAIT_MS + 2_000 },
-      );
+      await waitUntilElapsed(page, armMark, HOME_INTRO_MAX_WAIT_MS - 500);
       release();
 
-      await page.waitForFunction(
-        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
-        { mark: hydrateMark, elapsed: HOME_INTRO_MAX_WAIT_MS + 300 },
-        { timeout: 2_000 },
-      );
+      await waitUntilElapsed(page, armMark, HOME_INTRO_MAX_WAIT_MS + 300);
 
       await page.waitForFunction(() => {
         const section = document.querySelector("#home-intro");
@@ -577,16 +590,13 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
           && Boolean(image && image.complete && image.naturalWidth > 0);
       }, undefined, { timeout: 8_000 });
       const loadMark = await readImageLoadMark(page);
+      const armMark = await readMaxWaitArmMark(page);
       const startedAt = Date.now();
 
       await page.waitForTimeout(Math.max(0, 2_000 - (Date.now() - startedAt)));
       await page.setViewportSize({ width: 1800, height: 800 });
 
-      await page.waitForFunction(
-        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
-        { mark: loadMark, elapsed: HOME_INTRO_MAX_WAIT_MS + 400 },
-        { timeout: HOME_INTRO_MAX_WAIT_MS + 4_000 },
-      );
+      await waitUntilElapsed(page, Math.max(loadMark, armMark), HOME_INTRO_MAX_WAIT_MS + 400);
 
       const mid = await introState(page);
       assert.notEqual(mid.imageState, "timeout", "a srcset switch must not trip the 8s max-wait");
@@ -637,6 +647,53 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       });
       assert.equal(hidden, true, "corrupt photo must stay hidden past 8s with no broken icon");
       assert.equal(later.phase, "hold");
+    });
+  },
+
+  async "zero-width-complete"(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      await interceptImages(page, async (route) => {
+        await new Promise(() => {
+          void route;
+        });
+      });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      await stubImageDecode(page, 0);
+      await waitPastMaxWait(page);
+      const later = await introState(page);
+      assert.notEqual(later.imageState, "ready", "complete with naturalWidth 0 must not be treated as decoded");
+      assert.equal(later.imageState, "timeout", "timer must time out when decode never produced pixels");
+      const hidden = await page.evaluate(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : false;
+      });
+      assert.equal(hidden, true, "zero-width complete photo must stay hidden");
+      assert.equal(later.phase, "hold");
+    });
+  },
+
+  async "timer-ready-branch"(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      await interceptImages(page, async (route) => {
+        await new Promise(() => {
+          void route;
+        });
+      });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      // Image is complete with pixels, but React never got a load event.
+      // The 8s timer's ready-branch is the only path that can mark ready.
+      await stubImageDecode(page, 1);
+      await waitPastMaxWait(page);
+      const state = await introState(page);
+      assert.equal(state.imageState, "ready", "a decoded photo at the 8s timer must be marked ready");
+      assert.equal(state.phase, "photo", "timer ready-branch must start the sequence, not jump to hold");
+      const photoHidden = await page.evaluate(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : true;
+      });
+      assert.equal(photoHidden, false, "timeout must not hide a photo the timer treated as decoded");
     });
   },
 };

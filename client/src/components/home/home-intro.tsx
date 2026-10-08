@@ -31,6 +31,7 @@ export function HomeIntro() {
   const [imageState, setImageState] = useState<HomeIntroImageState>("pending");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const loadMarkRef = useRef<number | null>(null);
   const finalRef = useRef(false);
   // Count this instance once via a ref, not a useState initializer. StrictMode
@@ -106,7 +107,15 @@ export function HomeIntro() {
   }, [showFinalFrame, startFromLoad]);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    const section = sectionRef.current;
+    if (prefersReducedMotion) {
+      section?.setAttribute("data-max-wait", "skipped");
+      return () => section?.removeAttribute("data-max-wait");
+    }
+    // Client-only mount signal for tests: SSR already paints data-image-state
+    // and must not be mistaken for the 8s timer actually being armed.
+    section?.setAttribute("data-max-wait", "armed");
+    section?.setAttribute("data-max-wait-at", String(performance.now()));
     const timer = window.setTimeout(() => {
       if (loadMarkRef.current !== null || finalRef.current) return;
       const image = imageRef.current;
@@ -116,7 +125,11 @@ export function HomeIntro() {
       }
       showFinalFrame("timeout");
     }, HOME_INTRO_MAX_WAIT_MS);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      section?.removeAttribute("data-max-wait");
+      section?.removeAttribute("data-max-wait-at");
+    };
   }, [prefersReducedMotion, showFinalFrame, startFromLoad]);
 
   useEffect(() => {
@@ -156,6 +169,7 @@ export function HomeIntro() {
   return (
     <section
       id="home-intro"
+      ref={sectionRef}
       aria-label="The beginning of Canary Foundation"
       data-phase={phase}
       data-image-state={imageState}

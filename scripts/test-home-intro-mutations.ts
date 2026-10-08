@@ -3,6 +3,10 @@
  * Reverts each runtime guard, expects the matching Playwright case to go
  * red, then restores the source. Uses the Vite dev server so we do not
  * rebuild dist between cases.
+ *
+ * Default: a cold Vite process per mutation (CI). HOME_INTRO_MUTATION_WARM=1
+ * reuses one server. A surviving mutation is recorded and the suite continues;
+ * the process exits 1 after printing the full table.
  */
 import assert from "node:assert/strict";
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
@@ -18,6 +22,7 @@ type Mutation = {
   name: string;
   caseName: string;
   apply: (source: string) => string;
+  expect?: "red" | "survive";
 };
 
 const mutations: Mutation[] = [
@@ -158,26 +163,22 @@ const mutations: Mutation[] = [
   },
   {
     name: "drop naturalWidth so a broken decode is treated as ready",
-    caseName: "corrupt",
+    caseName: "zero-width-complete",
     apply: (source) => source.replace(
-      `    const timer = window.setTimeout(() => {
-      if (loadMarkRef.current !== null || finalRef.current) return;
-      const image = imageRef.current;
-      if (image && image.complete && image.naturalWidth > 0) {
+      "      if (image && image.complete && image.naturalWidth > 0) {",
+      "      if (image && image.complete) {",
+    ),
+  },
+  {
+    name: "drop the timer ready-branch for a decoded photo",
+    caseName: "timer-ready-branch",
+    apply: (source) => source.replace(
+      `      if (image && image.complete && image.naturalWidth > 0) {
         startFromLoad(readHomeIntroImageLoadMark(image, true));
         return;
       }
-      showFinalFrame("timeout");
-    }, HOME_INTRO_MAX_WAIT_MS);`,
-      `    const timer = window.setTimeout(() => {
-      const image = imageRef.current;
-      globalThis.__mutateDropNaturalWidth = true;
-      if (image && image.complete) {
-        startFromLoad(readHomeIntroImageLoadMark(image, true));
-        return;
-      }
-      showFinalFrame("timeout");
-    }, HOME_INTRO_MAX_WAIT_MS);`,
+      showFinalFrame("timeout");`,
+      `      showFinalFrame("timeout");`,
     ),
   },
 ];
@@ -286,7 +287,10 @@ async function withDevServer<T>(run: (url: string) => T | Promise<T>): Promise<T
 }
 
 async function main() {
+  const warm = process.env.HOME_INTRO_MUTATION_WARM === "1";
   const results: string[] = [];
+  let failed = 0;
+  let shared: { url: string; stop: () => void } | undefined;
   const onSignal = (signal: NodeJS.Signals) => {
     restoreSource();
     currentStop?.();
@@ -295,36 +299,64 @@ async function main() {
   process.on("SIGINT", onSignal);
   process.on("SIGTERM", onSignal);
   process.on("exit", restoreSource);
+
+  const runOnServer = async (fn: (url: string) => { status: number; output: string }) => {
+    if (shared) {
+      await new Promise((resolveWait) => setTimeout(resolveWait, 800));
+      return fn(shared.url);
+    }
+    return withDevServer(fn);
+  };
+
   try {
+    if (warm) {
+      shared = await startDevServer();
+      currentStop = shared.stop;
+      console.log("Mutation proof using one warm Vite server.");
+    }
     for (const mutation of mutations) {
       try {
         const mutated = mutation.apply(original);
         assert.notEqual(mutated, original, `${mutation.name}: patch must change the source`);
         sourceMarker(mutated, original);
         writeFileSync(introPath, mutated);
-        // Fresh Vite process so Fast Refresh / SSR module caches cannot
-        // keep the previous timer callback.
-        const failed = await withDevServer((url) => runCase(url, mutation.caseName));
-        if (failed.status === 0) {
-          throw new Error(
-            `${mutation.name}: expected HOME_INTRO_CASE=${mutation.caseName} to fail, but it passed.\n${failed.output}`,
-          );
+        const ran = await runOnServer((url) => runCase(url, mutation.caseName));
+        const survived = ran.status === 0;
+        const expectSurvive = mutation.expect === "survive";
+        if (expectSurvive) {
+          if (survived) {
+            results.push(`SURVIVE  ${mutation.name} (${mutation.caseName}, documented)`);
+            console.log(`SURVIVE  ${mutation.name}`);
+          } else {
+            failed += 1;
+            results.push(`RED  ${mutation.name} (${mutation.caseName}, expected SURVIVE)`);
+            console.log(`RED  ${mutation.name} (expected SURVIVE)\n${ran.output}`);
+          }
+        } else if (survived) {
+          failed += 1;
+          results.push(`SURVIVE  ${mutation.name} (${mutation.caseName}, expected RED)`);
+          console.log(`SURVIVE  ${mutation.name} (expected RED)\n${ran.output}`);
+        } else {
+          results.push(`RED  ${mutation.name} (${mutation.caseName})`);
+          console.log(`RED  ${mutation.name}`);
         }
-        results.push(`RED  ${mutation.name} (${mutation.caseName})`);
-        console.log(`RED  ${mutation.name}`);
       } finally {
         restoreSource();
       }
     }
 
     restoreSource();
-    const restored = await withDevServer((url) => runCase(url));
+    const restored = await runOnServer((url) => runCase(url));
     if (restored.status !== 0) {
-      throw new Error(`Restored source failed the full browser suite:\n${restored.output}`);
+      failed += 1;
+      results.push("RED restored all browser cases");
+      console.log(`Restored source failed the full browser suite:\n${restored.output}`);
+    } else {
+      results.push("GREEN restored all browser cases");
     }
-    results.push("GREEN restored all browser cases");
-    console.log("Homepage intro mutation proof passed.");
+    console.log(failed === 0 ? "Homepage intro mutation proof passed." : "Homepage intro mutation proof finished with failures.");
     for (const line of results) console.log(`  ${line}`);
+    if (failed > 0) process.exitCode = 1;
   } finally {
     restoreSource();
     process.off("SIGINT", onSignal);

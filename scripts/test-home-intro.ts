@@ -70,6 +70,8 @@ assert.match(intro, /HOME_INTRO_CAPTION/);
 assert.match(intro, /prefers-reduced-motion: reduce/);
 assert.match(intro, /naturalWidth === 0/);
 assert.match(intro, /HOME_INTRO_MAX_WAIT_MS/);
+assert.match(intro, /data-max-wait/);
+assert.match(intro, /data-max-wait-at/);
 assert.match(intro, /readHomeIntroImageLoadMark/);
 assert.match(intro, /<noscript>/);
 assert.match(intro, /home-intro-title[\s\S]*opacity:1!important/);
