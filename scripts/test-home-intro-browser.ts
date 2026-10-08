@@ -149,13 +149,16 @@ async function waitPastMaxWait(page: Page) {
 }
 
 function stubImageDecode(page: Page, naturalWidth: number) {
-  return page.evaluate((width) => {
-    const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+  // String evaluate so tsx/esbuild cannot inject a __name helper into the page.
+  const width = JSON.stringify(naturalWidth);
+  return page.evaluate(`(() => {
+    const image = document.querySelector("#home-intro-photo, #home-intro img");
     if (!image) throw new Error("intro photo missing");
+    const width = ${width};
     Object.defineProperty(image, "complete", { configurable: true, get: () => true });
     Object.defineProperty(image, "naturalWidth", { configurable: true, get: () => width });
-    Object.defineProperty(image, "naturalHeight", { configurable: true, get: () => width > 0 ? 1 : 0 });
-  }, naturalWidth);
+    Object.defineProperty(image, "naturalHeight", { configurable: true, get: () => (width > 0 ? 1 : 0) });
+  })()`);
 }
 
 async function waitForCopyVisibility(page: Page, titleVisible: boolean, captionVisible: boolean) {
