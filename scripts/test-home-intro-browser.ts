@@ -132,6 +132,11 @@ async function waitUntilElapsed(page: Page, loadMark: number, elapsedMs: number)
   );
 }
 
+async function waitPastMaxWait(page: Page) {
+  const hydrateMark = await page.evaluate(() => performance.now());
+  await waitUntilElapsed(page, hydrateMark, HOME_INTRO_MAX_WAIT_MS + 500);
+}
+
 async function waitForCopyVisibility(page: Page, titleVisible: boolean, captionVisible: boolean) {
   await page.waitForFunction(
     ({ wantTitle, wantCaption }) => {
@@ -315,8 +320,7 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         const image = document.querySelector("#home-intro-photo, #home-intro img");
         return Boolean(image) && Number.parseFloat(getComputedStyle(image as Element).opacity) <= 0.05;
       }, undefined, { timeout: 2_000 });
-      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
-      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      await waitPastMaxWait(page);
       const afterMaxWait = await introState(page);
       assert.equal(afterMaxWait.imageState, "failed", "failed must not flip to timeout at 8s");
       const hiddenAfterMaxWait = await page.evaluate(() => {
@@ -371,7 +375,6 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         await new Promise((resolve) => setTimeout(resolve, 1_200));
         await route.fulfill({ status: 404, body: "missing" });
       });
-      const started = Date.now();
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await waitForHydration(page);
       await page.waitForFunction((expected) => {
@@ -382,8 +385,7 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(state.phase, "hold", "post-hydration 404 must use onError to show the final frame");
       assert.equal(state.imageState, "failed");
       assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
-      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
-      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      await waitPastMaxWait(page);
       const afterMaxWait = await introState(page);
       assert.equal(afterMaxWait.imageState, "failed", "failed must not flip to timeout at 8s");
       const hiddenAfterMaxWait = await page.evaluate(() => {
@@ -617,7 +619,6 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
           body: Buffer.from("not-a-jpeg"),
         });
       });
-      const started = Date.now();
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await waitForHydration(page);
       await page.waitForFunction(() => {
@@ -626,8 +627,7 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         return state === "failed" || state === "timeout";
       }, undefined, { timeout: 4_000 });
       await waitForCopyVisibility(page, true, true);
-      const untilPastMaxWait = HOME_INTRO_MAX_WAIT_MS + 500 - (Date.now() - started);
-      if (untilPastMaxWait > 0) await page.waitForTimeout(untilPastMaxWait);
+      await waitPastMaxWait(page);
       const later = await introState(page);
       assert.notEqual(later.imageState, "ready", "a corrupt body must not be treated as a decoded photo");
       assert.equal(later.imageState, "failed", "failed must not flip to timeout at 8s");
