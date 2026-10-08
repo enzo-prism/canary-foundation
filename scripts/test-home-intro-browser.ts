@@ -667,6 +667,10 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       const later = await introState(page);
       assert.notEqual(later.imageState, "ready", "complete with naturalWidth 0 must not be treated as decoded");
       assert.equal(later.imageState, "timeout", "timer must time out when decode never produced pixels");
+      await page.waitForFunction(() => {
+        const image = document.querySelector("#home-intro-photo, #home-intro img");
+        return Boolean(image) && Number.parseFloat(getComputedStyle(image as Element).opacity) <= 0.05;
+      }, undefined, { timeout: 2_000 });
       const hidden = await page.evaluate(() => {
         const image = document.querySelector("#home-intro-photo, #home-intro img");
         return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : false;
