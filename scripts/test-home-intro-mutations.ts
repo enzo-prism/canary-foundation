@@ -171,7 +171,7 @@ const mutations: Mutation[] = [
     }, HOME_INTRO_MAX_WAIT_MS);`,
       `    const timer = window.setTimeout(() => {
       const image = imageRef.current;
-      // mutated: treat any complete body as ready, including naturalWidth === 0
+      void "mutate-drop-natural-width";
       if (image && image.complete) {
         startFromLoad(readHomeIntroImageLoadMark(image, true));
         return;
@@ -254,13 +254,21 @@ function restoreSource() {
   writeFileSync(introPath, original);
 }
 
+function isCommentLine(line: string): boolean {
+  return /^\s*\/\//.test(line) || /^\s*\/\*|\*\/\s*$/.test(line);
+}
+
 function sourceMarker(from: string, against: string): { includes?: string; excludes?: string } {
   const againstLines = new Set(against.split("\n"));
-  const added = from.split("\n").find((line) => line.trim().length > 0 && !againstLines.has(line));
-  if (added) return { includes: added };
+  const added = from.split("\n").find((line) => (
+    line.trim().length > 0 && !isCommentLine(line) && !againstLines.has(line)
+  ));
+  if (added) return { includes: added.trim() };
   const fromLines = new Set(from.split("\n"));
-  const removed = against.split("\n").find((line) => line.trim().length > 0 && !fromLines.has(line));
-  if (removed) return { excludes: removed };
+  const removed = against.split("\n").find((line) => (
+    line.trim().length > 0 && !isCommentLine(line) && !fromLines.has(line)
+  ));
+  if (removed) return { excludes: removed.trim() };
   throw new Error("patch must add or remove a unique line");
 }
 
