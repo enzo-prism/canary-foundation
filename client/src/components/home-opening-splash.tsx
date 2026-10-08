@@ -201,15 +201,15 @@ export default function HomeOpeningSplash() {
       />
       <div
         className={cn(
-          "absolute inset-0 bg-black/50",
+          "absolute inset-0 bg-black/50 transition-opacity duration-500 motion-reduce:transition-none",
           photoReady && scene !== "photo" ? "opacity-100" : "opacity-0",
         )}
         aria-hidden="true"
       />
       {photoReady && scene !== "photo" && <div className="relative z-10 max-w-5xl px-6 text-center">
         <p className="sr-only">Press Escape or click to skip.</p>
-        <p className={cn(
-          "font-sans font-bold uppercase text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)]",
+        <p key={scene} className={cn(
+          "animate-in fade-in duration-500 motion-reduce:animate-none font-sans font-bold uppercase text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.75)]",
           scene === "caption" ? "text-2xl tracking-[0.08em] sm:text-3xl md:text-4xl" : "text-4xl tracking-[0.22em] sm:text-5xl md:text-6xl lg:text-7xl",
         )}>
           {scene === "caption" ? HOME_OPENING_SPLASH_CAPTION : HOME_OPENING_SPLASH_TITLE}
