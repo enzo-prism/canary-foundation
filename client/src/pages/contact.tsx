@@ -20,6 +20,7 @@ import {
 import { apiRequest } from "@/lib/queryClient";
 import { trackFormSubmission } from "@/lib/analytics";
 import { trackContactFormLead } from "@/lib/ga4";
+import { isDurableContactReceipt } from "@shared/contact-receipt";
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name."),
@@ -36,11 +37,8 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-interface ContactResponse {
-  message: string;
-  persisted: boolean;
-  status: "stored" | "stored_temporarily";
-}
+const CONTACT_FAILURE_MESSAGE =
+  "We could not send your message. Your text is still here so you can copy it and email info@canaryfoundation.org.";
 
 export default function Contact() {
   const [submissionMessage, setSubmissionMessage] = useState<{
@@ -67,9 +65,13 @@ export default function Contact() {
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
       const response = await apiRequest("POST", "/api/contact", data);
-      return (await response.json()) as ContactResponse;
+      return (await response.json()) as unknown;
     },
     onSuccess: (response) => {
+      if (!isDurableContactReceipt(response)) {
+        setSubmissionMessage({ type: "error", text: CONTACT_FAILURE_MESSAGE });
+        return;
+      }
       trackFormSubmission("contact_form");
       trackContactFormLead();
       setSubmissionMessage({
@@ -81,7 +83,7 @@ export default function Contact() {
     onError: () => {
       setSubmissionMessage({
         type: "error",
-        text: "We could not send your message. Please try again or email info@canaryfoundation.org.",
+        text: CONTACT_FAILURE_MESSAGE,
       });
     },
   });

@@ -19,6 +19,8 @@
     "test:awards": "tsx scripts/test-awards.ts",
     "test:financials": "tsx scripts/test-financial-documents.ts",
     "test:platform": "bash scripts/test-platform-hardening.sh",
+    "test:contact-receipts": "tsx scripts/test-contact-receipts.ts",
+    "db:contact-setup": "tsx scripts/ensure-contact-table.ts",
     "db:push": "drizzle-kit push",
     "test:seo": "tsx scripts/test-seo-metadata.ts && node scripts/test-crawl-generation.mjs",
     "test:loading": "tsx scripts/test-route-loading.ts"

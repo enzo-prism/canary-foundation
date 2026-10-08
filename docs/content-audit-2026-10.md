@@ -1,4 +1,4 @@
-> 8 October update: Don canceled the QuickBooks summary. Its slot and references have been removed from both public financial surfaces and SEO. Narrative and Overview remain pending; the approved Form 990 remains available. The earlier four-part package below is superseded. The homepage intro now uses Don’s 5-second photo, 3-second title, and 3-second team caption sequence, once per browser-tab session. The requested 2004 caption remains pending date confirmation against the April 2005 photo label.
+> Current outstanding work is tracked in [Foundation publishing status](foundation-publishing-status-2026-10-08.md). Don confirmed staff and board and supplied the updated impact figures on 7 October. Those earlier review requests are closed. Don canceled the QuickBooks summary on 8 October. Narrative and Overview remain pending; the approved Form 990 remains available. The historical four-part package below is superseded. The requested 2004 intro caption remains pending confirmation against the April 2005 photo label.
 
 # Content audit — October 2026
 

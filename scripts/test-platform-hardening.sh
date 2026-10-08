@@ -88,11 +88,11 @@ if [[ "$traversal_status" != "404" ]] || grep -q 'outside-public-sentinel' /tmp/
 fi
 
 valid_payload='{"name":"Website Test","email":"test@example.com","subject":"Website question","inquiryType":"Website test","message":"This is a valid website test message."}'
-expect_status 202 POST "/api/contact" \
+expect_status 503 POST "/api/contact" \
   -H 'Content-Type: application/json' -H 'X-Forwarded-For: 198.51.100.10' \
   --data "$valid_payload"
 if ! grep -q '"persisted":false' /tmp/canary-platform-response; then
-  echo "FAIL: non-durable contact response is not explicit"
+  echo "FAIL: contact without durable storage must not claim retention"
   FAILURES=$((FAILURES + 1))
 fi
 

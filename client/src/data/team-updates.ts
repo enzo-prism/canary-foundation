@@ -150,7 +150,7 @@ export const ovarianJune2026Update: PublishedTeamUpdate = {
   evidence: {
     title: "Early Blood Test Evidence",
     paragraphs: [
-      "The report's clearest visual evidence is the biomarker panel chart. It shows that combining the known markers CA125 and HE4 with the newly discovered FTC1p and FTC2 improves the team's ability to distinguish ovarian cancer cases from healthy controls in an initial cohort of 160 blood samples — 90 from ovarian cancer patients and 60 from healthy women.",
+      "The report's clearest visual evidence is the biomarker panel chart. It shows that combining the known markers CA125 and HE4 with the newly discovered FTC1p and FTC2 improves the team's ability to distinguish ovarian cancer cases from healthy controls in an initial cohort of 160 blood samples collected from 90 ovarian cancer patients and 60 healthy women.",
       "This is still validation-stage science, so we frame it as encouraging progress rather than a finished screening test. The next step is testing these markers in blood collected up to years before diagnosis to confirm whether they can detect cancer earlier.",
     ],
     image: {

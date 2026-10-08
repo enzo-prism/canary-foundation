@@ -12,7 +12,7 @@ Do not add a second GA4 property, a second measurement ID, GTM, or a second `gta
 
 | Trigger | Event | Distinguishing params |
 | --- | --- | --- |
-| Successful contact form POST (`/api/contact` mutation `onSuccess`) | `generate_lead` | `method=form`, `contact_method=form`, `form_id=contact_form`, `form_name=contact_form`, `lead_source=website_contact_form`, `location=contact` |
+| Contact response confirms `success=true`, `status=stored`, `persisted=true` | `generate_lead` | `method=form`, `contact_method=form`, `form_id=contact_form`, `form_name=contact_form`, `lead_source=website_contact_form`, `location=contact` |
 | Donate page "Donate Online" CTA to Donorbox (`donate_donorbox_primary`) | `generate_lead` | `method=donate`, `contact_method=donate`, `form_id=donorbox_canary_campaign`, `form_name=donorbox_canary_campaign`, `lead_source=website_donorbox_cta`, `location=donate_primary` |
 | Donate page "Donate Online" CTA to Donorbox (`donate_donorbox_secondary`) | `generate_lead` | same donate params, `location=donate_secondary` |
 
@@ -49,7 +49,7 @@ Never send:
 ## Implementation
 
 - `client/src/lib/ga4.ts`: allowlisted `generate_lead` helper (does not call `gtag('config')`)
-- `client/src/pages/contact.tsx`: `trackContactFormLead()` on mutation `onSuccess` only (not validation failure or API error)
+- `client/src/pages/contact.tsx`: `trackContactFormLead()` only after a durable receipt passes `isDurableContactReceipt`. Temporary acceptance, malformed responses, validation failures and API errors do not count as leads or clear the visitor's text.
 - `client/src/pages/donate.tsx`: `trackDonorboxLead()` on the two Donorbox "Donate Online" CTAs
 
 ## Local verification

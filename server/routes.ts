@@ -126,26 +126,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      if (!isDatabaseConfigured) {
+        return res.status(503).json({
+          success: false,
+          persisted: false,
+          message: "Please email info@canaryfoundation.org to send your inquiry.",
+        });
+      }
+
       await storage.createContactMessage({
         ...validatedData,
         message: `Nature of inquiry: ${inquiryType}\n\n${validatedData.message}`,
       });
 
-      if (isDatabaseConfigured) {
-        return res.status(201).json({
-          success: true,
-          status: "stored",
-          persisted: true,
-          message: "Thank you. Your message has been securely received.",
-        });
-      }
-
-      return res.status(202).json({
+      return res.status(201).json({
         success: true,
-        status: "stored_temporarily",
-        persisted: false,
-        message:
-          "Your message was received by this server, but durable storage is not configured.",
+        status: "stored",
+        persisted: true,
+        message: "Thank you. Your message has been securely received.",
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -158,7 +156,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           })),
         });
       } else {
-        console.error("[contact] Failed to store a contact submission");
+        // Log only an error code, never a query, connection string, or inquiry.
+        const code = error && typeof error === "object" && "code" in error
+          ? String(error.code)
+          : "unknown";
+        console.error("[contact] Failed to store a contact submission", {
+          code: /^[A-Z0-9_]{1,20}$/.test(code) ? code : "unknown",
+        });
         res.status(500).json({ error: "Internal server error" });
       }
     }
