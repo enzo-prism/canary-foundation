@@ -171,7 +171,7 @@ const mutations: Mutation[] = [
     }, HOME_INTRO_MAX_WAIT_MS);`,
       `    const timer = window.setTimeout(() => {
       const image = imageRef.current;
-      void "mutate-drop-natural-width";
+      globalThis.__mutateDropNaturalWidth = true;
       if (image && image.complete) {
         startFromLoad(readHomeIntroImageLoadMark(image, true));
         return;
@@ -280,20 +280,22 @@ async function waitForServedSource(
   const deadline = Date.now() + 10_000;
   let last = "";
   while (Date.now() < deadline) {
-    const bust = Date.now();
     const candidates = [
-      `${url}/src/components/home/home-intro.tsx?t=${bust}`,
-      `${url}/@fs${introPath}?t=${bust}`,
+      `${url}/src/components/home/home-intro.tsx`,
+      `${url}/@fs${introPath}`,
     ];
     for (const candidate of candidates) {
       try {
         const response = await fetch(candidate, { cache: "no-store" });
         if (!response.ok) continue;
+        const type = response.headers.get("content-type") ?? "";
+        if (!type.includes("javascript") && !type.includes("typescript")) continue;
         last = await response.text();
+        if (!last.includes("HomeIntro")) continue;
         const hasInclude = !marker.includes || last.includes(marker.includes);
         const missingExclude = !marker.excludes || !last.includes(marker.excludes);
         if (hasInclude && missingExclude) {
-          // File watchers invalidate the module graph after the raw fetch.
+          // File watchers invalidate the imported module after this fetch.
           await new Promise((resolveWait) => setTimeout(resolveWait, 700));
           return;
         }
