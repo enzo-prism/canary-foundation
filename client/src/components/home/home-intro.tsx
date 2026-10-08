@@ -69,6 +69,9 @@ export function HomeIntro() {
       setPhase("hold");
       return;
     }
+    if (loadMarkRef.current !== null) {
+      return;
+    }
     const mark = ensureGeneration() === 1 ? loadMark : performance.now();
     loadMarkRef.current = mark;
     setPhase(homeIntroElapsedPhase(performance.now() - mark));
@@ -103,7 +106,7 @@ export function HomeIntro() {
   }, [showFinalFrame, startFromLoad]);
 
   useEffect(() => {
-    if (imageState !== "pending" || prefersReducedMotion) return;
+    if (prefersReducedMotion) return;
     const timer = window.setTimeout(() => {
       const image = imageRef.current;
       if (image && image.complete && image.naturalWidth > 0) {
@@ -113,7 +116,7 @@ export function HomeIntro() {
       showFinalFrame("timeout");
     }, HOME_INTRO_MAX_WAIT_MS);
     return () => window.clearTimeout(timer);
-  }, [imageState, prefersReducedMotion, showFinalFrame, startFromLoad]);
+  }, [prefersReducedMotion, showFinalFrame, startFromLoad]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;

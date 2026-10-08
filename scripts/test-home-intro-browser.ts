@@ -440,19 +440,13 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         { mark: hydrateMark, elapsed: HOME_INTRO_MAX_WAIT_MS - 500 },
         { timeout: HOME_INTRO_MAX_WAIT_MS + 2_000 },
       );
-
-      // Block the main thread from ~7.5s through ~8.08s so the decoded
-      // photo's onLoad and the 8s max-wait are both queued, then flush
-      // onLoad first. The timeout callback must treat that decoded photo
-      // as ready instead of overriding it to timeout + opacity 0.
-      const spin = page.evaluate((untilMark) => {
-        while (performance.now() < untilMark) {
-          // keep the thread
-        }
-      }, hydrateMark + HOME_INTRO_MAX_WAIT_MS + 80);
-      await new Promise((resolveWait) => setTimeout(resolveWait, 50));
       release();
-      await spin;
+
+      await page.waitForFunction(
+        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
+        { mark: hydrateMark, elapsed: HOME_INTRO_MAX_WAIT_MS + 300 },
+        { timeout: 2_000 },
+      );
 
       await page.waitForFunction(() => {
         const section = document.querySelector("#home-intro");
