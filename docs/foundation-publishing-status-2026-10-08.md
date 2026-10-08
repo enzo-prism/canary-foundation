@@ -33,8 +33,14 @@ The frontend now requires a durable receipt before clearing a form or tracking a
 
 Staff notification ownership and delivery remain a separate acceptance check. Storage success alone does not prove that a person will respond. Retain the existing public contact email as a fallback. Do not create a new staff recipient or claim delivery until it is configured and verified.
 
-GA4 uses the existing Foundation property. Connected-account access returned `403`; Search Console returned an authentication error. Restore existing access without creating a duplicate property. Donorbox outbound clicks are donation starts, not completed gifts.
+GA4 and Search Console reporting are now verified through the existing local `gog-codex` authentication for `enzo@design-prism.com`. The GA4 connector still returns `403` and the GSC connector still returns `invalid_grant`; these connector failures must not be reported as a lack of access to the properties themselves. No new properties or permissions were created. Use `gog-codex --account enzo@design-prism.com analytics report 311697082 ...` and `gog-codex --account enzo@design-prism.com searchconsole query sc-domain:canaryfoundation.org ...` for current reads.
+
+GA4 Realtime independently showed one `form_submit` and one `generate_lead`, with `form_id=contact_form`, matching the labeled successful test. Treat this as internal test traffic, not an actual prospective donor. Donorbox outbound clicks remain donation starts, not completed gifts. Standard daily reports can lag the realtime view.
+
+The canonical `https://canaryfoundation.org/sitemap.xml` was resubmitted and read back as pending with `lastSubmitted=2026-10-08T18:44:25.318Z`. Google processing is pending. An older WordPress submission at `https://www.canaryfoundation.org/sitemap_index.xml` still reports two errors; its redirect ends at a `404`. Keep this historical error separate from the newly accepted current sitemap.
 
 ## Announcements
 
 Use the editable one-page Word template prepared in the task outputs. Each item needs a project name, approved text and figures, sources, image permissions, approver and publication timing. Keep Q4 and UCSD preparations outside public assets until approved.
+
+An unsent review email to Don and Heidi is saved in Enzo's work Gmail with the updated Q4 packet and announcement template attached. Draft `r-1018467458288843796`, message `1a11cd6e1a5a8c4e`, was read back as `DRAFT`. No further email was sent. The packet now reflects verified reporting access and the still-pending staff notification setup.
