@@ -23,7 +23,7 @@ type Mutation = {
 const mutations: Mutation[] = [
   {
     name: "timer starts on mount instead of image load",
-    caseName: "timing",
+    caseName: "catchup",
     apply: (source) => source
       .replace(
         `  useEffect(() => {
@@ -42,8 +42,16 @@ const mutations: Mutation[] = [
   }, [startFromLoad]);`,
       )
       .replace(
-        "    startFromLoad(readHomeIntroImageLoadMark(image, true));",
-        "    // mutated: keep the mount-started timer",
+        `    if (!image || image.naturalWidth === 0) {
+      showFinalFrame("failed");
+      return;
+    }
+    startFromLoad(readHomeIntroImageLoadMark(image, true));`,
+        `    if (!image || image.naturalWidth === 0) {
+      showFinalFrame("failed");
+      return;
+    }
+    // mutated: keep the mount-started timer`,
       ),
   },
   {
@@ -112,6 +120,31 @@ const mutations: Mutation[] = [
     }
     `,
       "",
+    ),
+  },
+  {
+    name: "timeout hides a photo that already decoded",
+    caseName: "timeout-race",
+    apply: (source) => source.replace(
+      `    const timer = window.setTimeout(() => {
+      const image = imageRef.current;
+      if (image && image.complete && image.naturalWidth > 0) {
+        startFromLoad(readHomeIntroImageLoadMark(image, true));
+        return;
+      }
+      showFinalFrame("timeout");
+    }, HOME_INTRO_MAX_WAIT_MS);`,
+      `    const timer = window.setTimeout(() => {
+      showFinalFrame("timeout");
+    }, HOME_INTRO_MAX_WAIT_MS);`,
+    ),
+  },
+  {
+    name: "reuse the first-visit load mark on remount",
+    caseName: "remount",
+    apply: (source) => source.replace(
+      "    const mark = ensureGeneration() === 1 ? loadMark : performance.now();",
+      "    const mark = loadMark;",
     ),
   },
 ];
@@ -189,20 +222,23 @@ async function main() {
   const results: string[] = [];
   try {
     for (const mutation of mutations) {
-      const mutated = mutation.apply(original);
-      assert.notEqual(mutated, original, `${mutation.name}: patch must change the source`);
-      writeFileSync(introPath, mutated);
-      await new Promise((resolveWait) => setTimeout(resolveWait, 400));
-      const failed = runCase(url, mutation.caseName);
-      writeFileSync(introPath, original);
-      await new Promise((resolveWait) => setTimeout(resolveWait, 200));
-      if (failed.status === 0) {
-        throw new Error(
-          `${mutation.name}: expected HOME_INTRO_CASE=${mutation.caseName} to fail, but it passed.\n${failed.output}`,
-        );
+      try {
+        const mutated = mutation.apply(original);
+        assert.notEqual(mutated, original, `${mutation.name}: patch must change the source`);
+        writeFileSync(introPath, mutated);
+        await new Promise((resolveWait) => setTimeout(resolveWait, 400));
+        const failed = runCase(url, mutation.caseName);
+        if (failed.status === 0) {
+          throw new Error(
+            `${mutation.name}: expected HOME_INTRO_CASE=${mutation.caseName} to fail, but it passed.\n${failed.output}`,
+          );
+        }
+        results.push(`RED  ${mutation.name} (${mutation.caseName})`);
+        console.log(`RED  ${mutation.name}`);
+      } finally {
+        writeFileSync(introPath, original);
+        await new Promise((resolveWait) => setTimeout(resolveWait, 200));
       }
-      results.push(`RED  ${mutation.name} (${mutation.caseName})`);
-      console.log(`RED  ${mutation.name}`);
     }
 
     writeFileSync(introPath, original);

@@ -3,7 +3,7 @@
  * (`npm run build`) unless BASE_URL already points at a running server.
  * Uses Playwright against system Chrome.
  *
- * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load
+ * HOME_INTRO_CASE=timing|catchup|reduced-motion|abort|timeout|nojs|error|late-load|timeout-race|remount
  * runs a single case (used by the mutation proof).
  */
 import assert from "node:assert/strict";
@@ -12,9 +12,11 @@ import { createServer } from "node:net";
 import { chromium, type Browser, type BrowserContext, type Page, type Route } from "playwright-core";
 import {
   HOME_INTRO_CAPTION,
+  HOME_INTRO_CAPTION_MS,
   HOME_INTRO_MAX_WAIT_MS,
   HOME_INTRO_PHOTO_ALONE_MS,
   HOME_INTRO_TITLE,
+  HOME_INTRO_TITLE_MS,
 } from "../client/src/lib/home-intro.ts";
 
 const IMAGE_ROUTE = "**/home-intro/**";
@@ -411,6 +413,126 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(afterLateLoad.imageState, "ready");
       assert.ok(Number.parseFloat(afterLateLoad.titleOpacity ?? "0") >= 0.95);
       assert.ok(Number.parseFloat(afterLateLoad.captionOpacity ?? "0") >= 0.95);
+    });
+  },
+
+  async "timeout-race"(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      // 1x1 PNG so decode is instant once the 7.99s hold lifts.
+      const tinyPng = Buffer.from(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+        "base64",
+      );
+      let release!: () => void;
+      const held = new Promise<void>((resolveRelease) => {
+        release = resolveRelease;
+      });
+      await interceptImages(page, async (route) => {
+        await held;
+        await route.fulfill({ status: 200, contentType: "image/png", body: tinyPng });
+      });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      const hydrateMark = await page.evaluate(() => performance.now());
+
+      await page.waitForFunction(
+        ({ mark, elapsed }) => performance.now() >= mark + elapsed,
+        { mark: hydrateMark, elapsed: HOME_INTRO_MAX_WAIT_MS - 10 },
+        { timeout: HOME_INTRO_MAX_WAIT_MS + 2_000 },
+      );
+
+      // Hold the main thread across the 8.0s timer so onLoad and max-wait
+      // land in the same turn. The timeout callback must treat a decoded
+      // photo as ready instead of hiding it at opacity 0.
+      const spin = page.evaluate((untilMark) => {
+        while (performance.now() < untilMark) {
+          // keep the thread
+        }
+      }, hydrateMark + HOME_INTRO_MAX_WAIT_MS + 30);
+      await new Promise((resolveWait) => setTimeout(resolveWait, 20));
+      release();
+      await spin;
+
+      await page.waitForFunction(() => {
+        const section = document.querySelector("#home-intro");
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        if (!section || !image || !image.complete || image.naturalWidth === 0) return false;
+        const opacity = Number.parseFloat(getComputedStyle(image).opacity);
+        return section.getAttribute("data-image-state") === "ready" && opacity >= 0.95;
+      }, undefined, { timeout: 4_000 });
+
+      const state = await introState(page);
+      assert.equal(state.imageState, "ready", "a decoded photo at the 8s boundary must be ready, not timeout");
+      assert.equal(state.phase, "photo", "boundary load must start the sequence, not jump to the timeout hold");
+      const photoHidden = await page.evaluate(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return image ? Number.parseFloat(getComputedStyle(image).opacity) <= 0.05 : true;
+      });
+      assert.equal(photoHidden, false, "timeout must not leave a decoded photo at opacity 0");
+    });
+  },
+
+  async remount(browser, url) {
+    await withPage(browser, { reducedMotion: "no-preference" }, async (page) => {
+      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await waitForHydration(page);
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
+      }, "title", { timeout: HOME_INTRO_PHOTO_ALONE_MS + 3_000 });
+      await waitForCopyVisibility(page, true, false);
+
+      await page.locator("header a[href='/contact']").click();
+      await page.waitForFunction(() => !document.querySelector("#home-intro"), undefined, { timeout: 10_000 });
+
+      await page.locator("header a[href='/']").first().click();
+      await waitForHydration(page);
+      await page.waitForFunction(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return Boolean(image && image.complete && image.naturalWidth > 0);
+      }, undefined, { timeout: 10_000 });
+
+      const remountMark = await page.evaluate(() => performance.now());
+      const justBack = await introState(page);
+      assert.equal(justBack.phase, "photo", "SPA remount must restart at photo, not catch up the first visit");
+      assert.equal(justBack.imageState, "ready");
+
+      await waitUntilElapsed(page, remountMark, HOME_INTRO_PHOTO_ALONE_MS - 1_200);
+      const beforeTitle = await introState(page);
+      assert.equal(beforeTitle.phase, "photo", "remount must wait a fresh +5s");
+
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
+      }, "title", { timeout: 2_500 });
+      await waitForCopyVisibility(page, true, false);
+      const afterTitle = await introState(page);
+      assert.equal(afterTitle.phase, "title");
+
+      await waitUntilElapsed(page, remountMark, HOME_INTRO_PHOTO_ALONE_MS + HOME_INTRO_TITLE_MS - 1_200);
+      const beforeCaption = await introState(page);
+      assert.equal(beforeCaption.phase, "title", "remount must wait a fresh +8s");
+
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
+      }, "caption", { timeout: 2_500 });
+      await waitForCopyVisibility(page, true, true);
+      const afterCaption = await introState(page);
+      assert.equal(afterCaption.phase, "caption");
+
+      await waitUntilElapsed(
+        page,
+        remountMark,
+        HOME_INTRO_PHOTO_ALONE_MS + HOME_INTRO_TITLE_MS + HOME_INTRO_CAPTION_MS - 1_200,
+      );
+      const beforeHold = await introState(page);
+      assert.equal(beforeHold.phase, "caption", "remount must wait a fresh +11s");
+
+      await page.waitForFunction((expected) => {
+        return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
+      }, "hold", { timeout: 2_500 });
+      const afterHold = await introState(page);
+      assert.equal(afterHold.phase, "hold");
+      assert.equal(afterHold.title, HOME_INTRO_TITLE);
+      assert.equal(afterHold.caption, HOME_INTRO_CAPTION);
     });
   },
 };

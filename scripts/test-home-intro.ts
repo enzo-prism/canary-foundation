@@ -78,7 +78,17 @@ assert.match(intro, /onError=\{onError\}/);
 assert.match(intro, /finalRef/);
 assert.match(intro, /if \(finalRef\.current\)/);
 assert.match(intro, /hideBrokenImage/);
-assert.match(intro, /mountId === 1/);
+assert.match(intro, /ensureGeneration\(\) === 1/);
+assert.doesNotMatch(
+  intro,
+  /useState\(\(\) => \{[\s\S]{0,80}homeIntroMounts \+= 1/,
+  "Do not increment the mount counter in a useState initializer",
+);
+assert.match(
+  intro,
+  /if \(image && image\.complete && image\.naturalWidth > 0\) \{\s*startFromLoad/,
+  "Timeout must treat a decoded photo as ready",
+);
 assert.match(intro, /dataset\.loadedAt|__homeIntroLoadedAt/);
 assert.match(intro, /<p[\s\S]*\{HOME_INTRO_TITLE\}/);
 assert.match(intro, /<p[\s\S]*\{HOME_INTRO_CAPTION\}/);

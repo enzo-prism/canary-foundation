@@ -33,10 +33,18 @@ export function HomeIntro() {
   const imageRef = useRef<HTMLImageElement>(null);
   const loadMarkRef = useRef<number | null>(null);
   const finalRef = useRef(false);
-  const [mountId] = useState(() => {
-    homeIntroMounts += 1;
-    return homeIntroMounts;
-  });
+  // Count this instance once via a ref, not a useState initializer. StrictMode
+  // double-invokes lazy useState inits in dev and would bump the counter to 2
+  // on the first visit, disabling pre-hydration catch-up.
+  const generationRef = useRef<number | null>(null);
+
+  const ensureGeneration = (): number => {
+    if (generationRef.current === null) {
+      homeIntroMounts += 1;
+      generationRef.current = homeIntroMounts;
+    }
+    return generationRef.current;
+  };
 
   // Failed / hung images jump to the final frame (not a skip). The copy is
   // the point of the sequence, the reserved height stays put, and the
@@ -61,10 +69,10 @@ export function HomeIntro() {
       setPhase("hold");
       return;
     }
-    const mark = mountId === 1 ? loadMark : performance.now();
+    const mark = ensureGeneration() === 1 ? loadMark : performance.now();
     loadMarkRef.current = mark;
     setPhase(homeIntroElapsedPhase(performance.now() - mark));
-  }, [mountId]);
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -76,6 +84,10 @@ export function HomeIntro() {
     syncPreference();
     media.addEventListener("change", syncPreference);
     return () => media.removeEventListener("change", syncPreference);
+  }, []);
+
+  useEffect(() => {
+    ensureGeneration();
   }, []);
 
   useEffect(() => {
@@ -93,10 +105,15 @@ export function HomeIntro() {
   useEffect(() => {
     if (imageState !== "pending" || prefersReducedMotion) return;
     const timer = window.setTimeout(() => {
+      const image = imageRef.current;
+      if (image && image.complete && image.naturalWidth > 0) {
+        startFromLoad(readHomeIntroImageLoadMark(image, true));
+        return;
+      }
       showFinalFrame("timeout");
     }, HOME_INTRO_MAX_WAIT_MS);
     return () => window.clearTimeout(timer);
-  }, [imageState, prefersReducedMotion, showFinalFrame]);
+  }, [imageState, prefersReducedMotion, showFinalFrame, startFromLoad]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;

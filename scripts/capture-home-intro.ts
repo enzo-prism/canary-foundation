@@ -125,6 +125,33 @@ async function main() {
     await failPage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_failure_final.png`) });
     await failContext.close();
 
+    const lateContext = await browser.newContext({
+      viewport: { width: 1280, height: 800 },
+      deviceScaleFactor: 1,
+      reducedMotion: "no-preference",
+    });
+    const latePage = await lateContext.newPage();
+    const lateStarted = Date.now();
+    await latePage.route("**/home-intro/**", async (route) => {
+      await new Promise((resolveWait) => setTimeout(resolveWait, 8_200));
+      await route.continue();
+    });
+    await latePage.goto(url, { waitUntil: "domcontentloaded" });
+    await latePage.waitForFunction(() => {
+      const section = document.querySelector("#home-intro");
+      const title = document.querySelector(".home-intro-title");
+      const caption = document.querySelector(".home-intro-caption");
+      return section?.getAttribute("data-phase") === "hold"
+        && title
+        && caption
+        && Number.parseFloat(getComputedStyle(title).opacity) >= 0.95
+        && Number.parseFloat(getComputedStyle(caption).opacity) >= 0.95;
+    }, undefined, { timeout: 12_000 });
+    const untilNine = 9_000 - (Date.now() - lateStarted);
+    if (untilNine > 0) await latePage.waitForTimeout(untilNine);
+    await latePage.screenshot({ path: join(OUT_DIR, `${PREFIX}_1280_late_load_9s.png`) });
+    await lateContext.close();
+
     const noJsContext = await browser.newContext({
       viewport: { width: 1280, height: 800 },
       javaScriptEnabled: false,
