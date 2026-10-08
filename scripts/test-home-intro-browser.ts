@@ -90,12 +90,11 @@ async function introState(page: Page): Promise<IntroState> {
     const section = document.querySelector("#home-intro");
     const title = document.querySelector(".home-intro-title");
     const caption = document.querySelector(".home-intro-caption");
-    const styleOf = (element: Element | null) => (element ? getComputedStyle(element).opacity : null);
     return {
       phase: section?.getAttribute("data-phase") ?? null,
       imageState: section?.getAttribute("data-image-state") ?? null,
-      titleOpacity: styleOf(title),
-      captionOpacity: styleOf(caption),
+      titleOpacity: title ? getComputedStyle(title).opacity : null,
+      captionOpacity: caption ? getComputedStyle(caption).opacity : null,
       title: title?.textContent?.trim() ?? null,
       caption: caption?.textContent?.trim() ?? null,
     };
@@ -128,6 +127,22 @@ async function waitUntilElapsed(page: Page, loadMark: number, elapsedMs: number)
     ({ mark, elapsed }) => performance.now() >= mark + elapsed,
     { mark: loadMark, elapsed: elapsedMs },
     { timeout: elapsedMs + 4_000 },
+  );
+}
+
+async function waitForCopyVisibility(page: Page, titleVisible: boolean, captionVisible: boolean) {
+  await page.waitForFunction(
+    ({ wantTitle, wantCaption }) => {
+      const title = document.querySelector(".home-intro-title");
+      const caption = document.querySelector(".home-intro-caption");
+      if (!title || !caption) return false;
+      const titleOp = Number.parseFloat(getComputedStyle(title).opacity);
+      const captionOp = Number.parseFloat(getComputedStyle(caption).opacity);
+      return (wantTitle ? titleOp >= 0.95 : titleOp <= 0.05)
+        && (wantCaption ? captionOp >= 0.95 : captionOp <= 0.05);
+    },
+    { wantTitle: titleVisible, wantCaption: captionVisible },
+    { timeout: 2_000 },
   );
 }
 
@@ -192,18 +207,23 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       assert.equal(beforeRelease.phase, "photo", "delayed image must not advance before load");
       assert.equal(beforeRelease.titleOpacity, "0", "JS visitors must not flash the title");
       assert.equal(beforeRelease.captionOpacity, "0", "JS visitors must not flash the caption");
+      const loadedAtHydration = await page.evaluate(() => {
+        const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
+        return Boolean(image && image.complete && image.naturalWidth > 0);
+      });
+      assert.equal(loadedAtHydration, false, "hydration must beat the delayed image so timing is measured from load");
 
       await page.waitForFunction(() => {
         const image = document.querySelector<HTMLImageElement>("#home-intro-photo, #home-intro img");
         return Boolean(image && image.complete && image.naturalWidth > 0);
       }, undefined, { timeout: delayMs + 5_000 });
+      assert.ok(releasedAt > 0, "image route must be intercepted");
       const wallLoadAt = Date.now();
-      if (releasedAt) {
-        assert.ok(wallLoadAt - releasedAt < 2_500, "image decode should follow the delayed response");
-      }
+      assert.ok(wallLoadAt - releasedAt < 2_500, "image decode should follow the delayed response");
 
-      const loadMark = await readImageLoadMark(page);
-      await waitUntilElapsed(page, loadMark, HOME_INTRO_PHOTO_ALONE_MS - 1_200);
+      const remaining = HOME_INTRO_PHOTO_ALONE_MS - 1_200;
+      const untilBeforeTitle = releasedAt + remaining - Date.now();
+      if (untilBeforeTitle > 0) await page.waitForTimeout(untilBeforeTitle);
       const beforeTitle = await introState(page);
       assert.equal(beforeTitle.phase, "photo", "phase must stay photo until load+5s");
       assert.equal(beforeTitle.titleOpacity, "0");
@@ -211,11 +231,12 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
       }, "title", { timeout: 2_500 });
+      await waitForCopyVisibility(page, true, false);
       const afterTitle = await introState(page);
       assert.equal(afterTitle.phase, "title");
       assert.equal(afterTitle.title, HOME_INTRO_TITLE);
-      assert.equal(afterTitle.titleOpacity, "1");
-      assert.equal(afterTitle.captionOpacity, "0");
+      assert.ok(Number.parseFloat(afterTitle.titleOpacity ?? "0") >= 0.95);
+      assert.ok(Number.parseFloat(afterTitle.captionOpacity ?? "1") <= 0.05);
     });
   },
 
@@ -239,9 +260,10 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
       }, "title", { timeout: 2_500 });
+      await waitForCopyVisibility(page, true, false);
       const afterTitle = await introState(page);
       assert.equal(afterTitle.phase, "title", "phases must catch up from the real image load, not hydration");
-      assert.equal(afterTitle.titleOpacity, "1");
+      assert.ok(Number.parseFloat(afterTitle.titleOpacity ?? "0") >= 0.95);
     });
   },
 
@@ -252,10 +274,11 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-phase") === expected;
       }, "hold", { timeout: 3_000 });
+      await waitForCopyVisibility(page, true, true);
       const state = await introState(page);
       assert.equal(state.phase, "hold", "reduced motion JS must set the final phase");
-      assert.equal(state.titleOpacity, "1");
-      assert.equal(state.captionOpacity, "1");
+      assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
+      assert.ok(Number.parseFloat(state.captionOpacity ?? "0") >= 0.95);
       assert.equal(state.title, HOME_INTRO_TITLE);
       assert.equal(state.caption, HOME_INTRO_CAPTION);
     });
@@ -275,12 +298,13 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
           && section.getAttribute("data-image-state") === "failed";
       }, undefined, { timeout: 3_000 });
       const elapsed = Date.now() - started;
+      await waitForCopyVisibility(page, true, true);
       const state = await introState(page);
       assert.ok(elapsed < HOME_INTRO_MAX_WAIT_MS, `pre-hydration abort should not wait the max-wait (${elapsed}ms)`);
       assert.equal(state.phase, "hold");
       assert.equal(state.imageState, "failed");
-      assert.equal(state.titleOpacity, "1");
-      assert.equal(state.captionOpacity, "1");
+      assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
+      assert.ok(Number.parseFloat(state.captionOpacity ?? "0") >= 0.95);
       assert.equal(state.title, HOME_INTRO_TITLE);
     });
   },
@@ -302,12 +326,13 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
         return document.querySelector("#home-intro")?.getAttribute("data-image-state") === expected;
       }, "timeout", { timeout: HOME_INTRO_MAX_WAIT_MS });
       const elapsed = Date.now() - started;
+      await waitForCopyVisibility(page, true, true);
       const state = await introState(page);
       assert.ok(elapsed >= 7_000 && elapsed < 11_000, `max-wait should fire near 8s (was ${elapsed}ms)`);
       assert.equal(state.phase, "hold");
       assert.equal(state.imageState, "timeout");
-      assert.equal(state.titleOpacity, "1");
-      assert.equal(state.captionOpacity, "1");
+      assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
+      assert.ok(Number.parseFloat(state.captionOpacity ?? "0") >= 0.95);
     });
   },
 
@@ -333,10 +358,11 @@ const cases: Record<string, (browser: Browser, url: string) => Promise<void>> = 
       await page.waitForFunction((expected) => {
         return document.querySelector("#home-intro")?.getAttribute("data-image-state") === expected;
       }, "failed", { timeout: 4_000 });
+      await waitForCopyVisibility(page, true, true);
       const state = await introState(page);
       assert.equal(state.phase, "hold", "post-hydration 404 must use onError to show the final frame");
       assert.equal(state.imageState, "failed");
-      assert.equal(state.titleOpacity, "1");
+      assert.ok(Number.parseFloat(state.titleOpacity ?? "0") >= 0.95);
     });
   },
 };

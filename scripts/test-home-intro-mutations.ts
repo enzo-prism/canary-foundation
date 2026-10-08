@@ -24,8 +24,9 @@ const mutations: Mutation[] = [
   {
     name: "timer starts on mount instead of image load",
     caseName: "timing",
-    apply: (source) => source.replace(
-      `  useEffect(() => {
+    apply: (source) => source
+      .replace(
+        `  useEffect(() => {
     const image = imageRef.current;
     if (!image) return;
     if (image.complete && image.naturalWidth === 0) {
@@ -36,10 +37,14 @@ const mutations: Mutation[] = [
       startFromLoad(readHomeIntroImageLoadMark(image));
     }
   }, [showFinalFrame, startFromLoad]);`,
-      `  useEffect(() => {
+        `  useEffect(() => {
     startFromLoad(performance.now());
   }, [startFromLoad]);`,
-    ),
+      )
+      .replace(
+        "    startFromLoad(readHomeIntroImageLoadMark(image, true));",
+        "    // mutated: keep the mount-started timer",
+      ),
   },
   {
     name: "ignore reduced motion in JS",
@@ -117,9 +122,6 @@ async function freePort(): Promise<number> {
 }
 
 async function startDevServer(): Promise<{ url: string; stop: () => void }> {
-  if (process.env.BASE_URL) {
-    return { url: process.env.BASE_URL.replace(/\/$/, ""), stop: () => {} };
-  }
   const port = await freePort();
   const child: ChildProcess = spawn(process.execPath, ["scripts/dev.mjs"], {
     cwd: root,
