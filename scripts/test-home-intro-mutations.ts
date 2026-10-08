@@ -272,50 +272,24 @@ function sourceMarker(from: string, against: string): { includes?: string; exclu
   throw new Error("patch must add or remove a unique line");
 }
 
-async function waitForServedSource(
-  url: string,
-  marker: { includes?: string; excludes?: string },
-  label: string,
-) {
-  const deadline = Date.now() + 10_000;
-  let last = "";
-  while (Date.now() < deadline) {
-    const candidates = [
-      `${url}/src/components/home/home-intro.tsx`,
-      `${url}/@fs${introPath}`,
-    ];
-    for (const candidate of candidates) {
-      try {
-        const response = await fetch(candidate, { cache: "no-store" });
-        if (!response.ok) continue;
-        const type = response.headers.get("content-type") ?? "";
-        if (!type.includes("javascript") && !type.includes("typescript")) continue;
-        last = await response.text();
-        if (!last.includes("HomeIntro")) continue;
-        const hasInclude = !marker.includes || last.includes(marker.includes);
-        const missingExclude = !marker.excludes || !last.includes(marker.excludes);
-        if (hasInclude && missingExclude) {
-          // File watchers invalidate the imported module after this fetch.
-          await new Promise((resolveWait) => setTimeout(resolveWait, 700));
-          return;
-        }
-      } catch {
-        // Vite may still be transforming.
-      }
-    }
-    await new Promise((resolveWait) => setTimeout(resolveWait, 200));
+let currentStop: (() => void) | undefined;
+
+async function withDevServer<T>(run: (url: string) => T | Promise<T>): Promise<T> {
+  const server = await startDevServer();
+  currentStop = server.stop;
+  try {
+    return await run(server.url);
+  } finally {
+    server.stop();
+    currentStop = undefined;
   }
-  throw new Error(
-    `${label}: Vite did not serve the expected source (${JSON.stringify(marker)}). Last body length ${last.length}.`,
-  );
 }
 
 async function main() {
-  const { url, stop } = await startDevServer();
   const results: string[] = [];
   const onSignal = (signal: NodeJS.Signals) => {
     restoreSource();
-    stop();
+    currentStop?.();
     process.exit(signal === "SIGINT" ? 130 : 143);
   };
   process.on("SIGINT", onSignal);
@@ -326,10 +300,11 @@ async function main() {
       try {
         const mutated = mutation.apply(original);
         assert.notEqual(mutated, original, `${mutation.name}: patch must change the source`);
-        const marker = sourceMarker(mutated, original);
+        sourceMarker(mutated, original);
         writeFileSync(introPath, mutated);
-        await waitForServedSource(url, marker, mutation.name);
-        const failed = runCase(url, mutation.caseName);
+        // Fresh Vite process so Fast Refresh / SSR module caches cannot
+        // keep the previous timer callback.
+        const failed = await withDevServer((url) => runCase(url, mutation.caseName));
         if (failed.status === 0) {
           throw new Error(
             `${mutation.name}: expected HOME_INTRO_CASE=${mutation.caseName} to fail, but it passed.\n${failed.output}`,
@@ -339,21 +314,11 @@ async function main() {
         console.log(`RED  ${mutation.name}`);
       } finally {
         restoreSource();
-        await waitForServedSource(
-          url,
-          { includes: "if (loadMarkRef.current !== null || finalRef.current) return;" },
-          "restore",
-        );
       }
     }
 
     restoreSource();
-    await waitForServedSource(
-      url,
-      { includes: "if (loadMarkRef.current !== null || finalRef.current) return;" },
-      "restore-all",
-    );
-    const restored = runCase(url);
+    const restored = await withDevServer((url) => runCase(url));
     if (restored.status !== 0) {
       throw new Error(`Restored source failed the full browser suite:\n${restored.output}`);
     }
@@ -364,7 +329,7 @@ async function main() {
     restoreSource();
     process.off("SIGINT", onSignal);
     process.off("SIGTERM", onSignal);
-    stop();
+    currentStop?.();
   }
 }
 
