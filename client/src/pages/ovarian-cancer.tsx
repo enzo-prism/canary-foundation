@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "wouter";
 import { ResearchNextSteps } from "@/components/research-next-steps";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -174,6 +175,17 @@ export default function OvarianCancer() {
                 </div>
               </div>
             </div>
+
+            <Card className="mb-8 border-stone-200 bg-stone-50">
+              <CardContent className="p-6 md:p-8">
+                <p className="mb-2 text-sm font-semibold text-stone-600">RESEARCH OVERVIEW • OCTOBER 29, 2026</p>
+                <h3 className="mb-3 text-2xl font-semibold text-dark">Catching Ovarian Cancer Before It Starts</h3>
+                <p className="mb-5 text-gray-600">Explore a proposed imaging pilot at UC San Diego and Fred Hutchinson Cancer Center, testing whether advanced ultrasound and MRI can find the tiny fallopian tube lesions that precede the deadliest ovarian cancer.</p>
+                <Button asChild className="bg-primary text-dark hover:bg-primary-dark">
+                  <Link href="/blog/catching-ovarian-cancer-before-it-starts">Read the research overview</Link>
+                </Button>
+              </CardContent>
+            </Card>
 
             <ResearchNextSteps update={{ href: "/science/programs/team-updates/ovarian-june-2026", label: "Ovarian research update: June 2026" }} />
 
