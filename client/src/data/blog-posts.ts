@@ -26,6 +26,84 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 15,
+    slug: "catching-ovarian-cancer-before-it-starts",
+    title: "Catching Ovarian Cancer Before It Starts",
+    excerpt: "A proposed imaging pilot at UC San Diego and Fred Hutchinson Cancer Center would test advanced ultrasound and MRI to find the tiny fallopian tube lesions that precede the deadliest ovarian cancer.",
+    fullContent: `
+<p>This Canary Foundation proposal outlines a multi-strategy imaging pilot at UC San Diego and Fred Hutchinson Cancer Center. It aims to develop and test the tools needed to detect ovarian cancer at its most curable stage.</p>
+<p>The proposed work would test whether advanced ultrasound and MRI can find the tiny fallopian tube lesions that precede the deadliest ovarian cancer—before they have a chance to spread.</p>
+<p><strong>UC San Diego · Radiology &amp; Reproductive Medicine</strong><br>Dr. Ahmed N. El Kaffas and Dr. Rebecca Rakow-Penner (UCSD), with Dr. Charles Drescher (Fred Hutchinson Cancer Center), in collaboration with the Canary Foundation.</p>
+
+<h2>The need</h2>
+<h3>A cancer almost always caught too late</h3>
+<p>Ovarian cancer kills more women than any other gynecologic cancer—not because treatment fails, but because it is rarely found early. The deadliest form begins not in the ovary itself but as tiny, millimeter-scale lesions in the fallopian tubes, called STICs. These precursors are silent: they cause no symptoms and cannot be seen on a standard ultrasound. By the time a routine exam or blood test raises concern, cancer has usually already spread beyond the pelvis. Today, no approved screening test exists—not even for women at high genetic risk—and the only proven prevention is surgically removing healthy ovaries and fallopian tubes before cancer forms.</p>
+<dl>
+  <dt><strong>14,000</strong></dt>
+  <dd>Americans die of ovarian cancer every year—the deadliest gynecologic cancer in the U.S.</dd>
+  <dt><strong>~75%</strong></dt>
+  <dd>Of cases are diagnosed at an advanced stage, when five-year survival drops below 30%.</dd>
+  <dt><strong>1–5 mm</strong></dt>
+  <dd>The size of STIC lesions—the invisible fallopian tube source of most deadly ovarian cancers.</dd>
+</dl>
+
+<h2>The approach</h2>
+<h3>A toolkit of imaging strategies, tested side by side</h3>
+<p>Rather than betting on a single technology, this proposed pilot would test a coordinated suite of approaches—from affordable handheld ultrasound to novel MRI—to find which can image the fallopian tubes clearly enough to detect precancerous change. Each technology goes beyond the standard grayscale image, capturing raw acoustic or magnetic signals that produce quantitative tissue “fingerprints”—potentially revealing early disease before any visible mass forms.</p>
+<h3>Four complementary imaging strategies under evaluation</h3>
+<ul>
+  <li><strong>Point-of-Care Ultrasound (POCUS):</strong> Handheld endocavity and transabdominal probes, including 3D, for in-vivo imaging of the fallopian tubes and ovaries.</li>
+  <li><strong>High-Frequency Ultrasound (HFUS):</strong> A 20 MHz probe for ex-vivo imaging of excised fallopian tubes, resolving tissue layers invisible to standard ultrasound.</li>
+  <li><strong>Contrast-Enhanced Ultrasound (CEUS):</strong> Transcervical and IV microbubble injections with 3D reconstruction to map the full fallopian tube.</li>
+  <li><strong>Novel MRI:</strong> RSI-based and dynamic contrast-enhanced MRI protocols developed at UCSD for high-resolution ovarian tissue characterization.</li>
+</ul>
+
+<h2>The workflow</h2>
+<h3>A staged roadmap—from feasibility to clinical use</h3>
+<p>The proposal describes a roadmap from first scan to validated protocol:</p>
+<ol>
+  <li><strong>POCUS &amp; HFUS:</strong> In-vivo TVS and ex-vivo high-frequency fallopian tube imaging at Fred Hutchinson Cancer Center and UCSD.</li>
+  <li><strong>CEUS &amp; MRI:</strong> Microbubble 3D fallopian tube mapping and advanced MRI protocols at UCSD.</li>
+  <li><strong>AI &amp; biomarkers:</strong> AI guidance tools and molecular ultrasound agents.</li>
+  <li><strong>Clinical trial:</strong> The best-performing strategy would be scaled into a definitive screening study.</li>
+</ol>
+<p>All imaging results would be correlated with surgical pathology—fallopian tube and ovarian tissue examined by expert pathologists—to validate which techniques detect true disease and which signals reflect normal variation.</p>
+
+<h2>The study</h2>
+<h3>Four aims, two institutions, one coordinated pilot</h3>
+<h3>Short-term aims at Fred Hutchinson Cancer Center and UCSD</h3>
+<p><strong>Can we see the fallopian tubes? POCUS and high-frequency ultrasound</strong></p>
+<p>Under the proposed protocol, up to 15 patients undergoing gynecologic surgery would be scanned with a handheld endocavity probe immediately before the operation. Excised fallopian tubes would then be imaged at 20 MHz ex vivo—building baseline protocols and extracting quantitative acoustic biomarkers across the full tissue spectrum, from normal to pathologic, to guide which technology to take forward.</p>
+<h3>Mid-term aims at UCSD</h3>
+<p><strong>Can we reveal early abnormalities? Contrast CEUS and novel MRI</strong></p>
+<p>Transcervical and IV microbubble injections would be tested with a Philips 3D probe to reconstruct the fallopian tubes volumetrically—enabling direct visualization of obstructions or deformations. Simultaneously, an advanced MRI protocol developed at UCSD—combining Restriction Spectrum Imaging with high-resolution anatomic sequences—would be evaluated for its ability to distinguish normal, benign, and early malignant ovarian tissue.</p>
+
+<h2>The significance</h2>
+<h3>Why this could matter</h3>
+<ul>
+  <li><strong>Filling a deadly gap:</strong> No approved screening test for ovarian cancer exists today. This proposed pilot addresses that unmet need by developing the protocols and data a future screening trial would require to launch.</li>
+  <li><strong>Earlier intervention:</strong> Detecting STIC lesions before invasion could shift diagnosis from stage III–IV to stage I, where five-year survival exceeds 90%—potentially saving thousands of lives a year.</li>
+  <li><strong>Built to scale:</strong> Handheld POCUS strategies—if proven to image the fallopian tubes reliably—could bring ovarian cancer surveillance to community clinics and underserved populations far beyond academic centers.</li>
+</ul>
+
+<h2>The investigators</h2>
+<h3>Clinical lead: Dr. Charles Drescher</h3>
+<p>Gynecologic oncologist, Fred Hutchinson Cancer Center—leading in-vivo and ex-vivo imaging aims with the Canary Ovarian Cancer Program.</p>
+<h3>MRI science: Dr. Rebecca Rakow-Penner</h3>
+<p>Radiologist, UCSD—developed ovarian-specific RSI and dynamic contrast MRI protocols with promising early tissue discrimination results.</p>
+<h3>Ultrasound science: Dr. Ahmed N. El Kaffas</h3>
+<p>Director, Canary Translational Ultrasound Center, UCSD—pioneer of quantitative, AI-driven ultrasound characterization and the acoustic science behind this proposal.</p>
+    `,
+    author: "Canary Foundation",
+    date: "2026-10-29",
+    category: "Research",
+    tags: ["Ovarian Cancer", "Early Detection", "Ultrasound", "MRI"],
+    readTime: "5 min read",
+    wordCount: 848,
+    featured: false,
+  },
+
+  {
     id: 14,
     slug: "don-listwin-moffitt-melanoma-skin-cancer-advisory-board",
     title: "Don Listwin Joins Moffitt’s Melanoma and Skin Cancer Advisory Board",
