@@ -1,6 +1,6 @@
 // Public 2025 financials package shown on /about/financials and the homepage.
-// Don canceled the QuickBooks summary on 8 Oct 2026. The approved public
-// Form 990 remains available; Narrative and Overview stay pending.
+// Don confirmed on 3 Nov 2026 that the public Form 990 is the only
+// 2025 financial document to display.
 //
 // To publish a document after Candy or Don approves it:
 // 1. Convert Word/PowerPoint sources to PDF if needed.
@@ -28,26 +28,6 @@ export const FINANCIAL_DOCUMENTS_DIRECTORY = "client/public/docs/financials";
 
 export const financialDocuments: FinancialDocument[] = [
   {
-    id: "narrative-2025",
-    title: "2025 Narrative",
-    description: "A narrative account of the Foundation's 2025 work and finances.",
-    year: 2025,
-    formatLabel: "PDF",
-    href: null,
-    publicPath: "/docs/financials/2025-narrative.pdf",
-    dropPath: "client/public/docs/financials/2025-narrative.pdf",
-  },
-  {
-    id: "overview-2025",
-    title: "2025 Overview",
-    description: "A short overview of the Foundation's 2025 finances.",
-    year: 2025,
-    formatLabel: "PDF",
-    href: null,
-    publicPath: "/docs/financials/2025-overview.pdf",
-    dropPath: "client/public/docs/financials/2025-overview.pdf",
-  },
-  {
     id: "form-990-2025",
     title: "2025 Form 990 (public inspection copy)",
     description: "The public inspection copy of the Foundation's IRS Form 990 for the 2025 tax year.",
@@ -57,7 +37,6 @@ export const financialDocuments: FinancialDocument[] = [
     publicPath: "/docs/financials/2025-form-990.pdf",
     dropPath: "client/public/docs/financials/2025-form-990.pdf",
   },
-
 ];
 
 export function financialDocumentStatus(

@@ -2,13 +2,7 @@
 
 Approved public filings belong in `client/public/docs/financials/`. The Financials page reads availability from `client/src/data/financial-documents.ts`. A `null` `href` renders a coming-soon state and never a broken link.
 
-Don Listwin canceled the QuickBooks summary on 8 October 2026. The remaining 2025 package has three pieces. Source files may arrive as Word or PowerPoint; convert to PDF before dropping them in. Candy supplied the approved 2025 Form 990 public inspection copy on 7 October 2026, following Don’s request to post it. That file is available; the other two documents remain pending.
-
-| Document | Source | Drop this file | Then set `href` to |
-| --- | --- | --- | --- |
-| 2025 Narrative | Word → PDF | `2025-narrative.pdf` | `/docs/financials/2025-narrative.pdf` |
-| 2025 Overview | PowerPoint (~4 slides) → PDF | `2025-overview.pdf` | `/docs/financials/2025-overview.pdf` |
-| 2025 Form 990 | PDF | `2025-form-990.pdf` | `/docs/financials/2025-form-990.pdf` |
+On 3 November 2026, Don Listwin asked to show only the 2025 Form 990. Candy supplied the approved public inspection copy on 7 October 2026. The existing file is `client/public/docs/financials/2025-form-990.pdf` and is linked from both the homepage and Financials page.
 
 Don’s financial examples and reconciliation drafts remain on hold. Do not reinstate the canceled summary or publish replacement charts without his approval.
 

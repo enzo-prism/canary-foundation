@@ -39,8 +39,7 @@ export default function Financials() {
                 Current filings
               </h2>
               <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600">
-                2025 documents will be posted here as they become available. The current
-                set includes a narrative, an overview, and Form 990.
+                Download the public inspection copy of the Foundation’s 2025 Form 990.
               </p>
               <FinancialDocumentSlots />
             </div>
