@@ -406,7 +406,7 @@ export function HomeLower(_props: HomeInteractiveProps) {
               <div className="bg-[#252923] p-6 text-white sm:p-8">
                 <h3 className="mb-3 text-3xl font-bold">Current financial documents</h3>
                 <p className="text-lg text-stone-200">
-                  The 2025 Form 990 is available. The narrative and overview will be posted as they become available.
+                  The Foundation’s 2025 Form 990 is available to download.
                 </p>
               </div>
               <div className="p-6 sm:p-8">

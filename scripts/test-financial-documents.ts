@@ -15,7 +15,6 @@ const header = read("client/src/components/header.tsx");
 const footer = read("client/src/components/footer.tsx");
 const financialsPage = read("client/src/pages/financials.tsx");
 const homeLower = read("client/src/components/home/home-lower.tsx");
-const slots = read("client/src/components/financial-document-slots.tsx");
 const dropNotes = read("docs/financials-drop.md");
 
 assert.match(header, />News</);
@@ -35,45 +34,26 @@ assert.match(
   "Mobile News must sit immediately after Home",
 );
 
-const expectedIds = [
-  "narrative-2025",
-  "overview-2025",
-  "form-990-2025",
-];
-assert.equal(financialDocuments.length, 3);
 assert.deepEqual(
   financialDocuments.map((document) => document.id),
-  expectedIds,
+  ["form-990-2025"],
+  "Only the 2025 Form 990 should be listed",
 );
-assert.equal(
-  financialDocuments.some((document) => document.id === "statements-2025"),
-  false,
-  "The old single Financial Statements slot must not remain",
-);
+const [form990] = financialDocuments;
+assert.equal(form990.href, "/docs/financials/2025-form-990.pdf");
+assert.equal(form990.href, form990.publicPath);
+assert.equal(financialDocumentStatus(form990), "available");
+assert.match(form990.title, /public inspection copy/);
+assert.equal(form990.dropPath.startsWith(`${FINANCIAL_DOCUMENTS_DIRECTORY}/`), true);
+assert.equal(form990.formatLabel, "PDF");
+const pdf = readFileSync(resolve(root, form990.dropPath));
+assert.equal(pdf.length, 384331, "The complete supplied public-inspection copy must be served");
+assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
 
-for (const document of financialDocuments) {
-  if (document.id === "form-990-2025") {
-    assert.equal(document.href, document.publicPath);
-    assert.equal(financialDocumentStatus(document), "available");
-    assert.match(document.title, /public inspection copy/);
-    const pdf = readFileSync(resolve(root, document.dropPath));
-    assert.equal(pdf.length, 384331, "The complete supplied public-inspection copy must be served");
-    assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  } else {
-    assert.equal(document.href, null, `${document.id} must stay coming soon until a file is posted`);
-    assert.equal(financialDocumentStatus(document), "coming_soon");
-  }
-  assert.equal(document.dropPath.startsWith(`${FINANCIAL_DOCUMENTS_DIRECTORY}/`), true);
-  assert.equal(document.formatLabel, "PDF");
-}
-
-assert.match(slots, /Coming soon/);
 assert.match(financialsPage, /FinancialDocumentSlots/);
 assert.match(homeLower, /FinancialDocumentSlots/);
 assert.doesNotMatch(financialsPage, /\$3,963,900|12\.6¢|\$3,621,840/);
 assert.doesNotMatch(homeLower, /\$3,963,900|12\.6¢|\$3,621,840|financialChart2020|AmazonSmile/);
-assert.match(dropNotes, /2025-narrative\.pdf/);
-assert.match(dropNotes, /2025-overview\.pdf/);
 assert.match(dropNotes, /2025-form-990\.pdf/);
 assert.doesNotMatch(dropNotes, /2025-quickbooks-summary\.pdf/);
 assert.doesNotMatch(financialsPage, /QuickBooks|Annual\s+independent audits/);

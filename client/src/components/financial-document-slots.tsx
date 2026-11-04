@@ -45,7 +45,7 @@ export function FinancialDocumentSlots({
   documents?: FinancialDocument[];
 }) {
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className={documents.length === 1 ? "mx-auto max-w-2xl" : "grid gap-6 md:grid-cols-2"}>
       {documents.map((document) => (
         <Card key={document.id} className="border border-gray-200 bg-white shadow-none">
           <CardContent className="flex h-full flex-col p-6 sm:p-8">
