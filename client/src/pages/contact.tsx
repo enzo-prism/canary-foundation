@@ -139,9 +139,9 @@ export default function Contact() {
                       <address className="mt-1 not-italic leading-relaxed text-gray-700">
                         Canary Foundation
                         <br />
-                        PO Box 620134
+                        3480 Woodside Road
                         <br />
-                        Woodside, CA 94062-9991
+                        Woodside, CA 94062
                       </address>
                     </div>
                   </div>
