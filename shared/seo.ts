@@ -318,10 +318,10 @@ export function buildOrganizationJsonLd(): Record<string, unknown> {
     email: "info@canaryfoundation.org",
     address: {
       "@type": "PostalAddress",
-      postOfficeBoxNumber: "620134",
+      streetAddress: "3480 Woodside Road",
       addressLocality: "Woodside",
       addressRegion: "CA",
-      postalCode: "94062-9991",
+      postalCode: "94062",
       addressCountry: "US",
     },
     knowsAbout: [
